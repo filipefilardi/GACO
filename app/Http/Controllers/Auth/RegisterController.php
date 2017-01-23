@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Company;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,6 +50,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
+            'category' => 'required',
+             //TODO: we need to verify this!!!
+             // id_code: cpf/cnpj
+            'id_code' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -62,10 +67,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        if($data['category'] == '0'){
+            return User::create([
             'name' => $data['name'],
+            'cpf' => $data['id_code'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        }
+        else{
+            return Company::create([
+            'name' => $data['name'],
+            'cnpj' => $data['id_code'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+        }
     }
 }
+
+/*
+
+*/

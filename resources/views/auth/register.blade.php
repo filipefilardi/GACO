@@ -11,7 +11,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nome</label>
+                            <label for="name" class="col-md-4 control-label">Nome Completo</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -80,6 +80,45 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4" style="text-align: justify;text-justify: inter-word;">
+                                Clicando em registar você afirma que leu e concorda com os <a href="#" data-toggle="modal" data-target="#termsModal">Termos e Condições</a> do GACO.
+                            </div>
+                        </div>
+
+                         <!-- Modal -->
+                        <div id="termsModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header text-center"><h1>Termos e Condições</h1></div>
+                                    <div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
+                                        <p>O uso de todas as páginas desse website estão sujeitas a esse termos e condiçoes.</p>
+                                        <ol>
+                                            <li><strong>MODELO PARA O TERMOS E CONDICOES, É PRECISO ALTERA-LO</strong></li>
+                                            <li>Qualquer pessoa envolvida com o desenvolvimento da plataforma JubilaNao, não tem nenhum envolvimento com as publicações e avaliações feitas e disponibilizadas;</li>
+                                            <li>O JubilaNão não se responsabiliza pelo conteúdo divulgado aqui, cabe a cada autor de cada publicação se responsabilizar pelo conteudo divulgado;</li>
+                                            <li>A presente versão do JubilaNão foi criado para uso de estudantes e professores da USP. Qualquer usúario não USPiano precisa enter que a platoforma pode não ser de seu interesse;</li>
+                                            <li>Você não pode usar esse site:
+                                                <ol type="a">
+                                                    <li>para postar qualquer matérial ou comentário que infrija os direitos legais de qualaquer pessoa;</li>
+                                                    <li>para postar qualquer propaganda não autorizada ou spam;</li>
+                                                    <li>para transmitir ou re-circular qualquer material obtido pelo site para qualquer terceiro;</li>
+                                                </ol>
+                                            </li>
+                                            <li>Cada usuário cadastrado entende que ele está de acordo com tudo que está descrito nos termos e condições, caso ele não concorde, ele não deverá se cadastrar na plataforma.</li>
+                                        </ol>
+                                        <div class="modal-footer">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary" data-dismiss="modal">Concordar</button>
+                                                <a href="/" class="btn btn-default">Cancelar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

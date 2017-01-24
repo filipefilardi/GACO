@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Company;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -67,22 +66,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['category'] == '0'){
+        if($data['category'] == '0' || $data['category'] == '1'){
+
             return User::create([
             'name' => $data['name'],
-            'cpf' => $data['id_code'],
+            'id_code' => $data['id_code'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'category' => (int)$data['category'],
         ]);
         }
-        else{
-            return Company::create([
-            'name' => $data['name'],
-            'cnpj' => $data['id_code'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-        }
+        
     }
 }
 

@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Endereço de E-Mail</label>
+                            <label for="email" class="col-md-4 control-label">Endereço de e-mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirmação de Senha</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Confirmação de senha</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -85,7 +85,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4" style="text-align: justify;text-justify: inter-word;">
-                                Ao me cadastrar, eu concordo com os <a href="#" data-toggle="modal" data-target="#termsModal">Termos e Condições</a> do GACO.
+                                Clicando em registar você afirma que leu e concorda com os <a href="#" data-toggle="modal" data-target="#termsModal">Termos e Condições</a> do GACO.
                             </div>
                         </div>
 
@@ -135,4 +135,5 @@
         </div>
     </div>
 </div>
+<script src="/js/register.js"></script>
 @endsection

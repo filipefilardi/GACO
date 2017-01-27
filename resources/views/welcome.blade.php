@@ -5,149 +5,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>GACO</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="/css/app.css" rel="stylesheet">
-        <link href="/css/carousel.css" rel="stylesheet">
+        <link href="/css/welcome.css" rel="stylesheet">
         <!-- Styles -->
         <style>
 
-            .header-nightsky {
-                color: white;
-                background: url("/img/nightsky.jpg") no-repeat;
-                background-size: cover;
-                background-position: bottom;
-                padding-bottom: 100px;
-            }
-
-            .header-nightsky .navbar-nav>li>a {
-                color: white;
-                font-size: 17px;
-                border-radius: 10px;
-            }
-
-            .header-nightsky .navbar {
-                margin-bottom: 0px;
-                padding-top: 20px;
-                padding-bottom: 20px;
-                width: 100%;
-                border-bottom:none;
-                background-color: transparent;
-                min-width: 300px;
-                border: none;
-            }
-
-            .header-nightsky .navbar-default .navbar-nav>.open>a,
-            .header-nightsky .navbar-default .navbar-nav>.open>a:focus,
-            .header-nightsky .navbar-default .navbar-nav>.open>a:hover {
-                color: #ccc;
-                background-color: transparent;
-            }
-
-            .header-nightsky .nav>li>a:focus,
-            .header-nightsky .nav>li>a:hover {
-                color: #ccc;
-                background-color: transparent;
-            }
-
-            .header-nightsky .navbar-nav>li {
-                margin-right: 20px;
-            }
-
-            .header-nightsky .navbar-nav {
-               margin-top: 12px;
-            }
-
-            .header-nightsky .navbar-toggle {
-                background-color: transparent !important;
-                margin-top: 20px; 
-                border: 1px solid #fff;
-            }
-
-            .header-nightsky .navbar-toggle .icon-bar {
-                background-color: white;
-            }
-
-            .header-nightsky .navbar-brand {
-                color: white;
-                font-size: 30px;
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-
-            .header-nightsky .navbar-brand:hover {
-                color: #ccc;
-            }
-
-            .header-nightsky .hero {
-                text-align: center;
-                margin-top: 80px;
-                margin-bottom: 100px;
-            }
-
-            .header-nightsky .hero h1 {
-                color: white;
-                font-weight: bold;
-                font-size: 50px;
-                margin-bottom: 36px;
-            }
-
-
-            .header-nightsky .hero p {
-                font-size: 20px;
-                max-width: 660px;
-                margin: 0 auto 20px;
-            }
-
-            .header-nightsky .btn-primary {
-                color: #fff;
-                background-color: transparent;
-                border-color: #fffbfb !important;
-                outline:none;
-                margin-right: 20px;
-                margin-top: 20px;
-                font-size: 22px;
-                padding: 18px 50px;
-                transition:0.4s background-color;
-            }
-
-            .header-nightsky .btn-primary:hover {
-                background-color:rgba(255,255,255,0.1);
-            }
-
-            .header-nightsky .btn-primary:active {
-                transform:translateY(1px);
-            }
-
-            @media screen and (max-width: 767px) {
-
-                .header-nightsky .navbar-default .navbar-nav .open .dropdown-menu>li>a{
-                    color: #fff;
-                    font-size: 16px;
-                }
-
-                .header-nightsky .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover{
-                    color: #ccc;
-                }
-
-                .header-nightsky .navbar-collapse {
-                    margin-left: 20px;
-                    border-top: none;
-                    box-shadow: none;
-                }
-
-                .header-nightsky .hero{
-                    margin-top: 40px;
-                    margin-bottom: 40px;
-                }
-
-                .header-nightsky .hero h1{
-                    font-size: 42px;
-                }
-            }
-
+            
         </style>
     </head>
     <body>
@@ -168,9 +35,9 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Descubra</a></li>
-                                <li><a href="#">Parcerias</a></li>
-                                <li><a href="#">Contato</a></li>
+                                <li><a href="#descubra">Descubra</a></li>
+                                <li><a href="#parcerias">Parcerias</a></li>
+                                <li><a href="#contato">Contato</a></li>
                             </ul>
                         </li>
                         <li><a href="{{ url('/register') }}">Cadastre-se</a></li>
@@ -190,7 +57,7 @@
     </div>
 
     <div class="marketing">
-        <div class="container">
+        <div class="container" id="descubra">
             <h1 class="text-center header">Descubra sobre GACO</h1>
             <div class="row">
                 <div class="col-lg-4">
@@ -218,14 +85,33 @@
         </div>
 
         <div class="white-background">
-            <div class="container">
+            <div class="container" id="parcerias">
                 <h1 class="text-center header">Parcerias</h1>
-                <h3 class="text-center">Algo sobre as parcerias</h3>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="http://www.lassu.usp.br"><img src="/img/lassu.png" class="parcerias"></a>
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-4">
                         <a href="{{ url('/register') }}" class="btn btn-primary join-btn">COMECE AGORA</a>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="contato">
+            <h1 class="text-center header">Contato</h1>
+            <h3 class="text-center">Nosso Contato</h3>
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <a href="{{ url('/register') }}" class="btn btn-primary join-btn">COMECE AGORA</a>
                 </div>
             </div>
         </div>  

@@ -38,9 +38,15 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'GACO') }}
-                    </a>
+                    @if(Auth::guest())
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            {{ config('app.name', 'GACO') }}
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="{{ url('/home') }}">
+                            {{ config('app.name', 'GACO') }}
+                        </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

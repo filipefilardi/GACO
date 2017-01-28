@@ -14,6 +14,17 @@
 			
 			<div class="panel-body">
 			 Bem vindo {{ Auth::user()->name }}!
+
+		        @if(Auth::user()->category == 0)
+	                <a href="{{ url('/') }}">
+	                    link pessoa física
+	                </a>
+	            @else
+	                <a href="{{ url('/home') }}">
+	                    link pessoa jurídica
+	                </a>
+	            @endif
+
 			</div>
 			
 			</div>

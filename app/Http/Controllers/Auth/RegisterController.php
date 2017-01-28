@@ -52,6 +52,7 @@ class RegisterController extends Controller
             'category' => 'required',
              //TODO: we need to verify this!!!
              // id_code: cpf/cnpj
+             // we need to check whether its a real pessoa física/ pessoa jurídica
             'id_code' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',

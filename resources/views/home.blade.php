@@ -16,11 +16,11 @@
 			 Bem vindo {{ Auth::user()->name }}!
 
 		        @if(Auth::user()->category == 0)
-	                <a href="{{ url('/') }}">
+	                <a href="{{ url('/request') }}">
 	                    link pessoa física
 	                </a>
 	            @else
-	                <a href="{{ url('/home') }}">
+	                <a href="{{ url('/notification') }}">
 	                    link pessoa jurídica
 	                </a>
 	            @endif

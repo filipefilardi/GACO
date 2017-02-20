@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/request', 'RequestController@index_user');
+Route::get('/notification', 'RequestController@index_customer');
+Route::post('/make_request', 'RequestController@makeRequest');

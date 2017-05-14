@@ -64,8 +64,10 @@
                             <li><a href="{{ url('/home') }}">Parcerias</a></li>
                             <li><a href="{{ url('/home') }}">Contate-nos</a></li>
                             <!-- Só se não tiver sido completado -->
-                            @if(!Auth::user()->isComplete() && Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2)
-                            <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
+                            @if(!Auth::user()->isComplete())
+                                @if(Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2)
+                                    <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
+                                @endif
                             @endif
                         </ul>
                     @endif

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Util\Dao\PermissionDao;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('execute', function ($user, $nm_perm) {
+
+            $res = PermissionDao::getPermissionByCat($user->id_cat,$nm_perm);
+
+            if ($res->isEmpty()) {
+                return 0;
+            }else{
+                
+                return 1;
+            }
+        });
     }
 }

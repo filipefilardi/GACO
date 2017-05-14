@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoryTableSeed::class);
         $this->call(MasterUserTableSeed::class);
         $this->call(GarbageTableSeed::class);
+        $this->call(PermissionTableSeed::class);
     }
 }

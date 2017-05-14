@@ -48,7 +48,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'category' => 'required',
+            'id_cat' => 'required',
              //TODO: we need to verify this!!!
              // id_code: cpf/cnpj
              // we need to check whether its a real pessoa física/ pessoa jurídica
@@ -68,18 +68,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
+        
         switch ($data['id_cat']) {
-        case 0:
+        case 1:
             $id_cat_mapped = 1; // PESSOA FISICA - ID_CAT = 1
             break;
-        case 1:
+        case 2:
             $id_cat_mapped = 2; // PESSOA JURIDICA - ID_CAT = 2
             break;
         }
 
         if($id_cat_mapped > 0){
-
             return User::create([
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),

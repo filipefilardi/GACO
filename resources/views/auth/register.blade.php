@@ -10,12 +10,12 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                            <label for="category" class="col-md-4 control-label">Categoria</label>
+                        <div class="form-group{{ $errors->has('id_cat') ? ' has-error' : '' }}">
+                            <label for="id_cat" class="col-md-4 control-label">Categoria</label>
 
                             <div class="col-md-6">
-                                <label class="radio-inline"><input type="radio" name="category" value="0">Pessoa Física</label>
-                                <label class="radio-inline"><input type="radio" name="category" value="1">Pessoa Jurídica</label>
+                                <label class="radio-inline"><input type="radio" name="id_cat" value="1">Pessoa Física</label>
+                                <label class="radio-inline"><input type="radio" name="id_cat" value="2">Pessoa Jurídica</label>
                             </div>
                         </div>
                         

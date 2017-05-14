@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Request as MyRequest;
-use Auth;
-use DB;
+use App\Util\Dao\GarbageDao;
 
 class RequestController extends Controller
 {
@@ -25,41 +22,15 @@ class RequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index_user()
-    {
-    	$customers = User::where('category', 1)->get();
-
-        return view('request', ['customers' => $customers]);
+    public function index_user() {
+        $garbage = GarbageDao::get_list_garbage_actv();
+        return view('request', ['garbage' => $garbage]);
     }
 
-    public function index_customer()
-    {
-    	#$notifications = MyRequest::where('customer_id', Auth::user()->id_code)->get();
+    public function make_request(Request $data){
+        $data['garbage'];
 
-    	$notifications = DB::table('users')
-  						->join('requests', function ($join) {
-            				$join->on('users.id_code', '=', 'requests.user_id_code')
-                 			->where('requests.customer_id_code', '=', Auth::user()->id_code);
-        				})
-        				->get();
-        return view('request', ['notifications' => $notifications]);
+        return view('request');
     }
 
-    public function makeRequest(Request $request)
-    {
-    	$user_id_code = Auth::user()->id_code;
-
-    	echo Auth::user()->id_code;
-    	echo " requests: ";
-    	echo $request->input("id_code");
-
-    	$customer_id_code = $request->input("id_code");
-
-    	DB::table('requests')->insert([
-            ['user_id_code' => $user_id_code,
-            'customer_id_code' => $customer_id_code,
-            ]
-
-        ]);
-    }
 }

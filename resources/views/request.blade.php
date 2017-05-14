@@ -13,12 +13,26 @@
 			<div class="panel-heading">Dashboard</div>
 			
 			<div class="panel-body">
-			 Bem vindo {{ Auth::user()->name }}!
+			 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}">
+					{{ csrf_field() }}
 
-			 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
-                    <div class="col-md-6">
-                        <input id="email" type="email" class="form-control" name="email">
+					<div class="row">
+	                    <div class="col-md-6">
+							<label>Escolha uma categoria</label>
+							<select class="form-control" name="garbage">
+					 		@foreach ($garbage as $garbage)
+		                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
+		                    @endforeach
+							</select>
+						</div>                   
                     </div>
+                    <div class="row">
+	                    <div class="col-md-6">
+	                    	<button type="submit" class="btn btn-primary">
+	                        	Registrar
+	                    	</button>
+	                    </div>
+	                 </div>
                 </form>
 
 			</div>

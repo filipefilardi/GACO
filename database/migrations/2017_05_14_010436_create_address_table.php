@@ -17,7 +17,7 @@ class CreateAddressTable extends Migration
             $table->increments('id_add');
             $table->float('id_lat');
             $table->float('id_lon');
-            $table->string('id_comp');
+            $table->string('id_comp')->nullable();
             $table->string('nm_st');
             $table->string('id_st_numb'); // maybe int
             $table->string('nm_country');

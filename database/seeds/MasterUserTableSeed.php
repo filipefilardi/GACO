@@ -16,7 +16,7 @@ class MasterUserTableSeed extends Seeder
             'password' => bcrypt('secret'),
             'id_cat' => 4,
             'lst_chg_by' => 1,
-            'id_del' => 1,
+            'id_del' => 0,
         ]);
 
         DB::table('users')->insert([
@@ -24,7 +24,7 @@ class MasterUserTableSeed extends Seeder
             'password' => bcrypt('secret'),
             'id_cat' => 4,
             'lst_chg_by' => 1,
-            'id_del' => 1,
+            'id_del' => 0,
         ]);
 
         DB::table('users')->insert([
@@ -32,7 +32,7 @@ class MasterUserTableSeed extends Seeder
             'password' => bcrypt('secret'),
             'id_cat' => 4,
             'lst_chg_by' => 1,
-            'id_del' => 1,
+            'id_del' => 0,
         ]);
     }
 }

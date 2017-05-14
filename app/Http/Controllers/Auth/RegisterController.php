@@ -56,7 +56,9 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
-    }
+    }    
+
+    protected $id_cat_mapped = -1;
 
     /**
      * Create a new user instance after a valid registration.
@@ -66,15 +68,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['category'] == '0' || $data['category'] == '1'){
+
+        switch ($data['category']) {
+        case 0:
+            $id_cat_mapped = 1;
+            break;
+        case 1:
+            $id_cat_mapped = 2;
+            break;
+        }
+
+        if($id_cat_mapped > 0){
+
+            dd($id_cat_mapped);
 
             return User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'id_cat' => (int)$data['category'],
-        ]);
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'id_cat' => (int)$id_cat_mapped,
+            ]);
         }
-        
+
     }
 }
 

@@ -27,10 +27,14 @@ class RequestController extends Controller
         return view('request', ['garbage' => $garbage]);
     }
 
-    public function make_request(Request $data){
-        $data['garbage'];
+    public function make_request(Request $id){
+        $id['garbage'];
 
-        return view('request');
+
+        $garbage = GarbageDao::get_list_garbage_actv();
+        //return view('request', ['garbage' => $garbage])->with('status', 'PIROCA!');
+        $id->session()->flash('alert-success', 'sucess');
+        return redirect('/request');
     }
 
 }

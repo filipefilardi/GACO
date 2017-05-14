@@ -120,7 +120,7 @@ class RequestDao
         return;
     }
 
-    public static function insert_request($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage)
+    public static function update_request($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage)
     {
         // VALIDATION BLOCK //////////////
         $errors = array();

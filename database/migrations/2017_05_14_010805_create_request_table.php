@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateRequestTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id_user');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('request', function (Blueprint $table) {
+            $table->increments('id_req');
+            $table->string('desc_req');
+            $table->string('mod_req');
+            $table->string('status_garbage');
+            $table->string('status_req');
+            $table->string('id_active', 1);
+            $table->date('dt_colect');
             $table->timestamps();
             $table->integer('lst_chg_by');
             $table->integer('id_del');
@@ -31,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        //
     }
 }

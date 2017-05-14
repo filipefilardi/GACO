@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequestsTable extends Migration
+class CreateCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('requests', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('user_id_code');
-            $table->string('customer_id_code');
+        Schema::create('category', function (Blueprint $table) {
+            $table->increments('id_cat');
+            $table->string('nm_cat');
+            $table->string('table_cat');
             $table->timestamps();
+            $table->integer('lst_chg_by');
+            $table->integer('id_del');
         });
     }
 
@@ -30,6 +31,5 @@ class CreateRequestsTable extends Migration
     public function down()
     {
         //
-        Schema::drop('requests');
     }
 }

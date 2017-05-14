@@ -11,6 +11,8 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="/css/app.css" rel="stylesheet">
         <link href="/css/welcome.css" rel="stylesheet">
+        <link href="/css/footer.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
         <!-- Styles -->
         <style>
 
@@ -19,7 +21,7 @@
     </head>
     <body>
 
-        <div class="header-nightsky">
+        <div class="header-nightsky" id="inicio">
         <nav class="navbar navbar-default">
             <div class="container">
                 <a class="navbar-brand" href="#">GACO</a>
@@ -55,23 +57,33 @@
         </div>
 
     </div>
+    <div class="marketing">
+        <div class="container" id="descubra">
+            <h1 class="text-center header">Descubra sobre GACO</h1>
+            <div class="right-text">
+                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+                <div class="right-img"></div>
+            </div>
+        </div>
+    </div>
 
+    <!--
     <div class="marketing">
         <div class="container" id="descubra">
             <h1 class="text-center header">Descubra sobre GACO</h1>
             <div class="row">
                 <div class="col-lg-4">
-                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="140" height="140">
+                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
                     <h2>Saúde</h2>
                     <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
                 </div>
                 <div class="col-lg-4">
-                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="140" height="140">
+                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
                     <h2>Logistica Reversa</h2>
                     <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
                 </div>
                 <div class="col-lg-4">
-                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="140" height="140">
+                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
                     <h2>Sustentabilidade</h2>
                     <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                 </div>
@@ -83,7 +95,7 @@
                 </div>
             </div>
         </div>
-
+        -->
         <div class="white-background">
             <div class="container" id="parcerias">
                 <h1 class="text-center header">Parcerias</h1>
@@ -116,6 +128,33 @@
             </div>
         </div>  
     </div>
+
+    <footer class="footer-distributed">
+        <div class="footer-right">
+
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+
+            </div>
+
+            <div class="footer-left">
+
+                <p class="footer-links">
+                    <a href="#inicio">Início</a>
+                    ·
+                    <a href="#descubra">Descubra</a>
+                    ·
+                    <a href="#parcerias">Parcerias</a>
+                    ·
+                    <a href="#contato">Contato</a>
+                </p>
+
+                <p>GACO &copy; 2017</p>
+            </div>
+    </footer>
+
         <script src="/js/app.js"></script>
     </body>
 </html>

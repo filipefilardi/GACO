@@ -7,7 +7,7 @@ use DB;
 class GarbageDao
 
 {
-
+    
     public static function get_list_garbage_by_name()
     {
 

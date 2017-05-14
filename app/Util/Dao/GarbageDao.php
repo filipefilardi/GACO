@@ -34,15 +34,20 @@ class GarbageDao
         return $list;
     }
 
-    public static function delete_garbage()
+    public static function delete_garbage($id_garbage)
     {
-        DB::table('garbage')
-            ->where('id_garbage', 1)
-            ->update(['votes' => 1]);
 
-        $list = DB::table('garbage')->get();
-                    
-        return $list;
+        DB::table('garbage')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                      ->from('garbage')
+                      ->whereRaw('garbage.id_garbage = ' . $id_garbage)
+                      ->whereRaw('garbage.id_del = ' . 0);
+            })
+            ->where('id_garbage', $id_garbage)
+            ->update(['id_del' => 1]);
+      
+        return;
     }
 
 }

@@ -22,6 +22,11 @@ class CreateRequestConfirmationTable extends Migration
                 $table->integer('lst_chg_by')->nullable();
                 $table->integer('id_del')->default(0);
         });
+
+        Schema::table('request_confirmation', function($table) {
+            $table->integer('id_req')->unsigned();
+            $table->foreign('id_req')->references('id_req')->on('request')->onDelete('cascade');;
+        });
     }
 
     /**
@@ -31,6 +36,6 @@ class CreateRequestConfirmationTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('request_confirmation');
     }
 }

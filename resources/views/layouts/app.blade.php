@@ -63,6 +63,8 @@
                             <li><a href="{{ url('/home') }}">Lixo Eletrônico</a></li>
                             <li><a href="{{ url('/home') }}">Parcerias</a></li>
                             <li><a href="{{ url('/home') }}">Contate-nos</a></li>
+                            <!-- Só se não tiver sido completado -->
+                            <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
                         </ul>
                     @endif
                     <!-- Right Side Of Navbar -->

@@ -13,7 +13,7 @@
 			<div class="panel-heading">Dashboard</div>
 			
 			<div class="panel-body">
-			 Bem vindo {{ Auth::user()->name }}!
+			 Bem vindo {{ Auth::user()->email }}!
 
 		        @if(Auth::user()->category == 0)
 	                <a href="{{ url('/request') }}">

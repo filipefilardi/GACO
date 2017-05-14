@@ -38,7 +38,7 @@ class GarbageDao
     {
 
         DB::table('garbage')
-            ->whereExists(function ($query) {
+            ->whereExists(function ($query) use($id_garbage) {
                 $query->select(DB::raw(1))
                       ->from('garbage')
                       ->whereRaw('garbage.id_garbage = ' . $id_garbage)

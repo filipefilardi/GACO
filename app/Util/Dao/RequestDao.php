@@ -12,6 +12,10 @@ class RequestDao
 
     public static function get_all_requests_by_user($id_user) // All requests
     {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
     	$list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
@@ -22,6 +26,10 @@ class RequestDao
 
     public static function get_actv_requests_by_user($id_user) // Active requests
     {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
         $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
@@ -33,6 +41,10 @@ class RequestDao
 
     public static function get_pend_requests_by_user($id_user) // Pending requests
     {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
         $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
@@ -45,6 +57,10 @@ class RequestDao
 
     public static function get_acpt_requests_by_user($id_user) // Accepted requests
     {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
         $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
@@ -57,6 +73,10 @@ class RequestDao
 
     public static function get_comp_requests_by_user($id_user) // Completed requests but not confirmed
     {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
         $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
@@ -70,6 +90,10 @@ class RequestDao
 
     public static function get_comp_conf_requests_by_user($id_user) // Completed requests and confirmed
     {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
         $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
@@ -82,6 +106,11 @@ class RequestDao
 
     public static function get_cncl_requests_by_user($id_user) // Canceled requests
     {
+
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+        
         $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)

@@ -21,7 +21,7 @@ class RequestDao
             ->join('garbage', 'request.id_garbage', '=', 'garbage.id_garbage')
             ->select('request.*', 'garbage.nm_garbage','request_assignment.*')
             ->where('request.id_del', 0)
-            ->where('request.status_req in (ACTV,PEND)')
+            ->whereRaw('request.status_req in (ACTV,PEND)')
             ->where('request.id_user_req', $id_user)
             ->where('request_assignment.id_del', 0)
             ->where('garbage.id_del', 0)

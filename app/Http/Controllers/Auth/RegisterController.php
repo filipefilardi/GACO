@@ -48,12 +48,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
             'category' => 'required',
              //TODO: we need to verify this!!!
              // id_code: cpf/cnpj
              // we need to check whether its a real pessoa física/ pessoa jurídica
-            'id_code' => 'required',
+            //'id_code' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -70,11 +69,9 @@ class RegisterController extends Controller
         if($data['category'] == '0' || $data['category'] == '1'){
 
             return User::create([
-            'name' => $data['name'],
-            'id_code' => $data['id_code'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'category' => (int)$data['category'],
+            'id_cat' => (int)$data['category'],
         ]);
         }
         

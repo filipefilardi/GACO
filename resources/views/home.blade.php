@@ -14,17 +14,32 @@
 			
 			<div class="panel-body">
 			 Bem vindo {{ Auth::user()->email }}!
+             	
+            <a href="{{ url('/request') }}">
+                link pessoa física
+            </a>
 
-		        @if(Auth::user()->category == 0)
-	                <a href="{{ url('/request') }}">
-	                    link pessoa física
-	                </a>
-	            @else
-	                <a href="{{ url('/notification') }}">
-	                    link pessoa jurídica
-	                </a>
-	            @endif
-
+			 @if (!$request->isEmpty())
+				 <div class="list-group">
+					  @foreach ($request as $request)
+						  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+						    <div class="d-flex w-100 justify-content-between">
+						      <h5 class="mb-1">{{ $request->id_garbage}} | {{$request->mod_req}}
+						      <small class="text-right">
+						      	@if($request->status_req == "PEND")
+						      		PENDENTE
+						      	@else
+						      		{{$request->status_req}}
+						      	@endif
+						      </small>
+						      </h5>
+						    </div>
+						    <p class="mb-1">{{ $request->desc_req }}</p>
+						    <small>{{$request->dt_collect}}</small>
+						  </a>
+	             	  @endforeach
+				</div>
+			@endif			 
 			</div>
 			
 			</div>

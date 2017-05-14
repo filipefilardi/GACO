@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Util\Dao\RequestDao;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        Auth::user();
+        $request = RequestDAO::get_full_info_dashboard_req_by_user(Auth::user()->id_user);
+
+        return view('home', ['request' => $request]);
     }
 }

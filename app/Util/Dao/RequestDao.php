@@ -10,6 +10,26 @@ class RequestDao
 
 {
 
+    public static function get_full_info_dashboard_req_by_user($id_user) // All ACTV or PEND requests
+    {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
+        $list = DB::table('request')
+            ->join('request_assignment', 'request.id_req', '=', 'request_assignment.id_req')
+            ->join('garbage', 'request.id_garbage', '=', 'garbage.id_garbage')
+            ->select('request.*', 'garbage.nm_garbage','request_assignment.*')
+            ->where('request.id_del', 0)
+            ->where('request.status_req in (ACTV,PEND)')
+            ->where('request.id_user_req', $id_user)
+            ->where('request_assignment.id_del', 0)
+            ->where('garbage.id_del', 0)
+            ->get();
+                    
+        return $list;
+    }
+
     public static function get_all_requests_by_user($id_user) // All requests
     {
         $errors = array();
@@ -110,7 +130,7 @@ class RequestDao
         $errors = array();
         if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
         if(sizeof($errors)>0) return $errors;
-        
+
         $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)

@@ -17,16 +17,15 @@ class RequestDao
         if(sizeof($errors)>0) return $errors;
 
         $list = DB::table('request')
-            ->join('request_assignment', 'request.id_req', '=', 'request_assignment.id_req')
+            ->leftJoin('request_assignment', 'request.id_req', '=', 'request_assignment.id_req')
             ->join('garbage', 'request.id_garbage', '=', 'garbage.id_garbage')
-            ->select('request.*', 'garbage.nm_garbage','request_assignment.*')
+            ->select('request.*','request_assignment.dt_predicted', 'garbage.nm_garbage')
             ->where('request.id_del', 0)
             ->whereIn('request.status_req',['ACTV','PEND'])
             ->where('request.id_user_req', $id_user)
-            ->where('request_assignment.id_del', 0)
             ->where('garbage.id_del', 0)
             ->get();
-                    
+
         return $list;
     }
 

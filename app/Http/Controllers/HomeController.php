@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         Auth::user();
-        $request = RequestDAO::get_full_info_dashboard_req_by_user(Auth::user()->id_user);
+        $request = RequestDAO::get_all_requests_by_user(Auth::user()->id_user);
 
         return view('home', ['request' => $request]);
     }

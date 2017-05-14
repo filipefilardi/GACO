@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/garbage', 'GarbageController@index_garbage');
+
 Route::get('/request', 'RequestController@index_user');
 Route::post('/request', 'RequestController@make_request');
 Route::get('/notification', 'RequestController@index_customer');

@@ -58,9 +58,9 @@
                     @else
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/home') }}">Home</a></li>
-                            <li><a href="{{ url('/home') }}">Coleta</a></li>
+                            <li><a href="{{ url('/request') }}">Coleta</a></li>
                             <li><a href="{{ url('/home') }}">Cooperativas</a></li>
-                            <li><a href="{{ url('/home') }}">Lixo Eletrônico</a></li>
+                            <li><a href="{{ url('/garbage') }}">Lixo Eletrônico</a></li>
                             <li><a href="{{ url('/home') }}">Parcerias</a></li>
                             <li><a href="{{ url('/home') }}">Contate-nos</a></li>
                             <!-- Só se não tiver sido completado -->

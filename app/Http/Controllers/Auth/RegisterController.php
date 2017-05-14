@@ -71,16 +71,14 @@ class RegisterController extends Controller
 
         switch ($data['category']) {
         case 0:
-            $id_cat_mapped = 1;
+            $id_cat_mapped = 1; // PESSOA FISICA - ID_CAT = 1
             break;
         case 1:
-            $id_cat_mapped = 2;
+            $id_cat_mapped = 2; // PESSOA JURIDICA - ID_CAT = 2
             break;
         }
 
         if($id_cat_mapped > 0){
-
-            dd($id_cat_mapped);
 
             return User::create([
                 'email' => $data['email'],

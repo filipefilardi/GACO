@@ -22,8 +22,8 @@ class CompleteRegistrationController extends Controller
         return view('complete_registration')->with('id_cat',Auth::user()->id_cat);
     }
 
-    public function completeRegistration()
-    {
-
+    public function completeRegistration(Request $request)
+    {   
+        UserDao::insert(Auth::user()->user_id,$request->all());
     }
 }

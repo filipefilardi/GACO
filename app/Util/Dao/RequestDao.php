@@ -181,8 +181,8 @@ class RequestDao
                 'id_user_req' => $id_user,
                 'desc_req' => $desc_req,
                 'status_garbage' => $status_garbage,
-                'status_req' => "PEND",
-                'id_active' => "Y",
+                'status_req' => 'PEND',
+                'id_active' => 'Y',
                 'mod_req' => $mod_req
             ]);
       
@@ -217,6 +217,50 @@ class RequestDao
             ->where('id_req', $id_req)
             ->update([
                 'status_req' => $new_status_req
+            ]);
+      
+        return;
+    }
+
+    // This is called upon Cooperative accepting the request
+    public static function assign_request($id_req, $id_user, $dt_predicted)
+    {
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(is_null($id_req) || $id_req <= 0) array_push($errors, 'id_req null or invalid (<=0)');
+
+        // END VALIDATION BLOCK /////////
+
+        if(sizeof($errors)>0) return $errors;
+
+        DB::table('request')
+            ->whereExists(function ($query) use($id_req) {
+                $query->select(DB::raw(1))
+                      ->from('request')
+                      ->whereRaw('request.id_req = ' . $id_req)
+                      ->whereRaw('request.id_active = Y')
+                      ->whereRaw('request.status_req = PEND')
+                      ->whereRaw('request.id_del = ' . 0);
+            })
+            ->whereExists(function ($query) use($id_user) {
+                $query->select(DB::raw(1))
+                      ->from('users')
+                      ->whereRaw('users.id_user = ' . $id_user)
+                      ->whereRaw('users.id_cat = 3') // Has to be a cooperative to accept request 
+                      ->whereRaw('users.id_del = ' . 0);
+            })
+            ->whereNotExists(function ($query) use($id_req) {
+                $query->select(DB::raw(1))
+                    ->from('request_assignment')
+                    ->whereRaw('request_assignment.id_req = ' . $id_req);
+            });
+            ->insert([
+                'id_req' => $id_req,
+                'id_user_assign' => $id_user,
+                'dt_predicted' => $dt_predicted,
+                'id_del' => 0
             ]);
       
         return;

@@ -68,7 +68,7 @@ class RequestDao
     }
 
 
-    public static function get_comp_requests_by_user($id_user) // Completed requests and confirmed
+    public static function get_comp_conf_requests_by_user($id_user) // Completed requests and confirmed
     {
         $list = DB::table('request')
             ->where('id_del', 0)
@@ -94,6 +94,8 @@ class RequestDao
 
     public static function insert_request($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage)
     {
+        //dd($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage);
+
         // VALIDATION BLOCK //////////////
         $errors = array();
 
@@ -101,7 +103,7 @@ class RequestDao
         if(is_null($id_user)        || $id_user <= 0)                       array_push($errors, 'id_user null or invalid (<=0)');
         if(is_null($desc_req)       || strlen((string)$desc_req)<=5)        array_push($errors, 'desc_req null or invalid (len<=5)');
         if(is_null($mod_req)        || strlen((string)$mod_req)<=5)         array_push($errors, 'mod_req null or invalid (len<=5)');
-        if(is_null($status_garbage) || strlen((string)$status_garbage<=5)   array_push($errors, 'status_garbage null or invalid (len<=5)');
+        if(is_null($status_garbage) || strlen((string)$status_garbage)<=5)   array_push($errors, 'status_garbage null or invalid (len<=5)');
 
         // END VALIDATION BLOCK /////////
 
@@ -125,8 +127,10 @@ class RequestDao
                 'id_garbage' => $id_garbage,
                 'id_user_req' => $id_user,
                 'desc_req' => $desc_req,
-                'mod_req' => $mod_req, 
-                'status_garbage' => $status_garbage
+                'status_garbage' => $status_garbage,
+                'status_req' => "PEND",
+                'id_active' => "Y",
+                'mod_req' => $mod_req
             ]);
       
         return;
@@ -139,7 +143,7 @@ class RequestDao
         // VALIDATION BLOCK //////////////
         $errors = array();
 
-        if(is_null($new_status_req) || if (!in_array($new_status_req, $status_list))) 
+        if(is_null($new_status_req) || !in_array($new_status_req, $status_list)) 
             array_push($errors, 'new status_req null or invalid;');
         
         // END VALIDATION BLOCK /////////

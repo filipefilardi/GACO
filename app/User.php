@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Util\Dao\UserDao;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -28,4 +30,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isComplete()
+    {                   
+        $res = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
+        if ($res->isEmpty()) {
+            return 0;
+        }else{
+            
+            return 1;
+        }
+    }
+
 }

@@ -18,8 +18,7 @@ class CompleteRegistrationController extends Controller
     }
 
     public function indexCompleteRegistration()
-    {
-    	
+    {   
         return view('complete_registration')->with('id_cat',Auth::user()->id_cat);
     }
 

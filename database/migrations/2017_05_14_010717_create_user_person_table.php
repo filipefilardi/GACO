@@ -20,8 +20,8 @@ class CreateUserPersonTable extends Migration
             $table->bigInteger('ph_res');
             $table->bigInteger('cpf_user');
             $table->timestamps();
-            $table->integer('lst_chg_by');
-            $table->integer('id_del');
+            $table->integer('lst_chg_by')->nullable();
+            $table->integer('id_del')->default(0);
         });
     }
 

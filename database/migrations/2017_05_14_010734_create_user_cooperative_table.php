@@ -19,8 +19,8 @@ class CreateUserCooperativeTable extends Migration
             $table->bigInteger('cnpj_user');
             $table->integer('id_radius_user');
             $table->timestamps();
-            $table->integer('lst_chg_by');
-            $table->integer('id_del');
+            $table->integer('lst_chg_by')->nullable();
+            $table->integer('id_del')->default(0);
         });
     }
 

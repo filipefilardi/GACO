@@ -22,8 +22,8 @@ class CreateRequestTable extends Migration
             $table->string('id_active', 1);
             $table->date('dt_colect');
             $table->timestamps();
-            $table->integer('lst_chg_by');
-            $table->integer('id_del');
+            $table->integer('lst_chg_by')->nullable();
+            $table->integer('id_del')->default(0);
         });
     }
 

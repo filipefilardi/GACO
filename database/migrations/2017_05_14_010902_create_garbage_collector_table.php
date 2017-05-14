@@ -15,8 +15,8 @@ class CreateGarbageCollectorTable extends Migration
     {
         Schema::create('garbage_collector', function (Blueprint $table) {
                 $table->timestamps();
-                $table->integer('lst_chg_by');
-                $table->integer('id_del');
+                $table->integer('lst_chg_by')->nullable();
+                $table->integer('id_del')->default(0);
         });
     }
 

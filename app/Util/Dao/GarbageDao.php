@@ -11,7 +11,9 @@ class GarbageDao
     public static function get_list_garbage_by_name()
     {
 
-    	$list = DB::table('garbage')->where('id_del', 0)->pluck('nm_garbage');
+    	$list = DB::table('garbage')
+            ->where('id_del', 0)
+            ->pluck('nm_garbage');
         			
         return $list;
     }
@@ -32,8 +34,11 @@ class GarbageDao
         return $list;
     }
 
-    public static function delete_garbage() // Active and inactive
+    public static function delete_garbage()
     {
+        DB::table('garbage')
+            ->where('id_garbage', 1)
+            ->update(['votes' => 1]);
 
         $list = DB::table('garbage')->get();
                     

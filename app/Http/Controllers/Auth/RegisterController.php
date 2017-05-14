@@ -69,7 +69,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        switch ($data['category']) {
+        switch ($data['id_cat']) {
         case 0:
             $id_cat_mapped = 1; // PESSOA FISICA - ID_CAT = 1
             break;

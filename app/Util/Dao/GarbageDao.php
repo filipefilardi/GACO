@@ -50,4 +50,20 @@ class GarbageDao
         return;
     }
 
+        public static function activate_garbage($id_garbage)
+    {
+
+        DB::table('garbage')
+            ->whereExists(function ($query) use($id_garbage) {
+                $query->select(DB::raw(1))
+                      ->from('garbage')
+                      ->whereRaw('garbage.id_garbage = ' . $id_garbage)
+                      ->whereRaw('garbage.id_del = ' . 1);
+            })
+            ->where('id_garbage', $id_garbage)
+            ->update(['id_del' => 0]);
+      
+        return;
+    }
+
 }

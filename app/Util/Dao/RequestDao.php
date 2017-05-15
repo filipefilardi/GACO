@@ -280,16 +280,20 @@ class RequestDao
         if(sizeof($errors)>0) return $errors;
 
         $id_cat = -1;
-        $id_cat = DB::table('request_confirmation')
+        $id_cat = DB::table('users')
             ->whereExists(function ($query) use($id_user_auth) {
                 $query->select(DB::raw(1))
                       ->from('users')
                       ->whereRaw('users.id_user = ?', $id_user_auth)
                       ->whereRaw('users.id_del = ?', 0);
+                })      
+            ->where('id_user',$id_user_auth)
             ->value('id_cat');
 
         if($id_cat >= 1 && $id_cat <=3) {        // Master users or invalid cat cannot confirm reqs
-            
+
+            $today = date("Ymd");
+
             switch ($id_cat) {
 
             case 3:                         // COOPERATIVE - ID_CAT = 3
@@ -304,10 +308,12 @@ class RequestDao
                 })
                 ->where('id_req', $id_req)
                 ->update([
-                    'id_user_assign_sign' => 'Y'
+                    'id_user_assign_sign' => 'Y',
+                    'dt_user_assign_sign' => $today
                 ]);
 
                 break;
+
             default:                         // CLIENTES - ID_CAT in (1,2)
                 DB::table('request_confirmation')
                 ->whereNotExists(function ($query) use($id_req) {
@@ -319,7 +325,8 @@ class RequestDao
                 })
                 ->where('id_req', $id_req)
                 ->update([
-                    'id_user_req_sign' => 'Y'
+                    'id_user_req_sign' => 'Y',
+                    'dt_user_req_sign' => $today
                 ]);
 
                 break;

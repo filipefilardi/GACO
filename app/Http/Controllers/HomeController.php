@@ -28,6 +28,14 @@ class HomeController extends Controller
         Auth::user();
         $request = RequestDAO::get_full_info_dashboard_req_by_user(Auth::user()->id_user);
 
+        // request testing 
+        // RequestDAO::insert_request(5,4,'abcedf','tester','Completo');
+        // RequestDAO::insert_request(5,4,'abcedf','tester','Completo');
+        // RequestDAO::assign_request(1,5,'20170608');
+        // RequestDAO::update_request(1,'COMP');
+        // RequestDAO::confirm_request(1,4);
+        // RequestDAO::confirm_request(1,5);
+
         return view('home', ['request' => $request]);
     }
 }

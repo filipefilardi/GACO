@@ -29,6 +29,7 @@ class RequestDao
             ->where('request.id_user_req', $id_user)
             ->whereIn('request.status_req',['ACTV','PEND'])
             ->where('request.id_del', 0)
+            ->distinct()
             ->get();
 
         return $list;
@@ -191,6 +192,7 @@ class RequestDao
 
     public static function update_request($id_req, $new_status_req)
     {
+
         $status_list = array('PEND', 'ACPT', 'COMP', 'CNCL');
 
         // VALIDATION BLOCK //////////////
@@ -204,21 +206,20 @@ class RequestDao
         if(sizeof($errors)>0) return $errors;
 
         DB::table('request')
-            ->whereExists(function ($query) use($id_req) {
+            ->whereExists(function ($query) use($id_req, $new_status_req) {
                 $query->select(DB::raw(1))
                       ->from('request')
-                      ->whereRaw('request.id_req = ' . $id_req)
-                      ->whereRaw('request.id_active = Y')
-                      ->whereRaw('request.status_req != COMP')
-                      ->whereRaw('request.status_req != CNCL')
-                      ->whereRaw('request.status_req != ' . $new_status_req)
-                      ->whereRaw('request.id_del = ' . 0);
+                      ->whereRaw('request.id_req = ?', $id_req)
+                      ->whereRaw('request.id_active = ?','Y')
+                      ->whereRaw('request.status_req != ?','COMP') // Cannot update completed requests
+                      ->whereRaw('request.status_req != ?', $new_status_req)
+                      ->whereRaw('request.id_del = ?', 0);
             })
             ->where('id_req', $id_req)
             ->update([
                 'status_req' => $new_status_req
             ]);
-      
+
         return;
     }
 
@@ -235,27 +236,27 @@ class RequestDao
 
         if(sizeof($errors)>0) return $errors;
 
-        DB::table('request')
+        DB::table('request_assignment')
             ->whereExists(function ($query) use($id_req) {
                 $query->select(DB::raw(1))
                       ->from('request')
-                      ->whereRaw('request.id_req = ' . $id_req)
-                      ->whereRaw('request.id_active = Y')
-                      ->whereRaw('request.status_req = PEND')
-                      ->whereRaw('request.id_del = ' . 0);
+                      ->whereRaw('request.id_req = ?', $id_req)
+                      ->whereRaw('request.id_active = ?' , 'Y')
+                      ->whereRaw('request.status_req = ?', 'PEND')
+                      ->whereRaw('request.id_del = ?', 0);
             })
             ->whereExists(function ($query) use($id_user) {
                 $query->select(DB::raw(1))
                       ->from('users')
-                      ->whereRaw('users.id_user = ' . $id_user)
-                      ->whereRaw('users.id_cat = 3') // Has to be a cooperative to accept request 
-                      ->whereRaw('users.id_del = ' . 0);
+                      ->whereRaw('users.id_user = ?', $id_user)
+                      ->whereRaw('users.id_cat = ?', 3) // Has to be a cooperative to accept request 
+                      ->whereRaw('users.id_del = ?', 0);
             })
             ->whereNotExists(function ($query) use($id_req) {
                 $query->select(DB::raw(1))
                     ->from('request_assignment')
-                    ->whereRaw('request_assignment.id_req = ' . $id_req);
-            });
+                    ->whereRaw('request_assignment.id_req = ?', $id_req);
+            })
             ->insert([
                 'id_req' => $id_req,
                 'id_user_assign' => $id_user,

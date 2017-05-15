@@ -267,4 +267,79 @@ class RequestDao
         return;
     }
 
+    public static function confirm_request($id_req, $id_user_auth)
+    {
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($id_user_auth) || $id_user_auth <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(is_null($id_req) || $id_req <= 0) array_push($errors, 'id_req null or invalid (<=0)');
+
+        // END VALIDATION BLOCK /////////
+
+        if(sizeof($errors)>0) return $errors;
+
+        $id_cat = -1;
+        $id_cat = DB::table('request_confirmation')
+            ->whereExists(function ($query) use($id_user_auth) {
+                $query->select(DB::raw(1))
+                      ->from('users')
+                      ->whereRaw('users.id_user = ?', $id_user_auth)
+                      ->whereRaw('users.id_del = ?', 0);
+            ->value('id_cat');
+
+        if($id_cat >= 1 && $id_cat <=3) {        // Master users or invalid cat cannot confirm reqs
+            
+            switch ($id_cat) {
+
+            case 3:                         // COOPERATIVE - ID_CAT = 3
+                
+                DB::table('request_confirmation')
+                ->whereNotExists(function ($query) use($id_req) {
+                $query->select(DB::raw(1))
+                    ->from('request_confirmation')
+                    ->whereRaw('request_confirmation.id_req = ?', $id_req)
+                    ->whereRaw('request_confirmation.id_user_assign_sign = ?', 'Y')
+                    ->whereRaw('request_confirmation.id_del = ?', 0);
+                })
+                ->where('id_req', $id_req)
+                ->update([
+                    'id_user_assign_sign' => 'Y'
+                ]);
+
+                break;
+            default:                         // CLIENTES - ID_CAT in (1,2)
+                DB::table('request_confirmation')
+                ->whereNotExists(function ($query) use($id_req) {
+                $query->select(DB::raw(1))
+                    ->from('request_confirmation')
+                    ->whereRaw('request_confirmation.id_req = ?', $id_req)
+                    ->whereRaw('request_confirmation.id_user_req_sign = ?', 'Y')
+                    ->whereRaw('request_confirmation.id_del = ?', 0);
+                })
+                ->where('id_req', $id_req)
+                ->update([
+                    'id_user_req_sign' => 'Y'
+                ]);
+
+                break;
+            }
+        }
+
+        DB::table('request_confirmation')
+            ->whereNotExists(function ($query) use($id_req) {
+                $query->select(DB::raw(1))
+                    ->from('request_confirmation')
+                    ->whereRaw('request_confirmation.id_req = ?', $id_req)
+                    ->whereRaw('request_confirmation.id_user_req_sign = ?', 'Y')
+                    ->whereRaw('request_confirmation.id_del = ?', 0);
+            })
+            ->where('id_req', $id_req)
+            ->update([
+                'id_user_req_sign' => 'Y'
+            ]);
+      
+        return;
+    }
+
 }

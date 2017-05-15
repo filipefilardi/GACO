@@ -13,57 +13,84 @@ class CreateTriggersFunctions extends Migration
      */
     public function up()
     {
+        $yesFlag = 'Y';
+        $noFlag = 'N';
+        $completeStatus = 'COMP';
+        $acceptedStatus = 'ACTP';
+
         // creates function - verifies that request has been changed status to COMP
-        DB::unprepared('CREATE OR REPLACE FUNCTION prepare_confirmation_table() RETURNS trigger AS
-            $BODY$
+        DB::unprepared("CREATE OR REPLACE FUNCTION prepare_confirmation_table() RETURNS trigger AS
+            $$
                 BEGIN
                     IF NEW.status_req <> OLD.status_req THEN
-                        IF NEW.status_req = `COMP` THEN
+                        IF NEW.status_req = '$completeStatus' THEN
                             INSERT INTO request_confirmation (id_req,id_user_req_sign, id_user_assign_sign, id_del)
-                            VALUES(OLD.id_req,`N`,`N`,0);
+                            VALUES(OLD.id_req,'$noFlag','$noFlag',0);
                         END IF;
                     END IF;
 
                     RETURN NEW;
                 END
-            $BODY$
+            $$
             LANGUAGE plpgsql VOLATILE
-            COST 100;'
+            COST 100;"
         );
 
         // binding Trigger - verifies that request has been changed status to COMP
-        DB::unprepared('CREATE TRIGGER update_status_req
+        DB::unprepared("CREATE TRIGGER update_status_req
             AFTER UPDATE
             ON request
             FOR EACH ROW
-            EXECUTE PROCEDURE prepare_confirmation_table();'
+            EXECUTE PROCEDURE prepare_confirmation_table();"
         );
 
         // creates function - verifies both users confirmed request and inactivates
-        DB::unprepared('CREATE OR REPLACE FUNCTION inactive_comp_request() RETURNS trigger AS
-            $BODY$
+        DB::unprepared("CREATE OR REPLACE FUNCTION inactive_comp_request() RETURNS trigger AS
+            $$
                 BEGIN
                     IF NEW.id_user_req_sign <> OLD.id_user_req_sign or NEW.id_user_assign_sign <> OLD.id_user_assign_sign THEN
-                        IF NEW.id_user_req_sign  = `Y` and NEW.id_user_assign_sign = `Y` THEN
+                        IF NEW.id_user_req_sign  = '$yesFlag' and NEW.id_user_assign_sign = '$yesFlag' THEN
                             UPDATE request
-                            SET id_active = `N`
+                            SET id_active = '$noFlag'
                             WHERE id_req = OLD.id_req;
                         END IF;
                     END IF;
 
                     RETURN NEW;
                 END
-            $BODY$
+            $$
             LANGUAGE plpgsql VOLATILE
-            COST 100;'
+            COST 100;"
         );
 
         // binding Trigger - verifies both users confirmed request and inactivates
-        DB::unprepared('CREATE TRIGGER req_confirmation_update
+        DB::unprepared("CREATE TRIGGER req_confirmation_update
             AFTER UPDATE
             ON request_confirmation
             FOR EACH ROW
-            EXECUTE PROCEDURE inactive_comp_request();'
+            EXECUTE PROCEDURE inactive_comp_request();"
+        );
+
+        // creates function - updates req status to accepted ACPT
+        DB::unprepared("CREATE OR REPLACE FUNCTION req_status_acpt_change() RETURNS trigger AS
+            $$
+                BEGIN
+                    UPDATE request
+                    SET status_req = '$acceptedStatus'
+                    WHERE id_req = NEW.id_req;
+                    RETURN NEW;
+                END
+            $$
+            LANGUAGE plpgsql VOLATILE
+            COST 100;"
+        );
+
+        // binding Trigger - verifies new entry is added to request_assigment - meaning req is accepted
+        DB::unprepared("CREATE TRIGGER req_assignment_insert
+            AFTER INSERT
+            ON request_assignment
+            FOR EACH ROW
+            EXECUTE PROCEDURE req_status_acpt_change();"
         );
 
     }
@@ -77,5 +104,6 @@ class CreateTriggersFunctions extends Migration
     {
         DB::unprepared('DROP FUNCTION prepare_confirmation_table() CASCADE');
         DB::unprepared('DROP FUNCTION inactive_comp_request() CASCADE');
+        DB::unprepared('DROP FUNCTION req_status_acpt_change() CASCADE');
     }
 }

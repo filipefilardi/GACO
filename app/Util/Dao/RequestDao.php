@@ -325,19 +325,6 @@ class RequestDao
                 break;
             }
         }
-
-        DB::table('request_confirmation')
-            ->whereNotExists(function ($query) use($id_req) {
-                $query->select(DB::raw(1))
-                    ->from('request_confirmation')
-                    ->whereRaw('request_confirmation.id_req = ?', $id_req)
-                    ->whereRaw('request_confirmation.id_user_req_sign = ?', 'Y')
-                    ->whereRaw('request_confirmation.id_del = ?', 0);
-            })
-            ->where('id_req', $id_req)
-            ->update([
-                'id_user_req_sign' => 'Y'
-            ]);
       
         return;
     }

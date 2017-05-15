@@ -26,9 +26,9 @@
 	                        @endforeach
 	                    </div>
 
-						<div class="row">
-		                    <div class="col-md-6">
-								<label>Escolha uma categoria</label>
+						<div class="form-group">
+								<label class="col-md-2 control-label">Categoria</label>
+		                    <div class="col-md-5">
 								<select class="form-control" name="id_garbage">
 						 		@foreach ($garbage as $garbage)
 			                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
@@ -36,32 +36,111 @@
 								</select>
 							</div>                   
 	                    </div>
-	                    <div class="row">
-	                    	<div class="col-md-6">
-	                    		<textarea name='desc_req' class="form-control" placeholder="Descreva seu equipamento"></textarea>
-	                    	</div>
-	                    </div>
 
-	                    <div class="row">
-	                    	<div class="col-md-6">
-	                    		<input name="mod_req" class="form-control" placeholder="Modelo do seu equipamento"></input>
-	                    	</div>
-	                    </div>
-	                    <div class="row">
-	                    	<div class="col-md-6">
-	                    		<select class="form-control" name="status_garbage">
+	                    <div class="form-group{{ $errors->has('desc_req') ? ' has-error' : '' }}">
+						    <label for="desc_req" class="col-md-2 control-label">Equipamento</label>
+
+                            <div class="col-md-5">
+                                <input id="desc_req" type="text" class="form-control" name="desc_req" placeholder="Descreva seu equipamento" value="{{ old('desc_req') }}" required>
+
+                                @if ($errors->has('desc_req'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('desc_req') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+	                    <div class="form-group{{ $errors->has('mod_req') ? ' has-error' : '' }}">
+						    <label for="mod_req" class="col-md-2 control-label">Modelo</label>
+
+                            <div class="col-md-5">
+                                <input id="mod_req" type="text" class="form-control" name="mod_req" placeholder="Modelo do seu equipamento" value="{{ old('mod_req') }}" required>
+
+                                @if ($errors->has('mod_req'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('mod_req') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+	                    <div class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
+						    <label for="status_garbage" class="col-md-2 control-label">Condição</label>
+
+                            <div class="col-md-5">
+                                <select class="form-control" name="status_garbage">
 	                    			<option>Completo</option>
 	                    			<option>Incompleto</option>
 	                    		</select>
-	                    	</div>
-	                    </div>
+                                @if ($errors->has('status_garbage'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('status_garbage') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 	                    <div class="row">
-		                    <div class="col-md-6">
+                            <div class="col-md-6 col-md-offset-4">
 		                    	<button type="submit" class="btn btn-primary">
 		                        	Registrar
 		                    	</button>
 		                    </div>
 		                 </div>
+
+		                 <!-- 
+ 						<div class="form-group{{ $errors->has('desc_req') ? ' has-error' : '' }}">
+						    <label for="desc_req" class="col-md-2 control-label">Equipamento</label>
+
+                            <div class="col-md-5">
+                                <input id="desc_req" type="text" class="form-control" name="desc_req" placeholder="Descreva seu equipamento" value="{{ old('desc_req') }}" required>
+
+                                @if ($errors->has('desc_req'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('desc_req') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('mod_req') ? ' has-error' : '' }}">
+						    <label for="mod_req" class="col-md-2 control-label">Modelo</label>
+
+                            <div class="col-md-5">
+                                <input id="mod_req" type="text" class="form-control" name="mod_req" placeholder="Modelo do seu equipamento" value="{{ old('mod_req') }}" required>
+
+                                @if ($errors->has('mod_req'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('mod_req') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
+						    <label for="status_garbage" class="col-md-2 control-label">Condição</label>
+
+                            <div class="col-md-5">
+                                <select class="form-control" name="status_garbage">
+	                    			<option>Completo</option>
+	                    			<option>Incompleto</option>
+	                    		</select>
+                                @if ($errors->has('status_garbage'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('status_garbage') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Registrar
+                                </button>
+                            </div>
+                        </div>
+ -->
+
 	                </form>
 	            </div>
 			</div>

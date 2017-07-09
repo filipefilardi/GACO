@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Util\Dao\GarbageDao;
 use App\Util\Dao\RequestDao;
+use App\Util\Dao\UserDao;
 use Auth;
 use Gate;
 
@@ -25,11 +26,19 @@ class RequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index_user() {
+    public function index_user(Request $data) {
          if (Gate::allows('execute', 'create_request')) {
 
-            $garbage = GarbageDao::get_list_garbage_actv();
-            return view('request', ['garbage' => $garbage]);
+            // check whether the registration is complete
+            $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
+            if($is_complete->count()>0){
+                $garbage = GarbageDao::get_list_garbage_actv();
+                return view('request', ['garbage' => $garbage]);
+            }else{
+                $data->session()->flash('alert-warning', 'warning');
+                return redirect('/home');
+            }
+
 
         }else{
 

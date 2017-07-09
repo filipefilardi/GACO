@@ -9,7 +9,15 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
-			
+			<div class="flash-message">
+	                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+	                          @if(Session::has('alert-' . $msg))
+
+	                          <p class="alert alert-{{ $msg }}"> <strong>EITA, você deveria completar seu cadastro antes</strong> </a></p>
+	                          @endif
+	                        @endforeach
+	                    </div>
+
 			<div class="panel-heading">Dashboard</div>
 			
 			<div class="panel-body">

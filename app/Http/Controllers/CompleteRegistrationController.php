@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Util\Dao\UserDao;
 use Auth;
 
 class CompleteRegistrationController extends Controller
@@ -24,6 +25,13 @@ class CompleteRegistrationController extends Controller
 
     public function completeRegistration(Request $request)
     {   
-        UserDao::insert(Auth::user()->user_id,$request->all());
+        $res = UserDao::insert(Auth::user()->id_user,$request->all(),Auth::user()->id_cat);
+        if($res){
+            $request->session()->flash('alert-warning', 'warning');
+        }else{
+            $request->session()->flash('alert-warning', 'warning');
+            
+        }
+        return redirect('/home');
     }
 }

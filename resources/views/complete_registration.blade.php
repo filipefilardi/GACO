@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Completar Registro</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/complete_registration') }}">
                         {{ csrf_field() }}
 
                         @if($id_cat==1)
@@ -109,15 +109,15 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('cpnj') ? ' has-error' : '' }}">
-                                <label for="cpnj" class="col-md-4 control-label">CNPJ</label>
+                            <div class="form-group{{ $errors->has('cnpj') ? ' has-error' : '' }}">
+                                <label for="cnpj" class="col-md-4 control-label">CNPJ</label>
 
                                 <div class="col-md-6">
-                                    <input id="cpf" type="text" class="form-control" name="cpnj" value="{{ old('cpf') }}" required>
+                                    <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}" required>
 
-                                    @if ($errors->has('cpf'))
+                                    @if ($errors->has('cnpj'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('cpf') }}</strong>
+                                            <strong>{{ $errors->first('cnpj') }}</strong>
                                         </span>
                                     @endif
                                 </div>

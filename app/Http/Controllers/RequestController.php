@@ -67,4 +67,22 @@ class RequestController extends Controller
         }
     }
 
+    public function accept_request(Request $data){
+
+        if (Gate::allows('execute', 'accept_requests')) {
+            
+            Auth::user();
+
+            RequestDAO::assign_request($data['id_req'],Auth::user()->id_user, $data['dt_predicted']);
+
+            $data->session()->flash('alert-success', 'sucess');
+            return redirect('/home');
+
+        } else {
+
+            return view('/home');
+            
+        }
+    }
+
 }

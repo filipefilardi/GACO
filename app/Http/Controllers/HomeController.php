@@ -46,10 +46,11 @@ class HomeController extends Controller
         }
         else{
             $request = RequestDAO::get_pend_requests_for_coop();
+            $request_acpt = RequestDAO::get_acpt_requests_by_coop();
         }
         
 
-        return view('home', ['request' => $request]);
+        return view('home', ['request' => $request,'request_acpt' => $request_acpt]);
     }
 
     /**

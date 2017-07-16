@@ -9,6 +9,41 @@ class UserDao
 
 {
     
+    public static function getListUsersByCat($id_cat)
+    {
+        switch ($id_cat) {
+                    case 1:
+                        $res = DB::table('user_person')
+                        ->where('id_del', 0)
+                        ->get();
+                        break;
+                    
+                    case 2:
+                        $res = DB::table('user_enterprise')
+                        ->where('id_del', 0)
+                        ->get();
+                        break;
+                    
+                    case 3:
+                        $res = DB::table('user_cooperative')
+                        ->where('id_del', 0)
+                        ->get();
+                        break;
+                    
+                    case 4:
+                        $res = DB::table('user_master')
+                        ->where('id_del', 0)
+                        ->get();
+                        break;
+                    
+                    default:
+                        $res = null;
+                        break;
+                }
+
+        return $res;
+    }
+
     public static function getInfo($id_user, $id_cat)
     {
         switch ($id_cat) {

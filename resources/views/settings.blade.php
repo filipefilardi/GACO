@@ -13,6 +13,14 @@
 			<div class="panel-heading">Configurações</div>
 				
 			<div class="panel-body">
+                <div class="flash-message">
+                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                              @if(Session::has('alert-' . $msg))
+
+                              <p class="alert alert-{{ $msg }}"> <strong>EITA, você deveria completar seu cadastro antes</strong> </a></p>
+                              @endif
+                            @endforeach
+                </div>
 				<a href="#form_coop" class="btn btn-default btn-block" data-toggle="collapse">Adicionar Endereço</a>
                 
                 <div id="form_coop" class="main-container collapse">
@@ -139,7 +147,7 @@
 
                 <div id="conta" class="main-container collapse">
                     <h3 class="text-center">Alterar Senha</h3>
-                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings') }}">
+                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/update/password') }}">
                         {{ csrf_field() }}
                         
                         <div class="form-group{{ $errors->has('old_password') ? ' has-error' : '' }}">

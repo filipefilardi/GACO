@@ -36,5 +36,7 @@ class AdminController extends Controller
         } else {
             $request->session()->flash('alert-warning', 'warning');
         }
+
+        return view('admin', ['request' => $request]);
     }
 }

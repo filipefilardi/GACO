@@ -124,10 +124,16 @@
                 </div>
 
 
-                <a href="#outro" class="btn btn-default btn-block" data-toggle="collapse">OUTRO</a>
+                <a href="#confereCoops" class="btn btn-default btn-block" data-toggle="collapse">Cooperativas cadastradas</a>
 
-                <div id="outro" class="main-container collapse">
-                  outra parada aqui
+                <div id="confereCoops" class="main-container collapse">
+                    <ul class="list-group">
+                      @forelse($coops as $coop)
+                            <li class="list-group-item text-center">{{$coop->nm_user}}</li>
+                      @empty
+                            <p>Nenhuma cooperativa cadastrada</p>
+                      @endforelse
+                    </ul>              
                 </div>
 
               </div>

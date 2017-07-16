@@ -24,7 +24,8 @@ class AdminController extends Controller
             return redirect('/home');
         }
         else {
-            return view('admin', ['request' => $request]);
+            $coops = UserDao::getListUsersByCat(3);
+            return view('admin')->with('coops',$coops);
         }
     }
 

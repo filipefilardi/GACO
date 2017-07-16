@@ -162,11 +162,15 @@ class RequestDao
     {
 
         $list = DB::table('request_assignment')
-            ->join('request_assignment', 'request.id_req', '=', 'request_assignment.id_req')
+            ->join('request', function ($join) {
+            $join->on('request_assignment.id_req', '=', 'request.id_req')
+                 ->where('request.id_del', 0)
+                 ->where('request.id_active', 'Y');
+            })
+            //->join('request_assignment', 'request.id_req', '=', 'request_assignment.id_req')
             ->where('request_assignment.id_del', 0)
-            ->where('request_assignment.id_active', 'Y')
             ->where('request_assignment.id_user_assign', $id_user)
-            ->select('request.*','request_assignment.dt_predicted')
+            ->select('request.*','dt_predicted')
             ->get();        
         return $list;
     }

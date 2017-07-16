@@ -17,7 +17,7 @@
                <a href="#form_coop" class="btn btn-default btn-block" data-toggle="collapse">Cadastrar uma Cooperativa</a>
                 
                 <div id="form_coop" class="main-container collapse">
-                  <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                  <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin') }}">
                         {{ csrf_field() }}
                         
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -63,15 +63,15 @@
                                 </div>
                             </div>
 
-                        <div class="form-group{{ $errors->has('mobile_phone') ? ' has-error' : '' }}">
-                                <label for="mobile_phone" class="col-md-4 control-label">Telefone</label>
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                <label for="phone" class="col-md-4 control-label">Telefone</label>
 
                                 <div class="col-md-6">
-                                    <input id="mobile_phone" type="text" class="form-control" name="mobile_phone" value="{{ old('mobile_phone') }}" required>
+                                    <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
 
-                                    @if ($errors->has('mobile_phone'))
+                                    @if ($errors->has('phone'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('mobile_phone') }}</strong>
+                                            <strong>{{ $errors->first('phone') }}</strong>
                                         </span>
                                     @endif
                                 </div>

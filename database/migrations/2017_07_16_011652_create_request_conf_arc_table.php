@@ -13,7 +13,7 @@ class CreateRequestConfArcTable extends Migration
      */
     public function up()
     {
-        Schema::create('request_confirmation', function (Blueprint $table) {
+        Schema::create('request_confirmation_arc', function (Blueprint $table) {
                 $table->date('dt_arc');
                 $table->integer('id_req');
                 $table->string('id_user_req_sign', 1);

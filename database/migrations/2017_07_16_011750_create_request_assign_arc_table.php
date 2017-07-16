@@ -13,7 +13,7 @@ class CreateRequestAssignArcTable extends Migration
      */
     public function up()
     {
-        Schema::create('request_assignment', function (Blueprint $table) {
+        Schema::create('request_assignment_arc', function (Blueprint $table) {
                 $table->date('dt_arc');
                 $table->integer('id_req');
                 $table->integer('id_user_assign');

@@ -54,15 +54,53 @@
 				<div class="list-group">
 				<h4>Lista de doações, aceite alguma clicando no item</h4>
 					@foreach ($request as $request)
-					  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+					  <a href="#" data-toggle="modal" data-target="#Modal" class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex w-100 justify-content-between">
 					      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}	
-					      </h5>
+					      </h5>                   
 					    </div>
 					    <p class="mb-1">{{ $request->status_garbage }}</p>
 					  </a>
 	         	    @endforeach
 				</div>
+
+				 <!-- Modal -->
+                        <div id="Modal" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header text-center"><h1>Aceitar pedido</h1></div>
+                                    <div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
+                                        <ol>
+                                        <p>O uso de todas as páginas desse website estão sujeitas a esse termos e condiçoes.</p>
+                                            <li>Cada usuário cadastrado entende que ele está de acordo com tudo que está descrito nos termos e condições, caso ele não concorde, ele não deverá se cadastrar na plataforma.</li>
+                                        </ol>
+                                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
+                        				{{ csrf_field() }}
+				                        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
+			                                <label for="date" class="col-md-4 control-label">Data de Recolhimento</label>
+
+			                                <div class="col-md-6">
+			                                    <input id="date" type="text" class="form-control" name="date" value="{{ old('date') }}" required>
+
+			                                    @if ($errors->has('date'))
+			                                        <span class="help-block">
+			                                            <strong>{{ $errors->first('date') }}</strong>
+			                                        </span>
+			                                    @endif
+			                                </div>
+			                            </div>
+                                            <div class="form-group">
+					                            <div class="col-md-6 col-md-offset-4">
+					                                <button type="submit" class="btn btn-primary">
+					                                    Aceitar
+					                                </button>
+					                            </div>
+					                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 			@endif
 			</div>
 			

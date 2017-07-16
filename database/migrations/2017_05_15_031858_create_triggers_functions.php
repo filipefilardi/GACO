@@ -71,9 +71,7 @@ class CreateTriggersFunctions extends Migration
             EXECUTE PROCEDURE inactive_comp_request();"
         );
 
-        /*
-
-        // creates function - verifies both users confirmed request and inactivates
+        // creates function - verifies inactivated row and moves to archive
         DB::unprepared("CREATE OR REPLACE FUNCTION move_req_arc() RETURNS trigger AS
             $$
                 BEGIN
@@ -98,8 +96,6 @@ class CreateTriggersFunctions extends Migration
             FOR EACH ROW
             EXECUTE PROCEDURE move_req_arc();"
         );
-
-        */
 
         // creates function - updates req status to accepted ACPT
         DB::unprepared("CREATE OR REPLACE FUNCTION req_status_acpt_change() RETURNS trigger AS
@@ -135,5 +131,6 @@ class CreateTriggersFunctions extends Migration
         DB::unprepared('DROP FUNCTION prepare_confirmation_table() CASCADE');
         DB::unprepared('DROP FUNCTION inactive_comp_request() CASCADE');
         DB::unprepared('DROP FUNCTION req_status_acpt_change() CASCADE');
+        DB::unprepared('DROP FUNCTION move_req_arc() CASCADE');
     }
 }

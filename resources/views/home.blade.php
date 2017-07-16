@@ -53,18 +53,18 @@
 			@if(Auth::user()->id_cat == 3)
 				<div class="list-group">
 				<h4>Lista de doações, aceite alguma clicando no item</h4>
-					@foreach ($request as $request)
-					  <a href="#" data-toggle="modal" data-target="#Modal" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}	
-					      </h5>                   
-					    </div>
-					    <p class="mb-1">{{ $request->status_garbage }}</p>
-					  </a>
-	         	    @endforeach
-				</div>
+					@if (!$request->isEmpty())
+						@foreach ($request as $request)
+						  <a href="#" data-toggle="modal" data-target="#Modal" class="list-group-item list-group-item-action flex-column align-items-start">
+						    <div class="d-flex w-100 justify-content-between">
+						      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}	
+						      </h5>                   
+						    </div>
+						    <p class="mb-1">{{ $request->status_garbage }}</p>
+						  </a>
+		         	    @endforeach
 
-				 <!-- Modal -->
+		         	     <!-- Modal -->
                         <div id="Modal" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                                 <!-- Modal content-->
@@ -104,6 +104,10 @@
                                 </div>
                             </div>
                         </div>
+		         	@endif
+				</div>
+
+				
 			@endif
 			</div>
 			

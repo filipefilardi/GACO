@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::post('/home', 'RequestController@accept_request');
 
 Route::get('/garbage', 'GarbageController@index_garbage');
 

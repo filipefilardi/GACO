@@ -73,6 +73,20 @@ class UserDao
 
                         $res=1;
                         break;
+
+                    case 3:
+
+                        DB::table('user_cooperative')->insert([
+                            'id_user' => $id_user,
+                            'nm_user' => $data['name'],
+                            'ph_corp' => $data['corp_phone'],
+                            'id_radius_user' => $data['id_radius_user'],
+                            'cnpj_user' => $data['cnpj']
+                        ]);
+
+
+                        $res=1;
+                        break;
                     
                     default:
                         $res = null;

@@ -71,6 +71,35 @@ class CreateTriggersFunctions extends Migration
             EXECUTE PROCEDURE inactive_comp_request();"
         );
 
+        /*
+
+        // creates function - verifies both users confirmed request and inactivates
+        DB::unprepared("CREATE OR REPLACE FUNCTION move_req_arc() RETURNS trigger AS
+            $$
+                BEGIN
+                    IF NEW.id_active = '$noFlag' THEN
+                        UPDATE request
+                        SET id_active = '$noFlag'
+                        WHERE id_req = OLD.id_req;
+                    END IF;
+
+                    RETURN NEW;
+                END
+            $$
+            LANGUAGE plpgsql VOLATILE
+            COST 100;"
+        );
+
+        // binding Trigger - verifies both users confirmed request and inactivates
+        DB::unprepared("CREATE TRIGGER req_finish_archive
+            AFTER UPDATE
+            ON request
+            FOR EACH ROW
+            EXECUTE PROCEDURE move_req_arc();"
+        );
+
+        */
+
         // creates function - updates req status to accepted ACPT
         DB::unprepared("CREATE OR REPLACE FUNCTION req_status_acpt_change() RETURNS trigger AS
             $$

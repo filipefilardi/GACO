@@ -291,6 +291,7 @@ th {
 .img-thumbnail,
 body {
     background-color: #EFEFEF;
+    margin-bottom: 120px;
 }
 @font-face {
     font-family: 'Glyphicons Halflings';
@@ -1094,6 +1095,8 @@ body {
 }
 html {
     font-size: 10px;
+    position: relative;
+    min-height: 100%;
     -webkit-tap-highlight-color: transparent
 }
 body {

@@ -29,6 +29,7 @@ class HomeController extends Controller
     {
         Auth::user();
         $id_user = Auth::user()->id_user;
+        $id_cat = Auth::user()->id_cat;
 
         // check whether the account is deleted
         $user_status = UserDao::getStatus($id_user);
@@ -40,8 +41,7 @@ class HomeController extends Controller
 
         }
 
-
-        if ($id_user == 1 || $id_user == 2) {
+        if ($id_cat == 1 || $id_cat == 2) {
             $request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);   
         }
         else{

@@ -33,7 +33,7 @@
 						  @foreach ($request as $request)
 							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 							    <div class="d-flex w-100 justify-content-between">
-							      <h5 class="mb-1">{{ $request->nm_garbage}} | {{$request->mod_req}}
+							      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
 							      <small class="text-right">
 							      	@if($request->status_req == "PEND")
 							      		PENDENTE
@@ -44,14 +44,13 @@
 							      </h5>
 							    </div>
 							    <p class="mb-1">{{ $request->desc_req }}</p>
-							    <small>Previsao de Coleta{{$request->dt_predicted}}</small>
 							  </a>
 		             	  @endforeach
 					</div>
 				@endif			 
 			@endif
 
-			@if(Auth::user()->id_cat == 3 || Auth::user()->id_cat == 4)
+			@if(Auth::user()->id_cat == 3)
 				<div class="list-group">
 				<h4>Lista de doações, aceite alguma clicando no item</h4>
 					@foreach ($request as $request)

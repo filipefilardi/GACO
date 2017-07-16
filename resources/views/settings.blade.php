@@ -125,6 +125,72 @@
                 	
                 	
                 </div>
+
+                <a href="#conta" class="btn btn-default btn-block" data-toggle="collapse">Conta</a>
+
+                <div id="conta" class="main-container collapse">
+                    <h3 class="text-center">Alterar Senha</h3>
+                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings') }}">
+                        {{ csrf_field() }}
+                        
+                        <div class="form-group{{ $errors->has('old_password') ? ' has-error' : '' }}">
+                                <label for="old_password" class="col-md-4 control-label">Senha Antiga</label>
+
+                                <div class="col-md-6">
+                                    <input id="old_password" type="text" class="form-control" name="old_password" value="{{ old('old_password') }}" required>
+
+                                    @if ($errors->has('old_password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('old_password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Senha</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password-confirm" class="col-md-4 control-label">Confirmação de senha</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Registrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <h3 class="text-center">Deletar Conta</h3>
+                     <div class="form-group">
+                         <div class="col-md-6 col-md-offset-4">
+                            <p>Esteja certo que você quer deletar sua conta. Uma vez deletada, aquele abraço</p>
+                         </div>
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-danger">
+                                    Deletar Conta
+                                </button>
+                            </div>
+                        </div>
+                </div>
 			</div>
 			
 			</div>

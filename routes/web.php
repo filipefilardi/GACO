@@ -30,6 +30,12 @@ Route::post('/complete_registration', 'CompleteRegistrationController@completeRe
 
 Route::get('/admin', 'AdminController@index_admin');
 
+
 Route::get('/partners', 'HomeController@index_partners');
 
 Route::get('/about', 'HomeController@index_about');
+
+/* SETTINGS */
+Route::get('/settings', 'SettingsController@indexSettings');
+Route::post('/settings', 'SettingsController@registerAddress');
+

@@ -18,10 +18,18 @@ class AddressDao
 
         return $res;
     }
-    /*
 
 
+    /*Insert a new address and update the other addresses if the current one is the main address*/
+    public static function insertAndUpdateAddress($id_user, $data)
+    {
+        $is_main_address = (int)$data['main_address'];
 
+        if($is_main_address == 1){
+            DB::table('address')
+            ->where('id_user', $id_user)
+            ->update(['main_address' => 0]);
+        }
         DB::table('address')->insert([
                 'id_lat' => 0,
                 'id_lon' => 0,
@@ -32,8 +40,10 @@ class AddressDao
                 'nm_city'=>$data['nm_city'],
                 'id_cep'=>$data['id_cep'],
                 'id_user' => $id_user,
-                'main_address' => 1
+                'main_address' => $is_main_address
             ]);
-            
-    */
+        $res = 1;
+
+        return $res;
+    }
 }

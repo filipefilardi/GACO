@@ -27,7 +27,7 @@ class CompleteRegistrationController extends Controller
     {   
         $res = UserDao::insert(Auth::user()->id_user,$request->all(),Auth::user()->id_cat);
         if($res){
-            $request->session()->flash('alert-warning', 'warning');
+            $request->session()->flash('alert-success', 'success');
         }else{
             $request->session()->flash('alert-warning', 'warning');
             

@@ -16,7 +16,7 @@
 				<a href="#form_coop" class="btn btn-default btn-block" data-toggle="collapse">Adicionar Endereço</a>
                 
                 <div id="form_coop" class="main-container collapse">
-                  <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                  <form class="form-horizontal" role="form" method="POST" action="/register/address">
                         {{ csrf_field() }}
                         
                         <div class="form-group{{ $errors->has('nm_country') ? ' has-error' : '' }}">
@@ -102,6 +102,15 @@
                                     @endif
                                 </div>
                             </div>
+
+                        <div class="form-group{{ $errors->has('main_address') ? ' has-error' : '' }}">
+                            <label for="main_address" class="col-md-4 control-label">Endereço Principal</label>
+
+                            <div class="col-md-6">
+                                <label class="radio-inline"><input type="radio" name="main_address" value="1" required>Sim</label>
+                                <label class="radio-inline"><input type="radio" name="main_address" value="0">Não</label>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

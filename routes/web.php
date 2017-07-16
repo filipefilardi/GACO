@@ -37,5 +37,5 @@ Route::get('/about', 'HomeController@index_about');
 
 /* SETTINGS */
 Route::get('/settings', 'SettingsController@indexSettings');
-Route::post('/settings', 'SettingsController@registerAddress');
+Route::post('/register/address', 'SettingsController@registerAddress');
 

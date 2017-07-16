@@ -77,15 +77,18 @@
                                         </ol>
                                          <form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
                         				{{ csrf_field() }}
-				                        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-			                                <label for="date" class="col-md-4 control-label">Data de Recolhimento</label>
+				                        
+                        				<input type="hidden" name="id_req" value="{{$request->id_req}}" />
+
+				                        <div class="form-group{{ $errors->has('dt_predicted') ? ' has-error' : '' }}">
+			                                <label for="dt_predicted" class="col-md-4 control-label">Data de Recolhimento</label>
 
 			                                <div class="col-md-6">
-			                                    <input id="date" type="text" class="form-control" name="date" value="{{ old('date') }}" required>
+			                                    <input id="dt_predicted" type="text" class="form-control" name="dt_predicted" value="{{ old('dt_predicted') }}" required>
 
-			                                    @if ($errors->has('date'))
+			                                    @if ($errors->has('dt_predicted'))
 			                                        <span class="help-block">
-			                                            <strong>{{ $errors->first('date') }}</strong>
+			                                            <strong>{{ $errors->first('dt_predicted') }}</strong>
 			                                        </span>
 			                                    @endif
 			                                </div>

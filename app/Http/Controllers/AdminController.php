@@ -38,6 +38,7 @@ class AdminController extends Controller
             $request->session()->flash('alert-warning', 'warning');
         }
 
-        return view('admin', ['request' => $request]);
+        $coops = UserDao::getListUsersByCat(3);
+        return redirect('admin')->with('request', $request)->with('coops',$coops);
     }
 }

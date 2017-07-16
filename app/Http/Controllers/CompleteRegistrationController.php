@@ -32,6 +32,6 @@ class CompleteRegistrationController extends Controller
             $request->session()->flash('alert-warning', 'warning');
             
         }
-        return redirect('/home');
+        return redirect('/request');
     }
 }

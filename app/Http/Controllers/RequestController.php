@@ -36,7 +36,7 @@ class RequestController extends Controller
                 return view('request', ['garbage' => $garbage]);
             }else{
                 $data->session()->flash('alert-warning', 'warning');
-                return redirect('/home');
+                return redirect('/complete_registration');
             }
 
 

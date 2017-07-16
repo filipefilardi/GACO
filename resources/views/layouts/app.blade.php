@@ -63,6 +63,10 @@
                             <li><a href="{{ url('/garbage') }}">Lixo Eletrônico</a></li>
                             <li><a href="{{ url('/home') }}">Parcerias</a></li>
                             <li><a href="{{ url('/home') }}">Contate-nos</a></li>
+                            @if(Auth::user()->id_cat == 4)
+                                <!-- Apenas para administradores -->
+                                <li><a href="{{ url('/admin') }}">Painel do Administrador</a></li>
+                            @endif
                             <!-- Só se não tiver sido completado -->
                             @if(!Auth::user()->isComplete())
                                 @if(Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2)

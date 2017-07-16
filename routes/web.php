@@ -27,3 +27,5 @@ Route::get('/notification', 'RequestController@index_customer');
 
 Route::get('/complete_registration', 'CompleteRegistrationController@indexCompleteRegistration');
 Route::post('/complete_registration', 'CompleteRegistrationController@completeRegistration');
+
+Route::get('/admin', 'AdminController@index_admin');

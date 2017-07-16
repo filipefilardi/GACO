@@ -158,4 +158,33 @@ class UserDao
         return $res;
     }
 
+    public static function getPassword($id_user,$old_password)
+    {   
+        dd($old_password);
+        $res = DB::table('users')->where([
+            ['id_user', '=', $id_user],
+            ['password', '=', $old_password],
+        ])->get();
+
+        return $res;
+    }
+
+    public static function updatePassword($id_user, $new_password)
+    {
+
+        try{
+            DB::table('users')
+            ->where('id_user', $id_user)
+            ->update(['password' => $new_password]);
+
+            $res = 1;
+        } 
+        catch(\Exception $e){
+            $res = 0;
+            dd($e);
+        }
+        
+        return $res;
+    }
+
 }

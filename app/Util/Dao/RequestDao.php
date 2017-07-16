@@ -146,6 +146,31 @@ class RequestDao
         return $list;
     }
 
+    public static function get_pend_requests_for_coop() // Pending requests for coop
+    {
+
+        $list = DB::table('request')
+            ->where('id_del', 0)
+            ->where('id_active', 'Y')
+            ->where('status_req', 'PEND')
+            ->get();
+                    
+        return $list;
+    }
+
+    public static function get_acpt_requests_by_coop($id_user) // Accepted requests by coop
+    {
+
+        $list = DB::table('request_assignment')
+            ->where('id_del', 0)
+            ->where('id_active', 'Y')
+            ->where('id_user_assign', $id_user)
+            ->join('request_assignment', 'request.id_req', '=', 'request_assignment.id_req')
+            ->select('request.*','request_assignment.dt_predicted')
+                    
+        return $list;
+    }
+
     public static function insert_request($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage)
     {
         //dd($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage);

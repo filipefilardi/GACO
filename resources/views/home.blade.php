@@ -52,8 +52,9 @@
 
 			@if(Auth::user()->id_cat == 3)
 				<div class="list-group">
-				<h4>Lista de doações, aceite alguma clicando no item</h4>
+					<!-- MOSTRA TODAS AS REQUISIÇÕES NO SISTEMA -->
 					@if (!$request->isEmpty())
+						<h4>Lista de doações, aceite alguma clicando no item</h4>
 						@foreach ($request as $request)
 						  <a href="#" data-toggle="modal" data-target="#Modal" class="list-group-item list-group-item-action flex-column align-items-start">
 						    <div class="d-flex w-100 justify-content-between">
@@ -107,7 +108,23 @@
 		         	@endif
 				</div>
 
-				
+				<!-- MOSTRAR TODAS AS REQUISIÇÕES FEITAS PELA COOP -->
+				 @foreach ($request_acpt as $request)
+					  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
+					      <small class="text-right">
+					      	@if($request->status_req == "PEND")
+					      		PENDENTE
+					      	@else
+					      		{{$request->status_req}}
+					      	@endif
+					      </small>
+					      </h5>
+					    </div>
+					    <p class="mb-1">{{ $request->desc_req }}</p>
+					  </a>
+             	  @endforeach
 			@endif
 			</div>
 			

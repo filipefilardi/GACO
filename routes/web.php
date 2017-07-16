@@ -29,6 +29,7 @@ Route::get('/complete_registration', 'CompleteRegistrationController@indexComple
 Route::post('/complete_registration', 'CompleteRegistrationController@completeRegistration');
 
 Route::get('/admin', 'AdminController@index_admin');
+Route::post('/admin', 'AdminController@insertCoop');
 
 Route::get('/partners', 'HomeController@index_partners');
 

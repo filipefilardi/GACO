@@ -3,6 +3,7 @@
 namespace App\Util\Dao;
 
 use DB;
+use App\User;
 
 class UserDao
 
@@ -86,8 +87,8 @@ class UserDao
                             DB::table('user_cooperative')->insert([
                                 'id_user' => $userCreated->id_user,
                                 'nm_user' => $data['name'],
-                                'ph_corp' => $data['corp_phone'],
-                                'id_radius_user' => $data['id_radius_user'],
+                                'ph_numb' => $data['phone'],
+                                'id_radius_user' => $data['radius'],
                                 'cnpj_user' => $data['cnpj']
                             ]);
                         }

@@ -29,9 +29,9 @@ class RequestController extends Controller
     public function index_user(Request $data) {
          if (Gate::allows('execute', 'create_request')) {
 
-            // check whether the registration is complete
+            // check whether the registration is complete or its a master user
             $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
-            if($is_complete->count()>0){
+            if($is_complete->count()>0 || Auth::user()->id_cat == 4){
                 $garbage = GarbageDao::get_list_garbage_actv();
                 return view('request', ['garbage' => $garbage]);
             }else{

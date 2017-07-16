@@ -73,6 +73,9 @@
                                     <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
                                 @endif
                             @endif
+                            @if(Auth::user()->id_cat == 4)
+                                <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
+                            @endif
                         </ul>
                     @endif
                     <!-- Right Side Of Navbar -->

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGarbageCollectorTable extends Migration
+class CreateRequestAssignArcTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateGarbageCollectorTable extends Migration
      */
     public function up()
     {
-        Schema::create('garbage_collector', function (Blueprint $table) {
+        Schema::create('request_assignment', function (Blueprint $table) {
+                $table->date('dt_arc');
+                $table->integer('id_req');
+                $table->integer('id_user_assign');
+                $table->date('dt_predicted');
                 $table->timestamps();
                 $table->integer('lst_chg_by')->nullable();
-                $table->integer('id_del')->default(0);
+                $table->integer('id_del');
         });
-        // RELATIONAL TABLE - Links coop user and garbage table to 
-        // reflect items that are on the coop workstream
     }
 
     /**

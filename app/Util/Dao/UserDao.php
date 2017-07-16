@@ -46,19 +46,6 @@ class UserDao
     public static function insert($id_user, $data, $id_cat)
     {
 
-            DB::table('address')->insert([
-                'id_lat' => 0,
-                'id_lon' => 0,
-                'id_comp' =>(int)$data['id_comp'],
-                'nm_st' =>$data['nm_st'],
-                'id_st_numb'=>$data['id_st_numb'],
-                'nm_country'=>$data['nm_country'],
-                'nm_city'=>$data['nm_city'],
-                'id_cep'=>$data['id_cep'],
-            ]);
-
-
-        $id_add = DB::table('address')->orderBy('id_add', 'desc')->first()->id_add;
         switch ($id_cat) {
                     case 1:
 
@@ -68,8 +55,7 @@ class UserDao
                             'dt_user' => $data['birth'],
                             'ph_mob' => $data['mobile_phone'],
                             'ph_res' => $data['home_phone'],
-                            'cpf_user' => $data['cpf'],
-                            'id_add' => $id_add,
+                            'cpf_user' => $data['cpf']
 
                         ]);
                         $res=1;
@@ -81,8 +67,7 @@ class UserDao
                             'id_user' => $id_user,
                             'nm_user' => $data['name'],
                             'ph_corp' => $data['corp_phone'],
-                            'cnpj_user' => $data['cnpj'],
-                            'id_add' => $id_add,
+                            'cnpj_user' => $data['cnpj']
                         ]);
 
 
@@ -92,7 +77,23 @@ class UserDao
                     default:
                         $res = null;
                         break;
-                }
+        }
+
+        DB::table('address')->insert([
+                'id_lat' => 0,
+                'id_lon' => 0,
+                'id_comp' =>(int)$data['id_comp'],
+                'nm_st' =>$data['nm_st'],
+                'id_st_numb'=>$data['id_st_numb'],
+                'nm_country'=>$data['nm_country'],
+                'nm_city'=>$data['nm_city'],
+                'id_cep'=>$data['id_cep'],
+                'id_user' => $id_user,
+                'main_address' => 1
+            ]);
+
+
+        //$id_add = DB::table('address')->orderBy('id_add', 'desc')->first()->id_add;
 
         return $res;
     }

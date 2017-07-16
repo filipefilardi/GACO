@@ -29,3 +29,7 @@ Route::get('/complete_registration', 'CompleteRegistrationController@indexComple
 Route::post('/complete_registration', 'CompleteRegistrationController@completeRegistration');
 
 Route::get('/admin', 'AdminController@index_admin');
+
+Route::get('/partners', 'HomeController@index_partners');
+
+Route::get('/about', 'HomeController@index_about');

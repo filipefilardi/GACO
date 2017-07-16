@@ -61,8 +61,8 @@
                             <li><a href="{{ url('/request') }}">Coleta</a></li>
                             <li><a href="{{ url('/home') }}">Cooperativas</a></li>
                             <li><a href="{{ url('/garbage') }}">Lixo Eletrônico</a></li>
-                            <li><a href="{{ url('/home') }}">Parcerias</a></li>
-                            <li><a href="{{ url('/home') }}">Contate-nos</a></li>
+                            <li><a href="{{ url('/partners') }}">Parcerias</a></li>
+                            <li><a href="{{ url('/about') }}">Sobre</a></li>
                             @if(Auth::user()->id_cat == 4)
                                 <!-- Apenas para administradores -->
                                 <li><a href="{{ url('/admin') }}">Painel do Administrador</a></li>

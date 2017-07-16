@@ -38,4 +38,23 @@ class HomeController extends Controller
 
         return view('home', ['request' => $request]);
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_about()
+    {
+        return view('about');
+    }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_partners()
+    {
+        return view('partners');
+    }
 }

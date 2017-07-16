@@ -100,7 +100,7 @@
                         </div>
 
                          <div class="form-group{{ $errors->has('radius') ? ' has-error' : '' }}">
-                                <label for="radius" class="col-md-4 control-label">Raio de Alcançe</label>
+                                <label for="radius" class="col-md-4 control-label">Raio de Alcance</label>
 
                                 <div class="col-md-6">
                                     <input id="radius" type="text" class="form-control" name="radius" value="{{ old('radius') }}" required>

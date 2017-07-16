@@ -18,6 +18,8 @@ class CreateGarbageCollectorTable extends Migration
                 $table->integer('lst_chg_by')->nullable();
                 $table->integer('id_del')->default(0);
         });
+        // RELATIONAL TABLE - Links coop user and garbage table to 
+        // reflect items that are on the coop workstream
     }
 
     /**

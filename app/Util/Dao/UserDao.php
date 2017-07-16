@@ -76,14 +76,21 @@ class UserDao
 
                     case 3:
 
-                        DB::table('user_cooperative')->insert([
-                            'id_user' => $id_user,
-                            'nm_user' => $data['name'],
-                            'ph_corp' => $data['corp_phone'],
-                            'id_radius_user' => $data['id_radius_user'],
-                            'cnpj_user' => $data['cnpj']
+                        $userCreated = User::create([
+                        'email' => $data['email'],
+                        'password' => bcrypt($data['password']),
+                        'id_cat' => $id_cat,
                         ]);
 
+                        if($userCreated) {
+                            DB::table('user_cooperative')->insert([
+                                'id_user' => $userCreated->id_user,
+                                'nm_user' => $data['name'],
+                                'ph_corp' => $data['corp_phone'],
+                                'id_radius_user' => $data['id_radius_user'],
+                                'cnpj_user' => $data['cnpj']
+                            ]);
+                        }
 
                         $res=1;
                         break;
@@ -92,6 +99,8 @@ class UserDao
                         $res = null;
                         break;
         }
+
+/* Changed logic - Now addresses are added once requesting - Victor 15-7-17
 
         DB::table('address')->insert([
                 'id_lat' => 0,
@@ -108,6 +117,7 @@ class UserDao
 
 
         //$id_add = DB::table('address')->orderBy('id_add', 'desc')->first()->id_add;
+*/
 
         return $res;
     }

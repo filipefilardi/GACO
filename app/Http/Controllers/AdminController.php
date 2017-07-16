@@ -28,4 +28,15 @@ class AdminController extends Controller
             return view('admin', ['request' => $request]);
         }
     }
+
+    public function insertCoop(Request $request)
+    {   
+        $res = UserDao::insert(Auth::user()->id_user,$request->all(),3); // 3 - ID CAT de Coop
+        if($res){
+            $request->session()->flash('alert-warning', 'warning');
+        } else {
+            $request->session()->flash('alert-warning', 'warning');
+            
+        }
+    }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Util\Dao\RequestDao;
+use App\Util\Dao\UserDao;
 use Auth;
+use Session;
 
 class HomeController extends Controller
 {
@@ -26,8 +28,21 @@ class HomeController extends Controller
     public function index()
     {
         Auth::user();
-        if (Auth::user()->id_user == 1 || Auth::user()->id_user == 2) {
-            $request = RequestDAO::get_full_info_dashboard_req_by_user(Auth::user()->id_user);   
+        $id_user = Auth::user()->id_user;
+
+        // check whether the account is deleted
+        $user_status = UserDao::getStatus($id_user);
+        // logout!
+        if($user_status == 1){
+            Auth::logout();
+            Session::flush();
+            return redirect('/');
+
+        }
+
+
+        if ($id_user == 1 || $id_user == 2) {
+            $request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);   
         }
         else{
             $request = RequestDAO::get_pend_requests_for_coop();

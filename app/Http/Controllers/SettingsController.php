@@ -7,6 +7,7 @@ use App\Util\Dao\AddressDao;
 use App\Util\Dao\UserDao;
 use Auth;
 use Hash;
+use Session;
 
 class SettingsController extends Controller
 {
@@ -55,6 +56,17 @@ class SettingsController extends Controller
 
         $addresses = AddressDao::getAddresses($id_user);
         return view('/settings')->with('addresses',$addresses);
+    }
+
+    public function deleteAccount(Request $request){
+    	$id_user = Auth::user()->id_user;
+
+    	$res = UserDao::userStatusToggle($id_user, 1);
+
+    	Auth::logout();
+	    Session::flush();
+	    return redirect('/');
+    	
     }
 
     

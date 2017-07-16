@@ -197,6 +197,8 @@
                     </form>
 
                     <h3 class="text-center">Deletar Conta</h3>
+                    <form class="form-horizontal" role="form" method="POST" action="/delete/account">
+                        {{ csrf_field() }}
                      <div class="form-group">
                          <div class="col-md-6 col-md-offset-4">
                             <p>Esteja certo que você quer deletar sua conta. Uma vez deletada, aquele abraço</p>
@@ -207,6 +209,7 @@
                                 </button>
                             </div>
                         </div>
+                    </form>
                 </div>
 			</div>
 			

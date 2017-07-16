@@ -158,6 +158,27 @@ class UserDao
         return $res;
     }
 
+    public static function getStatus($id_user)
+    {
+        $res = DB::table('users')
+                        ->select('id_del')
+                        ->where('id_user',$id_user)
+                        ->first()->id_del;
+
+        return $res;
+
+    }
+
+    public static function userStatusToggle($id_user, $status)
+    {
+        DB::table('users')
+                        ->where('id_user',$id_user)
+                        ->update(['id_del' => $status]);
+        $res = 1;
+        return $res;
+
+    }
+
     public static function getPassword($id_user,$old_password)
     {   
         dd($old_password);

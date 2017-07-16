@@ -16,8 +16,8 @@ class CreateRequestConfArcTable extends Migration
         Schema::create('request_confirmation_arc', function (Blueprint $table) {
                 $table->date('dt_arc');
                 $table->integer('id_req');
-                $table->string('id_user_req_sign', 1);
-                $table->string('id_user_assign_sign', 1);
+                $table->string('id_user_req_sign',1);
+                $table->string('id_user_assign_sign',1);
                 $table->date('dt_user_req_sign')->default(null)->nullable;
                 $table->date('dt_user_assign_sign')->default(null)->nullable;
                 $table->timestamps();

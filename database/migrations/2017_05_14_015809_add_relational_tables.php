@@ -45,23 +45,17 @@ class AddRelationalTables extends Migration
         Schema::table('user_person', function($table) {
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');;
-            $table->integer('id_add')->unsigned();
-            $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');;
         });
 
         Schema::table('user_enterprise', function($table) {
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');;
-            $table->integer('id_add')->unsigned();
-            $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');;
         });
 
 
         Schema::table('user_cooperative', function($table) {
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');;
-            $table->integer('id_add')->unsigned();
-            $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');;
         });
 
         Schema::table('garbage_collector', function($table) {
@@ -69,6 +63,11 @@ class AddRelationalTables extends Migration
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');;
             $table->integer('id_garbage')->unsigned();
             $table->foreign('id_garbage')->references('id_garbage')->on('garbage')->onDelete('cascade');;
+        });
+
+        Schema::table('address', function($table) {
+            $table->integer('id_user')->unsigned();
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
         });
 
 

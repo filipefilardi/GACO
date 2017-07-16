@@ -108,6 +108,7 @@
 		         	@endif
 				</div>
 
+				<h4>Lista de pedidos aceitos</h4>
 				<!-- MOSTRAR TODAS AS REQUISIÇÕES FEITAS PELA COOP -->
 				 @foreach ($request_acpt as $request)
 					  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">

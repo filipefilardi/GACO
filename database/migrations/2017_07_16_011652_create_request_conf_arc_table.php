@@ -33,6 +33,6 @@ class CreateRequestConfArcTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('request_confirmation_arc');
     }
 }

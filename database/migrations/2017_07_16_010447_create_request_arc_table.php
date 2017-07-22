@@ -37,6 +37,6 @@ class CreateRequestArcTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('request_arc');
     }
 }

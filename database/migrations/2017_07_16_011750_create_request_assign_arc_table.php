@@ -31,6 +31,6 @@ class CreateRequestAssignArcTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('request_assignment_arc');
     }
 }

@@ -93,8 +93,8 @@ class AddRelationalTables extends Migration
         Schema::dropIfExists('request');
         Schema::dropIfExists('garbage_collector');
         Schema::dropIfExists('garbage');
-        Schema::dropIfExists('users');
         Schema::dropIfExists('address');
+        Schema::dropIfExists('users');
         Schema::dropIfExists('category');
     }
 }

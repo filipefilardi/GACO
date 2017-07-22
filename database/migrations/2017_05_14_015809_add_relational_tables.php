@@ -28,6 +28,8 @@ class AddRelationalTables extends Migration
             $table->foreign('id_user_req')->references('id_user')->on('users')->onDelete('cascade');;
             $table->integer('id_garbage')->unsigned();
             $table->foreign('id_garbage')->references('id_garbage')->on('garbage')->onDelete('cascade');;
+            $table->integer('id_add')->unsigned();
+            $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');;
         });
 
         Schema::table('request_assignment', function($table) {
@@ -69,7 +71,6 @@ class AddRelationalTables extends Migration
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
         });
-
 
     }
 

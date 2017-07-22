@@ -175,9 +175,8 @@ class RequestDao
         return $list;
     }
 
-    public static function insert_request($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage)
+    public static function insert_request($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage, $id_add)
     {
-        //dd($id_garbage, $id_user, $desc_req, $mod_req, $status_garbage);
 
         // VALIDATION BLOCK //////////////
         $errors = array();
@@ -187,6 +186,7 @@ class RequestDao
         if(is_null($desc_req)       || strlen((string)$desc_req)<=5)        array_push($errors, 'desc_req null or invalid (len<=5)');
         if(is_null($mod_req)        || strlen((string)$mod_req)<=5)         array_push($errors, 'mod_req null or invalid (len<=5)');
         if(is_null($status_garbage) || strlen((string)$status_garbage)<=5)   array_push($errors, 'status_garbage null or invalid (len<=5)');
+        if(is_null($id_add) || strlen((string)$id_add)<=5)   array_push($errors, 'id_add null or invalid (len<=5)');
 
         // END VALIDATION BLOCK /////////
 

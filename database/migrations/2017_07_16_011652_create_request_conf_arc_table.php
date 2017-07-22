@@ -18,8 +18,8 @@ class CreateRequestConfArcTable extends Migration
                 $table->integer('id_req');
                 $table->string('id_user_req_sign',1);
                 $table->string('id_user_assign_sign',1);
-                $table->date('dt_user_req_sign')->default(null)->nullable;
-                $table->date('dt_user_assign_sign')->default(null)->nullable;
+                $table->date('dt_user_req_sign')->nullable();
+                $table->date('dt_user_assign_sign')->nullable();
                 $table->timestamps();
                 $table->integer('lst_chg_by')->nullable();
                 $table->integer('id_del');

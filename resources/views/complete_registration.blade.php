@@ -14,14 +14,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/complete_registration') }}">
                         {{ csrf_field() }}
 
-                        <div class="flash-message">
-                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                              @if(Session::has('alert-' . $msg))
-
-                              <p class="alert alert-{{ $msg }}"> <strong>Você precisa completar sua cadastro antes de fazer uma doação.</strong><a href="#" data-dismiss="alert"></a></p>
-                              @endif
-                            @endforeach
-                        </div>
+                        @include('layouts.messages')
 
                         @if($id_cat==1)
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

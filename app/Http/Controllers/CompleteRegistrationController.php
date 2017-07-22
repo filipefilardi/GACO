@@ -31,16 +31,19 @@ class CompleteRegistrationController extends Controller
 
         if($address){
             $res = UserDao::insert(Auth::user()->id_user,$request->all(),Auth::user()->id_cat);
-            if($res){
-                $request->session()->flash('alert-success', 'success');
+            if($res == 1){
+                $request->session()->flash('message', 'Cadastro concluído com sucesso!'); 
+                $request->session()->flash('alert-success', 'success'); 
             }else{
-                $request->session()->flash('alert-warning', 'warning');
+                $request->session()->flash('message', 'Falha no cadastro. Por favor, preencha seus dados novamente.'); 
+                $request->session()->flash('alert-dange', 'danger');
                 
             }
         }else{
-            $request->session()->flash('alert-warning', 'warning');
+            $request->session()->flash('message', 'Falha no cadastro. Por favor, preencha seus dados novamente.'); 
+            $request->session()->flash('alert-danger', 'danger');
         }
         
-        return redirect('/request');
+        return redirect('/complete_registration');
     }
 }

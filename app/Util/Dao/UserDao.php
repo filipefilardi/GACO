@@ -83,7 +83,8 @@ class UserDao
     {
         
 
-        switch ($id_cat) {
+        try{
+            switch ($id_cat) {
                     case 1:
                         $data['mobile_phone'] = preg_replace("/[^0-9]/", "", $data['mobile_phone'] );
                         $data['home_phone'] = preg_replace("/[^0-9]/", "", $data['mobile_phone'] );
@@ -139,8 +140,11 @@ class UserDao
                         break;
                     
                     default:
-                        $res = null;
+                        $res = -1;
                         break;
+        }
+        }catch(\Exception $e){
+            $res = -1;
         }
 
 /* Changed logic - Now addresses are added once requesting - Victor 15-7-17

@@ -38,7 +38,8 @@ class RequestController extends Controller
 
                 return view('request', ['garbage' => $garbage,'addresses' => $addresses]);
             }else{
-                $data->session()->flash('alert-warning', 'warning');
+                $data->session()->flash('message', 'Você precisa completar sua cadastro antes de fazer uma doação!'); 
+                $data->session()->flash('alert-warning', 'warning'); 
                 return redirect('/complete_registration');
             }
 

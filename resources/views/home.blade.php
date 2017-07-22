@@ -110,24 +110,28 @@
 		         	@endif
 				</div>
 
-				<h4>Lista de pedidos aceitos</h4>
-				<!-- MOSTRAR TODAS AS REQUISIÇÕES FEITAS PELA COOP -->
-				 @foreach ($request_acpt as $request)
-					  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
-					      <small class="text-right">
-					      	@if($request->status_req == "PEND")
-					      		PENDENTE
-					      	@else
-					      		{{$request->status_req}}
-					      	@endif
-					      </small>
-					      </h5>
-					    </div>
-					    <p class="mb-1">{{ $request->desc_req }}</p>
-					  </a>
-             	  @endforeach
+				@if (!$request_acpt->isEmpty())
+					<h4>Lista de pedidos aceitos</h4>
+					<!-- MOSTRAR TODAS AS REQUISIÇÕES FEITAS PELA COOP -->
+					 @foreach ($request_acpt as $request)
+						  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+						    <div class="d-flex w-100 justify-content-between">
+						      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
+						      <small class="text-right">
+						      	@if($request->status_req == "PEND")
+						      		PENDENTE
+						      	@else
+						      		{{$request->status_req}}
+						      	@endif
+						      </small>
+						      </h5>
+						    </div>
+						    <p class="mb-1">{{ $request->desc_req }}</p>
+						  </a>
+	             	  @endforeach
+	            @else
+	            	<p>Não aceitamos nada</p>
+	            @endif
 			@endif
 			</div>
 			

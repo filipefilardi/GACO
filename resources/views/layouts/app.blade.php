@@ -58,24 +58,28 @@
                         </ul>
                     @else
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/home') }}">Home</a></li>
-                            <li><a href="{{ url('/request') }}">Coleta</a></li>
-                            <li><a href="{{ url('/home') }}">Cooperativas</a></li>
-                            <li><a href="{{ url('/garbage') }}">Lixo Eletrônico</a></li>
-                            <li><a href="{{ url('/partners') }}">Parcerias</a></li>
-                            <li><a href="{{ url('/about') }}">Sobre</a></li>
-                            @if(Auth::user()->id_cat == 4)
-                                <!-- Apenas para administradores -->
-                                <li><a href="{{ url('/admin') }}">Painel do Administrador</a></li>
-                            @endif
-                            <!-- Só se não tiver sido completado -->
-                            @if(!Auth::user()->isComplete())
-                                @if(Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2)
+                            @if(Auth::user()->id_cat != 3)
+                                <li><a href="{{ url('/home') }}">Home</a></li>
+                                <li><a href="{{ url('/request') }}">Coleta</a></li>
+                                <li><a href="{{ url('/home') }}">Cooperativas</a></li>
+                                <li><a href="{{ url('/garbage') }}">Lixo Eletrônico</a></li>
+                                <li><a href="{{ url('/partners') }}">Parcerias</a></li>
+                                <li><a href="{{ url('/about') }}">Sobre</a></li>
+                                @if(Auth::user()->id_cat == 4)
+                                    <!-- Apenas para administradores -->
+                                    <li><a href="{{ url('/admin') }}">Painel do Administrador</a></li>
+                                @endif
+                                <!-- Só se não tiver sido completado -->
+                                @if(!Auth::user()->isComplete())
+                                    @if(Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2)
+                                        <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
+                                    @endif
+                                @endif
+                                @if(Auth::user()->id_cat == 4)
                                     <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
                                 @endif
-                            @endif
-                            @if(Auth::user()->id_cat == 4)
-                                <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
+                            @else
+                                <li><a href="{{ url('/home') }}">Painel de Controle</a></li>
                             @endif
                         </ul>
                     @endif

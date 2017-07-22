@@ -16,7 +16,8 @@ class CompleteRegistrationController extends Controller
      */
     public function __construct()
     {
-        //TODO MIDDLEWARE
+        $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
+        if($is_complete->count()<=0) return redirect('/home');
     }
 
     public function indexCompleteRegistration()

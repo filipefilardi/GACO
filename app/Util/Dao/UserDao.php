@@ -81,10 +81,14 @@ class UserDao
 
     public static function insert($id_user, $data, $id_cat)
     {
+        
 
         switch ($id_cat) {
                     case 1:
-
+                        $data['mobile_phone'] = preg_replace("/[^0-9]/", "", $data['mobile_phone'] );
+                        $data['home_phone'] = preg_replace("/[^0-9]/", "", $data['mobile_phone'] );
+                        $data['cpf'] = preg_replace("/[^0-9]/", "", $data['cpf'] );
+                        
                         DB::table('user_person')->insert([
                             'id_user' => $id_user,
                             'nm_user' => $data['name'],
@@ -98,7 +102,8 @@ class UserDao
                         break;
                     
                     case 2:
-
+                        $data['corp_phone'] = preg_replace("/[^0-9]/", "", $data['corp_phone'] );
+                        $data['cnpj'] = preg_replace("/[^0-9]/", "", $data['cnpj'] );
                         DB::table('user_enterprise')->insert([
                             'id_user' => $id_user,
                             'nm_user' => $data['name'],
@@ -111,6 +116,8 @@ class UserDao
                         break;
 
                     case 3:
+                        $data['cnpj_user'] = preg_replace("/[^0-9]/", "", $data['cnpj_user'] );
+                        $data['ph_numb'] = preg_replace("/[^0-9]/", "", $data['ph_numb'] );
 
                         $userCreated = User::create([
                         'email' => $data['email'],

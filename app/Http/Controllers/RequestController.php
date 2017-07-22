@@ -45,7 +45,7 @@ class RequestController extends Controller
 
         }else{
 
-            return redirect('/home');
+            return view('/home');
 
         }
     }
@@ -54,25 +54,17 @@ class RequestController extends Controller
         $res = null;
 
         if (Gate::allows('execute', 'create_request')) {
-
-            $address = AddressDao::insertAndUpdateAddress(Auth::user()->id_user,$request->all());
-            if($address){
-                $request->session()->flash('alert-success', 'success');
-                $res = RequestDAO::insert_request($data['id_garbage'],Auth::user()->id_user, $data['desc_req'], $data['mod_req'], $data['status_garbage'],$data['id_add']);
-
-                $data->session()->flash('alert-success', 'sucess');
-                return redirect('/request');
-                
-            }else{
-                $request->session()->flash('alert-warning', 'warning');
-                
-            }
-
             
+            Auth::user();
+
+            $res = RequestDAO::insert_request($data['id_garbage'],Auth::user()->id_user, $data['desc_req'], $data['mod_req'], $data['status_garbage'],$data['id_add']);
+
+            $data->session()->flash('alert-success', 'sucess');
+            return redirect('/request');
 
         }else{
 
-            return redirect('/home');
+            return view('/home');
             
         }
     }
@@ -89,7 +81,7 @@ class RequestController extends Controller
 
         } else {
 
-            return redirect('/home');
+            return view('/home');
             
         }
     }

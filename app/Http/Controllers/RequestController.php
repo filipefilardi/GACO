@@ -42,7 +42,7 @@ class RequestController extends Controller
 
         }else{
 
-            return view('/home');
+            return redirect('/home');
 
         }
     }
@@ -61,7 +61,7 @@ class RequestController extends Controller
 
         }else{
 
-            return view('/home');
+            return redirect('/home');
             
         }
     }
@@ -78,7 +78,7 @@ class RequestController extends Controller
 
         } else {
 
-            return view('/home');
+            return redirect('/home');
             
         }
     }

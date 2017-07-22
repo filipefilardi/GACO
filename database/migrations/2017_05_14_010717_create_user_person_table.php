@@ -15,7 +15,7 @@ class CreateUserPersonTable extends Migration
     {
         Schema::create('user_person', function (Blueprint $table) {
             $table->string('nm_user');
-            $table->date('dt_user');
+            $table->date('dt_birth');
             $table->bigInteger('ph_mob');
             $table->bigInteger('ph_res');
             $table->bigInteger('cpf_user');

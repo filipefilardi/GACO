@@ -88,7 +88,7 @@ class UserDao
                         DB::table('user_person')->insert([
                             'id_user' => $id_user,
                             'nm_user' => $data['name'],
-                            'dt_user' => $data['birth'],
+                            'dt_birth' => $data['date'],
                             'ph_mob' => $data['mobile_phone'],
                             'ph_res' => $data['home_phone'],
                             'cpf_user' => $data['cpf']

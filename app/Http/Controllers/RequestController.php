@@ -74,7 +74,7 @@ class RequestController extends Controller
         if (Gate::allows('execute', 'accept_requests')) {         
             Auth::user();
 
-            $teste = RequestDAO::assign_request($data['id_req'],Auth::user()->id_user, $data['dt_predicted']);
+            $teste = RequestDAO::assign_request($data['id_req'],Auth::user()->id_user, $data['date']);
 
             //$data->session()->flash('alert-success', 'sucess');
             return redirect('/home');

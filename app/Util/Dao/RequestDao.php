@@ -185,8 +185,8 @@ class RequestDao
         if(is_null($id_user)        || $id_user <= 0)                       array_push($errors, 'id_user null or invalid (<=0)');
         if(is_null($desc_req)       || strlen((string)$desc_req)<=5)        array_push($errors, 'desc_req null or invalid (len<=5)');
         if(is_null($mod_req)        || strlen((string)$mod_req)<=5)         array_push($errors, 'mod_req null or invalid (len<=5)');
-        if(is_null($status_garbage) || strlen((string)$status_garbage)<=5)   array_push($errors, 'status_garbage null or invalid (len<=5)');
-        if(is_null($id_add)         || strlen((string)$id_add)<=5)   array_push($errors, 'id_add null or invalid (len<=5)');
+        if(is_null($status_garbage) || strlen((string)$status_garbage)<=5)  array_push($errors, 'status_garbage null or invalid (len<=5)');
+        if(is_null($id_add)         || $id_add <=0)                         array_push($errors, 'id_add null or invalid (<=0)');
 
         // END VALIDATION BLOCK /////////
 

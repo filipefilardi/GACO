@@ -48,15 +48,14 @@ class RequestController extends Controller
     }
 
     public function make_request(Request $data){
+        $res = null;
 
         if (Gate::allows('execute', 'create_request')) {
             
             Auth::user();
 
-            RequestDAO::insert_request($data['id_garbage'],Auth::user()->id_user, $data['desc_req'], $data['mod_req'], $data['status_garbage'],$data['id_add']);
+            $res = RequestDAO::insert_request($data['id_garbage'],Auth::user()->id_user, $data['desc_req'], $data['mod_req'], $data['status_garbage'],$data['id_add']);
 
-            $garbage = GarbageDao::get_list_garbage_actv();
-            //return view('request', ['garbage' => $garbage])->with('status', 'PIROCA!');
             $data->session()->flash('alert-success', 'sucess');
             return redirect('/request');
 
@@ -73,8 +72,6 @@ class RequestController extends Controller
             Auth::user();
 
             $teste = RequestDAO::assign_request($data['id_req'],Auth::user()->id_user, $data['dt_predicted']);
-
-            //dd($teste);
 
             //$data->session()->flash('alert-success', 'sucess');
             return redirect('/home');

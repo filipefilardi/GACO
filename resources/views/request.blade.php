@@ -78,6 +78,33 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="address" class="col-md-2 control-label">Endereço</label>
+
+                            <div class="col-md-5">
+                                <select class="form-control" autofocus name="id_add">
+                                    @if(is_null($addresses))
+                                    @else 
+                                        @foreach ($addresses as $address)
+                                            @if($address->main_address === 1)
+                                                <option selected style="display:none" value={{$address->id_add}}>{{$address->id_add}}</option>
+                                            @else
+                                                <option value={{$address->id_add}}>{{$address->id_add}}</option>
+                                            @endif
+                                            
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
 	                    <div class="row">
                             <div class="col-md-6 col-md-offset-4">
 		                    	<button type="submit" class="btn btn-primary">

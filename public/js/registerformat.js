@@ -99,4 +99,20 @@ $(document).ready(function() {
 	  }
 	});
 
+	var $id_cep = jQuery('input[name="id_cep"]');
+	$id_cep.attr('maxlength', '9');
+
+
+	$id_cep.bind('keyup','keydown', function(e){
+
+		if(e.which !== 8) { 
+	        var numChars = $id_cep.val().length;
+	        if(numChars === 5){
+	            var thisVal = $id_cep.val();
+	            thisVal += '-';
+	            $id_cep.val(thisVal);
+	        }
+	  }
+	});
+
 });

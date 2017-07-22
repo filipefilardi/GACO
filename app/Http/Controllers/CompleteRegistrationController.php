@@ -26,7 +26,9 @@ class CompleteRegistrationController extends Controller
 
     public function completeRegistration(Request $request)
     {   
+        $request['id_cep'] = preg_replace("/[^0-9]/", "", $request['id_cep'] );
         $address = AddressDao::insertAndUpdateAddress(Auth::user()->id_user,$request->all());
+
         if($address){
             $res = UserDao::insert(Auth::user()->id_user,$request->all(),Auth::user()->id_cat);
             if($res){

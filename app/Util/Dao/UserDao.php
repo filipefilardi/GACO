@@ -188,7 +188,6 @@ class UserDao
 
     public static function getPassword($id_user,$old_password)
     {   
-        dd($old_password);
         $res = DB::table('users')->where([
             ['id_user', '=', $id_user],
             ['password', '=', $old_password],

@@ -28,6 +28,8 @@ class SettingsController extends Controller
 
     public function registerAddress(Request $request) {
 
+        $request['id_cep'] = preg_replace("/[^0-9]/", "", $request['id_cep'] );
+        
         $res = AddressDao::insertAndUpdateAddress(Auth::user()->id_user,$request->all());
         if($res){
             $request->session()->flash('alert-success', 'success');

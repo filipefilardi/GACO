@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('stylesheet')
-    <link href="/css/carousel.css" rel="stylesheet">
+    <script src="/js/registerformat.js" type="text/javascript"></script>
 @endsection
 
 @section('content')

@@ -43,3 +43,5 @@ Route::post('/register/address', 'SettingsController@registerAddress');
 Route::post('/update/password', 'SettingsController@updatePassword');
 Route::post('/delete/account', 'SettingsController@deleteAccount');
 
+Route::get('/activate/account', 'Auth2000Controller@indexActivateAccount');
+Route::post('/activate/account', 'Auth2000Controller@loginActivateAccount');

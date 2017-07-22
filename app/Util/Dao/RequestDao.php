@@ -186,7 +186,7 @@ class RequestDao
         if(is_null($desc_req)       || strlen((string)$desc_req)<=5)        array_push($errors, 'desc_req null or invalid (len<=5)');
         if(is_null($mod_req)        || strlen((string)$mod_req)<=5)         array_push($errors, 'mod_req null or invalid (len<=5)');
         if(is_null($status_garbage) || strlen((string)$status_garbage)<=5)   array_push($errors, 'status_garbage null or invalid (len<=5)');
-        if(is_null($id_add) || strlen((string)$id_add)<=5)   array_push($errors, 'id_add null or invalid (len<=5)');
+        if(is_null($id_add)         || strlen((string)$id_add)<=5)   array_push($errors, 'id_add null or invalid (len<=5)');
 
         // END VALIDATION BLOCK /////////
 
@@ -206,6 +206,13 @@ class RequestDao
                       ->whereRaw('users.id_cat in (1,2)') // Client PF ou PJ 
                       ->whereRaw('users.id_del = ' . 0);
             })
+            ->whereExists(function ($query) use($id_add, $id_user) {
+                $query->select(DB::raw(1))
+                      ->from('address')
+                      ->whereRaw('address.id_user = ' . $id_user)
+                      ->whereRaw('address.id_add = ' . $id_add)
+                      ->whereRaw('address.id_del = ' . 0);
+            })
             ->insert([
                 'id_garbage' => $id_garbage,
                 'id_user_req' => $id_user,
@@ -213,7 +220,8 @@ class RequestDao
                 'status_garbage' => $status_garbage,
                 'status_req' => 'PEND',
                 'id_active' => 'Y',
-                'mod_req' => $mod_req
+                'mod_req' => $mod_req,
+                'id_add' => $id_add
             ]);
       
         return;

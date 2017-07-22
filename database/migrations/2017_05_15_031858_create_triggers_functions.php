@@ -24,8 +24,8 @@ class CreateTriggersFunctions extends Migration
                 BEGIN
                     IF NEW.status_req <> OLD.status_req THEN
                         IF NEW.status_req = '$completeStatus' THEN
-                            INSERT INTO request_confirmation (id_req,id_user_req_sign, id_user_assign_sign, id_del)
-                            VALUES(OLD.id_req,'$noFlag','$noFlag',0);
+                            INSERT INTO request_confirmation (id_req,id_sign, id_del)
+                            VALUES(OLD.id_req,'$noFlag',0);
                         END IF;
                     END IF;
 

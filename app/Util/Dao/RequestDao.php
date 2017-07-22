@@ -3,6 +3,7 @@
 namespace App\Util\Dao;
 
 use DB;
+use App\Util\Utilities;
 
 class RequestDao
 
@@ -192,6 +193,8 @@ class RequestDao
 
         if(sizeof($errors)>0) return $errors;
 
+        $conf_token = $id_user . substr((string) time(),-3) . Utilities::randomize_dictionary(5);
+
         DB::table('request')
             ->whereExists(function ($query) use($id_garbage) {
                 $query->select(DB::raw(1))
@@ -219,12 +222,13 @@ class RequestDao
                 'desc_req' => $desc_req,
                 'status_garbage' => $status_garbage,
                 'status_req' => 'PEND',
+                'conf_token' => $conf_token,
                 'id_active' => 'Y',
                 'mod_req' => $mod_req,
                 'id_add' => $id_add
             ]);
       
-        return;
+        return $conf_token;
     }
 
     public static function update_request($id_req, $new_status_req)
@@ -257,7 +261,7 @@ class RequestDao
                 'status_req' => $new_status_req
             ]);
 
-        return;
+        return $errors;
     }
 
     // This is called upon Cooperative accepting the request
@@ -301,16 +305,17 @@ class RequestDao
                 'id_del' => 0
             ]);
       
-        return;
+        return $errors;
     }
 
-    public static function confirm_request($id_req, $id_user_auth)
+    public static function confirm_request($id_req, $id_user_auth, $conf_token)
     {
         // VALIDATION BLOCK //////////////
         $errors = array();
 
-        if(is_null($id_user_auth) || $id_user_auth <= 0) array_push($errors, 'id_user null or invalid (<=0)');
-        if(is_null($id_req) || $id_req <= 0) array_push($errors, 'id_req null or invalid (<=0)');
+        if(is_null($id_user_auth)   || $id_user_auth <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(is_null($id_req)         || $id_req <= 0) array_push($errors, 'id_req null or invalid (<=0)');
+        if(is_null($conf_token)     || strlen($conf_token) < 9) array_push($errors, 'id_req null or invalid (<=0)');
 
         // END VALIDATION BLOCK /////////
 
@@ -327,50 +332,26 @@ class RequestDao
             ->where('id_user',$id_user_auth)
             ->value('id_cat');
 
-        if($id_cat >= 1 && $id_cat <=3) {        // Master users or invalid cat cannot confirm reqs
+        if($id_cat <=3) {        // Master users or invalid cat cannot confirm reqs
 
             $today = date("Ymd");
-
-            switch ($id_cat) {
-
-            case 3:                         // COOPERATIVE - ID_CAT = 3
                 
-                DB::table('request_confirmation')
-                ->whereNotExists(function ($query) use($id_req) {
+            DB::table('request_confirmation')
+                ->whereExists(function ($query) use($id_req, $conf_token) {
                 $query->select(DB::raw(1))
-                    ->from('request_confirmation')
-                    ->whereRaw('request_confirmation.id_req = ?', $id_req)
-                    ->whereRaw('request_confirmation.id_user_assign_sign = ?', 'Y')
-                    ->whereRaw('request_confirmation.id_del = ?', 0);
+                    ->from('request')
+                    ->whereRaw('request.id_req = ?', $id_req)
+                    ->whereRaw('request.id_del = ?', 0)
+                    ->whereRaw('request.conf_token = ?', $conf_token);
                 })
                 ->where('id_req', $id_req)
                 ->update([
-                    'id_user_assign_sign' => 'Y',
-                    'dt_user_assign_sign' => $today
+                    'id_sign' => 'Y',
+                    'dt_sign' => $today
                 ]);
-
-                break;
-
-            default:                         // CLIENTES - ID_CAT in (1,2)
-                DB::table('request_confirmation')
-                ->whereNotExists(function ($query) use($id_req) {
-                $query->select(DB::raw(1))
-                    ->from('request_confirmation')
-                    ->whereRaw('request_confirmation.id_req = ?', $id_req)
-                    ->whereRaw('request_confirmation.id_user_req_sign = ?', 'Y')
-                    ->whereRaw('request_confirmation.id_del = ?', 0);
-                })
-                ->where('id_req', $id_req)
-                ->update([
-                    'id_user_req_sign' => 'Y',
-                    'dt_user_req_sign' => $today
-                ]);
-
-                break;
-            }
         }
-      
-        return;
+
+        return $errors;
     }
 
 }

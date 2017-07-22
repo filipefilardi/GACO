@@ -31,6 +31,9 @@ class HomeController extends Controller
         $id_user = Auth::user()->id_user;
         $id_cat = Auth::user()->id_cat;
 
+        $request = null;
+        $request_acpt = null;
+
         // check whether the account is deleted
         $user_status = UserDao::getStatus($id_user);
         // logout!

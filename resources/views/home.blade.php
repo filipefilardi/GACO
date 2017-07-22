@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('stylesheet')
+	<script src="/js/registerformat.js" type="text/javascript"></script>
     <link href="/css/carousel.css" rel="stylesheet">
 @endsection
 
@@ -85,7 +86,7 @@
 			                                <label for="dt_predicted" class="col-md-4 control-label">Data de Recolhimento</label>
 
 			                                <div class="col-md-6">
-			                                    <input id="dt_predicted" type="text" class="form-control" name="dt_predicted" value="{{ old('dt_predicted') }}" required>
+			                                    <input id="dt_predicted" type="text" class="form-control" name="date" value="{{ old('dt_predicted') }}" required>
 
 			                                    @if ($errors->has('dt_predicted'))
 			                                        <span class="help-block">
@@ -94,6 +95,7 @@
 			                                    @endif
 			                                </div>
 			                            </div>
+									
                                             <div class="form-group">
 					                            <div class="col-md-6 col-md-offset-4">
 					                                <button type="submit" class="btn btn-primary">

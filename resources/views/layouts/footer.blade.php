@@ -1,25 +1,25 @@
-<footer class="footer-distributed">
-    <div class="footer-right">
 
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-github"></i></a>
 
-        </div>
 
-        <div class="footer-left">
 
-            <p class="footer-links">
-                <a href="#inicio">Início</a>
-                ·
+
+                <a href="#contato">Contato</a>
                 <a href="#descubra">Descubra</a>
-                ·
+                <a href="#inicio">Início</a>
                 <a href="#parcerias">Parcerias</a>
                 ·
-                <a href="#contato">Contato</a>
+                ·
+                ·
             </p>
-
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <p class="footer-links">
             <p>GACO &copy; 2017</p>
+        </div>
+        <div class="footer-left">
     </div>
+    <div class="footer-right">
 </footer>
+<footer class="footer-distributed">

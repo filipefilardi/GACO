@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('stylesheet')
+    <script src="/js/registerformat.js" type="text/javascript"></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -38,7 +42,7 @@
                                 <label for="birth" class="col-md-4 control-label">Data de Nascimento</label>
 
                                 <div class="col-md-6">
-                                    <input id="birth" type="text" class="form-control" name="birth" value="{{ old('birth') }}" required>
+                                    <input id="birth" type="text" size=10 maxlength=10 class="form-control" name="date" value="{{ old('birth') }}" required>
 
                                     @if ($errors->has('birth'))
                                         <span class="help-block">

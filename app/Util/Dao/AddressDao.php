@@ -13,6 +13,7 @@ class AddressDao
         
         $res = DB::table('address')
         ->where('id_user', $id_user)
+        ->where('id_del', 0)
         ->get();
 
 

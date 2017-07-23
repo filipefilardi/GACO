@@ -26,7 +26,7 @@ class AddressDao
     public static function insertAndUpdateAddress($id_user, $data)
     {
         $is_main_address = (int)$data['main_address'];
-        $str_address = $data['nm_st'] . ', ' . $data['id_st_numb'] . ', ' . $data['nm_city'] ;//. ', ' . $data['nm_state'] . ', ' . $data['nm_country'];
+        $str_address = $data['nm_st'] . ', ' . $data['id_st_numb'] . ', ' . $data['nm_city'] . ', ' . $data['nm_state'] . ', ' . $data['nm_country'];
         $lat_lon = Utilities::get_lat_lon($str_address);
         $lat = $lat_lon[0];
         $lon = $lat_lon[1];

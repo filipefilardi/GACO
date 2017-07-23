@@ -29,7 +29,7 @@ class Utilities
 		
 		try {
 			$rest_result = Utilities::CallAPI('GET',$url,$data);
-			dd($rest_result);
+			$parsed = json_decode($rest_result, true);
 
 		} catch (\Exception $e) {
 			dd('FODEU');
@@ -67,9 +67,7 @@ class Utilities
 	    }
 
 	    $result = curl_exec($curl);
-	    if(!$result){
-    		dd('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
-		}
+	    if(!$result) $result = file_get_contents($url);
 
 	    curl_close($curl);
 

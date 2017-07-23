@@ -60,8 +60,17 @@ class RequestController extends Controller
 
             $res = RequestDAO::insert_request($data['id_garbage'],Auth::user()->id_user, $data['desc_req'], $data['mod_req'], $data['status_garbage'],$data['id_add']);
 
-            $data->session()->flash('alert-success', 'sucess');
-            return redirect('/request');
+            if(is_string($res)){
+                $data->session()->flash('message', 'Pedido realizado com sucesso! Anote o seu código ' . $res . ' para a confirmação no momento da coleta.'); 
+                $data->session()->flash('alert-success', 'sucess');
+                return redirect('/request');
+            }else{
+                $data->session()->flash('message', 'Falha no pedido. Por favor, preencha os dados novamente.'); 
+                $data->session()->flash('alert-warning', 'warning');
+                return redirect('/request');
+            }
+
+            
 
         }else{
 

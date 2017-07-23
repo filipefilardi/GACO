@@ -7,24 +7,18 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
-			<div class="flash-message">
-                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                  @if(Session::has('alert-' . $msg))
 
-                  <p class="alert alert-{{ $msg }}"> <strong>Sucesso seu predido foi registrado com sucesso.</strong> Contribua mais!<a href="#" data-dismiss="alert"></a></p>
-                  @endif
-                @endforeach
-            </div>
-
+			<div class="panel-heading">Dashboard</div>
 			
-			
+			<div class="panel-body">
 			 	<div class="container">
 				 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}">
 						{{ csrf_field() }}
 
-						<div class="form-group">
+                        @include('layouts.messages')
+
+						<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
 								<label class="col-md-2 control-label">Categoria</label>
 		                    <div class="col-md-5">
 								<select class="form-control" name="id_garbage">
@@ -170,7 +164,7 @@
         	            </div>
                     </div>
                 </div>
-			
+			</div>
 		</div>
 	</div>
 </div>

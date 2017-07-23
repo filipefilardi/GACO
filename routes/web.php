@@ -31,9 +31,6 @@ Route::post('/complete_registration', 'CompleteRegistrationController@completeRe
 Route::get('/admin', 'AdminController@index_admin');
 Route::post('/admin', 'AdminController@insertCoop');
 
-
-Route::get('/partners', 'HomeController@index_partners');
-
 Route::get('/about', 'HomeController@index_about');
 
 /* SETTINGS */
@@ -44,3 +41,5 @@ Route::post('/delete/account', 'SettingsController@deleteAccount');
 
 Route::get('/activate/account', 'Auth2000Controller@indexActivateAccount');
 Route::post('/activate/account', 'Auth2000Controller@loginActivateAccount');
+
+Route::get('/cooperatives', 'CooperativesController@index_cooperatives');

@@ -62,9 +62,8 @@
                             @if(Auth::user()->id_cat != 3)
                                 <li><a href="{{ url('/home') }}">Home</a></li>
                                 <li><a href="{{ url('/request') }}">Coleta</a></li>
-                                <li><a href="{{ url('/home') }}">Cooperativas</a></li>
-                                <li><a href="{{ url('/garbage') }}">Lixo Eletrônico</a></li>
-                                <li><a href="{{ url('/partners') }}">Parcerias</a></li>
+                                <li><a href="{{ url('/cooperatives') }}">Cooperativas</a></li>
+                                <li><a href="{{ url('/garbage') }}">Resíduo Eletrônico</a></li>
                                 <li><a href="{{ url('/about') }}">Sobre</a></li>
                                 @if(Auth::user()->id_cat == 4)
                                     <!-- Apenas para administradores -->

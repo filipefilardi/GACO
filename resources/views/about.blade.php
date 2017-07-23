@@ -42,7 +42,7 @@
 
 					-->
 
-				    <h3>Parceiros</h3>
+				    <h3>Parcerias</h3>
 
 					    <!--
 							listar coops

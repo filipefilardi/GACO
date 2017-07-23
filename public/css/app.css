@@ -290,7 +290,7 @@ th {
 }
 .img-thumbnail,
 body {
-    background-color: #FFFFFF; /* GACO */
+    background-color: #e7ebf0; /* GACO */
     margin-bottom: 120px;
 }
 @font-face {
@@ -4472,8 +4472,8 @@ tbody.collapse.in {
     }
 }
 .navbar-default {
-    background-color: #001f3f; /* GACO */
-    border-color: #001f3f;
+    background-color: #4F7192; /* GACO */
+    border-color: #4F7192;
     padding-top: 15px;
     padding-bottom: 15px;
 }

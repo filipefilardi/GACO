@@ -4473,14 +4473,16 @@ tbody.collapse.in {
 }
 .navbar-default {
     background-color: #001f3f; /* GACO */
-    border-color: #001f3f
+    border-color: #001f3f;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 .navbar-default .navbar-brand {
     color: #DDDDDD
 }
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:hover {
-    color: #5e5e5e;
+    color: #98C1D9;
     background-color: transparent
 }
 .navbar-default .navbar-nav>li>a,
@@ -4491,7 +4493,7 @@ tbody.collapse.in {
 /* GACO HOVER */
 .navbar-default .navbar-nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover {
-    color: #333;
+    color: #98C1D9;
     background-color: transparent
 }
 .navbar-default .navbar-nav>.active>a,

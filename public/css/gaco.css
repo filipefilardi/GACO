@@ -32,8 +32,12 @@
 =======================================
 			   BUTTON 
 =======================================
-
 */
+
+.content .btn {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
 
 .content .btn-primary {
 	background-color: var(--btnprimary);

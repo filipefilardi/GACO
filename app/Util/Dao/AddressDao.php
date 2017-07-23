@@ -46,6 +46,7 @@ class AddressDao
                 'nm_state'=>$data['nm_state'],
                 'nm_city'=>$data['nm_city'],
                 'id_cep'=>$data['id_cep'],
+                'str_address'=>$str_address,
                 'id_user' => $id_user,
                 'main_address' => $is_main_address
             ]);

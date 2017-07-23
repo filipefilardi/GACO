@@ -24,6 +24,7 @@ class CreateAddressTable extends Migration
             $table->string('nm_city');
             $table->string('nm_state');
             $table->string('id_cep');
+            $table->string('str_address');
             $table->integer('main_address'); // is it the main address? 0 | 1
             $table->timestamps();
             $table->integer('lst_chg_by')->nullable();

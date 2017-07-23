@@ -21,6 +21,7 @@ class CreateRequestTable extends Migration
             $table->string('status_req');
             $table->string('conf_token');
             $table->string('id_active', 1);
+            $table->date('dt_req');
             $table->date('dt_collect')->nullable();
             $table->timestamps();
             $table->integer('lst_chg_by')->nullable();

@@ -194,6 +194,7 @@ class RequestDao
         if(sizeof($errors)>0) return $errors;
 
         $conf_token = $id_user . substr((string) time(),-3) . Utilities::randomize_dictionary(5);
+        $today = date("Ymd");
 
         DB::table('request')
             ->whereExists(function ($query) use($id_garbage) {
@@ -223,6 +224,7 @@ class RequestDao
                 'status_garbage' => $status_garbage,
                 'status_req' => 'PEND',
                 'conf_token' => $conf_token,
+                'dt_request' =>$today,
                 'id_active' => 'Y',
                 'mod_req' => $mod_req,
                 'id_add' => $id_add

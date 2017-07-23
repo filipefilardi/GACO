@@ -7,7 +7,6 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
               
               <div class="panel-heading">Painel do Administrador</div>
@@ -21,9 +20,9 @@
                         {{ csrf_field() }}
                         
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Nome da Cooperativa</label>
+                                <label for="name" class="col-md-3 control-label">Nome da Cooperativa</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 
                                     @if ($errors->has('name'))
@@ -35,9 +34,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Endereço de e-mail</label>
+                            <label for="email" class="col-md-3 control-label">Endereço de e-mail</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
@@ -50,9 +49,9 @@
 
 
                          <div class="form-group{{ $errors->has('cnpj') ? ' has-error' : '' }}">
-                                <label for="cnpj" class="col-md-4 control-label">CNPJ</label>
+                                <label for="cnpj" class="col-md-3 control-label">CNPJ</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}" required>
 
                                     @if ($errors->has('cnpj'))
@@ -64,9 +63,9 @@
                             </div>
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                                <label for="phone" class="col-md-4 control-label">Telefone</label>
+                                <label for="phone" class="col-md-3 control-label">Telefone</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
 
                                     @if ($errors->has('phone'))
@@ -78,9 +77,9 @@
                             </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Senha</label>
+                            <label for="password" class="col-md-3 control-label">Senha</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -92,17 +91,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirmação de senha</label>
+                            <label for="password-confirm" class="col-md-3 control-label">Confirmação de senha</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
                          <div class="form-group{{ $errors->has('radius') ? ' has-error' : '' }}">
-                                <label for="radius" class="col-md-4 control-label">Raio de Alcance</label>
+                                <label for="radius" class="col-md-3 control-label">Raio de Alcance</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <input id="radius" type="text" class="form-control" name="radius" value="{{ old('radius') }}" required>
 
                                     @if ($errors->has('radius'))
@@ -114,8 +113,8 @@
                             </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-7 col-md-offset-3">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     Registrar
                                 </button>
                             </div>
@@ -139,7 +138,6 @@
               </div>
               
           </div>
-        </div>
     </div>
 </div>
 @endsection

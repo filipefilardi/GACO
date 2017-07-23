@@ -71,6 +71,35 @@ class CreateTriggersFunctions extends Migration
             EXECUTE PROCEDURE inactive_comp_request();"
         );
 
+        // creates function - updates req status to accepted ACPT
+        DB::unprepared("CREATE OR REPLACE FUNCTION req_status_acpt_change() RETURNS trigger AS
+            $$
+                BEGIN
+                    UPDATE request
+                    SET status_req = '$acceptedStatus'
+                    WHERE id_req = NEW.id_req;
+                    RETURN NEW;
+                END
+            $$
+            LANGUAGE plpgsql VOLATILE
+            COST 100;"
+        );
+
+        // binding Trigger - verifies new entry is added to request_assigment - meaning req is accepted
+        DB::unprepared("CREATE TRIGGER req_assignment_insert
+            AFTER INSERT
+            ON request_assignment
+            FOR EACH ROW
+            EXECUTE PROCEDURE req_status_acpt_change();"
+        );
+
+
+
+
+
+
+
+
         // creates function - verifies inactivated row and moves to archive
         DB::unprepared("CREATE OR REPLACE FUNCTION move_req_arc() RETURNS trigger AS
             $$
@@ -97,27 +126,8 @@ class CreateTriggersFunctions extends Migration
             EXECUTE PROCEDURE move_req_arc();"
         );
 
-        // creates function - updates req status to accepted ACPT
-        DB::unprepared("CREATE OR REPLACE FUNCTION req_status_acpt_change() RETURNS trigger AS
-            $$
-                BEGIN
-                    UPDATE request
-                    SET status_req = '$acceptedStatus'
-                    WHERE id_req = NEW.id_req;
-                    RETURN NEW;
-                END
-            $$
-            LANGUAGE plpgsql VOLATILE
-            COST 100;"
-        );
 
-        // binding Trigger - verifies new entry is added to request_assigment - meaning req is accepted
-        DB::unprepared("CREATE TRIGGER req_assignment_insert
-            AFTER INSERT
-            ON request_assignment
-            FOR EACH ROW
-            EXECUTE PROCEDURE req_status_acpt_change();"
-        );
+        
 
     }
 

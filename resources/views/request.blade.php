@@ -1,38 +1,33 @@
 @extends('layouts.app')
 
-@section('stylesheet')
-    <link href="/css/carousel.css" rel="stylesheet">
-@endsection
-
 @section('content')
 <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
 
-			<div class="panel-heading">Dashboard</div>
+			<div class="panel-heading">Coleta</div>
 			
 			<div class="panel-body">
-			 	<div class="container">
 				 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}">
 						{{ csrf_field() }}
 
                         @include('layouts.messages')
 
-						<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
-								<label class="col-md-2 control-label">Categoria</label>
-		                    <div class="col-md-5">
-								<select class="form-control" name="id_garbage">
-						 		@foreach ($garbage as $garbage)
-			                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
-			                    @endforeach
-								</select>
-							</div>                   
-	                    </div>
+    					<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
+    							<label class="col-md-3 control-label">Categoria</label>
+    	                    <div class="col-md-7">
+    							<select class="form-control" name="id_garbage">
+    					 		@foreach ($garbage as $garbage)
+    		                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
+    		                    @endforeach
+    							</select>
+    						</div>                   
+                        </div>
 
-	                    <div class="form-group{{ $errors->has('desc_req') ? ' has-error' : '' }}">
-						    <label for="desc_req" class="col-md-2 control-label">Equipamento</label>
+                        <div class="form-group{{ $errors->has('desc_req') ? ' has-error' : '' }}">
+    					    <label for="desc_req" class="col-md-3 control-label">Equipamento</label>
 
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <input id="desc_req" type="text" class="form-control" name="desc_req" placeholder="Descreva seu equipamento" value="{{ old('desc_req') }}" required>
 
                                 @if ($errors->has('desc_req'))
@@ -43,10 +38,10 @@
                             </div>
                         </div>
 
-	                    <div class="form-group{{ $errors->has('mod_req') ? ' has-error' : '' }}">
-						    <label for="mod_req" class="col-md-2 control-label">Modelo</label>
+                        <div class="form-group{{ $errors->has('mod_req') ? ' has-error' : '' }}">
+    					    <label for="mod_req" class="col-md-3 control-label">Modelo</label>
 
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <input id="mod_req" type="text" class="form-control" name="mod_req" placeholder="Modelo do seu equipamento" value="{{ old('mod_req') }}" required>
 
                                 @if ($errors->has('mod_req'))
@@ -56,14 +51,14 @@
                                 @endif
                             </div>
                         </div>
-	                    <div class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
-						    <label for="status_garbage" class="col-md-2 control-label">Condição</label>
+                        <div class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
+    					    <label for="status_garbage" class="col-md-3 control-label">Condição</label>
 
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <select class="form-control" name="status_garbage">
-	                    			<option>Completo</option>
-	                    			<option>Incompleto</option>
-	                    		</select>
+                        			<option>Completo</option>
+                        			<option>Incompleto</option>
+                        		</select>
                                 @if ($errors->has('status_garbage'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('status_garbage') }}</strong>
@@ -73,9 +68,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="address" class="col-md-2 control-label">Endereço</label>
+                            <label for="address" class="col-md-3 control-label">Endereço</label>
 
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <select class="form-control" autofocus name="id_add">
                                     @if(is_null($addresses))
                                     @else 
@@ -98,17 +93,17 @@
                         </div>
 
 
-	                    <div class="row">
-                            <div class="col-md-6 col-md-offset-4">
-		                    	<button type="submit" class="btn btn-primary">
-		                        	Registrar
-		                    	</button>
-		                    </div>
-		                 </div>
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-3">
+    	                    	<button type="submit" class="btn btn-primary btn-block">
+    	                        	Registrar
+    	                    	</button>
+    	                    </div>
+    	                 </div>
 
-		                 <!-- 
- 						<div class="form-group{{ $errors->has('desc_req') ? ' has-error' : '' }}">
-						    <label for="desc_req" class="col-md-2 control-label">Equipamento</label>
+    	                 <!-- 
+    						<div class="form-group{{ $errors->has('desc_req') ? ' has-error' : '' }}">
+    					    <label for="desc_req" class="col-md-2 control-label">Equipamento</label>
 
                             <div class="col-md-5">
                                 <input id="desc_req" type="text" class="form-control" name="desc_req" placeholder="Descreva seu equipamento" value="{{ old('desc_req') }}" required>
@@ -122,7 +117,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('mod_req') ? ' has-error' : '' }}">
-						    <label for="mod_req" class="col-md-2 control-label">Modelo</label>
+    					    <label for="mod_req" class="col-md-2 control-label">Modelo</label>
 
                             <div class="col-md-5">
                                 <input id="mod_req" type="text" class="form-control" name="mod_req" placeholder="Modelo do seu equipamento" value="{{ old('mod_req') }}" required>
@@ -136,13 +131,13 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
-						    <label for="status_garbage" class="col-md-2 control-label">Condição</label>
+    					    <label for="status_garbage" class="col-md-2 control-label">Condição</label>
 
                             <div class="col-md-5">
                                 <select class="form-control" name="status_garbage">
-	                    			<option>Completo</option>
-	                    			<option>Incompleto</option>
-	                    		</select>
+                        			<option>Completo</option>
+                        			<option>Incompleto</option>
+                        		</select>
                                 @if ($errors->has('status_garbage'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('status_garbage') }}</strong>
@@ -152,18 +147,14 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-7 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Registrar
                                 </button>
                             </div>
                         </div>
- -->
-
-	                       </form>
-        	            </div>
-                    </div>
-                </div>
+    -->
+                   </form>
 			</div>
 		</div>
 	</div>

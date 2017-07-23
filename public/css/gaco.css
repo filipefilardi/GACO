@@ -4,8 +4,11 @@
 
 	--bodycolor: #FFFFFF;
 
+	--btndefaulthover: #4F7192;
 	--btnprimary: #385169;
 	--btnprimaryhover: #001f3f;
+	--btndanger:#C63D38;
+	--btndangerhover:#921A16;
 }
 
 .content .container {
@@ -39,10 +42,34 @@
 	padding-bottom: 20px;
 }
 
+
+.content .btn-default {
+	margin-bottom: 15px;
+}
+
+.content .btn-default:hover {
+	background-color: var(--btndefaulthover);
+	color: #FFFFFF;
+	margin-bottom: 15px;
+}
+
+.content .btn-default:focus {
+	background-color: var(--btndefaulthover);
+	color: #FFFFFF;
+}
+
 .content .btn-primary {
 	background-color: var(--btnprimary);
 }
 
 .content .btn-primary:hover {
 	background-color: var(--btnprimaryhover);
+}
+
+.content .btn-danger {
+	background-color:var(--btndanger);
+}
+
+.content .btn-danger:hover {
+	background-color: var(--btndangerhover)
 }

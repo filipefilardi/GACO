@@ -71,7 +71,7 @@
                             <label for="address" class="col-md-3 control-label">Endereço</label>
 
                             <div class="col-md-7">
-                                <select class="form-control" autofocus id="id_add" onchange="myFunction()">
+                                <select class="form-control" autofocus name="id_add" id="id_add" onchange="myFunction()">
                                     @if(is_null($addresses))
                                     @else 
                                         @foreach ($addresses as $address)

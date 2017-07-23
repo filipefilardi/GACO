@@ -1,0 +1,48 @@
+.content {
+	--headercolor: #EEEEEE;
+	--headertext: #001f3f;
+
+	--bodycolor: #FFFFFF;
+
+	--btnprimary: #385169;
+	--btnprimaryhover: #001f3f;
+}
+
+.content .container {
+	/*background-color: #292929;*/
+}
+
+.content .panel-heading {
+	background-color: var(--headercolor);
+	
+	color: var(--headertext);
+	text-align: center;
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	font-size: 16px;
+}
+
+.content .panel-body {
+	background-color: var(--bodycolor);
+}
+
+/*
+=======================================
+			   BUTTON 
+=======================================
+*/
+
+.content .btn {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.content .btn-primary {
+	background-color: var(--btnprimary);
+}
+
+.content .btn-primary:hover {
+	background-color: var(--btnprimaryhover);
+}

@@ -147,7 +147,7 @@
                     <label for="nm_state" class="col-md-3 control-label">Estado</label>
 
                     <div class="col-md-7">
-                        <input id="nm_state" type="text" class="form-control" name="nm_state" value="{{ old('nm_state') }}" required>
+                        <input id="nm_state" type="text" class="form-control" name="nm_state" value="{{ old('nm_state') }}" maxlength="2" required>
 
                         @if ($errors->has('nm_state'))
                             <span class="help-block">

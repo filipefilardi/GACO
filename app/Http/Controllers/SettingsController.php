@@ -32,9 +32,12 @@ class SettingsController extends Controller
         
         $res = AddressDao::insertAndUpdateAddress(Auth::user()->id_user,$request->all());
         if($res){
-            $request->session()->flash('alert-success', 'success');
+            $request->session()->flash('message', 'Endereço adicionado com sucesso!'); 
+            $request->session()->flash('alert-success', 'success'); 
+
         }else{
-            $request->session()->flash('alert-warning', 'warning');
+            $request->session()->flash('message', 'Falha no cadastro. Por favor, preencha seus dados novamente.'); 
+            $request->session()->flash('alert-dange', 'danger');
             
         }
         $addresses = AddressDao::getAddresses(Auth::user()->id_user);

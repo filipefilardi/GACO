@@ -78,6 +78,25 @@ $(document).ready(function() {
 	  }
 	});
 
+	var $corp_phone = jQuery('input[name="corp_phone"]');
+	$corp_phone.attr('maxlength','12');
+
+	$corp_phone.bind('keyup','keydown', function(e){
+		if(e.which !== 8) { 
+	        var numChars = $corp_phone.val().length;
+	        if(numChars === 2){
+	            var thisVal = $corp_phone.val();
+	            thisVal += ' ';
+	            $corp_phone.val(thisVal);
+	        }
+	        else if(numChars === 7){
+	        	var thisVal = $corp_phone.val();
+	            thisVal += '-';
+	            $corp_phone.val(thisVal);
+	        }
+	  }
+	});
+
 	var $mobile_phone = jQuery('input[name="mobile_phone"]');
 	$mobile_phone.attr('maxlength', '14');
 

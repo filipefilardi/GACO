@@ -12,14 +12,9 @@
 			<div class="panel-heading">Configurações</div>
 				
 			<div class="panel-body">
-                <div class="flash-message">
-                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                              @if(Session::has('alert-' . $msg))
+                
+                @include('layouts.messages')
 
-                              <p class="alert alert-{{ $msg }}"> <strong>EITA, você deveria completar seu cadastro antes</strong> </a></p>
-                              @endif
-                            @endforeach
-                </div>
 				<a href="#form_coop" class="btn btn-default btn-block" data-toggle="collapse">Adicionar Endereço</a>
                 
                 <div id="form_coop" class="main-container collapse">
@@ -43,7 +38,7 @@
                             <label for="nm_state" class="col-md-3 control-label">Estado</label>
 
                             <div class="col-md-7">
-                                <input id="nm_state" type="text" class="form-control" name="nm_state" value="{{ old('nm_state') }}" required>
+                                <input id="nm_state" type="text" class="form-control" name="nm_state" value="{{ old('nm_state') }}" maxlength="2" required>
 
                                 @if ($errors->has('nm_state'))
                                     <span class="help-block">

@@ -21,4 +21,64 @@ class Utilities
 		return $result;
 	}
 
+	public static function get_lat_lon($add) {
+
+		$result = [0,0];
+		$url = 'https://maps.googleapis.com/maps/api/geocode/json';
+		$data = array('address'=>Utilities::prepare_address($add),'key'=>'');
+		
+		try {
+			$rest_result = Utilities::CallAPI('GET',$url,$data);
+			dd($rest_result);
+
+		} catch (\Exception $e) {
+			dd('FODEU');
+		}
+
+		return $result;
+	}
+
+	// Method: POST, PUT, GET etc
+	// Data: array("param" => "value") ==> index.php?param=value
+
+	private static function CallAPI($method, $url, $data = false)
+	{
+	    $curl = curl_init();
+
+	    switch ($method)
+	    {
+	        case "POST":
+	            curl_setopt($curl, CURLOPT_POST, 1);
+
+	            if ($data)
+	                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+	            break;
+	        case "PUT":
+	            curl_setopt($curl, CURLOPT_PUT, 1);
+	            break;
+	        default:
+	            if ($data) {
+	                $url = sprintf("%s?%s", $url, http_build_query($data));
+	                curl_setopt_array($curl, array(
+    					CURLOPT_RETURNTRANSFER => 1,
+    					CURLOPT_URL => $url
+					));
+	            }
+	    }
+
+	    $result = curl_exec($curl);
+	    if(!$result){
+    		dd('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
+		}
+
+	    curl_close($curl);
+
+	    return $result;
+	}
+
+	public static function prepare_address($str_address) {
+		$address_for_url = str_replace(' ','+',$str_address);
+		return $address_for_url;
+	}
+
 }

@@ -26,13 +26,15 @@ class Utilities
 		$result = [0,0];
 		$url = 'https://maps.googleapis.com/maps/api/geocode/json';
 		$data = array('address'=>Utilities::prepare_address($add),'key'=>'');
-		
+
 		try {
 			$rest_result = Utilities::CallAPI('GET',$url,$data);
 			$parsed = json_decode($rest_result, true);
 
+			$lat_long = $parsed['results'][0]['geometry']['location'];
+			$result = array($lat_long('lat'),$lat_long('lng'));
 		} catch (\Exception $e) {
-			dd('FODEU');
+			dd($e);
 		}
 
 		return $result;
@@ -65,7 +67,6 @@ class Utilities
 					));
 	            }
 	    }
-
 	    $result = curl_exec($curl);
 	    if(!$result) $result = file_get_contents($url);
 

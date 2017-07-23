@@ -72,7 +72,7 @@ class UserDao
                         break;
                     
                     default:
-                        $res = null;
+                        $res = array();
                         break;
                 }
 

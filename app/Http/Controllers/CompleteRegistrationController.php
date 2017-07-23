@@ -16,17 +16,22 @@ class CompleteRegistrationController extends Controller
      */
     public function __construct()
     {
-        $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
-        if($is_complete->count()<=0) return redirect('/home');
+        
     }
 
     public function indexCompleteRegistration()
     {   
+        $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
+        if($is_complete->count()>0) return redirect('/home');
+
         return view('complete_registration')->with('id_cat',Auth::user()->id_cat);
     }
 
     public function completeRegistration(Request $request)
     {   
+        $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
+        if($is_complete->count()>0) return redirect('/home');
+
         $request['id_cep'] = preg_replace("/[^0-9]/", "", $request['id_cep'] );
         $address = AddressDao::insertAndUpdateAddress(Auth::user()->id_user,$request->all());
 

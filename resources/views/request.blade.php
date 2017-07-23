@@ -71,18 +71,18 @@
                             <label for="address" class="col-md-3 control-label">Endereço</label>
 
                             <div class="col-md-7">
-                                <select class="form-control" autofocus name="id_add" onChange="window.location.href=this.value">
+                                <select class="form-control" autofocus id="id_add" onchange="myFunction()">
                                     @if(is_null($addresses))
                                     @else 
                                         @foreach ($addresses as $address)
                                             @if($address->main_address === 1)
-                                                <option selected style="display:none" value={{$address->id_add}}>{{$address->id_add}}</option>
+                                                <option selected value={{$address->id_add}}>{{$address->id_add}}</option>
                                             @else
                                                 <option value={{$address->id_add}}>{{$address->id_add}}</option>
                                             @endif
                                             
                                         @endforeach
-                                        <option value="{{ url('/settings')}}"> Adicione um outro endereço para ser feita a coleta </option>
+                                        <option value="{{ url('/settings')}}" id="new_address"> Adicione um outro endereço para ser feita a coleta </option>
                                     @endif
                                 </select>
                                 @if ($errors->has('address'))
@@ -90,6 +90,14 @@
                                         <strong>{{ $errors->first('address') }}</strong>
                                     </span>
                                 @endif
+
+                                <script>
+                                    document.getElementById("id_add").onchange = function() {
+                                        if ($('#id_add').find(":selected").attr('id')=="new_address") {
+                                            window.location.href = this.value;
+                                        }        
+                                    };
+                                </script>
 
 
                             </div>

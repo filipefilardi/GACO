@@ -10,28 +10,17 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
-			<div class="flash-message">
-	                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-	                          @if(Session::has('alert-' . $msg))
 
-	                          <p class="alert alert-{{ $msg }}"> <strong>EITA, você deveria completar seu cadastro antes</strong> </a></p>
-	                          @endif
-	                        @endforeach
-	                    </div>
+			@include('layouts.messages')
 
 			<div class="panel-heading">Dashboard</div>
 			
 			<div class="panel-body">
 			Bem vindo {{ Auth::user()->email }}!
             @if(Auth::user()->id_cat != 3) 	
-	            
-	            <a href="{{ url('/request') }}">
-	                link pessoa física
-	            </a>
 
-				 @if (!$request->isEmpty())
 					 <div class="list-group">
-						  @foreach ($request as $request)
+						  	@forelse($request as $request)
 							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 							    <div class="d-flex w-100 justify-content-between">
 							      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
@@ -45,10 +34,17 @@
 							      </h5>
 							    </div>
 							    <p class="mb-1">{{ $request->desc_req }}</p>
+							    <p class="mb-1">Código de confirmação:{{$request->conf_token}}</p>
+							    <p class="mb-1">Data do pedido de coleta:{{$request->created_at}}</p>
+
 							  </a>
-		             	  @endforeach
-					</div>
-				@endif			 
+							@empty
+							Você não possui nenhuma coleta pendente!
+								@if(!Auth::user()->isComplete())
+	                                Complete seu<a href="{{ url('/complete_registration')}}"> cadastro </a>para começar a fazer pedidos.
+	                            @endif
+		             	  	@endforelse
+					</div>		 
 			@endif
 
 			@if(Auth::user()->id_cat == 3)
@@ -62,7 +58,7 @@
 						      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}	
 						      </h5>                   
 						    </div>
-						    <p class="mb-1">{{ $request->status_garbage }}</p>
+						    <p class="mb-1">{{ $request->status_garbage }} {{$request->conf_token}}</p>
 						  </a>
 		         	    @endforeach
 
@@ -126,7 +122,7 @@
 						      </small>
 						      </h5>
 						    </div>
-						    <p class="mb-1">{{ $request->desc_req }}</p>
+						    <p class="mb-1">{{ $request->desc_req }} {{$request->conf_token}}</p>
 						  </a>
 	             	  @endforeach
 	            @else

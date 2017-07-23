@@ -45,33 +45,37 @@ class Utilities
 
 	private static function CallAPI($method, $url, $data = false)
 	{
-	    $curl = curl_init();
+		try {
+		    $curl = curl_init();
 
-	    switch ($method)
-	    {
-	        case "POST":
-	            curl_setopt($curl, CURLOPT_POST, 1);
+		    switch ($method)
+		    {
+		        case "POST":
+		            curl_setopt($curl, CURLOPT_POST, 1);
 
-	            if ($data)
-	                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-	            break;
-	        case "PUT":
-	            curl_setopt($curl, CURLOPT_PUT, 1);
-	            break;
-	        default:
-	            if ($data) {
-	                $url = sprintf("%s?%s", $url, http_build_query($data));
-	                curl_setopt_array($curl, array(
-    					CURLOPT_RETURNTRANSFER => 1,
-    					CURLOPT_URL => $url
-					));
-	            }
-	    }
-	    $result = curl_exec($curl);
-	    if(!$result) $result = file_get_contents($url);
+		            if ($data)
+		                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+		            break;
+		        case "PUT":
+		            curl_setopt($curl, CURLOPT_PUT, 1);
+		            break;
+		        default:
+		            if ($data) {
+		                $url = sprintf("%s?%s", $url, http_build_query($data));
+		                curl_setopt_array($curl, array(
+	    					CURLOPT_RETURNTRANSFER => 1,
+	    					CURLOPT_URL => $url
+						));
+		            }
+		    }
+		    $result = curl_exec($curl);
+		    if(!$result) $result = file_get_contents($url);
 
-	    curl_close($curl);
-
+		    curl_close($curl);
+		    
+		} catch(\Exception $e) {
+			$result = file_get_contents($url);
+		}
 	    return $result;
 	}
 

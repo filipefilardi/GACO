@@ -11,7 +11,7 @@ class RequestDao
 
 {
 
-    public static function get_full_info_dashboard_req_by_user($id_user) // All ACTV or PEND requests
+    public static function get_full_info_dashboard_req_by_user($id_user) // All ACPT or PEND requests
     {
         $errors = array();
         if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
@@ -28,7 +28,7 @@ class RequestDao
             })
             ->select('request.*','request_assignment.dt_predicted', 'garbage.nm_garbage')
             ->where('request.id_user_req', $id_user)
-            ->whereIn('request.status_req',['ACTV','PEND'])
+            ->whereIn('request.status_req',['ACPT','PEND'])
             ->where('request.id_del', 0)
             ->distinct()
             ->get();
@@ -93,7 +93,7 @@ class RequestDao
             ->where('id_active', 'Y')
             ->where('status_req', 'ACPT')
             ->get();
-                    
+                            
         return $list;
     }
 

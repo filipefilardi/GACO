@@ -16,7 +16,7 @@ class CreateTriggersFunctions extends Migration
         $yesFlag = 'Y';
         $noFlag = 'N';
         $completeStatus = 'COMP';
-        $acceptedStatus = 'ACTP';
+        $acceptedStatus = 'ACPT';
 
         // creates function - verifies that request has been changed status to COMP
         DB::unprepared("CREATE OR REPLACE FUNCTION prepare_confirmation_table() RETURNS trigger AS

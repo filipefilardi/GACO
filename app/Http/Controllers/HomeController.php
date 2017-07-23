@@ -45,7 +45,7 @@ class HomeController extends Controller
         }
 
         if ($id_cat == 1 || $id_cat == 2) {
-            $request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);   
+            $request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
         }
         else{
             $request = RequestDAO::get_pend_requests_for_coop();

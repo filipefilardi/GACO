@@ -22,24 +22,24 @@
             	<a href="#myreq" class="btn btn-default btn-block" data-toggle="collapse">Coletas requisitadas</a>
 					 
 					 <div class="list-group collapse" id="myreq">
-						  	@forelse($request as $request)
-							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-							    <div class="d-flex w-100 justify-content-between">
-							      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
-							      <small class="text-right">
-							      	@if($request->status_req == "PEND")
-							      		PENDENTE
-							      	@else
-							      		{{$request->status_req}}
-							      	@endif
-							      </small>
-							      </h5>
-							    </div>
-							    <p class="mb-1">{{ $request->desc_req }}</p>
-							    <p class="mb-1">Código de confirmação:{{$request->conf_token}}</p>
-							    <p class="mb-1">Data do pedido de coleta:{{$request->created_at}}</p>
+						  	@forelse($request as $req)
+							  @if($req->status_req == "PEND")
+								  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+								    <div class="d-flex w-100 justify-content-between">
+								      <h5 class="mb-1">{{ $req->desc_req}} | {{$req->mod_req}}
+								      <small class="text-right">
+								      	@if($req->status_req == "PEND")
+								      		PENDENTE
+								      	@endif
+								      </small>
+								      </h5>
+								    </div>
+								    <p class="mb-1">{{ $req->desc_req }}</p>
+								    <p class="mb-1">Código de confirmação:{{$req->conf_token}}</p>
+								    <p class="mb-1">Data do pedido de coleta:{{$req->dt_req}}</p>
 
-							  </a>
+								  </a>
+							  @endif
 							@empty
 							<p>Você não possui nenhuma coleta pendente!</p>
 								@if(!Auth::user()->isComplete())
@@ -50,8 +50,29 @@
 
 				<a href="#req_acpt" class="btn btn-default btn-block" data-toggle="collapse">Coletas aceitas</a>
 				
-				<div class="list-group collapse" id="req_done">
-					Não Implementado
+				<div class="list-group collapse" id="req_acpt">
+					@forelse($request as $request)
+						@if($request->status_req == "ACPT")
+							<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+								    <div class="d-flex w-100 justify-content-between">
+								      <h5 class="mb-1">{{ $req->desc_req}} | {{$req->mod_req}}
+								      <small class="text-right">
+								      	@if($req->status_req == "PEND")
+								      		PENDENTE
+								      	@endif
+								      </small>
+								      </h5>
+								    </div>
+								    <p class="mb-1">{{ $req->desc_req }}</p>
+								    <p class="mb-1">Código de confirmação:{{$req->conf_token}}</p>
+								    <p class="mb-1">Data do pedido de coleta:{{$req->dt_req}}</p>
+
+								  </a>
+						@endif
+					@empty
+					<p>Você não possui nenhuma coleta pendente!</p>
+					
+             	  	@endforelse
 				</div>
 			@endif
 
@@ -68,7 +89,7 @@
 						      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}	
 						      </h5>                   
 						    </div>
-						    <p class="mb-1">{{ $request->status_garbage }} {{$request->conf_token}}</p>
+						    <p class="mb-1">{{ $request->status_garbage }}</p>
 						  </a>
 		         	    @endforeach
 

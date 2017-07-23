@@ -26,17 +26,17 @@
 							  @if($req->status_req == "PEND")
 								  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 								    <div class="d-flex w-100 justify-content-between">
-								      <h5 class="mb-1">{{ $req->desc_req}} | {{$req->mod_req}}
+								      <h5 class="mb-1">Descrição: {{ $req->desc_req}}
 								      <small class="text-right">
 								      	@if($req->status_req == "PEND")
 								      		PENDENTE
 								      	@endif
 								      </small>
 								      </h5>
+								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
 								    </div>
-								    <p class="mb-1">{{ $req->desc_req }}</p>
-								    <p class="mb-1">Código de confirmação:{{$req->conf_token}}</p>
-								    <p class="mb-1">Data do pedido de coleta:{{$req->dt_req}}</p>
+								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
+								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
 
 								  </a>
 							  @endif
@@ -55,17 +55,17 @@
 						@if($request->status_req == "ACPT")
 							<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 								    <div class="d-flex w-100 justify-content-between">
-								      <h5 class="mb-1">{{ $req->desc_req}} | {{$req->mod_req}}
+								      <h5 class="mb-1">Descrição: {{ $req->desc_req}}
 								      <small class="text-right">
-								      	@if($req->status_req == "PEND")
-								      		PENDENTE
+								      	@if($req->status_req == "ACPT")
+								      		ACEITO
 								      	@endif
 								      </small>
 								      </h5>
+								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
 								    </div>
-								    <p class="mb-1">{{ $req->desc_req }}</p>
-								    <p class="mb-1">Código de confirmação:{{$req->conf_token}}</p>
-								    <p class="mb-1">Data do pedido de coleta:{{$req->dt_req}}</p>
+								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
+								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
 
 								  </a>
 						@endif
@@ -86,10 +86,19 @@
 						@foreach ($request as $request)
 						  <a href="#" data-toggle="modal" data-target="#Modal" class="list-group-item list-group-item-action flex-column align-items-start">
 						    <div class="d-flex w-100 justify-content-between">
-						      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}	
-						      </h5>                   
-						    </div>
-						    <p class="mb-1">{{ $request->status_garbage }}</p>
+							      <h5 class="mb-1">Descrição: {{ $request->desc_req}} 
+							      <small class="text-right">
+							      	@if($request->status_req == "PEND")
+							      		PENDENTE
+							      	@else
+							      		{{$request->status_req}}
+							      	@endif
+							      </small>
+							      </h5>
+							      <h5 class="mb-1">Modelo: {{$request->mod_req}} </h5>
+							    </div>
+							    <p class="mb-1">Estado: {{ $request->status_garbage }} </p>
+								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
 						  </a>
 		         	    @endforeach
 
@@ -147,17 +156,19 @@
 						 @foreach ($request_acpt as $request)
 							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 							    <div class="d-flex w-100 justify-content-between">
-							      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
+							      <h5 class="mb-1">Descrição: {{ $request->desc_req}}
 							      <small class="text-right">
-							      	@if($request->status_req == "PEND")
-							      		PENDENTE
+							      	@if($request->status_req == "ACPT")
+							      		ACEITO
 							      	@else
 							      		{{$request->status_req}}
 							      	@endif
 							      </small>
 							      </h5>
+							      <h5 class="mb-1">Modelo: {{$request->mod_req}} </h5>
 							    </div>
-							    <p class="mb-1">{{ $request->desc_req }} {{$request->conf_token}}</p>
+							    <p class="mb-1">Estado: {{ $request->status_garbage }} </p>
+								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
 							  </a>
 		             	  @endforeach
 		            @else

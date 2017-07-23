@@ -76,9 +76,9 @@
                                     @else 
                                         @foreach ($addresses as $address)
                                             @if($address->main_address === 1)
-                                                <option selected value={{$address->id_add}}>{{$address->id_add}}</option>
+                                                <option selected value={{$address->id_add}}>{{$address->str_address}}</option>
                                             @else
-                                                <option value={{$address->id_add}}>{{$address->id_add}}</option>
+                                                <option value={{$address->id_add}}>{{$address->str_address}}</option>
                                             @endif
                                             
                                         @endforeach

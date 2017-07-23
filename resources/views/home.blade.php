@@ -70,7 +70,7 @@
 								  </a>
 						@endif
 					@empty
-					<p>Você não possui nenhuma coleta pendente!</p>
+					<p>Você não possui nenhuma coleta aceita!</p>
 					
              	  	@endforelse
 				</div>
@@ -144,7 +144,7 @@
                             </div>
                         </div>
 		         	@else
-		         		<p>Não temos nenhuma doação cadastrada no sistema</p>
+		         		<p>Não existem doações cadastrada no sistema</p>
 		         	@endif
 				</div>
 
@@ -172,7 +172,7 @@
 							  </a>
 		             	  @endforeach
 		            @else
-		            	<p>Não aceitamos nenhuma doação até o momento</p>
+		            	<p>Você não aceitou nenhuma doação até o momento</p>
 		            @endif
 		        </div>
 			@endif

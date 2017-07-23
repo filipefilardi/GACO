@@ -8,18 +8,20 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
 
-			@include('layouts.messages')
 
-			<div class="panel-heading">Dashboard</div>
+			<div class="panel-heading">Home</div>
 			
 			<div class="panel-body">
-			Bem vindo {{ Auth::user()->email }}!
-            @if(Auth::user()->id_cat != 3) 	
+			
+			@include('layouts.messages')
 
-					 <div class="list-group">
+			<!--<p>Bem vindo {{ Auth::user()->email }}!</p> -->
+            @if(Auth::user()->id_cat != 3) 	
+            	<a href="#myreq" class="btn btn-default btn-block" data-toggle="collapse">Coletas requisitadas</a>
+					 
+					 <div class="list-group collapse" id="myreq">
 						  	@forelse($request as $request)
 							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 							    <div class="d-flex w-100 justify-content-between">
@@ -39,16 +41,24 @@
 
 							  </a>
 							@empty
-							Você não possui nenhuma coleta pendente!
+							<p>Você não possui nenhuma coleta pendente!</p>
 								@if(!Auth::user()->isComplete())
-	                                Complete seu<a href="{{ url('/complete_registration')}}"> cadastro </a>para começar a fazer pedidos.
+	                                Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.
 	                            @endif
 		             	  	@endforelse
-					</div>		 
+					</div>
+
+				<a href="#req_acpt" class="btn btn-default btn-block" data-toggle="collapse">Coletas aceitas</a>
+				
+				<div class="list-group collapse" id="req_done">
+					Não Implementado
+				</div>
 			@endif
 
 			@if(Auth::user()->id_cat == 3)
-				<div class="list-group">
+				<a href="#list-group" class="btn btn-default btn-block" data-toggle="collapse">Doações cadastradas no sistema</a>
+				
+				<div class="list-group collapse" id="list-group" >
 					<!-- MOSTRA TODAS AS REQUISIÇÕES NO SISTEMA -->
 					@if (!$request->isEmpty())
 						<h4>Lista de doações, aceite alguma clicando no item</h4>
@@ -103,36 +113,40 @@
                                 </div>
                             </div>
                         </div>
+		         	@else
+		         		<p>Não temos nenhuma doação cadastrada no sistema</p>
 		         	@endif
 				</div>
 
-				@if (!$request_acpt->isEmpty())
-					<h4>Lista de pedidos aceitos</h4>
-					<!-- MOSTRAR TODAS AS REQUISIÇÕES FEITAS PELA COOP -->
-					 @foreach ($request_acpt as $request)
-						  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-						    <div class="d-flex w-100 justify-content-between">
-						      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
-						      <small class="text-right">
-						      	@if($request->status_req == "PEND")
-						      		PENDENTE
-						      	@else
-						      		{{$request->status_req}}
-						      	@endif
-						      </small>
-						      </h5>
-						    </div>
-						    <p class="mb-1">{{ $request->desc_req }} {{$request->conf_token}}</p>
-						  </a>
-	             	  @endforeach
-	            @else
-	            	<p>Não aceitamos nada</p>
-	            @endif
+				<a href="#acpt_req" class="btn btn-default btn-block" data-toggle="collapse">Doações aceitas</a>
+				<div id="acpt_req" class="main-container collapse">
+					@if (!$request_acpt->isEmpty())
+						<h4>Lista de pedidos aceitos</h4>
+						<!-- MOSTRAR TODAS AS REQUISIÇÕES FEITAS PELA COOP -->
+						 @foreach ($request_acpt as $request)
+							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+							    <div class="d-flex w-100 justify-content-between">
+							      <h5 class="mb-1">{{ $request->desc_req}} | {{$request->mod_req}}
+							      <small class="text-right">
+							      	@if($request->status_req == "PEND")
+							      		PENDENTE
+							      	@else
+							      		{{$request->status_req}}
+							      	@endif
+							      </small>
+							      </h5>
+							    </div>
+							    <p class="mb-1">{{ $request->desc_req }} {{$request->conf_token}}</p>
+							  </a>
+		             	  @endforeach
+		            @else
+		            	<p>Não aceitamos nenhuma doação até o momento</p>
+		            @endif
+		        </div>
 			@endif
 			</div>
 			
 			</div>
-		</div>
 	</div>
 </div>
 @endsection

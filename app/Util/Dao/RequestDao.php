@@ -224,7 +224,7 @@ class RequestDao
                 'status_garbage' => $status_garbage,
                 'status_req' => 'PEND',
                 'conf_token' => $conf_token,
-                'dt_request' =>$today,
+                'dt_req' =>$today,
                 'id_active' => 'Y',
                 'mod_req' => $mod_req,
                 'id_add' => $id_add

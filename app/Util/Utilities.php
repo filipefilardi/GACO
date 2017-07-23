@@ -23,7 +23,7 @@ class Utilities
 
 	public static function get_lat_lon($add) {
 
-		$result = [0,0];
+		$result = array(0,0);
 		$url = 'https://maps.googleapis.com/maps/api/geocode/json';
 		$data = array('address'=>Utilities::prepare_address($add),'key'=>'');
 
@@ -32,9 +32,9 @@ class Utilities
 			$parsed = json_decode($rest_result, true);
 
 			$lat_long = $parsed['results'][0]['geometry']['location'];
-			$result = array($lat_long('lat'),$lat_long('lng'));
+			$result = array($lat_long['lat'],$lat_long['lng']);
 		} catch (\Exception $e) {
-			dd($e);
+			// TODO
 		}
 
 		return $result;
@@ -45,37 +45,33 @@ class Utilities
 
 	private static function CallAPI($method, $url, $data = false)
 	{
-		try {
-		    $curl = curl_init();
+	    $curl = curl_init();
 
-		    switch ($method)
-		    {
-		        case "POST":
-		            curl_setopt($curl, CURLOPT_POST, 1);
+	    switch ($method)
+	    {
+	        case "POST":
+	            curl_setopt($curl, CURLOPT_POST, 1);
 
-		            if ($data)
-		                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-		            break;
-		        case "PUT":
-		            curl_setopt($curl, CURLOPT_PUT, 1);
-		            break;
-		        default:
-		            if ($data) {
-		                $url = sprintf("%s?%s", $url, http_build_query($data));
-		                curl_setopt_array($curl, array(
-	    					CURLOPT_RETURNTRANSFER => 1,
-	    					CURLOPT_URL => $url
-						));
-		            }
-		    }
-		    $result = curl_exec($curl);
-		    if(!$result) $result = file_get_contents($url);
+	            if ($data)
+	                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+	            break;
+	        case "PUT":
+	            curl_setopt($curl, CURLOPT_PUT, 1);
+	            break;
+	        default:
+	            if ($data) {
+	                $url = sprintf("%s?%s", $url, http_build_query($data));
+	                curl_setopt_array($curl, array(
+    					CURLOPT_RETURNTRANSFER => 1,
+    					CURLOPT_URL => $url
+					));
+	            }
+	    }
+	    $result = curl_exec($curl);
+	    if(!$result) $result = file_get_contents($url);
 
-		    curl_close($curl);
-		    
-		} catch(\Exception $e) {
-			$result = file_get_contents($url);
-		}
+	    curl_close($curl);
+
 	    return $result;
 	}
 

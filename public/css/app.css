@@ -290,7 +290,7 @@ th {
 }
 .img-thumbnail,
 body {
-    background-color: #EFEFEF;
+    background-color: #FFFFFF; /* GACO */
     margin-bottom: 120px;
 }
 @font-face {
@@ -1476,7 +1476,7 @@ dd {
 }
 @media (min-width: 768px) {
     .dl-horizontal dt {
-        float: left;
+        float: left;    
         width: 160px;
         clear: left;
         text-align: right;
@@ -4472,11 +4472,11 @@ tbody.collapse.in {
     }
 }
 .navbar-default {
-    background-color: #fff;
-    border-color: #d3e0e9
+    background-color: #001f3f; /* GACO */
+    border-color: #001f3f
 }
 .navbar-default .navbar-brand {
-    color: #777
+    color: #DDDDDD
 }
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:hover {
@@ -4485,8 +4485,10 @@ tbody.collapse.in {
 }
 .navbar-default .navbar-nav>li>a,
 .navbar-default .navbar-text {
-    color: #777
+    color: #DDDDDD
 }
+
+/* GACO HOVER */
 .navbar-default .navbar-nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover {
     color: #333;

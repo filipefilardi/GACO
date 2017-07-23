@@ -18,9 +18,8 @@
                 @endforeach
             </div>
 
-			<div class="panel-heading">Dashboard</div>
 			
-			<div class="panel-body">
+			
 			 	<div class="container">
 				 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}">
 						{{ csrf_field() }}
@@ -171,7 +170,7 @@
         	            </div>
                     </div>
                 </div>
-			</div>
+			
 		</div>
 	</div>
 </div>

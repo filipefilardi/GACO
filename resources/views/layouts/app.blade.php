@@ -15,6 +15,7 @@
     <script src="jquery.maskedinput.js" type="text/javascript"></script>
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/gaco.css" rel="stylesheet">
     @yield('stylesheet')
 
     <!-- Scripts -->
@@ -120,8 +121,9 @@
             </div>
         </nav>
 
-        @yield('content')
-
+        <div class="content">
+            @yield('content')
+        </div>
     </div>
     <footer class="footer-distributed">
             <div class="footer-right">

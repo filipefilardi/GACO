@@ -39,6 +39,19 @@
                                     @endif
                                 </div>
                             </div>
+                        <div class="form-group{{ $errors->has('nm_state') ? ' has-error' : '' }}">
+                            <label for="nm_state" class="col-md-3 control-label">Estado</label>
+
+                            <div class="col-md-7">
+                                <input id="nm_state" type="text" class="form-control" name="nm_state" value="{{ old('nm_state') }}" required>
+
+                                @if ($errors->has('nm_state'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nm_state') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('nm_city') ? ' has-error' : '' }}">
                                 <label for="nm_city" class="col-md-3 control-label">Cidade</label>

@@ -71,7 +71,7 @@
                             <label for="address" class="col-md-3 control-label">Endereço</label>
 
                             <div class="col-md-7">
-                                <select class="form-control" autofocus name="id_add">
+                                <select class="form-control" autofocus name="id_add" onChange="window.location.href=this.value">
                                     @if(is_null($addresses))
                                     @else 
                                         @foreach ($addresses as $address)
@@ -82,6 +82,7 @@
                                             @endif
                                             
                                         @endforeach
+                                        <option value="{{ url('/settings')}}"> Adicione um outro endereço para ser feita a coleta </option>
                                     @endif
                                 </select>
                                 @if ($errors->has('address'))
@@ -89,6 +90,8 @@
                                         <strong>{{ $errors->first('address') }}</strong>
                                     </span>
                                 @endif
+
+
                             </div>
                         </div>
 

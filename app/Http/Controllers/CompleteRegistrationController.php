@@ -44,7 +44,7 @@ class CompleteRegistrationController extends Controller
                 return redirect('/home');
             }else{
                 $request->session()->flash('message', 'Falha no cadastro. Por favor, preencha seus dados novamente.'); 
-                $request->session()->flash('alert-dange', 'danger');
+                $request->session()->flash('alert-danger', 'danger');
 
                 return redirect('/complete_registration');
             }

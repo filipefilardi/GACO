@@ -55,7 +55,7 @@
 
 .content .btn-default:focus {
 	background-color: var(--btndefaulthover);
-	color: #FFFFFF;
+	color: black;
 }
 
 .content .btn-primary {
@@ -72,4 +72,27 @@
 
 .content .btn-danger:hover {
 	background-color: var(--btndangerhover)
+}
+
+/*
+=======================================
+			   COOPS 
+=======================================
+*/
+
+.cooperative{
+	text-align: justify;
+
+	color: #001122; /* text more darker */
+}
+
+.cooperative .panel-body{
+	text-align: justify;
+
+	border: 2px;
+	border-style: solid;
+	border-color: var(--headercolor);
+	border-radius: 5px;
+
+	margin-bottom: 15px;
 }

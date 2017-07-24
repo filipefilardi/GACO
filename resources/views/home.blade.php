@@ -11,7 +11,7 @@
 		<div class="panel panel-default">
 
 
-			<div class="panel-heading">Home</div>
+			<div class="panel-heading">@lang('app.home')</div>
 			
 			<div class="panel-body">
 			

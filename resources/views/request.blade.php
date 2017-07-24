@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="panel panel-default">
 
-			<div class="panel-heading">Coleta</div>
+			<div class="panel-heading">@lang('app.request')</div>
 			
 			<div class="panel-body">
 				 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}">

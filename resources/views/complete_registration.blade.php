@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Completar Registro</div>
+            <div class="panel-heading">@lang('app.completeregistration')</div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/complete_registration') }}">
                     {{ csrf_field() }}

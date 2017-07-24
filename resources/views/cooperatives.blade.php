@@ -5,12 +5,51 @@
 	<div class="row">
 		<div class="panel panel-default">
 			
-			<div class="panel-heading">Cooperativas</div>
+			<div class="panel-heading">@lang('app.cooperatives')</div>
 			<div class="panel-body">
-			 	
+			
+				<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="cooperative">
+						<p>@lang('app.cooptextintro')</p>
 
+
+			            <div id="coopernova">
+			            	<div class="panel-heading">Coopernova</div>
+			            	<div class="panel-body">
+					            <img src="img/coopernova.jpg" class="img-responsive" style="margin: 0 auto">
+								<div class="text-center">
+					            	<p>R. Nova Pátria, 120 - Jardim Nova Cotia, Cotia - SP, 06700-538</p>
+					            	<p>(11) 4243-1810</p>
+					            	<p><a href="https://www.coopernovacotiarecicla.com" target="_blank">https://www.coopernovacotiarecicla.com</a></p>
+			            		</div>
+			            		<p>@lang('app.coopernovadescription')</p>
+				            </div>
+			            </div>
+
+
+			            <div id="recifavela">
+			           		<div class="panel-heading">Recifavela</div>
+			           		<div class="panel-body">
+					            <img src="img/recifavela.jpg" class="img-responsive" style="margin: 0 auto">
+				           		<div class="text-center">
+					            	<p>Rua Capitão Pacheco e Chaves, 108, Vila Prudente, São Paulo</p>
+					            	<p>(11) 4243-1810</p>
+					            	<p><a href="https://www.facebook.com/COOPERECIFAVELA" target="_blank">https://www.facebook.com/COOPERECIFAVELA</a></p>
+				            	</div>
+			            		<p>@lang('app.recifaveladescription')</p>
+				            </div>
+			            </div>
+
+			            <h2 class="text-center">Faça parte</h2>
+
+			            <p>@lang('app.letscontribute')</p>
+			            <a href="/request" class="btn btn-primary btn-block" >@lang('app.wannacontribute')</a>
+
+		            </div>
+		        </div>
+	            </div>
 			</div>
-		
 		</div>
 	</div>
 </div>

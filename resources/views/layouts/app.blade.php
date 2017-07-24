@@ -60,26 +60,26 @@
                     @else
                         <ul class="nav navbar-nav">
                             @if(Auth::user()->id_cat != 3)
-                                <li><a href="{{ url('/home') }}">Home</a></li>
-                                <li><a href="{{ url('/request') }}">Coleta</a></li>
-                                <li><a href="{{ url('/cooperatives') }}">Cooperativas</a></li>
-                                <li><a href="{{ url('/garbage') }}">Resíduo Eletrônico</a></li>
-                                <li><a href="{{ url('/about') }}">Sobre</a></li>
+                                <li><a href="{{ url('/home') }}">@lang('app.home')</a></li>
+                                <li><a href="{{ url('/request') }}">@lang('app.request')</a></li>
+                                <li><a href="{{ url('/cooperatives') }}">@lang('app.cooperatives')</a></li>
+                                <li><a href="{{ url('/garbage') }}">@lang('app.ewaste')</a></li>
+                                <li><a href="{{ url('/about') }}">@lang('app.about')</a></li>
                                 @if(Auth::user()->id_cat == 4)
                                     <!-- Apenas para administradores -->
-                                    <li><a href="{{ url('/admin') }}">Painel do Administrador</a></li>
+                                    <li><a href="{{ url('/admin') }}">@lang('app.adminpanel')</a></li>
                                 @endif
                                 <!-- Só se não tiver sido completado -->
                                 @if(!Auth::user()->isComplete())
                                     @if(Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2)
-                                        <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
+                                        <li><a href="{{ url('/complete_registration') }}">@lang('app.completeregistration')</a></li>
                                     @endif
                                 @endif
                                 @if(Auth::user()->id_cat == 4)
-                                    <li><a href="{{ url('/complete_registration') }}">Complete seu Cadastro</a></li>
+                                    <li><a href="{{ url('/complete_registration') }}">@lang('app.completeregistration')</a></li>
                                 @endif
                             @else
-                                <li><a href="{{ url('/home') }}">Painel de Controle</a></li>
+                                <li><a href="{{ url('/home') }}">@lang('app.adminpanel')</a></li>
                             @endif
                         </ul>
                     @endif
@@ -87,8 +87,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/register') }}">Cadastre-se</a></li>
-                            <li><a href="{{ url('/login') }}">Entrar</a></li>
+                            <li><a href="{{ url('/register') }}">@lang('app.register')</a></li>
+                            <li><a href="{{ url('/login') }}">@lang('app.login')</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -98,14 +98,14 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="/settings">
-                                            Configurações
+                                            @lang('app.settings')
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Sair
+                                            @lang('app.logout')
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

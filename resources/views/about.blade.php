@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 
-		<div class="panel-heading">Sobre</div>
+		<div class="panel-heading">@lang('app.about')</div>
 		<div class="panel panel-default">
 				<div class="panel-body">			
 

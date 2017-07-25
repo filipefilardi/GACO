@@ -41,9 +41,17 @@
 				    </ul>
 
 					-->
-
 				    <h3>Parcerias</h3>
-
+				    <ul style="list-style-type: none;">
+				    	<!-- 
+				    	<div class="logos">
+					    	<li><img src="img/coopernova_logo.png" class="img-responsive"></li>
+					    	<li><img src="img/recifavela_logo.jpg" class="img-responsive"></li>
+					    	<li><img src="img/gea_logo.png" class="img-responsive"></li>
+					    	<li><img src="img/vaitec_logo.jpg" class="img-responsive"></li>
+				    	</div>
+ 						-->
+				    </ul>
 					    <!--
 							listar coops
 					    -->

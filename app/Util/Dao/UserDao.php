@@ -90,10 +90,13 @@ class UserDao
                         $data['home_phone'] = preg_replace("/[^0-9]/", "", $data['mobile_phone'] );
                         $data['cpf'] = preg_replace("/[^0-9]/", "", $data['cpf'] );
                         
+                        $tmp = explode("/",$data['date']);
+                        $date = $tmp[1] . "/" .  $tmp[0] . "/"  . $tmp[2];
+
                         DB::table('user_person')->insert([
                             'id_user' => $id_user,
                             'nm_user' => $data['name'],
-                            'dt_birth' => $data['date'],
+                            'dt_birth' => $date,
                             'ph_mob' => $data['mobile_phone'],
                             'ph_res' => $data['home_phone'],
                             'cpf_user' => $data['cpf']
@@ -144,6 +147,7 @@ class UserDao
                         break;
         }
         }catch(\Exception $e){
+            dd($e);
             $res = -1;
         }
 

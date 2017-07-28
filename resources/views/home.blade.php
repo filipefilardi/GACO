@@ -24,7 +24,7 @@
 					 <div class="list-group collapse" id="myreq">
 						  	@forelse($request as $req)
 							  @if($req->status_req == "PEND")
-								  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+								  <div class="list-group-item list-group-item-action flex-column align-items-start">
 								    <div class="d-flex w-100 justify-content-between">
 								      <h5 class="mb-1">Descrição: {{ $req->desc_req}}
 								      <small class="text-right">
@@ -34,11 +34,13 @@
 								      </small>
 								      </h5>
 								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
+
+								    <button class="btn btn-danger pull-right">Cancelar Coleta</button>
+								    
 								    </div>
 								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
 								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
-
-								  </a>
+								  </div>
 							  @endif
 							@empty
 							<p>Você não possui nenhuma coleta pendente!</p>
@@ -53,7 +55,7 @@
 				<div class="list-group collapse" id="req_acpt">
 					@forelse($request as $request)
 						@if($request->status_req == "ACPT")
-							<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+							<div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 								    <div class="d-flex w-100 justify-content-between">
 								      <h5 class="mb-1">Descrição: {{ $req->desc_req}}
 								      <small class="text-right">
@@ -63,11 +65,16 @@
 								      </small>
 								      </h5>
 								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
+								    
+								    <button class="btn btn-danger pull-right" style="margin-left: 10px;">Cancelar Coleta</button>
+								    <button class="btn btn-primary pull-right">Confirmar Coleta</button>
+								    
+
 								    </div>
 								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
 								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
 
-								  </a>
+								  </div>
 						@endif
 					@empty
 					<p>Você não possui nenhuma coleta aceita!</p>
@@ -82,9 +89,9 @@
 				<div class="list-group collapse" id="list-group" >
 					<!-- MOSTRA TODAS AS REQUISIÇÕES NO SISTEMA -->
 					@if (!$request->isEmpty())
-						<h4>Lista de doações, aceite alguma clicando no item</h4>
+						<h4>Lista de doações</h4>
 						@foreach ($request as $request)
-						  <a href="#" data-toggle="modal" data-target="#Modal" class="list-group-item list-group-item-action flex-column align-items-start">
+						  <div class="list-group-item list-group-item-action flex-column align-items-start">
 						    <div class="d-flex w-100 justify-content-between">
 							      <h5 class="mb-1">Descrição: {{ $request->desc_req}} 
 							      <small class="text-right">
@@ -96,10 +103,13 @@
 							      </small>
 							      </h5>
 							      <h5 class="mb-1">Modelo: {{$request->mod_req}} </h5>
+
+								  <button data-toggle="modal" data-target="#Modal" class="btn btn-success pull-right">Aceitar Coleta</button>
+
 							    </div>
 							    <p class="mb-1">Estado: {{ $request->status_garbage }} </p>
 								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
-						  </a>
+						  </div>
 		         	    @endforeach
 
 		         	     <!-- Modal -->
@@ -134,7 +144,7 @@
 									
                                             <div class="form-group">
 					                            <div class="col-md-6 col-md-offset-4">
-					                                <button type="submit" class="btn btn-primary">
+					                                <button type="submit" class="btn btn-primary btn-block">
 					                                    Aceitar
 					                                </button>
 					                            </div>
@@ -154,7 +164,7 @@
 						<h4>Lista de pedidos aceitos</h4>
 						<!-- MOSTRAR TODAS AS REQUISIÇÕES FEITAS PELA COOP -->
 						 @foreach ($request_acpt as $request)
-							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+							  <div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 							    <div class="d-flex w-100 justify-content-between">
 							      <h5 class="mb-1">Descrição: {{ $request->desc_req}}
 							      <small class="text-right">
@@ -166,10 +176,14 @@
 							      </small>
 							      </h5>
 							      <h5 class="mb-1">Modelo: {{$request->mod_req}} </h5>
+
+								    <button class="btn btn-danger pull-right" style="margin-left: 10px;">Cancelar Coleta</button>
+								    <button class="btn btn-primary pull-right">Confirmar Coleta</button>
+
 							    </div>
 							    <p class="mb-1">Estado: {{ $request->status_garbage }} </p>
 								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
-							  </a>
+							  </div>
 		             	  @endforeach
 		            @else
 		            	<p>Você não aceitou nenhuma doação até o momento</p>

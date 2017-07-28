@@ -3,7 +3,7 @@
 return [
 	// NAVBAR
 	'home' => 'Home',
-	'request' => 'Coleta',
+	'request' => 'Quero Descartar',
 	'cooperatives' => 'Cooperativas',
 	'ewaste' => 'Resíduo Eletrônico',
 	'adminpanel' => 'Painel do Administrador',
@@ -18,7 +18,7 @@ return [
 	// Garbage view
 	'discoveryallresidues' => 'Descubra todos os lixos que você pode doar!',
 	'ewastetext' => 'Lixo Eletrônico é todo resíduo material produzido pelo descarte de equipamentos eletrônicos. Com o elevado uso de equipamentos eletrônicos no mundo moderno, este tipo de lixo tem se tornado um grande problema ambiental quando não descartado em locais adequados',
-	'wannacontribute' => 'Quero contribuir',
+	'wannacontribute' => 'Quero descartar meu eletrônico',
     'whydonate' => 'Voce sabe por que é importante reciclar seu lixo eletrônico?',
 
     // Cooperatives view

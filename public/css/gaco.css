@@ -96,3 +96,17 @@
 
 	margin-bottom: 15px;
 }
+
+.cooperative .grey-box{
+	margin-top: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	background-color: #e9eaec;
+
+	border-radius: 5px;
+}
+
+.cooperative .grey-box a{
+	color: var(--panel-heading);
+}

@@ -14,9 +14,9 @@
                         @include('layouts.messages')
 
     					<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
-    							<label class="col-md-3 control-label">Categoria</label>
+    							<label class="col-md-3 control-label">Resíduo</label>
     	                    <div class="col-md-7">
-    							<select class="form-control" name="id_garbage">
+    							<select class="form-control" id="id_garbage" name="id_garbage">
     					 		@foreach ($garbage as $garbage)
     		                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
     		                    @endforeach
@@ -24,41 +24,14 @@
     						</div>                   
                         </div>
 
-                        <div class="form-group{{ $errors->has('desc_req') ? ' has-error' : '' }}">
-    					    <label for="desc_req" class="col-md-3 control-label">Equipamento</label>
-
-                            <div class="col-md-7">
-                                <input id="desc_req" type="text" class="form-control" name="desc_req" placeholder="Descreva seu equipamento" value="{{ old('desc_req') }}" required>
-
-                                @if ($errors->has('desc_req'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('desc_req') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('mod_req') ? ' has-error' : '' }}">
-    					    <label for="mod_req" class="col-md-3 control-label">Modelo</label>
-
-                            <div class="col-md-7">
-                                <input id="mod_req" type="text" class="form-control" name="mod_req" placeholder="Modelo do seu equipamento" value="{{ old('mod_req') }}" required>
-
-                                @if ($errors->has('mod_req'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('mod_req') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
-    					    <label for="status_garbage" class="col-md-3 control-label">Condição</label>
+                        <div style="display:none" id="status_tv"class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
+                            <label for="status_garbage" class="col-md-3 control-label">Condição</label>
 
                             <div class="col-md-7">
                                 <select class="form-control" name="status_garbage">
-                        			<option>Completo</option>
-                        			<option>Incompleto</option>
-                        		</select>
+                                    <option>Aberta</option>
+                                    <option>Fechada</option>
+                                </select>
                                 @if ($errors->has('status_garbage'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('status_garbage') }}</strong>
@@ -67,8 +40,36 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
+    					    <label for="quantity" class="col-md-3 control-label">Quantidade</label>
+
+                            <div class="col-md-7">
+                                <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="{{ old('quantity') }}" required>
+
+                                @if ($errors->has('quantity'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('quantity') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <div class="form-group{{ $errors->has('observation') ? ' has-error' : '' }}">
+                            <label for="observation" class="col-md-3 control-label">Observação</label>
+
+                            <div class="col-md-7">
+                                <input id="observation" type="text" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}" required>
+
+                                @if ($errors->has('observation'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('observation') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="address" class="col-md-3 control-label">Endereço</label>
+                            <label for="address" class="col-md-3 control-label">Endereço de coleta</label>
 
                             <div class="col-md-7">
                                 <select class="form-control" autofocus name="id_add" id="id_add" onchange="myFunction()">
@@ -82,7 +83,7 @@
                                             @endif
                                             
                                         @endforeach
-                                        <option value="{{ url('/settings')}}" id="new_address"> Adicione um outro endereço para ser feita a coleta </option>
+                                        <option value="{{ url('/settings')}}" id="new_address"> Adicionar outro endereço para ser feita a coleta </option>
                                     @endif
                                 </select>
                                 @if ($errors->has('address'))
@@ -170,4 +171,15 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    document.getElementById("id_garbage").onchange = function() {
+        if ($('#id_garbage').find(":selected").attr('value')=="16") {
+            $('#status_tv').show();
+        }
+        else {
+            $('#status_tv').hide();   
+        }        
+    };
+</script>
 @endsection

@@ -52,8 +52,8 @@ class RequestController extends Controller
     }
 
     public function make_request(Request $data){
+        dd($data);
         $res = null;
-
         if (Gate::allows('execute', 'create_request')) {
             
             Auth::user();

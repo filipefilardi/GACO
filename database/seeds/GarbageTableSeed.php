@@ -12,20 +12,8 @@ class GarbageTableSeed extends Seeder
     public function run()
     {
 
-    	DB::table('garbage')->insert([
-            'nm_garbage' => "Bateria"
-        ]);
-
         DB::table('garbage')->insert([
-            'nm_garbage' => "Caixa de Som"
-        ]);
-
-        DB::table('garbage')->insert([
-            'nm_garbage' => "Cabos"
-        ]);
-
-        DB::table('garbage')->insert([
-            'nm_garbage' => "Camera Fotografica"
+            'nm_garbage' => "Carregador"
         ]);
 
         DB::table('garbage')->insert([
@@ -33,23 +21,35 @@ class GarbageTableSeed extends Seeder
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Computador"
+            'nm_garbage' => "CPU"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Disquete"
+            'nm_garbage' => "Drive CD/DVD"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Fone de Ouvido"
+            'nm_garbage' => "Eletrodomesticos"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Geladeira"
+            'nm_garbage' => "Fonte"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Home Theater"
+            'nm_garbage' => "HD"
+        ]);
+
+        DB::table('garbage')->insert([
+            'nm_garbage' => "Impressora"
+        ]);
+
+        DB::table('garbage')->insert([
+            'nm_garbage' => "Monitores"
+        ]);
+
+        DB::table('garbage')->insert([
+            'nm_garbage' => "Mouse"
         ]);
 
         DB::table('garbage')->insert([
@@ -57,23 +57,31 @@ class GarbageTableSeed extends Seeder
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Pilha"
+            'nm_garbage' => "Placa Mãe"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Tablet"
+            'nm_garbage' => "Processador"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Televisor"
+            'nm_garbage' => "Teclado"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Video Game"
+            'nm_garbage' => "Telefone"
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Video Cassete"
+            'nm_garbage' => "Televisão"
+        ]);
+
+        DB::table('garbage')->insert([
+            'nm_garbage' => "Ventoinha"
+        ]);
+
+        DB::table('garbage')->insert([
+            'nm_garbage' => "Outros"
         ]);
     }
 }

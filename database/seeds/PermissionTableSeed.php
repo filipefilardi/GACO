@@ -30,7 +30,7 @@ class PermissionTableSeed extends Seeder
         ]);
         DB::table('permission')->insert([
             'id_cat' => "1",
-            'nm_perm' => "cancel_request",
+            'nm_perm' => "cancel_requests",
             'desc_perm' => "this permission allows to cancel a given request",
         ]);
 
@@ -53,7 +53,7 @@ class PermissionTableSeed extends Seeder
         ]);
         DB::table('permission')->insert([
             'id_cat' => "2",
-            'nm_perm' => "cancel_request",
+            'nm_perm' => "cancel_requests",
             'desc_perm' => "this permission allows to cancel a given request",
         ]);
 
@@ -76,7 +76,7 @@ class PermissionTableSeed extends Seeder
         ]);
         DB::table('permission')->insert([
             'id_cat' => "3",
-            'nm_perm' => "cancel_request",
+            'nm_perm' => "cancel_requests",
             'desc_perm' => "this permission allows to cancel a given request",
         ]);
 

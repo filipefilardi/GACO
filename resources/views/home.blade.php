@@ -34,9 +34,11 @@
 								      </small>
 								      </h5>
 								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
-
-								    <button class="btn btn-danger pull-right">Cancelar Coleta</button>
-								    
+								    <form role="form" method="POST" action="{{ url('/request/cancel') }}">
+								    	{{ csrf_field() }}
+								    	<input type="hidden" name="id_req" value="{{$req->id_req}}" />
+								    	<button class="btn btn-danger pull-right">Cancelar Coleta</button>
+								    </form>
 								    </div>
 								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
 								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
@@ -66,10 +68,17 @@
 								      </h5>
 								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
 								    
-								    <button class="btn btn-danger pull-right" style="margin-left: 10px;">Cancelar Coleta</button>
-								    <button class="btn btn-primary pull-right">Confirmar Coleta</button>
-								    
+								     <form role="form" method="POST" action="{{ url('/request/cancel') }}">
+								    	{{ csrf_field() }}
+								    	<input type="hidden" name="id_req" value="{{$request->id_req}}" />
+								    	<button class="btn btn-danger pull-right" style="margin-left: 10px;">Cancelar Coleta</button>
+								    </form>
 
+								    <form role="form" method="POST" action="{{ url('/request/confirm') }}">
+									    	{{ csrf_field() }}
+								    	<input type="hidden" name="id_req" value="{{$request->id_req}}" />
+									    <button class="btn btn-primary pull-right">Confirmar Coleta</button>
+								    </form>
 								    </div>
 								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
 								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
@@ -177,13 +186,57 @@
 							      </h5>
 							      <h5 class="mb-1">Modelo: {{$request->mod_req}} </h5>
 
-								    <button class="btn btn-danger pull-right" style="margin-left: 10px;">Cancelar Coleta</button>
-								    <button class="btn btn-primary pull-right">Confirmar Coleta</button>
+							      	<form role="form" method="POST" action="{{ url('/request/cancel') }}">
+								    	{{ csrf_field() }}
+								    	<input type="hidden" name="id_req" value="{{$request->id_req}}" />
+								    	<button class="btn btn-danger pull-right" style="margin-left: 10px;">Cancelar Coleta</button>
+								    </form>
+
+								    <button data-toggle="modal" data-target="#modaltoken" class="btn btn-primary pull-right">Confirmar Coleta</button>
 
 							    </div>
 							    <p class="mb-1">Estado: {{ $request->status_garbage }} </p>
 								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
 							  </div>
+
+							  <!-- Modal -->
+                        <div id="modaltoken" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header text-center"><h1>Confirmar Pedido</h1></div>
+                                    <div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
+                                        
+                                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/request/confirm') }}">
+                        				{{ csrf_field() }}
+				                        
+                        				<input type="hidden" name="id_req" value="{{$request->id_req}}" />
+
+				                        <div class="form-group{{ $errors->has('conf_token') ? ' has-error' : '' }}">
+			                                <label for="conf_token" class="col-md-4 control-label">Token da coleta</label>
+
+			                                <div class="col-md-6">
+			                                    <input id="conf_token" type="text" class="form-control" name="conf_token" value="{{ old('conf_token') }}" required>
+
+			                                    @if ($errors->has('conf_token'))
+			                                        <span class="help-block">
+			                                            <strong>{{ $errors->first('conf_token') }}</strong>
+			                                        </span>
+			                                    @endif
+			                                </div>
+			                            </div>
+
+
+			                            <div class="form-group">
+					                        <div class="col-md-6 col-md-offset-4">
+												<button class="btn btn-primary btn-block pull-right">Confirmar Coleta</button>
+					                        </div>
+					                    </div>
+										    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 		             	  @endforeach
 		            @else
 		            	<p>Você não aceitou nenhuma doação até o momento</p>

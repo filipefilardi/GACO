@@ -81,6 +81,7 @@ class RequestController extends Controller
 
     public function accept_request(Request $data){
 
+
         if (Gate::allows('execute', 'accept_requests')) {         
             Auth::user();
 
@@ -108,7 +109,7 @@ class RequestController extends Controller
 
         } else {
 
-            return view('/home');
+            return redirect('/home');
             
         }
     }
@@ -122,11 +123,12 @@ class RequestController extends Controller
             $id_user = Auth::user()->id_user;
             $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token']);
 
+
             return redirect('/home');
 
         } else {
 
-            return view('/home');
+            return redirect('/home');
             
         }
     }

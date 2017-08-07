@@ -315,7 +315,7 @@ class RequestDao
         // VALIDATION BLOCK //////////////
         $errors = array();
 
-        if(is_null($id_user_auth)   || $id_user_auth <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(is_null($id_user)   || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
         if(is_null($id_req)         || $id_req <= 0) array_push($errors, 'id_req null or invalid (<=0)');
         if(is_null($conf_token)     || strlen($conf_token) < 9) array_push($errors, 'id_req null or invalid (<=0)');
 
@@ -340,7 +340,7 @@ class RequestDao
                     ->from('request_assignment')
                     ->whereRaw('request_assignment.id_req = ?', $id_req)
                     ->whereRaw('request_assignment.id_user_assign = ?', $id_user)
-                    ->whereRaw('request_assignment.id_del = ?', 0)
+                    ->whereRaw('request_assignment.id_del = ?', 0);
                 })
                 ->where('id_req', $id_req)
                 ->update([

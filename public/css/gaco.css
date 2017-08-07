@@ -74,6 +74,29 @@
 	background-color: var(--btndangerhover)
 }
 
+
+/*
+=======================================
+		      REQUESTS 
+=======================================
+*/
+
+.danger-box-request {
+	margin-bottom: 15px; 	
+
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+
+	text-align: justify;
+
+	border: 1px;
+	border-style: solid;
+	border-color: var(--headercolor);
+	border-radius: 5px;
+}
+
 /*
 =======================================
 			   COOPS 

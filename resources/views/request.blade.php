@@ -24,7 +24,7 @@
     						</div>                   
                         </div>
 
-                        <div style="display:none" id="status_tv"class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
+                        <div style="display:none" id="status_tv" class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
                             <label for="status_garbage" class="col-md-3 control-label">Condição</label>
 
                             <div class="col-md-7">
@@ -40,11 +40,29 @@
                             </div>
                         </div>
 
+                        <div id="others" style="display:none" class="form-group{{ $errors->has('others') ? ' has-error' : '' }}">
+                            <div class="col-md-7 col-md-offset-3">
+                                <p class="danger-box-request ">Alguns equipamentos, como lampadas, baterias, cartuchos e toners de impressora, podem não ser recolhidos, porém incentivamos o cadastro dos mesmos.</p>
+                            </div>
+
+                            <label for="others" class="col-md-3 control-label">Equipamento</label>
+
+                            <div class="col-md-7">
+                                <input id="others" type="text" class="form-control" name="others" placeholder="Descreva qual resíduo quer doar" value="{{ old('others') }}">
+
+                                @if ($errors->has('others'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('others') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
     					    <label for="quantity" class="col-md-3 control-label">Quantidade</label>
 
                             <div class="col-md-7">
-                                <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="{{ old('quantity') }}" required>
+                                <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="1" required>
 
                                 @if ($errors->has('quantity'))
                                     <span class="help-block">
@@ -91,16 +109,6 @@
                                         <strong>{{ $errors->first('address') }}</strong>
                                     </span>
                                 @endif
-
-                                <script>
-                                    document.getElementById("id_add").onchange = function() {
-                                        if ($('#id_add').find(":selected").attr('id')=="new_address") {
-                                            window.location.href = this.value;
-                                        }        
-                                    };
-                                </script>
-
-
                             </div>
                         </div>
 
@@ -174,11 +182,21 @@
 
 <script>
     document.getElementById("id_garbage").onchange = function() {
-        if ($('#id_garbage').find(":selected").attr('value')=="16") {
+        if ($('#id_garbage').find(":selected").attr('value')=="15") {
             $('#status_tv').show();
+        }
+        else if ($('#id_garbage').find(":selected").attr('value')=="17") {
+            $('#others').show();
         }
         else {
             $('#status_tv').hide();   
+            $('#others').hide();
+        }        
+    };
+
+    document.getElementById("id_add").onchange = function() {
+        if ($('#id_add').find(":selected").attr('id')=="new_address") {
+            window.location.href = this.value;
         }        
     };
 </script>

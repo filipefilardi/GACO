@@ -19,7 +19,7 @@
 
 			<!--<p>Bem vindo {{ Auth::user()->email }}!</p> -->
             @if(Auth::user()->id_cat != 3) 	
-            	<a href="#myreq" class="btn btn-default btn-block" data-toggle="collapse">Coletas requisitadas</a>
+            	<a href="#myreq" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
 					 
 					 <div class="list-group collapse" id="myreq">
 						  	@forelse($request as $req)
@@ -45,14 +45,14 @@
 								  </div>
 							  @endif
 							@empty
-							<p>Você não possui nenhuma coleta pendente!</p>
+							<p class="text-center">Você não possui nenhuma coleta pendente! Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p>
 								@if(!Auth::user()->isComplete())
 	                                Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.
 	                            @endif
 		             	  	@endforelse
 					</div>
 
-				<a href="#req_acpt" class="btn btn-default btn-block" data-toggle="collapse">Coletas aceitas</a>
+				<a href="#req_acpt" class="btn btn-default btn-block" data-toggle="collapse">Coletas agendadas</a>
 				
 				<div class="list-group collapse" id="req_acpt">
 					@forelse($request as $request)
@@ -86,7 +86,7 @@
 								  </div>
 						@endif
 					@empty
-					<p>Você não possui nenhuma coleta aceita!</p>
+					<p class="text-center">Você não possui nenhuma coleta agendada! Espere alguma cooperativa aceitar o seu pedido.</p>
 					
              	  	@endforelse
 				</div>

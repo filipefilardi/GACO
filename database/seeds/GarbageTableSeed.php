@@ -29,10 +29,6 @@ class GarbageTableSeed extends Seeder
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Eletrodomesticos"
-        ]);
-
-        DB::table('garbage')->insert([
             'nm_garbage' => "Fonte"
         ]);
 
@@ -81,7 +77,7 @@ class GarbageTableSeed extends Seeder
         ]);
 
         DB::table('garbage')->insert([
-            'nm_garbage' => "Outros"
+            'nm_garbage' => "Eletrodomesticos e eletrônicos em geral"
         ]);
     }
 }

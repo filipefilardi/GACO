@@ -213,7 +213,7 @@
                         				<input type="hidden" name="id_req" value="{{$request->id_req}}" />
 
 				                        <div class="form-group{{ $errors->has('conf_token') ? ' has-error' : '' }}">
-			                                <label for="conf_token" class="col-md-4 control-label">Token da coleta</label>
+			                                <label for="conf_token" class="col-md-4 control-label">Token de segurança</label>
 
 			                                <div class="col-md-6">
 			                                    <input id="conf_token" type="text" class="form-control" name="conf_token" value="{{ old('conf_token') }}" required>
@@ -226,6 +226,20 @@
 			                                </div>
 			                            </div>
 
+			                            <div class="form-group{{ $errors->has('dt_collected') ? ' has-error' : '' }}">
+			                                <label for="dt_collected" class="col-md-4 control-label">Data de Coleta</label>
+
+			                                <div class="col-md-6">
+			                                    <input id="dt_collected" type="text" class="form-control" name="dt_collected" value="{{ old('dt_collected') }}" required>
+
+			                                    @if ($errors->has('dt_collected'))
+			                                        <span class="help-block">
+			                                            <strong>{{ $errors->first('dt_collected') }}</strong>
+			                                        </span>
+			                                    @endif
+			                                </div>
+			                            </div>
+									
 
 			                            <div class="form-group">
 					                        <div class="col-md-6 col-md-offset-4">

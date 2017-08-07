@@ -123,7 +123,7 @@ class RequestController extends Controller
 
             $id_cat = Auth::user()->id_cat;
             $id_user = Auth::user()->id_user;
-            $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token'], '20170101');
+            $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token'], $data['dt_collected']);
 
 
             return redirect('/home');

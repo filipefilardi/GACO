@@ -310,7 +310,7 @@ class RequestDao
         return $errors;
     }
 
-    public static function confirm_request($id_req, $id_user_auth, $conf_token)
+    public static function confirm_request($id_req, $id_user, $id_cat, $conf_token)
     {
         // VALIDATION BLOCK //////////////
         $errors = array();
@@ -323,18 +323,7 @@ class RequestDao
 
         if(sizeof($errors)>0) return $errors;
 
-        $id_cat = -1;
-        $id_cat = DB::table('users')
-            ->whereExists(function ($query) use($id_user_auth) {
-                $query->select(DB::raw(1))
-                      ->from('users')
-                      ->whereRaw('users.id_user = ?', $id_user_auth)
-                      ->whereRaw('users.id_del = ?', 0);
-                })      
-            ->where('id_user',$id_user_auth)
-            ->value('id_cat');
-
-        if($id_cat <=3) {        // Master users or invalid cat cannot confirm reqs
+        if($id_cat == 3) {        // Master users or invalid cat cannot confirm reqs
 
             $today = date("Ymd");
                 
@@ -346,12 +335,76 @@ class RequestDao
                     ->whereRaw('request.id_del = ?', 0)
                     ->whereRaw('request.conf_token = ?', $conf_token);
                 })
+                ->whereExists(function ($query) use($id_req, $id_user) {
+                $query->select(DB::raw(1))
+                    ->from('request_assignment')
+                    ->whereRaw('request_assignment.id_req = ?', $id_req)
+                    ->whereRaw('request_assignment.id_user_assign = ?', $id_user)
+                    ->whereRaw('request_assignment.id_del = ?', 0)
+                })
                 ->where('id_req', $id_req)
                 ->update([
                     'id_sign' => 'Y',
                     'dt_sign' => $today
                 ]);
         }
+
+        $id_req_confirmed = -1;
+        $id_req_confirmed = DB::table('request_confirmation')
+                ->where('id_req', $id_req)
+                ->where('id_sign', 'Y')
+                ->where('dt_sign', $today)
+                ->where('id_del', 0)
+                ->value('id_req');
+
+        if($id_req_confirmed != $id_req) array_push($errors,'Seu token de confirmação está incorreto!');
+        else $errors = array();
+
+        return $errors;
+    }
+
+    public static function cancel_request($id_req, $id_cat)
+    {
+
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($id_req)         || $id_req <= 0) array_push($errors, 'id_req null or invalid (<=0)');
+        
+        // END VALIDATION BLOCK /////////
+
+        if(sizeof($errors)>0) return $errors;
+
+            
+        if($id_cat == 1 || $id_cat == 2) {
+            $errors = RequestDao::update_request($id_req, 'CNCL');
+        } elseif($id_cat == 3) {
+            $errors = RequestDao::update_request($id_req, 'PEND');
+        }
+
+        DB::table('request_assignment')
+            ->whereExists(function ($query) use($id_req) {
+                $query->select(DB::raw(1))
+                      ->from('request_assignment')
+                      ->whereRaw('request_assignment.id_req = ?', $id_req)
+                      ->whereRaw('request_assignment.id_del = ?', 0);
+            })
+            ->where('id_req', $id_req)
+            ->update([
+                'id_del' => 1
+            ]);        
+
+        DB::table('request_confirmation')
+            ->whereExists(function ($query) use($id_req) {
+                $query->select(DB::raw(1))
+                      ->from('request_confirmation')
+                      ->whereRaw('request_confirmation.id_req = ?', $id_req)
+                      ->whereRaw('request_confirmation.id_del = ?', 0);
+            })
+            ->where('id_req', $id_req)
+            ->update([
+                'id_del' => 1
+            ]);   
 
         return $errors;
     }

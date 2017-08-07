@@ -96,4 +96,39 @@ class RequestController extends Controller
         }
     }
 
+    public function cancel_request(Request $data){
+
+        if (Gate::allows('execute', 'cancel_requests')) {         
+            Auth::user();
+
+            $id_cat = Auth::user()->id_cat;
+            $teste = RequestDAO::cancel_request($data['id_req'],$id_cat);
+
+            return redirect('/home');
+
+        } else {
+
+            return view('/home');
+            
+        }
+    }
+
+        public function confirm_request(Request $data){
+
+        if (Gate::allows('execute', 'confirm_requests')) {         
+            Auth::user();
+
+            $id_cat = Auth::user()->id_cat;
+            $id_user = Auth::user()->id_user;
+            $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token']);
+
+            return redirect('/home');
+
+        } else {
+
+            return view('/home');
+            
+        }
+    }
+
 }

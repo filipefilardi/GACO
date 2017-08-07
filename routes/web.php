@@ -23,6 +23,8 @@ Route::get('/garbage', 'GarbageController@index_garbage');
 
 Route::get('/request', 'RequestController@index_user');
 Route::post('/request', 'RequestController@make_request');
+Route::post('/request/cancel', 'RequestController@cancel_request');
+Route::post('/request/confirm', 'RequestController@confirm_request');
 Route::get('/notification', 'RequestController@index_customer');
 
 Route::get('/complete_registration', 'CompleteRegistrationController@indexCompleteRegistration');

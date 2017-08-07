@@ -23,7 +23,7 @@ class CreateTriggersFunctions extends Migration
             $$
                 BEGIN
                     IF NEW.status_req <> OLD.status_req THEN
-                        IF NEW.status_req = '$completeStatus' THEN
+                        IF NEW.status_req = '$acceptedStatus' THEN
                             INSERT INTO request_confirmation (id_req,id_sign, id_del)
                             VALUES(OLD.id_req,'$noFlag',0);
                         END IF;
@@ -48,10 +48,10 @@ class CreateTriggersFunctions extends Migration
         DB::unprepared("CREATE OR REPLACE FUNCTION inactive_comp_request() RETURNS trigger AS
             $$
                 BEGIN
-                    IF NEW.id_user_req_sign <> OLD.id_user_req_sign or NEW.id_user_assign_sign <> OLD.id_user_assign_sign THEN
-                        IF NEW.id_user_req_sign  = '$yesFlag' and NEW.id_user_assign_sign = '$yesFlag' THEN
+                    IF NEW.id_sign <> OLD.id_sign THEN
+                        IF NEW.id_sign  = '$yesFlag' THEN
                             UPDATE request
-                            SET id_active = '$noFlag'
+                            SET id_active = '$noFlag', status_req = '$completeStatus'
                             WHERE id_req = OLD.id_req;
                         END IF;
                     END IF;
@@ -105,8 +105,8 @@ class CreateTriggersFunctions extends Migration
             $$
                 BEGIN
                     IF NEW.id_active = '$noFlag' THEN
-                        INSERT INTO request_arc (dt_arc,id_req,desc_req,mod_req,status_garbage,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del)
-                        SELECT CURRENT_TIMESTAMP,id_req,desc_req,mod_req,status_garbage,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del
+                        INSERT INTO request_arc (dt_arc,id_req,desc_req,mod_req,status_garbage,conf_token,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del)
+                        SELECT CURRENT_TIMESTAMP,id_req,desc_req,mod_req,status_garbage,conf_token,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del
                         FROM request
                         WHERE id_req = OLD.id_req;
                     END IF;
@@ -126,7 +126,29 @@ class CreateTriggersFunctions extends Migration
             EXECUTE PROCEDURE move_req_arc();"
         );
 
+        // creates function - verifies inactivated row and moves to archive
+        DB::unprepared("CREATE OR REPLACE FUNCTION delete_req_after_arc() RETURNS trigger AS
+            $$
+                BEGIN
+                    DELETE
+                    FROM request
+                    WHERE id_req = NEW.id_req;
+                
+                    RETURN NEW;
+                END
 
+            $$
+            LANGUAGE plpgsql VOLATILE
+            COST 100;"
+        );
+
+        // binding Trigger - verifies both users confirmed request and inactivates
+        DB::unprepared("CREATE TRIGGER req_del_after_archive
+            AFTER INSERT
+            ON request_arc
+            FOR EACH ROW
+            EXECUTE PROCEDURE delete_req_after_arc();"
+        );
         
 
     }
@@ -142,5 +164,6 @@ class CreateTriggersFunctions extends Migration
         DB::unprepared('DROP FUNCTION inactive_comp_request() CASCADE');
         DB::unprepared('DROP FUNCTION req_status_acpt_change() CASCADE');
         DB::unprepared('DROP FUNCTION move_req_arc() CASCADE');
+        DB::unprepared('DROP FUNCTION delete_req_after_arc() CASCADE');
     }
 }

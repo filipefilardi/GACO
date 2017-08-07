@@ -310,8 +310,9 @@ class RequestDao
         return $errors;
     }
 
-    public static function confirm_request($id_req, $id_user, $id_cat, $conf_token)
+    public static function confirm_request($id_req, $id_user, $id_cat, $conf_token, $dt_collect)
     {
+
         // VALIDATION BLOCK //////////////
         $errors = array();
 
@@ -326,7 +327,34 @@ class RequestDao
         if($id_cat == 3) {        // Master users or invalid cat cannot confirm reqs
 
             $today = date("Ymd");
-                
+            
+            DB::table('request')
+                ->whereExists(function ($query) use($id_req, $conf_token) {
+                $query->select(DB::raw(1))
+                    ->from('request')
+                    ->whereRaw('request.id_req = ?', $id_req)
+                    ->whereRaw('request.id_del = ?', 0)
+                    ->whereRaw('request.conf_token = ?', $conf_token);
+                })
+                ->whereExists(function ($query) use($id_req, $id_user) {
+                $query->select(DB::raw(1))
+                    ->from('request_assignment')
+                    ->whereRaw('request_assignment.id_req = ?', $id_req)
+                    ->whereRaw('request_assignment.id_user_assign = ?', $id_user)
+                    ->whereRaw('request_assignment.id_del = ?', 0);
+                })
+                ->whereExists(function ($query) use($id_req, $id_user) {
+                $query->select(DB::raw(1))
+                    ->from('request_confirmation')
+                    ->whereRaw('request_confirmation.id_req = ?', $id_req)
+                    ->whereRaw('request_confirmation.id_sign = ?', 'N')
+                    ->whereRaw('request_confirmation.id_del = ?', 0);
+                })
+                ->where('id_req', $id_req)
+                ->update([
+                    'dt_collect' => $dt_collect,
+                ]);
+
             DB::table('request_confirmation')
                 ->whereExists(function ($query) use($id_req, $conf_token) {
                 $query->select(DB::raw(1))
@@ -347,6 +375,7 @@ class RequestDao
                     'id_sign' => 'Y',
                     'dt_sign' => $today
                 ]);
+
         }
 
         $id_req_confirmed = -1;

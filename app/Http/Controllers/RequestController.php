@@ -119,9 +119,11 @@ class RequestController extends Controller
         if (Gate::allows('execute', 'confirm_requests')) {         
             Auth::user();
 
+            // TODO Pass DAte of Collect from UI to confirm_request function of DAO - needs to come on $data
+
             $id_cat = Auth::user()->id_cat;
             $id_user = Auth::user()->id_user;
-            $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token']);
+            $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token'], '20170101');
 
 
             return redirect('/home');

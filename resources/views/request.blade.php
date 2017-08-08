@@ -184,9 +184,11 @@
     document.getElementById("id_garbage").onchange = function() {
         if ($('#id_garbage').find(":selected").attr('value')=="15") {
             $('#status_tv').show();
+            $('#others').hide();
         }
         else if ($('#id_garbage').find(":selected").attr('value')=="17") {
             $('#others').show();
+            $('#status_tv').hide(); 
         }
         else {
             $('#status_tv').hide();   

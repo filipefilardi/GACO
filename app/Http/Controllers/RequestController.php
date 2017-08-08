@@ -52,7 +52,6 @@ class RequestController extends Controller
     }
 
     public function make_request(Request $data){
-        #dd($data->all());
         $res = null;
         if (Gate::allows('execute', 'create_request')) {
             
@@ -60,13 +59,14 @@ class RequestController extends Controller
 
 
             $status_tv = $data['status_garbage'];
-            if($status_tv == 'Aberto'){
+            $id_garbage =  $data['id_garbage'];
+            if($status_tv == 'Aberta' && $id_garbage == 15){
                 $data->session()->flash('message', 'Não é possível fazer a coleta de um televisor aberto :('); 
                 $data->session()->flash('alert-warning', 'warning');
                 return redirect('/request');
             }
 
-            $res = RequestDAO::insert_request(Auth::user()->id_user, $data['id_garbage'], $data['status_tv'], $data['observation'], $data['quantity'], $data['id_add'], $data['quantity']);
+            $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $data['status_tv'], $data['observation'], $data['id_add'], $data['quantity']);
 
             if(is_string($res)){
                 $data->session()->flash('message', 'Pedido realizado com sucesso! Anote o seu código ' . $res . ' para a confirmação no momento da coleta.'); 

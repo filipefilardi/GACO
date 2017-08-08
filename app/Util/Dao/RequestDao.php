@@ -176,7 +176,7 @@ class RequestDao
         return $list;
     }
 
-    public static function insert_request($id_user, $id_garbage, $status_tv, $observation, $mod_req, $id_add, $quantity)
+    public static function insert_request($id_user, $id_garbage, $status_tv, $observation, $id_add, $quantity)
     {
         // VALIDATION BLOCK //////////////
         $errors = array();
@@ -227,7 +227,6 @@ class RequestDao
             'conf_token' => $conf_token,
             'dt_req' =>$today,
             'id_active' => 'Y',
-            'mod_req' => $mod_req,
             'id_add' => $id_add
         ]);
         

@@ -180,7 +180,6 @@
 							      	@endif
 							      </small>
 							      </h5>
-							      <h5 class="mb-1">Modelo: {{$request->mod_req}} </h5>
 
 							      	<form role="form" method="POST" action="{{ url('/request/cancel') }}">
 								    	{{ csrf_field() }}

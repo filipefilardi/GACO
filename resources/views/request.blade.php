@@ -42,7 +42,7 @@
 
                         <div id="others" style="display:none" class="form-group{{ $errors->has('others') ? ' has-error' : '' }}">
                             <div class="col-md-7 col-md-offset-3">
-                                <p class="danger-box-request ">Alguns equipamentos, como lampadas, baterias, cartuchos e toners de impressora, podem não ser recolhidos, porém incentivamos o cadastro dos mesmos.</p>
+                                <p class="danger-box-request ">Alguns equipamentos, como lâmpadas, baterias, cartuchos e toners de impressora, podem não ser recolhidos, porém incentivamos o cadastro dos mesmos.</p>
                             </div>
 
                             <label for="others" class="col-md-3 control-label">Equipamento</label>
@@ -136,19 +136,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('mod_req') ? ' has-error' : '' }}">
-    					    <label for="mod_req" class="col-md-2 control-label">Modelo</label>
-
-                            <div class="col-md-5">
-                                <input id="mod_req" type="text" class="form-control" name="mod_req" placeholder="Modelo do seu equipamento" value="{{ old('mod_req') }}" required>
-
-                                @if ($errors->has('mod_req'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('mod_req') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+   
 
                         <div class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
     					    <label for="status_garbage" class="col-md-2 control-label">Condição</label>
@@ -184,24 +172,16 @@
     document.getElementById("id_garbage").onchange = function() {
         if ($('#id_garbage').find(":selected").attr('value')=="15") {
             $('#status_tv').show();
-            $("#status_tv #status_garbage").prop('disabled',false);
-            $("#status_tv #status_garbage").prop('required',true);
             $('#others').hide();
-            $("#others #others").prop('disabled',true);
 
         }
         else if ($('#id_garbage').find(":selected").attr('value')=="17") {
             $('#others').show();
-            $("#others #others").prop('disabled',false);
-            $("#others #others").prop('required',true)
             $('#status_tv').hide(); 
-            $("#status_tv #status_garbage").prop('disabled',true);
         }
         else {
             $('#status_tv').hide();   
             $('#others').hide();
-            $("#others #others").prop('disabled',true);
-            $("#status_tv #status_garbage").prop('disabled',true);
         }        
     };
 

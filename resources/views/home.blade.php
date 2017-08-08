@@ -32,7 +32,8 @@
 								      	@endif
 								      </small>
 								      </h5>
-								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
+								      <h5 class="mb-1">Modelo: {{$req->nm_garbage}} </h5>
+								      <h5 class="mb-1">Observação: {{$req->observation}} </h5>
 								    <form role="form" method="POST" action="{{ url('/request/cancel') }}">
 								    	{{ csrf_field() }}
 								    	<input type="hidden" name="id_req" value="{{$req->id_req}}" />
@@ -46,7 +47,7 @@
 							@empty
 							<p class="text-center">Você não possui nenhuma coleta pendente! Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p>
 								@if(!Auth::user()->isComplete())
-	                                Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.
+	                                <p class="text-center">Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.</p>
 	                            @endif
 		             	  	@endforelse
 					</div>
@@ -64,7 +65,7 @@
 								      	@endif
 								      </small>
 								      </h5>
-								      <h5 class="mb-1">Modelo: {{$req->mod_req}} </h5>
+								      <h5 class="mb-1">Modelo: {{$req->nm_garbage}} </h5>
 								    
 								     <form role="form" method="POST" action="{{ url('/request/cancel') }}">
 								    	{{ csrf_field() }}
@@ -108,7 +109,7 @@
 							      	@endif
 							      </small>
 							      </h5>
-							      <h5 class="mb-1">Modelo: {{$request->mod_req}} </h5>
+							      <h5 class="mb-1">Modelo: {{$request->nm_garbage}} </h5>
 
 								  <button data-toggle="modal" data-target="#Modal" class="btn btn-success pull-right">Aceitar Coleta</button>
 

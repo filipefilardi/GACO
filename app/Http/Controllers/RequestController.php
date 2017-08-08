@@ -61,7 +61,7 @@ class RequestController extends Controller
             $status_tv = $data['status_garbage'];
             $id_garbage =  $data['id_garbage'];
             if($status_tv == 'Aberta' && $id_garbage == 15){
-                $data->session()->flash('message', 'Não é possível fazer a coleta de um televisor aberto :('); 
+                $data->session()->flash('message', 'A coleta de um televisor aberto é inviabilizada por riscos a saúde, dada a quantidade de chumbo exposta.'); 
                 $data->session()->flash('alert-warning', 'warning');
                 return redirect('/request');
             }

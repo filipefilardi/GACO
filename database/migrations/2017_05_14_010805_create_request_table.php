@@ -15,10 +15,11 @@ class CreateRequestTable extends Migration
     {
         Schema::create('request', function (Blueprint $table) {
             $table->increments('id_req');
-            $table->string('desc_req');
             $table->string('mod_req');
-            $table->string('status_garbage');
+            $table->string('status_tv')->nullable();
+            $table->string('observation')->nullable();
             $table->string('status_req');
+            $table->integer('quantity');
             $table->string('conf_token');
             $table->string('id_active', 1);
             $table->date('dt_req');

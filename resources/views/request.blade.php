@@ -184,21 +184,24 @@
     document.getElementById("id_garbage").onchange = function() {
         if ($('#id_garbage').find(":selected").attr('value')=="15") {
             $('#status_tv').show();
+            $("#status_tv #status_garbage").prop('disabled',false);
             $("#status_tv #status_garbage").prop('required',true);
             $('#others').hide();
-            $("#others #others").prop('required',false);
+            $("#others #others").prop('disabled',true);
+
         }
         else if ($('#id_garbage').find(":selected").attr('value')=="17") {
             $('#others').show();
+            $("#others #others").prop('disabled',false);
             $("#others #others").prop('required',true)
             $('#status_tv').hide(); 
-            $("#status_tv #status_garbage").prop('required',false);
+            $("#status_tv #status_garbage").prop('disabled',true);
         }
         else {
             $('#status_tv').hide();   
             $('#others').hide();
-            $("#status_tv #status_garbage").prop('required',false);
-            $("#others #others").prop('required',false)
+            $("#others #others").prop('disabled',true);
+            $("#status_tv #status_garbage").prop('disabled',true);
         }        
     };
 

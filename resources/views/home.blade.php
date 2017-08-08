@@ -26,7 +26,7 @@
 							  @if($req->status_req == "PEND")
 								  <div class="list-group-item list-group-item-action flex-column align-items-start">
 								    <div class="d-flex w-100 justify-content-between">
-								      <h5 class="mb-1">Descrição: {{ $req->desc_req}}
+								      <!--<h5 class="mb-1">Descrição: {{ $req->desc_req}}-->
 								      <small class="text-right">
 								      	@if($req->status_req == "PEND")
 								      		PENDENTE
@@ -59,7 +59,7 @@
 						@if($request->status_req == "ACPT")
 							<div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 								    <div class="d-flex w-100 justify-content-between">
-								      <h5 class="mb-1">Descrição: {{ $req->desc_req}}
+								      <!--<h5 class="mb-1">Descrição: {{ $req->desc_req}}-->
 								      <small class="text-right">
 								      	@if($req->status_req == "ACPT")
 								      		ACEITO
@@ -102,7 +102,7 @@
 						@foreach ($request as $request)
 						  <div class="list-group-item list-group-item-action flex-column align-items-start">
 						    <div class="d-flex w-100 justify-content-between">
-							      <h5 class="mb-1">Descrição: {{ $request->desc_req}} 
+							      <!--<h5 class="mb-1">Descrição: {{ $request->desc_req}} -->
 							      <small class="text-right">
 							      	@if($request->status_req == "PEND")
 							      		PENDENTE
@@ -116,7 +116,7 @@
 								  <button data-toggle="modal" data-target="#Modal" class="btn btn-success pull-right">Aceitar Coleta</button>
 
 							    </div>
-							    <p class="mb-1">Estado: {{ $request->status_garbage }} </p>
+							    <!--<p class="mb-1">Estado: {{ $request->status_garbage }} </p>-->
 								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
 						  </div>
 		         	    @endforeach
@@ -175,7 +175,7 @@
 						 @foreach ($request_acpt as $request)
 							  <div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 							    <div class="d-flex w-100 justify-content-between">
-							      <h5 class="mb-1">Descrição: {{ $request->desc_req}}
+							      <!--<h5 class="mb-1">Descrição: {{ $request->desc_req}}-->
 							      <small class="text-right">
 							      	@if($request->status_req == "ACPT")
 							      		ACEITO
@@ -195,7 +195,7 @@
 								    <button data-toggle="modal" data-target="#modaltoken" class="btn btn-primary pull-right">Confirmar Coleta</button>
 
 							    </div>
-							    <p class="mb-1">Estado: {{ $request->status_garbage }} </p>
+							    <!--<p class="mb-1">Estado: {{ $request->status_garbage }} </p>-->
 								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
 							  </div>
 

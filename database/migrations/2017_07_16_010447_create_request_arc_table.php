@@ -16,9 +16,8 @@ class CreateRequestArcTable extends Migration
         Schema::create('request_arc', function (Blueprint $table) {
             $table->date('dt_arc');
             $table->integer('id_req');
-            $table->string('desc_req');
             $table->string('mod_req');
-            $table->string('status_garbage');
+            $table->string('status_tv')->nullable();
             $table->string('status_req');
             $table->string('conf_token');
             $table->string('id_active', 1);

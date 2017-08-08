@@ -28,7 +28,7 @@
                             <label for="status_garbage" class="col-md-3 control-label">Condição</label>
 
                             <div class="col-md-7">
-                                <select class="form-control" name="status_garbage">
+                                <select class="form-control" name="status_garbage" id="status_garbage">
                                     <option>Aberta</option>
                                     <option>Fechada</option>
                                 </select>
@@ -184,15 +184,21 @@
     document.getElementById("id_garbage").onchange = function() {
         if ($('#id_garbage').find(":selected").attr('value')=="15") {
             $('#status_tv').show();
+            $("#status_tv #status_garbage").prop('required',true);
             $('#others').hide();
+            $("#others #others").prop('required',false);
         }
         else if ($('#id_garbage').find(":selected").attr('value')=="17") {
             $('#others').show();
+            $("#others #others").prop('required',true)
             $('#status_tv').hide(); 
+            $("#status_tv #status_garbage").prop('required',false);
         }
         else {
             $('#status_tv').hide();   
             $('#others').hide();
+            $("#status_tv #status_garbage").prop('required',false);
+            $("#others #others").prop('required',false)
         }        
     };
 

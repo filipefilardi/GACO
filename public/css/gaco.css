@@ -9,6 +9,12 @@
 	--btnprimaryhover: #001f3f;
 	--btndanger:#C63D38;
 	--btndangerhover:#921A16;
+
+	--textcolor: #090927;
+}
+
+.content {
+	color: var(--textcolor);
 }
 
 .content .container {

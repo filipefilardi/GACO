@@ -20,6 +20,7 @@ return [
 	'ewastetext' => 'Lixo Eletrônico é todo resíduo material produzido pelo descarte de equipamentos eletrônicos. Com o elevado uso de equipamentos eletrônicos no mundo moderno, este tipo de lixo tem se tornado um grande problema ambiental quando não descartado em locais adequados',
 	'wannacontribute' => 'Quero descartar meu eletrônico',
     'whydonate' => 'Voce sabe por que é importante reciclar seu lixo eletrônico?',
+    'jaraguapicture' => 'Foto tirada no Pico do Jaraguá, 28 de Julho de 2017, mostrando a poluição em São Paulo.',
 
     // Cooperatives view
     'cooptextintro' => 'Texto falando sobre as cooperativas que trabalhos e porque elas...',

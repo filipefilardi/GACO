@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="/css/app.css" rel="stylesheet">
+        <link href="/css/gaco.css" rel="stylesheet">
         <link href="/css/welcome.css" rel="stylesheet">
         <link href="/css/footer.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -34,6 +35,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
+                        
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -42,6 +44,7 @@
                                 <li><a href="#contato">Contato</a></li>
                             </ul>
                         </li>
+                        
                         <li><a href="{{ url('/register') }}">Cadastre-se</a></li>
                         <li><a href="{{ url('/login') }}">Entrar</a></li>
                     </ul>
@@ -57,6 +60,7 @@
         </div>
 
     </div>
+    <div class="content">
     <div class="marketing">
         <div class="container" id="descubra">
             <h1 class="text-center header">Descubra sobre GACO</h1>
@@ -111,7 +115,7 @@
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-4">
-                        <a href="{{ url('/register') }}" class="btn btn-primary join-btn">COMECE AGORA</a>
+                        <a href="{{ url('/register') }}" class="btn btn-primary btn-block">COMECE AGORA</a>
                     </div>
                 </div>
             </div>
@@ -123,19 +127,19 @@
             <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
-                    <a href="{{ url('/register') }}" class="btn btn-primary join-btn">COMECE AGORA</a>
+                    <a href="{{ url('/register') }}" class="btn btn-primary btn-block" style="margin-bottom:15px;">COMECE AGORA</a>
                 </div>
             </div>
         </div>  
     </div>
 
+    </content>
+
     <footer class="footer-distributed">
         <div class="footer-right">
 
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
+            <a href="https://www.facebook.com/gaco.sp" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://github.com/filipefilardi/GACO" target="_blank"><i class="fa fa-github"></i></a>
 
             </div>
 

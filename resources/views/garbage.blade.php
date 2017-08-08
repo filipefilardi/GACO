@@ -10,6 +10,11 @@
 				<div class="panel-body">
 				 	
 					 <p>@lang('app.whydonate')</p>
+					 
+					<img src="{{URL::asset('/img/picojaragua.jpg')}}" class="img-responsive" alt="Pico do Jaraguá">
+
+					<p class="text-center" style="color: black; margin-top: 5px;">@lang('app.jaraguapicture')</p>
+
 					 <p class="text-justify">@lang('app.ewastetext')</p>
 
 					

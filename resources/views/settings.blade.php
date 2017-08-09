@@ -15,9 +15,9 @@
                 
                 @include('layouts.messages')
 
-				<a href="#form_coop" class="btn btn-default btn-block" data-toggle="collapse">Adicionar Endereço</a>
+				<a href="#add_adress" class="btn btn-default btn-block" data-toggle="collapse">Adicionar Endereço</a>
                 
-                <div id="form_coop" class="main-container collapse">
+                <div id="add_adress" class="main-container collapse">
                   <form class="form-horizontal" role="form" method="POST" action="/register/address">
                         {{ csrf_field() }}
                         
@@ -142,14 +142,15 @@
 
                 <div id="outro" class="main-container collapse">
                 	@forelse($addresses as $a)
-					    <p>{{$a->nm_st}} {{$a->id_st_numb}}, {{$a->id_comp}}</p>
+					    <div class="settings-addressbox">{{$a->nm_st}} {{$a->id_st_numb}}, {{$a->id_comp}}</div>
 					@empty
-					    <p>Adicione um endereço, pl0x</p>
+					    <div class="text-center">
+                            <p>Ainda não possui nenhum endereço. Clique <a href="#add_adress" data-toggle="collapse">aqui</a> para cadastrar.</p>
+                        </div>
 					@endforelse
                 	
-                	
                 </div>
-
+                
                 <a href="#conta" class="btn btn-default btn-block" data-toggle="collapse">Conta</a>
 
                 <div id="conta" class="main-container collapse">

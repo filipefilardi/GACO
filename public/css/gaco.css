@@ -139,3 +139,25 @@
 .cooperative .grey-box a{
 	color: var(--panel-heading);
 }
+
+
+/*
+=======================================
+			  SETTINGS 
+=======================================
+*/
+
+.settings-addressbox{
+	margin-bottom: 2px;
+
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;	
+	padding-right: 10px;
+
+	text-align: center;
+}
+
+.settings-addressbox:hover{
+	background-color: var(--btndefaulthover);
+}

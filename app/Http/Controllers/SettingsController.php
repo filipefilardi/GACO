@@ -41,7 +41,7 @@ class SettingsController extends Controller
             
         }
         $addresses = AddressDao::getAddresses(Auth::user()->id_user);
-        return view('/settings')->with('addresses',$addresses);
+        return redirect('/settings')->with('addresses',$addresses);
     }
 
     public function updatePassword(Request $request) {

@@ -109,7 +109,6 @@ class RequestController extends Controller
 
     public function accept_request(Request $data){
 
-
         if (Gate::allows('execute', 'accept_requests')) {         
             Auth::user();
 

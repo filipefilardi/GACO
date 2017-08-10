@@ -52,7 +52,6 @@ class HomeController extends Controller
             $request_acpt = RequestDAO::get_acpt_requests_by_coop($id_user);
         }
         
-
         return view('home')->with('request', $request)->with('request_acpt', $request_acpt);
     }
 

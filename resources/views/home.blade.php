@@ -62,11 +62,7 @@
 												<div class="col-md-4"><button class="btn btn-success btn-block">Confirmar</button></div>
 												 -->
 												<div class="col-md-4 col-md-offset-8">
-													<form role="form" method="POST" action="{{ url('/request/cancel') }}">
-														{{ csrf_field() }}
-														<input type="hidden" name="id_req" value="{{$req->id_req}}" />
-														<button  data-toggle="modal" data-target="#cancelrequest"class="btn btn-danger btn-block">Cancelar</button>
-													</form>
+													<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Cancelar</button>
 												</div>
 											</div>
 										</div>
@@ -81,6 +77,7 @@
                         @endif
 					@endif 	
 				</div> 
+
 
 				<!-- 
 					COLETAS AGENDADAS
@@ -128,17 +125,6 @@
 					</div>
 				</div>
 			@endif
-			
-			<div id="cancelrequest" class="modal fade" role="dialog">
-				<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header text-center"><h1>Confirmação</h1></div>
-						<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
-
-							TESTE
-						</div>
-					</div>                
-			</div>
 
 			<!-- 
 				FINAL DA HOME RELACIONADO AO USUARIO (FISICO, COLETIVOS e JURIDICOS)
@@ -312,4 +298,45 @@
 			</div>
 	</div>
 </div>
+
+<!-- 
+	ALL MODAL
+ -->
+
+<!-- MODAL CANCEL REQUEST -->
+<div id="cancelrequest" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header text-center"><h1>Confirmação</h1></div>
+			<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
+				<form role="form" method="POST" action="{{ url('/request/cancel') }}">
+					{{ csrf_field() }}
+            		<input type="hidden" name="id_req"  id="id_req" value="" />
+					
+					<h4>Antes de deletar, tenha certeza que não quer descartar seu resíduo. Deseja continuar com esta ação?</h4>
+					
+					<div class="row">
+						<div class="col-md-6">
+							<button class="btn btn-danger btn-block">Sim</button>
+						</div>
+						<div class="col-md-6">
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Não</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>                
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).on("click", ".open-cancelrequest", function () {
+	     var id_req = $(this).data('id');
+	     $(".modal-body #id_req").val( id_req );
+	     // As pointed out in comments, 
+	     // it is superfluous to have to manually call the modal.
+	     // $('#addBookDialog').modal('show');
+	});
+</script>
+
 @endsection

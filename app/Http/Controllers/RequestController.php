@@ -52,21 +52,41 @@ class RequestController extends Controller
     }
 
     public function make_request(Request $data){
+        #dd($data->all());
         $res = null;
         if (Gate::allows('execute', 'create_request')) {
             
-            Auth::user();
-
+            #Auth::user();
+            $id_garbage =  $data['id_garbage'];
+            $desc_req = "";
+            $state = "";
+            switch ($id_garbage) {
+                # tv
+                case 15:
+                    $state = $data['status_tv'];
+                    break;
+                # cpu
+                case 3:
+                    $state = $data['status_cpu'];
+                    $desc_req = $data['others_cpu'];
+                    break;
+                # other
+                case 17:
+                    $desc_req = $data['others'];
+                    break;
+            }
 
             $status_tv = $data['status_garbage'];
-            $id_garbage =  $data['id_garbage'];
-            if($status_tv == 'Aberta' && $id_garbage == 15){
+            
+
+            if($state == 'Aberta' && $id_garbage == 15){
                 $data->session()->flash('message', 'A coleta de um televisor aberto é inviabilizada por riscos a saúde, dada a quantidade de chumbo exposta.'); 
                 $data->session()->flash('alert-warning', 'warning');
                 return redirect('/request');
             }
 
-            $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $data['status_tv'], $data['observation'], $data['id_add'], $data['quantity']);
+            
+            $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $data['observation'], $data['id_add'], $data['quantity'], $desc_req);
 
             if(is_string($res)){
                 $data->session()->flash('message', 'Pedido realizado com sucesso! Anote o seu código ' . $res . ' para a confirmação no momento da coleta.'); 

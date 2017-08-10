@@ -18,79 +18,136 @@
 			@include('layouts.messages')
 
 			<!--<p>Bem vindo {{ Auth::user()->email }}!</p> -->
+
+			<!-- 
+				COMECO DA HOME RELACIONADO AO USUARIO (FISICO, COLETIVOS e JURIDICOS)
+			 -->
             @if(Auth::user()->id_cat != 3) 	
-            	<a href="#myreq" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
+            	
+            	<!-- 
+					COLETAS PENDENTES
+			 	-->
+
+            	<a href="#req_pen" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
 					 
-					 <div class="list-group collapse" id="myreq">
-						  	@forelse($request as $req)
-							  @if($req->status_req == "PEND")
-								  <div class="list-group-item list-group-item-action flex-column align-items-start">
-								    <div class="d-flex w-100 justify-content-between">
-								      <small class="text-right">
-								      	@if($req->status_req == "PEND")
-								      		PENDENTE
-								      	@endif
-								      </small>
-								      </h5>
-								      <h5 class="mb-1">Modelo: {{$req->nm_garbage}} </h5>
-								      <h5 class="mb-1">Observação: {{$req->observation}} </h5>
-								    <form role="form" method="POST" action="{{ url('/request/cancel') }}">
-								    	{{ csrf_field() }}
-								    	<input type="hidden" name="id_req" value="{{$req->id_req}}" />
-								    	<button class="btn btn-danger pull-right">Cancelar Coleta</button>
-								    </form>
-								    </div>
-								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
-								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
-								  </div>
-							  @endif
-							@empty
-							<p class="text-center">Você não possui nenhuma coleta pendente! Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p>
-								@if(!Auth::user()->isComplete())
-	                                <p class="text-center">Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.</p>
-	                            @endif
-		             	  	@endforelse
-					</div>
+				<div id="req_pen" class="collapse">
+					@if(!$request->isEmpty())
+						<div class="list-group request-item">
+							@foreach($request as $req)
+								@if($req->status_req == "PEND")
+									<div class="list-group-item">
+										<div class="row">
+											@if($req->desc_req)
+												<div class="col-md-8">Resíduo: {{$req->desc_req}}</div>
+											@else
+												<div class="col-md-8">Resíduo: {{$req->nm_garbage}} {{$req->desc_req}}</div>
+											@endif
+											<div class="col-md-2 text-right">Token: {{$req->conf_token}}</div>
+											<div class="col-md-2 text-right">Pendente</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
+											<div class="col-md-4 col-md-offset-4 text-right">{{$req->dt_req}}</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-6">Endereço:</div>
+										</div>
+										<div class="row">
+											<div class="col-md-8">Observação: {{$req->observation}} 
+											</div>
+											<div class="col-md-4">
+												<!-- 
+												<div class="col-md-4"><button class="btn btn-primary btn-block">Adiar</button></div>
+												<div class="col-md-4"><button class="btn btn-success btn-block">Confirmar</button></div>
+												 -->
+												<div class="col-md-4 col-md-offset-8">
+													<form role="form" method="POST" action="{{ url('/request/cancel') }}">
+														{{ csrf_field() }}
+														<input type="hidden" name="id_req" value="{{$req->id_req}}" />
+														<button  data-toggle="modal" data-target="#cancelrequest"class="btn btn-danger btn-block">Cancelar</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								@endif
+							@endforeach
+						</div>
+					@else
+					<p class="text-center">Você não possui nenhuma coleta pendente! Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p>
+						@if(!Auth::user()->isComplete())
+                            <p class="text-center">Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.</p>
+                        @endif
+					@endif 	
+				</div> 
+
+				<!-- 
+					COLETAS AGENDADAS
+			 	-->
 
 				<a href="#req_acpt" class="btn btn-default btn-block" data-toggle="collapse">Coletas agendadas</a>
 				
-				<div class="list-group collapse" id="req_acpt">
-					@forelse($request as $request)
-						@if($request->status_req == "ACPT")
-							<div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-								    <div class="d-flex w-100 justify-content-between">
-								      <small class="text-right">
-								      	@if($req->status_req == "ACPT")
-								      		ACEITO
-								      	@endif
-								      </small>
-								      </h5>
-								      <h5 class="mb-1">Modelo: {{$req->nm_garbage}} </h5>
-								    
-								     <form role="form" method="POST" action="{{ url('/request/cancel') }}">
-								    	{{ csrf_field() }}
-								    	<input type="hidden" name="id_req" value="{{$request->id_req}}" />
-								    	<button class="btn btn-danger pull-right" style="margin-left: 10px;">Cancelar Coleta</button>
-								    </form>
+				<div id="req_acpt" class="collapse">
+					<div class="list-group request-item">
+						@forelse($request as $req)
+							@if($req->status_req == "ACPT")
+								<div class="list-group-item">
+									<div class="row">
+										@if($req->desc_req)
+											<div class="col-md-8">Resíduo: {{$req->desc_req}}</div>
+										@else
+											<div class="col-md-8">Resíduo: {{$req->nm_garbage}} {{$req->desc_req}}</div>
+										@endif
+										<div class="col-md-2 text-right">Token: {{$req->conf_token}}</div>
+										<div class="col-md-2 text-right">{{$req->status_req}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
+										<div class="col-md-4 col-md-offset-4 text-right">{{$req->dt_req}}</div>
+									</div>
 
-								    <form role="form" method="POST" action="{{ url('/request/confirm') }}">
-									    	{{ csrf_field() }}
-								    	<input type="hidden" name="id_req" value="{{$request->id_req}}" />
-									    <button class="btn btn-primary pull-right">Confirmar Coleta</button>
-								    </form>
-								    </div>
-								    <p class="mb-1">Código de confirmação: {{$req->conf_token}}</p>
-								    <p class="mb-1">Data do pedido de coleta: {{$req->dt_req}}</p>
-
-								  </div>
-						@endif
-					@empty
-					<p class="text-center">Você não possui nenhuma coleta agendada! Espere alguma cooperativa aceitar o seu pedido.</p>
-					
-             	  	@endforelse
+									<div class="row">
+										<div class="col-md-6">Endereço:</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">Observação: {{$req->observation}} 
+										</div>
+										<div class="col-md-4">
+											 
+											<div class="col-md-4"><button class="btn btn-primary btn-block">Adiar</button></div>
+											<div class="col-md-4"><button class="btn btn-primary btn-block">Confirmar</button></div>
+											<div class="col-md-4"><button class="btn btn-danger btn-block">Cancelar</button></div>
+										</div>
+									</div>
+								</div>
+							@endif
+						@empty
+							<p class="text-center">Você não possui nenhuma coleta agendada! Espere alguma cooperativa aceitar o seu pedido.</p>	
+						@endforelse
+					</div>
 				</div>
 			@endif
+			
+			<div id="cancelrequest" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header text-center"><h1>Confirmação</h1></div>
+						<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
 
+							TESTE
+						</div>
+					</div>                
+			</div>
+
+			<!-- 
+				FINAL DA HOME RELACIONADO AO USUARIO (FISICO, COLETIVOS e JURIDICOS)
+			 -->
+
+
+			 <!-- 
+				FINAL DA HOME RELACIONADO A COOPERATIVA
+			 -->
 			@if(Auth::user()->id_cat == 3)
 				<a href="#list-group" class="btn btn-default btn-block" data-toggle="collapse">Doações cadastradas no sistema</a>
 				
@@ -109,12 +166,10 @@
 							      	@endif
 							      </small>
 							      </h5>
-							      <h5 class="mb-1">Modelo: {{$request->nm_garbage}} </h5>
 
 								  <button data-toggle="modal" data-target="#Modal" class="btn btn-success pull-right">Aceitar Coleta</button>
 
 							    </div>
-							    <!--<p class="mb-1">Estado: {{ $request->status_garbage }} </p>-->
 								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
 						  </div>
 		         	    @endforeach
@@ -191,7 +246,6 @@
 								    <button data-toggle="modal" data-target="#modaltoken" class="btn btn-primary pull-right">Confirmar Coleta</button>
 
 							    </div>
-							    <!--<p class="mb-1">Estado: {{ $request->status_garbage }} </p>-->
 								<p class="mb-1">Data do pedido de coleta: {{$request->dt_req}}</p>
 							  </div>
 

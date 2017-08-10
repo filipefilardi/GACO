@@ -31,6 +31,7 @@ class RequestDao
             ->whereIn('request.status_req',['ACPT','PEND'])
             ->where('request.id_del', 0)
             ->distinct()
+            ->orderBy('id_req')
             ->get();
 
         return $list;
@@ -45,6 +46,7 @@ class RequestDao
     	$list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
+            ->orderBy('id_req')
             ->get();
         			
         return $list;
@@ -60,6 +62,7 @@ class RequestDao
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
             ->where('id_active', 'Y')
+            ->orderBy('id_req')
             ->get();
                     
         return $list;
@@ -76,6 +79,7 @@ class RequestDao
             ->where('id_user_req', $id_user)
             ->where('id_active', 'Y')
             ->where('status_req', 'PEND')
+            ->orderBy('id_req')
             ->get();
                     
         return $list;
@@ -92,6 +96,7 @@ class RequestDao
             ->where('id_user_req', $id_user)
             ->where('id_active', 'Y')
             ->where('status_req', 'ACPT')
+            ->orderBy('id_req')
             ->get();
                             
         return $list;
@@ -108,6 +113,7 @@ class RequestDao
             ->where('id_user_req', $id_user)
             ->where('id_active', 'Y')
             ->where('status_req', 'COMP')
+            ->orderBy('id_req')
             ->get();
                     
         return $list;
@@ -125,6 +131,7 @@ class RequestDao
             ->where('id_user_req', $id_user)
             ->where('id_active', 'N')
             ->where('status_req', 'COMP')
+            ->orderBy('id_req')
             ->get();
                     
         return $list;
@@ -142,6 +149,7 @@ class RequestDao
             ->where('id_user_req', $id_user)
             ->where('id_active', 'N')
             ->where('status_req', 'CNCL')
+            ->orderBy('id_req')
             ->get();
                     
         return $list;
@@ -154,6 +162,7 @@ class RequestDao
             ->where('id_del', 0)
             ->where('id_active', 'Y')
             ->where('status_req', 'PEND')
+            ->orderBy('id_req')
             ->get();
                     
         return $list;
@@ -172,6 +181,7 @@ class RequestDao
             ->where('request_assignment.id_del', 0)
             ->where('request_assignment.id_user_assign', $id_user)
             ->select('request.*','dt_predicted')
+            ->orderBy('id_req')
             ->get();        
         return $list;
     }

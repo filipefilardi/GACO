@@ -24,17 +24,51 @@
     						</div>                   
                         </div>
 
-                        <div style="display:none" id="status_tv" class="form-group{{ $errors->has('status_garbage') ? ' has-error' : '' }}">
-                            <label for="status_garbage" class="col-md-3 control-label">Condição</label>
+                        <div style="display:none" id="status_tv" class="form-group{{ $errors->has('status_tv') ? ' has-error' : '' }}">
+                            <label for="status_tv" class="col-md-3 control-label">Condição</label>
 
                             <div class="col-md-7">
-                                <select class="form-control" name="status_garbage" id="status_garbage">
+                                <select class="form-control" name="status_tv" id="status_tv">
                                     <option>Aberta</option>
                                     <option>Fechada</option>
                                 </select>
-                                @if ($errors->has('status_garbage'))
+                                @if ($errors->has('status_tv'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('status_garbage') }}</strong>
+                                        <strong>{{ $errors->first('status_tv') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div style="display:none" id="status_cpu" class="form-group{{ $errors->has('status_cpu') ? ' has-error' : '' }}">
+                            <label for="status_cpu" class="col-md-3 control-label">Condição</label>
+
+                            <div class="col-md-7">
+                                <select class="form-control" name="status_cpu" id="status_cpu">
+                                    <option>Completa</option>
+                                    <option>Incompleta</option>
+                                </select>
+                                @if ($errors->has('status_cpu'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('status_cpu') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div id="others_cpu" name="others_cpu" style="display:none" class="form-group{{ $errors->has('others_cpu') ? ' has-error' : '' }}">
+                            <div class="col-md-7 col-md-offset-3">
+                                <p class="danger-box-request "> Pela CPU estar incompleta, por favor, nos informe os componentes que faltam. </p>
+                            </div>
+
+                            <label for="others_cpu" class="col-md-3 control-label">Descrição</label>
+
+                            <div class="col-md-7">
+                                <input id="others_cpu" type="text" class="form-control" name="others_cpu" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu') }}">
+
+                                @if ($errors->has('others_cpu'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('others_cpu') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -76,7 +110,7 @@
                             <label for="observation" class="col-md-3 control-label">Observação</label>
 
                             <div class="col-md-7">
-                                <input id="observation" type="text" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}" required>
+                                <input id="observation" type="text" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
 
                                 @if ($errors->has('observation'))
                                     <span class="help-block">
@@ -173,16 +207,43 @@
         if ($('#id_garbage').find(":selected").attr('value')=="15") {
             $('#status_tv').show();
             $('#others').hide();
+            $('#status_cpu').hide();
+            $('#others_cpu').hide();
+            $("#others_cpu").find("input").prop('required',false);
+
+        }
+        else if ($('#id_garbage').find(":selected").attr('value')=="3") {
+            $('#status_cpu').show();
+            $('#others').hide();
+            $('#status_tv').hide();
+            $('#others_cpu').hide();
+            $("#others_cpu").find("input").prop('required',false);
 
         }
         else if ($('#id_garbage').find(":selected").attr('value')=="17") {
             $('#others').show();
             $('#status_tv').hide(); 
+            $('#status_cpu').hide();
+            $('#others_cpu').hide();
+            $("#others_cpu").find("input").prop('required',false);
         }
         else {
             $('#status_tv').hide();   
             $('#others').hide();
+            $('#status_cpu').hide();
+            $('#others_cpu').hide();
+            $("#others_cpu").find("input").prop('required',false);
         }        
+    };
+
+    document.getElementById("status_cpu").onchange = function() {
+        if($('#status_cpu').find(":selected").text() == "Incompleta"){
+            $("#others_cpu").show();
+            $("#others_cpu").find("input").prop('required',true);
+        }else{
+            $('#others_cpu').hide();
+            $("#others_cpu").find("input").prop('required',false);
+        }
     };
 
     document.getElementById("id_add").onchange = function() {

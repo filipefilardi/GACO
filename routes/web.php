@@ -27,6 +27,8 @@ Route::post('/request/cancel', 'RequestController@cancel_request');
 Route::post('/request/confirm', 'RequestController@confirm_request');
 Route::get('/notification', 'RequestController@index_customer');
 
+Route::get('/evaluation', 'EvaluationController@index_evaluation');
+
 Route::get('/complete_registration', 'CompleteRegistrationController@indexCompleteRegistration');
 Route::post('/complete_registration', 'CompleteRegistrationController@completeRegistration');
 

@@ -15,6 +15,7 @@ return [
 	'login' => 'Entrar',
 	'logout' => 'Sair',
 	'contribute' => 'Contribuir',
+	'completedrequest' => 'Resíduos Doados',
 
 	// Garbage view
 	'discoveryallresidues' => 'Descubra todos os lixos que você pode doar!',

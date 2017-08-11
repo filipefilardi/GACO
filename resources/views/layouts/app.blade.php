@@ -98,11 +98,10 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="/settings">
-                                            @lang('app.settings')
-                                        </a>
-                                    </li>
+                                    @if(Auth::user()->id_cat != 4)
+                                        <li><a href="/evaluation">@lang('app.completedrequest')</a></li>
+                                    @endif
+                                    <li><a href="/settings">@lang('app.settings')</a></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();

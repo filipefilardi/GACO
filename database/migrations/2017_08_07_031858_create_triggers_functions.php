@@ -105,8 +105,8 @@ class CreateTriggersFunctions extends Migration
             $$
                 BEGIN
                     IF NEW.id_active = '$noFlag' THEN
-                        INSERT INTO request_arc (dt_arc,id_req,status_tv,conf_token,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del)
-                        SELECT CURRENT_TIMESTAMP,id_req,status_tv,conf_token,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del
+                        INSERT INTO request_arc (dt_arc,id_req,state,conf_token,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del)
+                        SELECT CURRENT_TIMESTAMP,id_req,state,conf_token,status_req,id_active,dt_collect,id_user_req,id_garbage,lst_chg_by,id_del
                         FROM request
                         WHERE id_req = OLD.id_req;
                     END IF;

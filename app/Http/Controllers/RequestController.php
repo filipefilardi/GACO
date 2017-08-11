@@ -76,7 +76,7 @@ class RequestController extends Controller
                     break;
             }
 
-            $status_tv = $data['status_garbage'];
+            #$status_tv = $data['status_garbage'];
             
 
             if($state == 'Aberta' && $id_garbage == 15){

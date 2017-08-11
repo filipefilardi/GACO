@@ -60,6 +60,9 @@ class HomeController extends Controller
                 $user_pend[] = $r;
             }
         }
+
+        if ($id_cat == 4) return redirect('admin');
+        
         return view('home')->with('request', $request)
                            ->with('request_acpt', $request_acpt)
                            ->with('user_acpt', $user_acpt)

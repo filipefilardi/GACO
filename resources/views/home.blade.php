@@ -10,9 +10,11 @@
 	<div class="row">
 		<div class="panel panel-default">
 
-
-			<div class="panel-heading">@lang('app.home')</div>
-			
+			@if(Auth::user()->id_cat == 3)
+				<div class="panel-heading">@lang('app.cooperativepanel')</div>
+			@else
+				<div class="panel-heading">@lang('app.home')</div>
+			@endif
 			<div class="panel-body">
 			
 			@include('layouts.messages')

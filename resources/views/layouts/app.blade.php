@@ -60,8 +60,10 @@
                     @else
                         <ul class="nav navbar-nav">
                             @if(Auth::user()->id_cat != 3)
-                                <li><a href="{{ url('/home') }}">@lang('app.home')</a></li>
-                                <li><a href="{{ url('/request') }}">@lang('app.request')</a></li>
+                                @if(Auth::user()->id_cat != 4)
+                                    <li><a href="{{ url('/home') }}">@lang('app.home')</a></li>
+                                    <li><a href="{{ url('/request') }}">@lang('app.request')</a></li>
+                                @endif
                                 <li><a href="{{ url('/cooperatives') }}">@lang('app.cooperatives')</a></li>
                                 <li><a href="{{ url('/garbage') }}">@lang('app.ewaste')</a></li>
                                 <li><a href="{{ url('/about') }}">@lang('app.about')</a></li>
@@ -79,7 +81,7 @@
                                     <li><a href="{{ url('/complete_registration') }}">@lang('app.completeregistration')</a></li>
                                 @endif
                             @else
-                                <li><a href="{{ url('/home') }}">@lang('app.adminpanel')</a></li>
+                                <li><a href="{{ url('/home') }}">@lang('app.cooperativepanel')</a></li>
                             @endif
                         </ul>
                     @endif

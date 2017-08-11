@@ -7,6 +7,7 @@ return [
 	'cooperatives' => 'Cooperativas',
 	'ewaste' => 'Resíduo Eletrônico',
 	'adminpanel' => 'Painel do Administrador',
+	'cooperativepanel' => 'Painel da Cooperativa',
 	'completeregistration' => 'Complete Seu Cadastro',
 	'about' => 'Sobre',
 	'settings' => 'Configurações',

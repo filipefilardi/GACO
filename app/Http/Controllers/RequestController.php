@@ -30,9 +30,9 @@ class RequestController extends Controller
     public function index_user(Request $data) {
          if (Gate::allows('execute', 'create_request')) {
 
-            // check whether the registration is complete or its a master user
+            // check whether the registration is complete
             $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
-            if($is_complete->count()>0 || Auth::user()->id_cat == 4){
+            if($is_complete->count()>0){
                 $garbage = GarbageDao::get_list_garbage_actv();
                 $addresses = AddressDao::getAddresses(Auth::user()->id_user);
 
@@ -40,6 +40,7 @@ class RequestController extends Controller
             }else{
                 $data->session()->flash('message', 'Você precisa completar sua cadastro antes de fazer uma doação!'); 
                 $data->session()->flash('alert-warning', 'warning'); 
+                if(Auth::user()->id_cat == 4) return redirect('/admin');
                 return redirect('/complete_registration');
             }
 

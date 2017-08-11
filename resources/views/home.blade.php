@@ -22,7 +22,7 @@
 			<!-- 
 				COMECO DA HOME RELACIONADO AO USUARIO (FISICO, COLETIVOS e JURIDICOS)
 			 -->
-            @if(Auth::user()->id_cat != 3) 	
+            @if(Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2) 	
             	
             	<!-- 
 					COLETAS PENDENTES

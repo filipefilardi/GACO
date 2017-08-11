@@ -26,7 +26,11 @@ class RequestDao
             $join->on('request.id_garbage', '=', 'garbage.id_garbage')
                  ->where('garbage.id_del', 0);
             })
-            ->select('request.*','request_assignment.dt_predicted', 'garbage.nm_garbage')
+            ->join('address', function ($join){
+                $join->on('address.id_add', '=', 'request.id_add')
+                 ->where('address.id_del', 0);
+            })
+            ->select('request.*','request_assignment.dt_predicted', 'garbage.nm_garbage','address.str_address')
             ->where('request.id_user_req', $id_user)
             ->whereIn('request.status_req',['ACPT','PEND'])
             ->where('request.id_del', 0)

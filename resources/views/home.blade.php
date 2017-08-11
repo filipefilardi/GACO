@@ -51,7 +51,7 @@
 										</div>
 
 										<div class="row">
-											<div class="col-md-6">Endereço:</div>
+											<div class="col-md-6">Endereço: {{$req->str_address}}</div>
 										</div>
 										<div class="row">
 											<div class="col-md-8">Observação: {{$req->observation}} 
@@ -105,7 +105,7 @@
 									</div>
 
 									<div class="row">
-										<div class="col-md-6">Endereço:</div>
+										<div class="col-md-6">Endereço: {{$req->str_address}}</div>
 									</div>
 									<div class="row">
 										<div class="col-md-8">Observação: {{$req->observation}} 

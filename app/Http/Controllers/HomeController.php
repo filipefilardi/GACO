@@ -51,8 +51,19 @@ class HomeController extends Controller
             $request = RequestDAO::get_pend_requests_for_coop();
             $request_acpt = RequestDAO::get_acpt_requests_by_coop($id_user);
         }
-        
-        return view('home')->with('request', $request)->with('request_acpt', $request_acpt);
+        $user_acpt = array();
+        $user_pend = array();
+        foreach ($request as $r) {
+            if($r->status_req == "ACPT"){
+                $user_acpt[] = $r;
+            }else{
+                $user_pend[] = $r;
+            }
+        }
+        return view('home')->with('request', $request)
+                           ->with('request_acpt', $request_acpt)
+                           ->with('user_acpt', $user_acpt)
+                           ->with('user_pend', $user_pend);
     }
 
     /**

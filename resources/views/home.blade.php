@@ -31,7 +31,7 @@
             	<a href="#req_pen" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
 					 
 				<div id="req_pen" class="collapse">
-					@if(!$request->isEmpty())
+					@if(!empty($user_pend))
 						<div class="list-group request-item">
 							@foreach($request as $req)
 								@if($req->status_req == "PEND")
@@ -87,7 +87,7 @@
 				
 				<div id="req_acpt" class="collapse">
 					<div class="list-group request-item">
-						@forelse($request as $req)
+						@forelse($user_acpt as $req)
 							@if($req->status_req == "ACPT")
 								<div class="list-group-item">
 									<div class="row">

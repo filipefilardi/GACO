@@ -80,6 +80,20 @@
 	background-color: var(--btndangerhover)
 }
 
+/*
+=======================================
+		        TEXTS 
+=======================================
+*/
+
+.content .text-header{
+	text-align: center;
+	font-size: 30px;
+
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
 
 /*
 =======================================

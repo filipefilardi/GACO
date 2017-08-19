@@ -43,22 +43,17 @@ class HomeController extends Controller
             return redirect('/');
 
         }
-
+        $user_acpt = null;
+        $user_pend = null;
+        
         if ($id_cat == 1 || $id_cat == 2) {
             $request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
+            $user_acpt = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'status_req', '=', 'ACPT');
+            $user_pend = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'status_req', '=', 'PEND');
         }
         else{
             $request = RequestDAO::get_pend_requests_for_coop();
             $request_acpt = RequestDAO::get_acpt_requests_by_coop($id_user);
-        }
-        $user_acpt = array();
-        $user_pend = array();
-        foreach ($request as $r) {
-            if($r->status_req == "ACPT"){
-                $user_acpt[] = $r;
-            }else{
-                $user_pend[] = $r;
-            }
         }
 
         if ($id_cat == 4) return redirect('admin');

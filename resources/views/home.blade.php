@@ -35,7 +35,7 @@
 				<div id="req_pen" class="collapse">
 					@if(!empty($user_pend))
 						<div class="list-group request-item">
-							@foreach($request as $req)
+							@foreach($user_pend as $req)
 								@if($req->status_req == "PEND")
 									<div class="list-group-item">
 										<div class="row">
@@ -89,40 +89,42 @@
 				
 				<div id="req_acpt" class="collapse">
 					<div class="list-group request-item">
-						@forelse($user_acpt as $req)
-							@if($req->status_req == "ACPT")
-								<div class="list-group-item">
-									<div class="row">
-										@if($req->desc_req)
-											<div class="col-md-8">Resíduo: {{$req->desc_req}}</div>
-										@else
-											<div class="col-md-8">Resíduo: {{$req->nm_garbage}} {{$req->desc_req}}</div>
-										@endif
-										<div class="col-md-2 text-right">Token: {{$req->conf_token}}</div>
-										<div class="col-md-2 text-right">{{$req->status_req}}</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-										<div class="col-md-4 col-md-offset-4 text-right">{{$req->dt_req}}</div>
-									</div>
+						@if(!empty($user_acpt))
+							@foreach($user_acpt as $req)
+								@if($req->status_req == "ACPT")
+									<div class="list-group-item">
+										<div class="row">
+											@if($req->desc_req)
+												<div class="col-md-8">Resíduo: {{$req->desc_req}}</div>
+											@else
+												<div class="col-md-8">Resíduo: {{$req->nm_garbage}} {{$req->desc_req}}</div>
+											@endif
+											<div class="col-md-2 text-right">Token: {{$req->conf_token}}</div>
+											<div class="col-md-2 text-right">{{$req->status_req}}</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
+											<div class="col-md-4 col-md-offset-4 text-right">{{$req->dt_req}}</div>
+										</div>
 
-									<div class="row">
-										<div class="col-md-6">Endereço: {{$req->str_address}}</div>
-									</div>
-									<div class="row">
-										<div class="col-md-8">Observação: {{$req->observation}} 
+										<div class="row">
+											<div class="col-md-6">Endereço: {{$req->str_address}}</div>
 										</div>
-										<div class="col-md-4">
-											 
-											<div class="col-md-4 col-md-offset-4"><button class="btn btn-default btn-block">Adiar</button></div>
-											<div class="col-md-4"><button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Excluir</button></div>
+										<div class="row">
+											<div class="col-md-8">Observação: {{$req->observation}} 
+											</div>
+											<div class="col-md-4">
+												 
+												<div class="col-md-4 col-md-offset-4"><button class="btn btn-default btn-block">Adiar</button></div>
+												<div class="col-md-4"><button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Excluir</button></div>
+											</div>
 										</div>
 									</div>
-								</div>
-							@endif
-						@empty
+								@endif
+							@endforeach
+						@else
 							<p class="text-center">Você não possui nenhuma coleta agendada! Espere alguma cooperativa aceitar o seu pedido.</p>	
-						@endforelse
+						@endif
 					</div>
 				</div>
 			@endif

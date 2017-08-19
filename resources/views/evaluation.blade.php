@@ -9,9 +9,10 @@
 
 				<div class="list-group">
 					
+					@foreach($request as $req)
 					<div class="list-group-item">
 						<div class="row">
-							<div class="col-md-8"> Alguma info de identificação do request, talvez data e alguma outra coisa </div>
+							<div class="col-md-8"> Alguma info de identificação do request, talvez data e alguma outra coisa ({{$req->dt_arc}}, {{$req->conf_token}})</div>
 							<div class="col-md-4">
 								<div class="col-md-4 col-md-offset-8">
 									<button  data-toggle="modal" data-id="" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">Avaliar</button>
@@ -19,8 +20,11 @@
 							</div>
 						</div>
 					</div>
+					@endforeach
 
 				</div>
+
+				{{ $request->links() }}
 
 			<div id="evaluationmodal" class="modal fade" role="dialog">
 				<div class="modal-dialog modal-lg">

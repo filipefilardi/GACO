@@ -31,6 +31,6 @@ class EvaluationController extends Controller
         $request = RequestDAO::get_comp_conf_requests_by_user($id_user);
         #dd($request);
         
-        return view('/evaluation');
+        return view('/evaluation')->with("request",$request);
     }
 }

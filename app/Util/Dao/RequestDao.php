@@ -168,7 +168,7 @@ class RequestDao
             ->where('id_active', 'N')
             ->where('status_req', 'COMP')
             ->orderBy('id_req')
-            ->paginate(1);
+            ->paginate(3);
                     
         return $list;
     }

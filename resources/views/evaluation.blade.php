@@ -24,7 +24,9 @@
 
 				</div>
 
-				{{ $request->links() }}
+				<div class="text-center">
+					{{ $request->links() }}
+				</div>
 
 			<div id="evaluationmodal" class="modal fade" role="dialog">
 				<div class="modal-dialog modal-lg">

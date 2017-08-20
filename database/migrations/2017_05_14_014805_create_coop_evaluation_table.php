@@ -13,7 +13,7 @@ class CreateCoopEvaluationTable extends Migration
      */
     public function up()
     {
-        Schema::create('evaluation', function (Blueprint $table) {
+        Schema::create('coop_evaluation', function (Blueprint $table) {
             $table->increments('id_eval');
             $table->float('puctual_eval');
             $table->float('satisf_eval');

@@ -12,140 +12,149 @@
 						{{ csrf_field() }}
 
                         @include('layouts.messages')
+                        <div class="parent">
+                            <div class="repeatable">
+            					<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
+            							<label class="col-md-3 control-label">Resíduo</label>
+            	                    <div class="col-md-7">
+            							<select class="form-control" id="id_garbage" name="id_garbage">
+            					 		@foreach ($garbage as $garbage)
+            		                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
+            		                    @endforeach
+            							</select>
+            						</div>                   
+                                </div>
 
-    					<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
-    							<label class="col-md-3 control-label">Resíduo</label>
-    	                    <div class="col-md-7">
-    							<select class="form-control" id="id_garbage" name="id_garbage">
-    					 		@foreach ($garbage as $garbage)
-    		                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
-    		                    @endforeach
-    							</select>
-    						</div>                   
-                        </div>
+                                <div style="display:none" id="status_tv" class="form-group{{ $errors->has('status_tv') ? ' has-error' : '' }}">
+                                    <label for="status_tv" class="col-md-3 control-label">Condição</label>
 
-                        <div style="display:none" id="status_tv" class="form-group{{ $errors->has('status_tv') ? ' has-error' : '' }}">
-                            <label for="status_tv" class="col-md-3 control-label">Condição</label>
+                                    <div class="col-md-7">
+                                        <select class="form-control" name="status_tv" id="status_tv">
+                                            <option>Aberta</option>
+                                            <option>Fechada</option>
+                                        </select>
+                                        @if ($errors->has('status_tv'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('status_tv') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
-                            <div class="col-md-7">
-                                <select class="form-control" name="status_tv" id="status_tv">
-                                    <option>Aberta</option>
-                                    <option>Fechada</option>
-                                </select>
-                                @if ($errors->has('status_tv'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('status_tv') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                <div style="display:none" id="status_cpu" class="form-group{{ $errors->has('status_cpu') ? ' has-error' : '' }}">
+                                    <label for="status_cpu" class="col-md-3 control-label">Condição</label>
 
-                        <div style="display:none" id="status_cpu" class="form-group{{ $errors->has('status_cpu') ? ' has-error' : '' }}">
-                            <label for="status_cpu" class="col-md-3 control-label">Condição</label>
+                                    <div class="col-md-7">
+                                        <select class="form-control" name="status_cpu" id="status_cpu">
+                                            <option>Completa</option>
+                                            <option>Incompleta</option>
+                                        </select>
+                                        @if ($errors->has('status_cpu'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('status_cpu') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
-                            <div class="col-md-7">
-                                <select class="form-control" name="status_cpu" id="status_cpu">
-                                    <option>Completa</option>
-                                    <option>Incompleta</option>
-                                </select>
-                                @if ($errors->has('status_cpu'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('status_cpu') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                <div id="others_cpu" name="others_cpu" style="display:none" class="form-group{{ $errors->has('others_cpu') ? ' has-error' : '' }}">
+                                    <div class="col-md-7 col-md-offset-3">
+                                        <p class="danger-box-request "> Pela CPU estar incompleta, por favor, nos informe os componentes que faltam. </p>
+                                    </div>
 
-                        <div id="others_cpu" name="others_cpu" style="display:none" class="form-group{{ $errors->has('others_cpu') ? ' has-error' : '' }}">
-                            <div class="col-md-7 col-md-offset-3">
-                                <p class="danger-box-request "> Pela CPU estar incompleta, por favor, nos informe os componentes que faltam. </p>
-                            </div>
+                                    <label for="others_cpu" class="col-md-3 control-label">Descrição</label>
 
-                            <label for="others_cpu" class="col-md-3 control-label">Descrição</label>
+                                    <div class="col-md-7">
+                                        <input id="others_cpu" type="text" class="form-control" name="others_cpu" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu') }}">
 
-                            <div class="col-md-7">
-                                <input id="others_cpu" type="text" class="form-control" name="others_cpu" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu') }}">
+                                        @if ($errors->has('others_cpu'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('others_cpu') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
-                                @if ($errors->has('others_cpu'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('others_cpu') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                <div id="others" style="display:none" class="form-group{{ $errors->has('others') ? ' has-error' : '' }}">
+                                    <div class="col-md-7 col-md-offset-3">
+                                        <p class="danger-box-request ">Alguns equipamentos, como lâmpadas, baterias, cartuchos e toners de impressora, podem não ser recolhidos, porém incentivamos o cadastro dos mesmos.</p>
+                                    </div>
 
-                        <div id="others" style="display:none" class="form-group{{ $errors->has('others') ? ' has-error' : '' }}">
-                            <div class="col-md-7 col-md-offset-3">
-                                <p class="danger-box-request ">Alguns equipamentos, como lâmpadas, baterias, cartuchos e toners de impressora, podem não ser recolhidos, porém incentivamos o cadastro dos mesmos.</p>
-                            </div>
+                                    <label for="others" class="col-md-3 control-label">Equipamento</label>
 
-                            <label for="others" class="col-md-3 control-label">Equipamento</label>
+                                    <div class="col-md-7">
+                                        <input id="others" type="text" class="form-control" name="others" placeholder="Descreva qual resíduo quer doar" value="{{ old('others') }}">
 
-                            <div class="col-md-7">
-                                <input id="others" type="text" class="form-control" name="others" placeholder="Descreva qual resíduo quer doar" value="{{ old('others') }}">
+                                        @if ($errors->has('others'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('others') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
-                                @if ($errors->has('others'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('others') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
+            					    <label for="quantity" class="col-md-3 control-label">Quantidade</label>
 
-                        <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
-    					    <label for="quantity" class="col-md-3 control-label">Quantidade</label>
+                                    <div class="col-md-7">
+                                        <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="1" required>
 
-                            <div class="col-md-7">
-                                <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="1" required>
+                                        @if ($errors->has('quantity'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('quantity') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group{{ $errors->has('observation') ? ' has-error' : '' }}">
+                                    <label for="observation" class="col-md-3 control-label">Observação</label>
 
-                                @if ($errors->has('quantity'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('quantity') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        
-                        <div class="form-group{{ $errors->has('observation') ? ' has-error' : '' }}">
-                            <label for="observation" class="col-md-3 control-label">Observação</label>
+                                    <div class="col-md-7">
+                                        <input id="observation" type="text" maxlength="140" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
 
-                            <div class="col-md-7">
-                                <input id="observation" type="text" maxlength="140" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
+                                        @if ($errors->has('observation'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('observation') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
-                                @if ($errors->has('observation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('observation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                    <label for="address" class="col-md-3 control-label">Endereço de coleta</label>
 
-                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="address" class="col-md-3 control-label">Endereço de coleta</label>
-
-                            <div class="col-md-7">
-                                <select class="form-control" autofocus name="id_add" id="id_add" onchange="myFunction()">
-                                    @if(is_null($addresses))
-                                    @else 
-                                        @foreach ($addresses as $address)
-                                            @if($address->main_address === 1)
-                                                <option selected value={{$address->id_add}}>{{$address->str_address}}</option>
-                                            @else
-                                                <option value={{$address->id_add}}>{{$address->str_address}}</option>
+                                    <div class="col-md-7">
+                                        <select class="form-control" autofocus name="id_add" id="id_add" onchange="myFunction()">
+                                            @if(is_null($addresses))
+                                            @else 
+                                                @foreach ($addresses as $address)
+                                                    @if($address->main_address === 1)
+                                                        <option selected value={{$address->id_add}}>{{$address->str_address}}</option>
+                                                    @else
+                                                        <option value={{$address->id_add}}>{{$address->str_address}}</option>
+                                                    @endif
+                                                    
+                                                @endforeach
+                                                <option value="{{ url('/settings')}}" id="new_address"> Adicionar outro endereço para ser feita a coleta </option>
                                             @endif
-                                            
-                                        @endforeach
-                                        <option value="{{ url('/settings')}}" id="new_address"> Adicionar outro endereço para ser feita a coleta </option>
-                                    @endif
-                                </select>
-                                @if ($errors->has('address'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                                @endif
+                                        </select>
+                                        @if ($errors->has('address'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <p class="col-md-7 col-md-offset-3 text-center">---------</p>
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="col-md-7 col-md-offset-3">
+                            <a input="button" id="btn-repeat" class="btn btn-default btn-block">Adicionar outro resíduo</a>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-7 col-md-offset-3 text-center">
                                 Escolha os dias e periodo que você pode efetuar a coleta. 
@@ -330,6 +339,11 @@
             }
 
         });
+    });
+
+    $(document).on('click', '#btn-repeat', function (e) {
+        e.preventDefault();
+        $('.repeatable').parent('div.parent').append($('.parent').children('div:first').html());
     });
 </script>
 @endsection

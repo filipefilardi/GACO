@@ -37,13 +37,19 @@ class EvaluationController extends Controller
 
             $comments = EvaluationDAO::get_evals_obs_per_coop($id_user);
             $evaluation = EvaluationDAO::get_evals_per_coop($id_user);
+            $punctual_eval = null;
+            $satisf_eval = null;
 
+            if(sizeof($evaluation)>0 || !is_null($evaluation)) {
+                $punctual_eval = $evaluation->punctual_eval;
+                $satisf_eval = $evaluation->satisf_eval;
+            }
             #dd($evaluation->punctual_eval);
 
             return view('/evaluation')
             ->with("request",$comments)
-            ->with("avg_ponctuality", $evaluation->punctual_eval)
-            ->with("avg_satisfaction", $evaluation->satisf_eval)
+            ->with("avg_ponctuality", $punctual_eval)
+            ->with("avg_satisfaction", $satisf_eval)
             ->with("count", $evaluation->count);
         }
         

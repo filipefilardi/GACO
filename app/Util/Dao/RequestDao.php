@@ -336,9 +336,7 @@ class RequestDao
 
         if(sizeof($errors)>0) return $errors;
 
-        $res = 1;
-        try{
-            DB::table('request_assignment')
+        DB::table('request_assignment')
             ->whereExists(function ($query) use($id_req) {
                 $query->select(DB::raw(1))
                       ->from('request')
@@ -365,11 +363,7 @@ class RequestDao
                 'dt_predicted' => $dt_predicted,
                 'id_del' => 0
             ]);
-
-        }catch(\Exception $e){
-            array_push($errors,"Data invalida");
-        }
-        
+      
         return $errors;
     }
 
@@ -383,9 +377,16 @@ class RequestDao
 
         if(is_null($id_user)   || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
         if(is_null($id_req)         || $id_req <= 0) array_push($errors, 'id_req null or invalid (<=0)');
-        if(is_null($conf_token)     || strlen($conf_token) < 9) array_push($errors, 'id_req null or invalid (<=0)');
+        if(is_null($conf_token)     || strlen($conf_token) < 9) array_push($errors, 'conf_token null or invalid');
 
         // END VALIDATION BLOCK /////////
+        $conf_token_db = DB::table('request')
+                            ->where('id_del', 0)
+                            ->where('id_active', 'Y')
+                            ->where('id_req', $id_req)
+                            ->value('conf_token');
+
+        if($conf_token_db != $conf_token) array_push($errors,'Seu token de confirmação está incorreto!');
 
         if(sizeof($errors)>0) return $errors;
 
@@ -393,9 +394,7 @@ class RequestDao
 
             $today = date("Ymd");
             
-
-            try{
-                DB::table('request')
+            DB::table('request')
                 ->whereExists(function ($query) use($id_req, $conf_token) {
                 $query->select(DB::raw(1))
                     ->from('request')
@@ -443,26 +442,15 @@ class RequestDao
                     'dt_sign' => $today
                 ]);
 
-
-            }catch(\Exception $e){
-                array_push($errors,"Data invalida");
-                #dd($e);
-            }
-            
         }
 
-        $id_req_confirmed = -1;
+        /*$id_req_confirmed = -1;
         $id_req_confirmed = DB::table('request_confirmation')
                 ->where('id_req', $id_req)
                 ->where('id_sign', 'Y')
                 ->where('dt_sign', $today)
                 ->where('id_del', 0)
-                ->value('id_req');
-
-        #dd($id_req);
-
-        if($id_req_confirmed != $id_req) array_push($errors,'Seu token de confirmação está incorreto!');
-        else $errors = array();
+                ->value('id_req');*/
 
         return $errors;
     }

@@ -39,7 +39,11 @@ class EvaluationDao
     public static function get_evals_per_coop($id_coop)
     {
 
-        $result = DB::raw('avg(punctual_eval) AS punctual_eval, avg(satisf_eval) AS satisf_eval, id_user_coop')
+        $result = DB::table('coop_evaluation')
+                    ->select(DB::raw('  avg(punctual_eval)  AS punctual_eval, 
+                                        avg(satisf_eval)    AS satisf_eval, 
+                                        count(1)            AS count, 
+                                        id_user_coop'))
                     ->where('id_del', 0)
                     ->where('id_user_coop', $id_coop)
                     ->groupBy('id_user_coop')
@@ -48,4 +52,14 @@ class EvaluationDao
         return $result;
     }
 
+    public static function get_evals_obs_per_coop($id_coop)
+    {
+
+        $result = DB::table('coop_evaluation')
+                    ->where('id_del', 0)
+                    ->where('id_user_coop', $id_coop)
+                    ->pluck('observation');
+                    
+        return $result;
+    }
 }

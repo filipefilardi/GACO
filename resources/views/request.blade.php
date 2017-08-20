@@ -155,14 +155,14 @@
                         <div class="form-group{{ $errors->has('weekdays') ? ' has-error' : '' }}">
                             <label for="weekdays" class="col-md-3 control-label">Dias</label>
                             <div class="col-md-7">
-                                <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="checkbox" name="domingo" value="1">Domingo</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="segunda" value="1">Segunda</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="terça" value="1">Terça</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="quarta" value="1">Quarta</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="quinta" value="1">Quinta</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="sexta" value="1">Sexta</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="sabado" value="1">Sábado</label>
+                                <div class="btn-group btn-group-justified" id="weekcheckbox" data-toggle="buttons">
+                                    <label class="btn btn-default"><input type="checkbox" name="domingo" value="1" required>Domingo</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="segunda" value="1" required>Segunda</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="terça" value="1" required>Terça</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="quarta" value="1" required>Quarta</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="quinta" value="1" required>Quinta</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="sexta" value="1" required>Sexta</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="sabado" value="1" required>Sábado</label>
                                 </div>
                             </div>
                         </div>
@@ -170,17 +170,17 @@
                         <div class="form-group{{ $errors->has('period') ? ' has-error' : '' }}">
                             <label for="period" class="col-md-3 control-label">Periodo</label>
                             <div class="col-md-7">
-                                <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1">Manhã</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1">Tarde</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="noite" value="1">Noite</label>
+                                <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
+                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1" required="">Manhã</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1" required="">Tarde</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="noite" value="1" required="">Noite</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-7 col-md-offset-3">
-    	                    	<a data-toggle="modal" data-target="#confirmdonation" class="open-confirmdonation btn btn-primary btn-block">
+    	                    	<a input="button" id="checkBtn" data-toggle="modal" data-target="#confirmdonation" class="open-confirmdonation btn btn-primary btn-block">
     	                        	Registrar
     	                    	</a>
     	                    </div>
@@ -315,5 +315,18 @@
             window.location.href = this.value;
         }        
     };
+
+    $(document).ready(function () {
+        $('#checkBtn').click(function() {
+            checked = $("input[type=checkbox]:checked").length;
+            if(checked < 2) {
+                //alert("You must check at least one checkbox.");
+                $('#weekcheckbox').attr('style', "border-radius: 5px; border:#B63131 1px solid;");
+                $('#periodcheckbox').attr('style', "border-radius: 5px; border:#B63131 1px solid;");
+                return false;
+            }
+
+        });
+    });
 </script>
 @endsection

@@ -49,7 +49,7 @@
 								<div class="col-md-8"> Alguma info de identificação do request, talvez data e alguma outra coisa ({{$req->dt_arc}}, {{$req->conf_token}})</div>
 								<div class="col-md-4">
 									<div class="col-md-4 col-md-offset-8">
-										<button  data-toggle="modal" data-id="" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">Avaliar</button>
+										<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">Avaliar</button>
 									</div>
 								</div>
 							</div>
@@ -70,14 +70,15 @@
 							<div class="modal-header text-center"><h1>Avalie o Serviço</h1></div>
 							<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
 								
-							<form class="form-horizontal" role="form" method="POST" action="">
+							<form class="form-horizontal" role="form" method="POST" action="{{ url('/evaluation') }}">
 		                        {{ csrf_field() }}
+		                        <input type="hidden" name="id_req" id="id_req" value=""/>
 
-		                        <div class="form-group{{ $errors->has('ponctuality') ? ' has-error' : '' }}">
-		                            <label for="ponctuality" class="col-md-4 control-label">Pontualidade</label>
+		                        <div class="form-group{{ $errors->has('punctual') ? ' has-error' : '' }}">
+		                            <label for="punctual" class="col-md-4 control-label">Pontualidade</label>
 
 		                            <div class="col-md-6">
-		                                <select class="form-control" name="main_address">
+		                                <select class="form-control" name="punctual">
 		                                    <option value="1">1</option>
 		                                    <option value="2">2</option>
 		                                    <option value="3">3</option>
@@ -87,11 +88,11 @@
 		                            </div>
 		                        </div>
 
-		                        <div class="form-group{{ $errors->has('comunication') ? ' has-error' : '' }}">
-		                            <label for="comunication" class="col-md-4 control-label">Satisfação</label>
+		                        <div class="form-group{{ $errors->has('satisfac') ? ' has-error' : '' }}">
+		                            <label for="satisfac" class="col-md-4 control-label">Satisfação</label>
 
 		                            <div class="col-md-6">
-		                                <select class="form-control" name="main_address">
+		                                <select class="form-control" name="satisfac">
 		                                    <option value="1">1</option>
 		                                    <option value="2">2</option>
 		                                    <option value="3">3</option>
@@ -101,11 +102,11 @@
 		                            </div>
 		                        </div>
 
-		                        <div class="form-group{{ $errors->has('coment') ? ' has-error' : '' }}">
-		                            <label for="coment" class="col-md-4 control-label">Comentário</label>
+		                        <div class="form-group{{ $errors->has('obs') ? ' has-error' : '' }}">
+		                            <label for="obs" class="col-md-4 control-label">Comentário</label>
 
 		                            <div class="col-md-6">
-		                                <textarea id="coment" type="coment" rows="3" class="form-control" name="coment" value="{{ old('coment') }}" required></textarea>
+		                                <textarea type="obs" rows="3" class="form-control" name="obs" value="{{ old('obs') }}" required></textarea>
 		                            </div>
 		                        </div>
 
@@ -133,5 +134,11 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(document).on("click", ".open-evaluationmodal", function () {
+	     var id_req = $(this).data('id');
+	     $(".modal-body #id_req").val( id_req );
+	});
+</script>
 @endif
 @endsection

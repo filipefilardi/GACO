@@ -316,6 +316,8 @@ class RequestDao
     // This is called upon Cooperative accepting the request
     public static function assign_request($id_req, $id_user, $dt_predicted)
     {
+        $tmp = explode("/",$dt_predicted);
+        $dt_predicted = $tmp[1] . "/" .  $tmp[0] . "/"  . $tmp[2];
         // VALIDATION BLOCK //////////////
         $errors = array();
 

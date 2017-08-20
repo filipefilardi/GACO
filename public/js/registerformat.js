@@ -14,6 +14,21 @@ $(document).ready(function() {
 	  }
 	});
 
+	var $jqDate = jQuery('input[name="dt_collected"]');
+	$jqDate.attr('maxlength','10');
+
+	$jqDate.bind('keyup','keydown', function(e){
+
+		if(e.which !== 8) { 
+	        var numChars = $jqDate.val().length;
+	        if(numChars === 2 || numChars === 5){
+	            var thisVal = $jqDate.val();
+	            thisVal += '/';
+	            $jqDate.val(thisVal);
+	        }
+	  }
+	});
+
 	var $cpf = jQuery('input[name="cpf"]');
 	$cpf.attr('maxlength', '14');
 

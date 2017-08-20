@@ -33,7 +33,7 @@
             	<a href="#req_pen" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
 					 
 				<div id="req_pen" class="collapse">
-					@if(!empty($user_pend))
+					@if(!$user_pend->isEmpty())
 						<div class="list-group request-item">
 							@foreach($user_pend as $req)
 								@if($req->status_req == "PEND")
@@ -49,7 +49,7 @@
 										</div>
 										<div class="row">
 											<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-											<div class="col-md-4 col-md-offset-4 text-right">{{$req->dt_req}}</div>
+											<div class="col-md-4 col-md-offset-4 text-right">{{date('d/m/Y', strtotime($req->dt_req))}}</div>
 										</div>
 
 										<div class="row">
@@ -89,7 +89,7 @@
 				
 				<div id="req_acpt" class="collapse">
 					<div class="list-group request-item">
-						@if(!empty($user_acpt))
+						@if(!$user_acpt->isEmpty())
 							@foreach($user_acpt as $req)
 								@if($req->status_req == "ACPT")
 									<div class="list-group-item">
@@ -104,7 +104,7 @@
 										</div>
 										<div class="row">
 											<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-											<div class="col-md-4 col-md-offset-4 text-right">{{$req->dt_req}}</div>
+											<div class="col-md-4 col-md-offset-4 text-right">{{date('d/m/Y', strtotime($req->dt_req))}}</div>
 										</div>
 
 										<div class="row">
@@ -156,7 +156,7 @@
 								</div>
 								<div class="row">
 									<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-									<div class="col-md-4 col-md-offset-4 text-right">{{$req->dt_req}}</div>
+									<div class="col-md-4 col-md-offset-4 text-right">{{date('d/m/Y', strtotime($req->dt_req))}}</div>
 								</div>
 
 								<div class="row">
@@ -188,7 +188,7 @@
 									@else
 										<div class="col-md-6">Resíduo: Não está retornando no método</div>
 									@endif
-									<div class="col-md-4 text-right">Agendamento: {{$req->dt_predicted}}</div>
+									<div class="col-md-4 text-right">Agendamento: {{date('d/m/Y', strtotime($req->dt_predicted))}}</div>
 									<div class="col-md-2 text-right">{{$req->status_req}}</div>
 								</div>
 								<div class="row">

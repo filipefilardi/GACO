@@ -147,7 +147,7 @@ class UserDao
                         break;
         }
         }catch(\Exception $e){
-            dd($e);
+            #dd($e);
             $res = -1;
         }
 

@@ -115,7 +115,13 @@ class RequestController extends Controller
 
             $teste = RequestDAO::assign_request($data['id_req'],Auth::user()->id_user, $data['date']);
 
-            //$data->session()->flash('alert-success', 'sucess');
+            if(sizeof($teste) == 0){
+                $data->session()->flash('message', 'Doação aceita com sucesso'); 
+                $data->session()->flash('alert-success', 'sucess');
+            }else{
+                $data->session()->flash('message', 'Falha ao aceitar doação. Por favor, tente novamente'); 
+                $data->session()->flash('alert-warning', 'warning');
+            }
             return redirect('/home');
 
         } else {
@@ -152,7 +158,21 @@ class RequestController extends Controller
             $id_cat = Auth::user()->id_cat;
             $id_user = Auth::user()->id_user;
             $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token'], $data['dt_collected']);
+            #dd($teste);
 
+            if(in_array("Seu token de confirmação está incorreto!",$teste)){
+                $data->session()->flash('message', 'Seu token de confirmação está incorreto! Por favor, tente novamente'); 
+                $data->session()->flash('alert-warning', 'warning');
+                return redirect('/home');
+            }
+            
+            if(sizeof($teste) == 0){
+                $data->session()->flash('message', 'Coleta confirmada com sucesso'); 
+                $data->session()->flash('alert-success', 'sucess');
+            }else{
+                $data->session()->flash('message', 'Falha ao confirmação da coleta. Por favor, tente novamente'); 
+                $data->session()->flash('alert-warning', 'warning');
+            }
 
             return redirect('/home');
 

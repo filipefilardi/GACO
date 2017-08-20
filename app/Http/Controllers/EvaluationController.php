@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Util\Dao\RequestDao;
+use App\Util\Dao\EvaluationDao;
 use App\Util\Dao\UserDao;
 use App\Util\Dao\EvaluationDao;
 use Auth;
@@ -30,6 +31,8 @@ class EvaluationController extends Controller
     	Auth::user();
         $id_cat = Auth::user()->id_cat;
         $id_user = Auth::user()->id_user;
+
+        dd(EvaluationDao::get_evals_per_coop($id_user));
 
         if ($id_cat == 3) {
 

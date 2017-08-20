@@ -25,9 +25,10 @@ class EvaluationDao
         ->whereNotExists(function ($query) use($id_req) {
                 $query->select(DB::raw(1))
                     ->from('coop_evaluation')
-                    ->whereRaw('coop_evaluation.id_req = ?', $id_req)
+                    ->whereRaw('coop_evaluation.id_req = ?', $id_req);
+        })
         ->insert([
-            'puctual_eval' => $punctual,
+            'punctual_eval' => $punctual,
             'satisf_eval' => $satisf,
             'observation' => $obs,
             'id_req' => $id_req,
@@ -38,12 +39,13 @@ class EvaluationDao
     public static function get_evals_per_coop($id_coop)
     {
 
-        $list = DB::table('coop_evaluation')
+        $result = DB::raw('avg(punctual_eval) AS punctual_eval, avg(satisf_eval) AS satisf_eval, id_user_coop')
                     ->where('id_del', 0)
                     ->where('id_user_coop', $id_coop)
                     ->groupBy('id_user_coop')
+                    ->first();
                     
-        return $list;
+        return $result;
     }
 
 }

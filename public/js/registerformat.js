@@ -14,17 +14,17 @@ $(document).ready(function() {
 	  }
 	});
 
-	var $jqDate = jQuery('input[name="dt_collected"]');
-	$jqDate.attr('maxlength','10');
+	var $jqDate2 = jQuery('input[name="dt_collected"]');
+	$jqDate2.attr('maxlength','10');
 
-	$jqDate.bind('keyup','keydown', function(e){
+	$jqDate2.bind('keyup','keydown', function(e){
 
 		if(e.which !== 8) { 
-	        var numChars = $jqDate.val().length;
+	        var numChars = $jqDate2.val().length;
 	        if(numChars === 2 || numChars === 5){
-	            var thisVal = $jqDate.val();
+	            var thisVal = $jqDate2.val();
 	            thisVal += '/';
-	            $jqDate.val(thisVal);
+	            $jqDate2.val(thisVal);
 	        }
 	  }
 	});

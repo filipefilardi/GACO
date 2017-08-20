@@ -35,16 +35,17 @@ class EvaluationController extends Controller
 
         if ($id_cat == 3) {
 
-            $request = RequestDAO::get_comp_conf_requests_by_user($id_user); // APENAS OS REVIEWS SEM IDENTIFICAÇÂO, ANONIMOS
+            $comments = EvaluationDAO::get_evals_obs_per_coop($id_user);
+            $evaluation = EvaluationDAO::get_evals_per_coop($id_user);
+
+            #dd($evaluation->punctual_eval);
 
             return view('/evaluation')
-            ->with("request",$request)
-            ->with("avg_ponctuality", '2.0')
-            ->with("avg_satisfaction", '4.7');    
+            ->with("request",$comments)
+            ->with("avg_ponctuality", $evaluation->punctual_eval)
+            ->with("avg_satisfaction", $evaluation->satisf_eval)
+            ->with("count", $evaluation->count);
         }
-
-        $request = RequestDAO::get_comp_conf_requests_by_user($id_user);
-        #dd($request);
         
         return view('/evaluation')->with("request",$request);
     }

@@ -44,8 +44,6 @@ class AddRelationalTables extends Migration
         Schema::table('coop_evaluation', function($table) {
             $table->integer('id_req')->unsigned();
             $table->foreign('id_req')->references('id_req')->on('request')->onDelete('cascade');;
-            $table->integer('id_user_coop')->unsigned();
-            $table->foreign('id_user_coop')->references('id_user')->on('users')->onDelete('cascade');;
         });
 
         Schema::table('request_assignment', function($table) {

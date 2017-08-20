@@ -99,6 +99,7 @@ class AddRelationalTables extends Migration
         Schema::dropIfExists('user_enterprise');
         Schema::dropIfExists('user_cooperative');
         Schema::dropIfExists('request_assignment');
+        Schema::dropIfExists('request_master');
         Schema::dropIfExists('request');
         Schema::dropIfExists('garbage_collector');
         Schema::dropIfExists('garbage');

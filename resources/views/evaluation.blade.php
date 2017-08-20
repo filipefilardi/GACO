@@ -5,30 +5,41 @@
 	<!-- COOP VIEW -->
 	<div class="container">
 		<div class="row">
-			<div class="panel panel-default">			
-				<div class="panel-heading">@lang('app.evaluations')</div>
-				<div class="panel-body">
-					
-					@if(!$request->isEmpty())
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-default">			
+					<div class="panel-heading">@lang('app.evaluations')</div>
+					<div class="panel-body">
+						
+						@if(!$request->isEmpty())
 
-						<div class="row">
-							<div class="col-md-8 col-md-offset-3">
-								<div class="col-md-6">
-									Pontualidade: {{$avg_ponctuality}}	
+						<div class="panel panel-default">
+							<div class="evaluation">
+								<div class="panel-heading">
+									<div class="row">
+										<strong>Média</strong>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<strong>Pontualidade:</strong> {{$avg_ponctuality}}
+										</div>
+										<div class="col-md-6">
+											<strong>Satisfação:</strong> {{$avg_satisfaction}}
+										</div>
+									</div>
 								</div>
-								<div class="col-md-6">
-									Satisfação: {{$avg_satisfaction}}	
-								</div>
+								
+								@foreach($request as $review)
+									<div class="panel-body text-justify list-group-item">
+										{{$review}}
+									</div>
+								@endforeach
+							
 							</div>
 						</div>
-						<div class="row">
-							@foreach($request as $review)
-								{{$review}}
-							@endforeach
-						</div>
-					@else
-						<p class="text-center">Nenhuma avaliação feita até o momento.</p>
-					@endif
+						@else
+							<p class="text-center">Nenhuma avaliação feita até o momento.</p>
+						@endif
+					</div>
 				</div>
 			</div>
 		</div>

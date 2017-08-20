@@ -162,7 +162,7 @@ class RequestDao
         if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
         if(sizeof($errors)>0) return $errors;
 
-        $list = DB::table('request_arc')
+        $list = DB::table('request')
             ->where('id_del', 0)
             ->where('id_user_req', $id_user)
             ->where('id_active', 'N')

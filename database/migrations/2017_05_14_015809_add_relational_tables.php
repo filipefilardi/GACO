@@ -32,11 +32,13 @@ class AddRelationalTables extends Migration
 
         Schema::table('request', function($table) {
             $table->integer('id_user_req')->unsigned();
-            $table->foreign('id_user_req')->references('id_user')->on('users')->onDelete('cascade');; // to be removed when new flow goes in
+            $table->foreign('id_user_req')->references('id_user')->on('users')->onDelete('cascade');; // to be REMOVED when new flow goes in
             $table->integer('id_garbage')->unsigned();
             $table->foreign('id_garbage')->references('id_garbage')->on('garbage')->onDelete('cascade');;
             $table->integer('id_add')->unsigned();
-            $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');; // to be removed when new flow goes in
+            $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');; // to be REMOVED when new flow goes in
+            #$table->integer('id_req_master')->unsigned();
+            #$table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');; // to be ADDED when new flow goes in
         });
 
         Schema::table('request_assignment', function($table) {

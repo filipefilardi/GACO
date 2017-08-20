@@ -13,7 +13,15 @@ class AddProcedures extends Migration
      */
     public function up() {
 
-
+        //DB::unprepared("CREATE OR REPLACE FUNCTION insert_request_batch(OUT status boolean) AS
+        //     $$
+        //         BEGIN
+        //             
+        //         END
+        //     $$
+        //     LANGUAGE plpgsql VOLATILE
+        //     COST 100;"
+        // );
 
 
 

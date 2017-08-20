@@ -370,6 +370,8 @@ class RequestDao
     public static function confirm_request($id_req, $id_user, $id_cat, $conf_token, $dt_collect)
     {
 
+        $tmp = explode("/",$dt_collect);
+        $dt_collect = $tmp[2] .  $tmp[1]  . $tmp[0];
         // VALIDATION BLOCK //////////////
         $errors = array();
 

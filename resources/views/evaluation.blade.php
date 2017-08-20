@@ -69,7 +69,7 @@
 	                            <label for="coment" class="col-md-4 control-label">Comentário</label>
 
 	                            <div class="col-md-6">
-	                                <textarea id="coment" type="coment" class="form-control" name="coment" value="{{ old('coment') }}" required></textarea>
+	                                <textarea id="coment" type="coment" rows="3" class="form-control" name="coment" value="{{ old('coment') }}" required></textarea>
 	                            </div>
 	                        </div>
 

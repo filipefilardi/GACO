@@ -147,8 +147,8 @@
 						@forelse($request as $req)
 							<div class="list-group-item">
 								<div class="row">
-									@if($req->desc_req)
-										<div class="col-md-8">Resíduo: {{$req->desc_req}}</div>
+									@if($req->nm_garbage)
+										<div class="col-md-8">Resíduo: {{$req->nm_garbage}}</div>
 									@else
 										<div class="col-md-8">Resíduo: Não está retornando no método</div>
 									@endif
@@ -183,8 +183,8 @@
 						@forelse($request_acpt as $req)
 							<div class="list-group-item">
 								<div class="row">
-									@if($req->desc_req)
-										<div class="col-md-6">Resíduo: {{$req->desc_req}}</div>
+									@if($req->nm_garbage)
+										<div class="col-md-6">Resíduo: {{$req->nm_garbage}}</div>
 									@else
 										<div class="col-md-6">Resíduo: Não está retornando no método</div>
 									@endif

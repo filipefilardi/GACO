@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Util\Dao\RequestDao;
 use App\Util\Dao\UserDao;
+use App\Util\Dao\EvaluationDao;
 use Auth;
 
 class EvaluationController extends Controller
@@ -44,5 +45,10 @@ class EvaluationController extends Controller
         #dd($request);
         
         return view('/evaluation')->with("request",$request);
+    }
+
+    public function make_evaluation(Request $data){
+        $id_coop = Auth::user()->id_user;
+        EvaluationDAO::insert_evaluation($data->punctual, $data->satisf, $data->$obs, $data->id_req, $id_coop);
     }
 }

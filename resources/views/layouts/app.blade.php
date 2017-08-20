@@ -63,6 +63,7 @@
                                 @if(Auth::user()->id_cat != 4)
                                     <li><a href="{{ url('/home') }}">@lang('app.home')</a></li>
                                     <li><a href="{{ url('/request') }}">@lang('app.request')</a></li>
+                                    <li><a href="/evaluation">@lang('app.completedrequest')</a></li>
                                 @endif
                                 <li><a href="{{ url('/cooperatives') }}">@lang('app.cooperatives')</a></li>
                                 <li><a href="{{ url('/garbage') }}">@lang('app.ewaste')</a></li>
@@ -82,6 +83,7 @@
                                 @endif
                             @else
                                 <li><a href="{{ url('/home') }}">@lang('app.cooperativepanel')</a></li>
+                                <li><a href="/evaluation">@lang('app.evaluations')</a></li>
                             @endif
                         </ul>
                     @endif
@@ -98,9 +100,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    @if(Auth::user()->id_cat != 4)
-                                        <li><a href="/evaluation">@lang('app.completedrequest')</a></li>
-                                    @endif
                                     <li><a href="/settings">@lang('app.settings')</a></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"

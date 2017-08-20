@@ -65,6 +65,6 @@ class EvaluationController extends Controller
 
     public function make_evaluation(Request $data){
         $id_coop = Auth::user()->id_user;
-        EvaluationDAO::insert_evaluation($data->punctual, $data->satisfac, $data->obs, $data->id_req, $id_coop);
+        EvaluationDAO::insert_evaluation($data->punctual, $data->satisfac, $data->obs, $data->id_req);
     }
 }

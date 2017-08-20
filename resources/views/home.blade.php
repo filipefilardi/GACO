@@ -115,7 +115,7 @@
 											</div>
 											<div class="col-md-4">
 												 
-												<div class="col-md-4 col-md-offset-4"><button class="btn btn-default btn-block">Adiar</button></div>
+												<div class="col-md-4 col-md-offset-4"><button data-toggle="modal" data-id="{{$req->id_req}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button></div>
 												<div class="col-md-4"><button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Excluir</button></div>
 											</div>
 										</div>
@@ -202,7 +202,7 @@
 									<div class="col-md-8">Observação: {{$req->observation}} 
 									</div>
 									<div class="col-md-4">
-										<div class="col-md-4"><button class="btn btn-default btn-block">Adiar</button></div>
+										<div class="col-md-4"><button data-toggle="modal" data-id="{{$req->id_req}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button></div>
 										<div class="col-md-4"><button data-toggle="modal" data-id="{{$req->id_req}}" data-target="#confirmrequest" class="open-confirmrequest btn btn-primary">Confirmar</button></div>
 										<div class="col-md-4">
 											<form role="form" method="POST" action="{{ url('/request/cancel') }}">
@@ -348,6 +348,45 @@
 		</div>
 	</div>
 
+	<div id="delayrequest" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header text-center"><h1>Adiar Coleta</h1></div>
+				<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
+						{{ csrf_field() }}
+	            		<input type="hidden" name="id_req"  id="id_req" value="" />
+						
+						<div class="form-group{{ $errors->has('justification') ? ' has-error' : '' }}">
+	                        <label for="justification" class="col-md-4 control-label">Justificativa</label>
+
+	                        <div class="col-md-6">
+	                            <textarea id="justification" rows="3" type="text" class="form-control" name="justification" value="{{ old('justification') }}" required></textarea>
+
+	                            @if ($errors->has('justification'))
+	                                <span class="help-block">
+	                                    <strong>{{ $errors->first('justification') }}</strong>
+	                                </span>
+	                            @endif
+	                        </div>
+	                    </div>
+
+						<div class="row">
+							<div class="col-md-6 col-md-offset-4">
+								<button class="btn btn-primary btn-block">Adiar</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-md-offset-4" style="padding-top: 5px">
+								<button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>                
+		</div>
+	</div>
+
 <script type="text/javascript">
 	$(document).on("click", ".open-cancelrequest", function () {
 	     var id_req = $(this).data('id');
@@ -360,6 +399,11 @@
 	});
 
 	$(document).on("click", ".open-confirmrequest", function () {
+	     var id_req = $(this).data('id');
+	     $(".modal-body #id_req").val( id_req );
+	});
+	
+	$(document).on("click", ".open-delayrequest", function () {
 	     var id_req = $(this).data('id');
 	     $(".modal-body #id_req").val( id_req );
 	});

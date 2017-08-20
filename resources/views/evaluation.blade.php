@@ -9,7 +9,7 @@
 
 				<div class="list-group">
 					
-					@foreach($request as $req)
+					@forelse($request as $req)
 					<div class="list-group-item">
 						<div class="row">
 							<div class="col-md-8"> Alguma info de identificação do request, talvez data e alguma outra coisa ({{$req->dt_arc}}, {{$req->conf_token}})</div>
@@ -20,7 +20,9 @@
 							</div>
 						</div>
 					</div>
-					@endforeach
+					@empty
+						<p class="text-center">Nenhuma coleta realizada até o momento. Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p></p>
+					@endforelse
 
 				</div>
 
@@ -69,7 +71,7 @@
 	                            <label for="coment" class="col-md-4 control-label">Comentário</label>
 
 	                            <div class="col-md-6">
-	                                <textarea id="coment" type="coment" class="form-control" name="coment" value="{{ old('coment') }}" required></textarea>
+	                                <textarea id="coment" type="coment" rows="3" class="form-control" name="coment" value="{{ old('coment') }}" required></textarea>
 	                            </div>
 	                        </div>
 

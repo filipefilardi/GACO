@@ -20,7 +20,7 @@ class CreateRequestTable extends Migration
             $table->string('desc_req')->nullable();
             $table->string('status_req');
             $table->integer('quantity');
-            $table->string('conf_token');
+            $table->string('conf_token'); // to be removed once new flow goes in
             $table->string('id_active', 1);
             $table->date('dt_req');
             $table->date('dt_collect')->nullable();

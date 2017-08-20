@@ -110,7 +110,7 @@
                             <label for="observation" class="col-md-3 control-label">Observação</label>
 
                             <div class="col-md-7">
-                                <input id="observation" type="text" maxlength="50" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
+                                <input id="observation" type="text" maxlength="140" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
 
                                 @if ($errors->has('observation'))
                                     <span class="help-block">

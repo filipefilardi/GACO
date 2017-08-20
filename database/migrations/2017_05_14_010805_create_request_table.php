@@ -16,7 +16,7 @@ class CreateRequestTable extends Migration
         Schema::create('request', function (Blueprint $table) {
             $table->increments('id_req');
             $table->string('state')->nullable();
-            $table->string('observation', 50)->nullable();
+            $table->string('observation', 140)->nullable();
             $table->string('desc_req')->nullable();
             $table->string('status_req');
             $table->integer('quantity');

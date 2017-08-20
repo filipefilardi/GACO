@@ -55,7 +55,7 @@ class HomeController extends Controller
             $request = RequestDAO::get_pend_requests_for_coop();
             $request_acpt = RequestDAO::get_acpt_requests_by_coop($id_user);
         }
-
+        
         if ($id_cat == 4) return redirect('admin');
         
         return view('home')->with('request', $request)

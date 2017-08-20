@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequestTable extends Migration
+class CreateRequestMasterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateRequestTable extends Migration
      */
     public function up()
     {
-        Schema::create('request', function (Blueprint $table) {
-            $table->increments('id_req');
-            $table->string('state')->nullable();
-            $table->string('observation', 140)->nullable();
-            $table->string('desc_req')->nullable();
+        Schema::create('request_master', function (Blueprint $table) {
+            $table->increments('id_req_master');
             $table->string('status_req');
-            $table->integer('quantity');
-            $table->string('conf_token'); // to be removed once new flow goes in
+            $table->string('conf_token');
             $table->string('id_active', 1);
-            $table->date('dt_req'); // to be removed once new flow goes in
+            $table->date('dt_req');
             $table->date('dt_collect')->nullable();
             $table->timestamps();
             $table->integer('lst_chg_by')->nullable();

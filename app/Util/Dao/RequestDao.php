@@ -195,10 +195,14 @@ class RequestDao
     {
 
         $list = DB::table('request')
-            ->where('id_del', 0)
-            ->where('id_active', 'Y')
-            ->where('status_req', 'PEND')
-            ->orderBy('id_req')
+        ->join('garbage', function ($join) {
+            $join->on('request.id_garbage', '=', 'garbage.id_garbage')
+                 ->where('garbage.id_del', 0);
+            })
+            ->where('request.id_del', 0)
+            ->where('request.id_active', 'Y')
+            ->where('request.status_req', 'PEND')
+            ->orderBy('request.id_req')
             ->get();
                     
         return $list;
@@ -213,10 +217,14 @@ class RequestDao
                  ->where('request.id_del', 0)
                  ->where('request.id_active', 'Y');
             })
+            ->join('garbage', function ($join) {
+            $join->on('request.id_garbage', '=', 'garbage.id_garbage')
+                 ->where('garbage.id_del', 0);
+            })
             //->join('request_assignment', 'request.id_req', '=', 'request_assignment.id_req')
             ->where('request_assignment.id_del', 0)
             ->where('request_assignment.id_user_assign', $id_user)
-            ->select('request.*','dt_predicted')
+            ->select('request.*','dt_predicted','nm_garbage')
             ->orderBy('id_req')
             ->get();        
         return $list;

@@ -41,6 +41,13 @@ class AddRelationalTables extends Migration
             #$table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');; // to be ADDED when new flow goes in
         });
 
+        Schema::table('coop_evaluation', function($table) {
+            $table->integer('id_req')->unsigned();
+            $table->foreign('id_req')->references('id_req')->on('request')->onDelete('cascade');;
+            $table->integer('id_user_coop')->unsigned();
+            $table->foreign('id_user_coop')->references('id_user')->on('users')->onDelete('cascade');;
+        });
+
         Schema::table('request_assignment', function($table) {
             $table->integer('id_req')->unsigned();
             $table->foreign('id_req')->references('id_req')->on('request')->onDelete('cascade');;
@@ -101,6 +108,7 @@ class AddRelationalTables extends Migration
         Schema::dropIfExists('request_assignment');
         Schema::dropIfExists('request_master');
         Schema::dropIfExists('request');
+        Schema::dropIfExists('coop_evaluation');
         Schema::dropIfExists('garbage_collector');
         Schema::dropIfExists('garbage');
         Schema::dropIfExists('address');

@@ -336,7 +336,9 @@ class RequestDao
 
         if(sizeof($errors)>0) return $errors;
 
-        DB::table('request_assignment')
+        $res = 1;
+        try{
+            DB::table('request_assignment')
             ->whereExists(function ($query) use($id_req) {
                 $query->select(DB::raw(1))
                       ->from('request')
@@ -363,7 +365,11 @@ class RequestDao
                 'dt_predicted' => $dt_predicted,
                 'id_del' => 0
             ]);
-      
+
+        }catch(\Exception $e){
+            array_push($errors,"Data invalida");
+        }
+        
         return $errors;
     }
 
@@ -387,7 +393,9 @@ class RequestDao
 
             $today = date("Ymd");
             
-            DB::table('request')
+
+            try{
+                DB::table('request')
                 ->whereExists(function ($query) use($id_req, $conf_token) {
                 $query->select(DB::raw(1))
                     ->from('request')
@@ -435,6 +443,12 @@ class RequestDao
                     'dt_sign' => $today
                 ]);
 
+
+            }catch(\Exception $e){
+                array_push($errors,"Data invalida");
+                #dd($e);
+            }
+            
         }
 
         $id_req_confirmed = -1;
@@ -444,6 +458,8 @@ class RequestDao
                 ->where('dt_sign', $today)
                 ->where('id_del', 0)
                 ->value('id_req');
+
+        #dd($id_req);
 
         if($id_req_confirmed != $id_req) array_push($errors,'Seu token de confirmação está incorreto!');
         else $errors = array();

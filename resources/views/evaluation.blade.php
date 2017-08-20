@@ -9,7 +9,7 @@
 				<div class="panel-heading">@lang('app.evaluations')</div>
 				<div class="panel-body">
 					
-					@if($request->isEmpty())
+					@if(!$request->isEmpty())
 
 						<div class="row">
 							<div class="col-md-8 col-md-offset-3">

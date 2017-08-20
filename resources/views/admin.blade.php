@@ -13,6 +13,8 @@
               
               <div class="panel-body">
                 
+                @include('layouts.messages')
+
                <a href="#form_coop" class="btn btn-default btn-block" data-toggle="collapse">Cadastrar uma Cooperativa</a>
                 
                 <div id="form_coop" class="main-container collapse">

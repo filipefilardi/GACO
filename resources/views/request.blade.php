@@ -149,9 +149,9 @@
 
                         <div class="row">
                             <div class="col-md-7 col-md-offset-3">
-    	                    	<button type="submit" class="btn btn-primary btn-block">
+    	                    	<a data-toggle="modal" data-target="#confirmdonation" class="open-confirmdonation btn btn-primary btn-block">
     	                        	Registrar
-    	                    	</button>
+    	                    	</a>
     	                    </div>
     	                 </div>
 
@@ -196,6 +196,39 @@
                             </div>
                         </div>
     -->
+
+                        <!-- MODAL -->
+                       <div id="confirmdonation" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center"><h1>Termos de Coleta</h1></div>
+                                    <div class="modal-body" style=" text-align: justify;text-justify: inter-word; font-size: 17px;">
+                                    @if(Auth::user()->id_cat == 2)
+                                        <!-- PESSOAS JURIDICAS -->
+                                        <p>Apenas para pessoas jurídicas, as seguintes condições são necessárias para efetuar uma doação:</p>
+                                        <ol>
+                                            <li>Devido a atenção especial a doação, é necessario <strong>taxar R$ 4,50 cada KM</strong> que a cooperativa se deslocará até o endereço escolhido da pessoa júridica;</li>
+                                            <li>A taxação será cobrada no ato da coleta pela própria cooperativa. De maneira que nenhuma transação seja feita pela plataforma GACO;</li>
+                                            <li>A taxação resultará em uma certicação de que seu resíduo foi coletado, também entregue na coleta;</li>
+                                        </ol>
+                                        <p><strong>Ao confirmar seu pedido e coleta, você diz que entende, aceita e cumprirá com essa cobrança;</strong></p>
+                                    @else
+                                        <!-- COLETIVOS E PESSOAS FISICAS -->
+                                        <p>Ao fazer a coleta, eu entendo que:</p>
+                                        <ol>
+                                            <li>Estou doando de forma voluntária o meu eletrônico sem receber qualquer remuneração em troca;</li>
+                                            <li>Não será cobrado nenhum tipo de taxa, ou seja, o serviço prestado por essa forma é totalmente gratuito;</li>
+                                            <li>Eu entendo que as cooperativas tem um custo para coletar o meu resíduo, portanto me comprometo a cumprir a minha parte como doador;</li>
+                                            <li>Entendo que posso cancelar ou adiar os meus pedidos, e o farei mediante a justificativa e com pelo menos um dia de antecedência a coleta.</li>
+                                        </ol>
+                                    @endif
+                                        <button class="btn btn-primary btn-block">Confirmar Coleta</button>
+                                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar Coleta</button>
+
+                                    </div>
+                                </div>                
+                            </div>
+                        </div>
                    </form>
 			</div>
 		</div>

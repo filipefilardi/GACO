@@ -53,10 +53,14 @@ class EvaluationController extends Controller
             ->with("avg_ponctuality", $punctual_eval)
             ->with("avg_satisfaction", $satisf_eval)
             ->with("count", $count);
+        } elseif ($id_cat < 3 and $id_cat >=1) {
+
+            $request = RequestDAO::get_comp_conf_requests_by_user($id_user);
+            return view('/evaluation')->with("request",$request);
+        
         }
         
-        $request = RequestDAO::get_comp_conf_requests_by_user($id_user);
-        return view('/evaluation')->with("request",$request);
+        return redirect('/home');
     }
 
     public function make_evaluation(Request $data){

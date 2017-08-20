@@ -8,7 +8,7 @@
 			<div class="panel-heading">@lang('app.request')</div>
 			
 			<div class="panel-body">
-				 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}">
+				 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}" onkeypress="return event.keyCode != 13;">
 						{{ csrf_field() }}
 
                         @include('layouts.messages')

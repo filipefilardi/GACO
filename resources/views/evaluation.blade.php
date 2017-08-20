@@ -60,8 +60,10 @@
 								<div class="col-md-8"> Alguma info de identificação do request, talvez data e alguma outra coisa ({{$req->dt_req}}, {{$req->conf_token}})</div>
 								<div class="col-md-4">
 									<div class="col-md-4 col-md-offset-8">
-										@if($req->eval_flag == 0)
+										@if($eval_flag == 0)
 											<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">Avaliar</button>
+										@else
+											<div style="margin-top: 60px;"></div>
 										@endif
 									</div>
 								</div>

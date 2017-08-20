@@ -56,7 +56,7 @@ class EvaluationController extends Controller
         } elseif ($id_cat < 3 and $id_cat >=1) {
 
             $request = RequestDAO::get_comp_conf_requests_by_user($id_user);
-            return view('/evaluation')->with("request",$request);
+            return view('/evaluation')->with("request",$request)->with("eval_flag", "0");
         
         }
         

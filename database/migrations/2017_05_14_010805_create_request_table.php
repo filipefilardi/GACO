@@ -22,7 +22,7 @@ class CreateRequestTable extends Migration
             $table->integer('quantity');
             $table->string('conf_token'); // to be removed once new flow goes in
             $table->string('id_active', 1);
-            $table->date('dt_req');
+            $table->date('dt_req'); // to be removed once new flow goes in
             $table->date('dt_collect')->nullable();
             $table->timestamps();
             $table->integer('lst_chg_by')->nullable();

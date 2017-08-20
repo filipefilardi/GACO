@@ -90,7 +90,8 @@ class UserDao
                         $data['cpf'] = preg_replace("/[^0-9]/", "", $data['cpf'] );
                         
                         $tmp = explode("/",$data['date']);
-                        $date = $tmp[1] . "/" .  $tmp[0] . "/"  . $tmp[2];
+                        #$date = $tmp[1] . "/" .  $tmp[0] . "/"  . $tmp[2];
+                        $date =  $tmp[2] .  $tmp[1]  . $tmp[0];
 
                         DB::table('user_person')->insert([
                             'id_user' => $id_user,

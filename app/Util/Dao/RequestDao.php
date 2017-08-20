@@ -325,7 +325,7 @@ class RequestDao
     public static function assign_request($id_req, $id_user, $dt_predicted)
     {
         $tmp = explode("/",$dt_predicted);
-        $dt_predicted = $tmp[1] . "/" .  $tmp[0] . "/"  . $tmp[2];
+        $dt_predicted = $tmp[2] .  $tmp[1]  . $tmp[0];
         // VALIDATION BLOCK //////////////
         $errors = array();
 

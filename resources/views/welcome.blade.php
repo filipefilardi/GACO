@@ -54,42 +54,50 @@
 
         <div class="hero">
             <h1>Não acumule lixo eletrônico</h1>
-            <p>Ajude dedicando apenas alguns minutos a cidade de São Paulo a se tornar uma cidade mais limpa e bonita, totalmente sem custos.</p>
+            <div class="text-justify">
+                <p>Ajude dedicando apenas alguns minutos a cidade de São Paulo a se tornar uma cidade mais limpa e bonita, totalmente sem custos.</p>
+            </div>
             <a href="{{ url('/register') }}" class="btn btn-primary">COMECE AGORA</a>
-            <p style="margin-top:80px;"><span class="glyphicon glyphicon-chevron-down"></span></p>
+            <p style="margin-top:80px;"><a href="#descubra" style="color: white; font-size: 40px"><i class="fa fa-angle-down" aria-hidden="true"></i></p></a>
         </div>
 
     </div>
     <div class="content">
     <div class="marketing">
         <div class="container" id="descubra">
-            <h1 class="text-center header">Descubra sobre GACO</h1>
-            <div class="right-text">
-                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-                <div class="right-img"></div>
+            <h1 class="text-center header">Projeto GACO</h1>
+            <div class="right-text text-justify" style="font-size: 19px;">
+                
+                <iframe style="display: block; margin: 0 auto; margin-bottom: 30px;" width="853" height="480" src="https://www.youtube.com/embed/fe_Xx49nODc" frameborder="0" allowfullscreen></iframe>
+
+                <p>O Projeto GACO surgiu em 2015 como proposta de reduzir o impacto dos resíduos eletroeletrônicos na cidade de São Paulo. Assim, Filipe Filardi, Sabrina Gonçalves, Victor Edoardo  Garcia e Thiago Nobayashi, se reuniram buscando desenvolver uma plataforma que conecta as pessoas que querem descartar seus resíduos de forma apropriada e as  cooperativas de reciclagem capacitadas a dar destinação correta a esses resíduos.</p>
+
             </div>
-        </div>
+            
+        </div>        
     </div>
 
-    <!--
+    
     <div class="marketing">
         <div class="container" id="descubra">
-            <h1 class="text-center header">Descubra sobre GACO</h1>
-            <div class="row">
-                <div class="col-lg-4">
-                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
-                    <h2>Saúde</h2>
-                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-                </div>
-                <div class="col-lg-4">
-                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
-                    <h2>Logistica Reversa</h2>
-                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-                </div>
-                <div class="col-lg-4">
-                    <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
-                    <h2>Sustentabilidade</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <h1 class="text-center header">Como funciona</h1>
+            <div class="row" style="font-size: 15px;">
+                <div class="text-justify">
+                    <div class="col-lg-4">
+                        <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
+                        <h2>Agendamento</h2>
+                        <p>Atravéz da plataforma, você pode se comunicar com as cooperativas parceiras que coletam o resíduo em sua casa gratuitamente.</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
+                        <h2>Logistica Reversa</h2>
+                        <p>A cooperativa é capacitada no manuseio do seu equipamento de forma responsável.</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
+                        <h2>Colaboratividade</h2>
+                        <p>O GACO é um projeto colaborativo, entre no nosso repositório para entender como você pode colaborar ainda mais com a sustentabilidade na cidade de São Paulo.</p>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -99,28 +107,35 @@
                 </div>
             </div>
         </div>
-        -->
+        
         <div class="white-background">
             <div class="container" id="parcerias">
                 <h1 class="text-center header">Parcerias</h1>
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
+                        <a href="http://www.lassu.usp.br"><img src="/img/lassu_logo.png" class="img-responsive img-parcerias"></a>
                     </div>
-                    <div class="col-lg-4">
-                        <a href="http://www.lassu.usp.br"><img src="/img/lassu.png" class="parcerias"></a>
+                    <div class="col-lg-3">
+                        <a href="http://www.institutogea.org.br/"><img src="/img/igea_logo.png" class="img-responsive img-parcerias"></a>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
+                        <a href="https://www.facebook.com/COOPERECIFAVELA"><img src="/img/recifavela_logo.png" class="img-responsive img-parcerias"></a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="https://www.coopernovacotiarecicla.com/"><img src="/img/coopernova_logo.png" class="img-responsive img-parcerias"></a>
                     </div>
                 </div>
+                <!-- 
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-4">
-                        <a href="{{ url('/register') }}" class="btn btn-primary btn-block">COMECE AGORA</a>
+                        <a href="{{ url('/register') }}" class="btn btn-primary btn-block" style="margin-bottom:15px; margin-top: 15px;">COMECE AGORA</a>
                     </div>
                 </div>
+                -->
             </div>
         </div>
-
+<!-- 
         <div class="container" id="contato">
             <h1 class="text-center header">Contato</h1>
             <h3 class="text-center">Nosso Contato</h3>
@@ -130,7 +145,8 @@
                     <a href="{{ url('/register') }}" class="btn btn-primary btn-block" style="margin-bottom:15px;">COMECE AGORA</a>
                 </div>
             </div>
-        </div>  
+        </div>
+         -->  
     </div>
 
     </content>
@@ -148,11 +164,11 @@
                 <p class="footer-links">
                     <a href="#inicio">Início</a>
                     ·
-                    <a href="#descubra">Descubra</a>
+                    <a href="#descubra">GACO</a>
                     ·
                     <a href="#parcerias">Parcerias</a>
-                    ·
-                    <a href="#contato">Contato</a>
+                
+                    
                 </p>
 
                 <p>GACO &copy; 2017</p>

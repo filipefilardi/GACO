@@ -199,10 +199,6 @@
   padding-bottom: 50px;
 }
 
-.parcerias {
-  height: 120px;
-}
-
 .marketing .right-text{
 
 }
@@ -265,4 +261,13 @@
   .featurette-heading {
     margin-top: 120px;
   }
+}
+
+.img-parcerias {
+  height: 100px;
+
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+
 }

@@ -64,13 +64,23 @@ class SettingsController extends Controller
     }
 
     public function deleteAccount(Request $request){
-    	$id_user = Auth::user()->id_user;
+        
+        if(Auth::attempt(['email' => Auth::user()->email, 'password' => $request->password])){
+            $id_user = Auth::user()->id_user;
 
-    	$res = UserDao::userStatusToggle($id_user, 1);
+            $res = UserDao::userStatusToggle($id_user, 1);
 
-    	Auth::logout();
-	    Session::flush();
-	    return redirect('/');
+            Auth::logout();
+            Session::flush();
+            return redirect('/');
+        }else{
+            $request->session()->flash('message', 'Erro ao desativar conta. Senha incorreta.');
+            $request->session()->flash('alert-warning', 'warning');
+        }
+
+        $addresses = AddressDao::getAddresses(Auth::user()->id_user);
+        return redirect('/settings')->with('addresses',$addresses);
+    	
     	
     }
 

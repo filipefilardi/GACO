@@ -209,10 +209,24 @@
                     <h3 class="col-md-offset-3">@lang('app.deleteaccount')</h3>
                     <form class="form-horizontal" role="form" method="POST" action="/delete/account">
                         {{ csrf_field() }}
-                     <div class="form-group">
-                         <div class="col-md-7 col-md-offset-3">
+                        <div class="form-group">
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <label for="password" class="col-md-3 control-label">@lang('app.password')</label>
+
+                                    <div class="col-md-7">
+                                        <input id="password" type="password" class="form-control" name="password" required>
+
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            <div class="col-md-7 col-md-offset-3">
                             <p>@lang('app.deleteacctext')</p>
-                         </div>
+                            </div>
+
                             <div class="col-md-7 col-md-offset-3">
                                 <button type="submit" class="btn btn-danger btn-block">
                                     @lang('app.deleteaccount')

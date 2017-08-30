@@ -21,6 +21,30 @@ class AddressDao
         return $res;
     }
 
+    public static function deleteAddress($id_user, $id_address)
+    {
+        $res = 1;
+
+        try{
+            
+            DB::table('address')
+            ->where('id_user', $id_user)
+            ->where('id_add', $id_address)
+            ->update(['id_del' => 1]);
+
+
+        }catch(\Exception $e){
+            dd($e);
+            $res = 0;
+        }
+
+        
+        
+
+
+        return $res;
+    }
+
 
     /*Insert a new address and update the other addresses if the current one is the main address*/
     public static function insertAndUpdateAddress($id_user, $data)

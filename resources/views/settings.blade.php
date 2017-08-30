@@ -143,13 +143,29 @@
                 <a href="#outro" class="btn btn-default btn-block" data-toggle="collapse">@lang('app.myaddresses')</a>
 
                 <div id="outro" class="main-container collapse">
-                	@forelse($addresses as $a)
-					    <div class="settings-addressbox">{{$a->nm_st}} {{$a->id_st_numb}}, {{$a->id_comp}}</div>
-					@empty
-					    <div class="text-center">
-                            <p>Ainda não possui nenhum endereço. Clique <a href="#add_adress" data-toggle="collapse">aqui</a> para cadastrar.</p>
-                        </div>
-					@endforelse
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/delete/address') }}">
+                    	{{ csrf_field() }}
+                        @forelse($addresses as $a)
+                                @if($a->main_address == 1)
+                                    <div class="settings-addressbox">{{$a->nm_st}} {{$a->id_st_numb}}, {{$a->id_comp}}</div>
+                                @else
+                                    <div class="settings-addressbox">
+
+                                        {{$a->nm_st}} {{$a->id_st_numb}}, {{$a->id_comp}} 
+
+                                        <button type="submit" class="btn btn-danger" name="delete_button" value={{$a->id_add}}>
+                                            @lang('app.deleteaccount')
+                                        </button>
+
+                                    </div>
+                                @endif
+    					    
+    					@empty
+    					    <div class="text-center">
+                                <p>Ainda não possui nenhum endereço. Clique <a href="#add_adress" data-toggle="collapse">aqui</a> para cadastrar.</p>
+                            </div>
+    					@endforelse
+                    </form>
                 	
                 </div>
                 

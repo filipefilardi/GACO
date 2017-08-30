@@ -84,5 +84,24 @@ class SettingsController extends Controller
     	
     }
 
+    public function deleteAddress(Request $request){
+        
+        
+        $res = AddressDao::deleteAddress(Auth::user()->id_user, $request->delete_button);
+
+        if($res){
+            $request->session()->flash('message', 'Endereço removido com sucesso!');
+            $request->session()->flash('alert-success', 'success');
+        }else{
+            $request->session()->flash('message', 'Erro ao deletar endereço. Por favor, tente novamente.');
+            $request->session()->flash('alert-warning', 'warning');
+        }
+
+        $addresses = AddressDao::getAddresses(Auth::user()->id_user);
+        return redirect('/settings')->with('addresses',$addresses);
+        
+        
+    }
+
     
 }

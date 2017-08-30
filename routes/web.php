@@ -41,6 +41,7 @@ Route::get('/about', 'HomeController@index_about');
 /* SETTINGS */
 Route::get('/settings', 'SettingsController@indexSettings');
 Route::post('/register/address', 'SettingsController@registerAddress');
+Route::post('/delete/address', 'SettingsController@deleteAddress');
 Route::post('/update/password', 'SettingsController@updatePassword');
 Route::post('/delete/account', 'SettingsController@deleteAccount');
 

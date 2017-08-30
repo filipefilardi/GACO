@@ -47,7 +47,7 @@ return [
 	'confirmpassword' => 'Confirmação de Senha',
 	'register' => 'Registrar',
 	'deleteaccount' => 'Deletar Conta',
-	'deleteacctext' => 'Esteja certo que você quer deletar sua conta. Não se preocupe, você pode reativa-la.',
+	'deleteacctext' => 'Esteja certo que você quer deletar sua conta. Não se preocupe, você pode reativá-la.',
 	'principaladdress' => 'Endereço Principal',
 	'postalcode' => 'CEP',
 	'apartment' => 'Complemento',

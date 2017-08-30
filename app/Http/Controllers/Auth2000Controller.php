@@ -15,10 +15,16 @@ class Auth2000Controller extends Controller
 
     public function loginActivateAccount(Request $request){
     	# login manually
-    	Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-    	$this->activateAccount(Auth::user());
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $this->activateAccount(Auth::user());
+            return redirect('/home');
+        }else{
+            $request->session()->flash('message', 'Erro ao ativar conta. Email ou senha incorreta.');
+            $request->session()->flash('alert-warning', 'warning');
+            return view('activate_account');
+        }
     	
-	    return redirect('/home');
+    	
     }
 
 	public function activateAccount($user){

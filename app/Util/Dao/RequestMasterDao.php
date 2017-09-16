@@ -5,7 +5,7 @@ namespace App\Util\Dao;
 use DB;
 use App\Util\Utilities;
 
-class RequestDao {
+class RequestMasterDao {
 
 // status_req in (PEND, ACPT, COMP, CNCL) Pending, Accepted, Completed, Canceled
 
@@ -30,7 +30,7 @@ class RequestDao {
         $today = date("Ymd");
 
         
-        DB::table('request')
+        DB::table('request_master')
         ->whereExists(function ($query) use($id_garbage) {
             $query->select(DB::raw(1))
                   ->from('garbage')
@@ -52,12 +52,12 @@ class RequestDao {
                   ->whereRaw('address.id_del = ' . 0);
         })
         ->insert([
-            'id_garbage' => $id_garbage,
+            //'id_garbage' => $id_garbage,
             'id_user_req' => $id_user,
-            'observation' => $observation,
-            'state' => $state,
-            'desc_req' => $desc_req,
-            'quantity' => $quantity,
+            //'observation' => $observation,
+            //'state' => $state,
+            //'desc_req' => $desc_req,
+            //'quantity' => $quantity,
             'status_req' => 'PEND',
             'conf_token' => $conf_token,
             'dt_req' =>$today,

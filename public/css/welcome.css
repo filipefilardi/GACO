@@ -164,6 +164,10 @@
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
+body {
+  background-color: #ffffff;
+}
+
 /* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
   margin-bottom: 20px;
@@ -195,12 +199,11 @@
 }
 
 .marketing .white-background{
-  background-color: white;
   padding-bottom: 50px;
 }
 
-.marketing .right-text{
-
+.marketing .gray-background{
+  background-color: #f0f1f5;
 }
 
 .marketing .right-img{

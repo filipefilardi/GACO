@@ -19,52 +19,56 @@
 
             
         </style>
+
     </head>
     <body>
 
         <div class="header-nightsky" id="inicio">
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <a class="navbar-brand" href="#">GACO</a>
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+            <div class="fade">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <a class="navbar-brand" href="#">GACO</a>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#gaco">GACO</a></li>
+                                    <li><a href="#funcionamento">Como funciona</a></li>
+                                    <li><a href="#parcerias">Parcerias</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li><a href="{{ url('/register') }}">Cadastre-se</a></li>
+                            <li><a href="{{ url('/login') }}">Entrar</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-right">
-                        
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#descubra">Descubra</a></li>
-                                <li><a href="#parcerias">Parcerias</a></li>
-                                <li><a href="#contato">Contato</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li><a href="{{ url('/register') }}">Cadastre-se</a></li>
-                        <li><a href="{{ url('/login') }}">Entrar</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
 
-        <div class="hero">
-            <h1>Não acumule lixo eletrônico</h1>
-            <div class="text-justify">
-                <p>Ajude dedicando apenas alguns minutos a cidade de São Paulo a se tornar uma cidade mais limpa e bonita, totalmente sem custos.</p>
+            <div class="hero">
+                <h1>Não acumule lixo eletrônico</h1>
+                <div class="text-justify">
+                    <p>Ajude a cidade de São Paulo, dedicando apenas alguns minutos, a se tornar uma cidade mais limpa e bonita, totalmente sem custos.</p>
+                </div>
+                <a href="{{ url('/register') }}" class="btn btn-primary">COMECE AGORA</a>
+                <p style="margin-top:80px;"><a href="#descubra" style="color: white; font-size: 40px"><i class="fa fa-angle-down" aria-hidden="true"></i></p></a>
             </div>
-            <a href="{{ url('/register') }}" class="btn btn-primary">COMECE AGORA</a>
-            <p style="margin-top:80px;"><a href="#descubra" style="color: white; font-size: 40px"><i class="fa fa-angle-down" aria-hidden="true"></i></p></a>
+            </div>
         </div>
 
-    </div>
     <div class="content">
     <div class="marketing">
-        <div class="container" id="descubra">
+        <div class="container" id="gaco">
+            <div class="fade">
             <h1 class="text-center header">Projeto GACO</h1>
             <div class="right-text text-justify" style="font-size: 19px;">
                 
@@ -73,30 +77,33 @@
                 <p>O Projeto GACO surgiu em 2015 como proposta de reduzir o impacto dos resíduos eletroeletrônicos na cidade de São Paulo. Assim, Filipe Filardi, Sabrina Gonçalves, Victor Edoardo  Garcia e Thiago Nobayashi, se reuniram buscando desenvolver uma plataforma que conecta as pessoas que querem descartar seus resíduos de forma apropriada e as  cooperativas de reciclagem capacitadas a dar destinação correta a esses resíduos.</p>
 
             </div>
-            
+            </div>
         </div>        
     </div>
 
     
     <div class="marketing">
-        <div class="container" id="descubra">
+        <div class="gray-background">
+        <div class="container" id="funcionamento">
+        <div class="fade">
             <h1 class="text-center header">Como funciona</h1>
             <div class="row" style="font-size: 15px;">
                 <div class="text-justify">
                     <div class="col-lg-4">
-                        <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
+                        <img src="/img/file.png" alt="Agendamento" width="180" height="180">
                         <h2>Agendamento</h2>
-                        <p>Atravéz da plataforma, você pode se comunicar com as cooperativas parceiras que coletam o resíduo em sua casa gratuitamente.</p>
+                        <p>Atravéz da plataforma, você pode se comunicar com as cooperativas parceiras, escolhendo qual resíduo eletrônico você deseja doar gratuitamente.</p>
                     </div>
                     <div class="col-lg-4">
-                        <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
-                        <h2>Logistica Reversa</h2>
-                        <p>A cooperativa é capacitada no manuseio do seu equipamento de forma responsável.</p>
+                        <img src="/img/laptop.png" alt="Coleta" width="180" height="180">
+                        <!-- <h2>Logistica Reversa</h2> -->
+                        <h2>Coleta</h2>
+                        <p>A cooperativa é capacitada no manuseio do seu equipamento de forma responsável e irá coletar seu resíduo assim que possível.</p>
                     </div>
                     <div class="col-lg-4">
-                        <img class="img-circle" src="/img/carousel_1.jpg" alt="Generic placeholder image" width="180" height="180">
+                        <img src="/img/planet-earth.png" alt="Colaboratividade" width="180" height="180">
                         <h2>Colaboratividade</h2>
-                        <p>O GACO é um projeto colaborativo, entre no nosso repositório para entender como você pode colaborar ainda mais com a sustentabilidade na cidade de São Paulo.</p>
+                        <p>O GACO é um projeto colaborativo, entre no nosso  <a href="https://github.com/filipefilardi/GACO" target="_blank" style="color: #385169;">repositório</a> para entender como você pode colaborar ainda mais com a sustentabilidade na cidade de São Paulo.</p>
                     </div>
                 </div>
             </div>
@@ -106,8 +113,10 @@
                     <a href="{{ url('/register') }}" class="btn btn-primary join-btn">COMECE AGORA</a>
                 </div>
             </div>
+            </div>
         </div>
-        
+        </div>
+        <div class="fade">
         <div class="white-background">
             <div class="container" id="parcerias">
                 <h1 class="text-center header">Parcerias</h1>
@@ -134,6 +143,7 @@
                 </div>
                 -->
             </div>
+        </div>
         </div>
 <!-- 
         <div class="container" id="contato">
@@ -164,7 +174,9 @@
                 <p class="footer-links">
                     <a href="#inicio">Início</a>
                     ·
-                    <a href="#descubra">GACO</a>
+                    <a href="#gaco">GACO</a>
+                    ·
+                    <a href="#funcionamento">Como funciona</a>
                     ·
                     <a href="#parcerias">Parcerias</a>
                 
@@ -177,4 +189,29 @@
 
         <script src="/js/app.js"></script>
     </body>
+            <script type="text/javascript">
+            $(window).on("load",function() {
+              function fade(pageLoad) {
+                var windowTop=$(window).scrollTop(), windowBottom=windowTop+$(window).innerHeight();
+                var min=0.3, max=1, threshold=0.01;
+                
+                $(".fade").each(function() {
+                  /* Check the location of each desired element */
+                  var objectHeight=$(this).outerHeight(), objectTop=$(this).offset().top, objectBottom=$(this).offset().top+objectHeight;
+                  
+                  /* Fade element in/out based on its visible percentage */
+                  if (objectTop < windowTop) {
+                    if (objectBottom > windowTop) {$(this).fadeTo(0,min+((max-min)*((objectBottom-windowTop)/objectHeight)));}
+                    else if ($(this).css("opacity")>=min+threshold || pageLoad) {$(this).fadeTo(0,min);}
+                  } else if (objectBottom > windowBottom) {
+                    if (objectTop < windowBottom) {$(this).fadeTo(0,min+((max-min)*((windowBottom-objectTop)/objectHeight)));}
+                    else if ($(this).css("opacity")>=min+threshold || pageLoad) {$(this).fadeTo(0,min);}
+                  } else if ($(this).css("opacity")<=max-threshold || pageLoad) {$(this).fadeTo(0,max);}
+                });
+              } fade(true); //fade elements on page-load
+              $(window).scroll(function(){
+                fade(false);}
+                ); //fade elements on scroll
+            });
+        </script>
 </html>

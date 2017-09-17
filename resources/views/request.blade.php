@@ -15,7 +15,7 @@
                         <div class="parent">
                             <div class="repeatable">
             					<div class="form-group{{ $errors->has('id_garbage_1') ? ' has-error' : '' }}">
-            							<label class="col-md-3 control-label">Resíduo</label>
+            							<label class="col-md-3 control-label">@lang('app.residue')</label>
             	                    <div class="col-md-7">
             							<select class="form-control" id="id_garbage_1" name="id_garbage_1">
             					 		@foreach ($garbage as $garbage)
@@ -26,12 +26,12 @@
                                 </div>
 
                                 <div style="display:none" id="status_tv_1" class="form-group{{ $errors->has('status_tv_1') ? ' has-error' : '' }}">
-                                    <label for="status_tv_1" class="col-md-3 control-label">Condição</label>
+                                    <label for="status_tv_1" class="col-md-3 control-label">@lang('app.condition')</label>
 
                                     <div class="col-md-7">
                                         <select class="form-control" name="status_tv_1" id="status_tv_1">
-                                            <option>Aberta</option>
-                                            <option>Fechada</option>
+                                            <option>@lang('app.open')</option>
+                                            <option>@lang('app.closed')</option>
                                         </select>
                                         @if ($errors->has('status_tv_1'))
                                             <span class="help-block">
@@ -42,12 +42,12 @@
                                 </div>
 
                                 <div style="display:none" id="status_cpu_1" class="form-group{{ $errors->has('status_cpu_1') ? ' has-error' : '' }}">
-                                    <label for="status_cpu_1" class="col-md-3 control-label">Condição</label>
+                                    <label for="status_cpu_1" class="col-md-3 control-label">@lang('app.condition')</label>
 
                                     <div class="col-md-7">
                                         <select class="form-control" name="status_cpu_1" id="status_cpu_1">
-                                            <option>Completa</option>
-                                            <option>Incompleta</option>
+                                            <option>@lang('app.complete')</option>
+                                            <option>@lang('app.incomplete')</option>
                                         </select>
                                         @if ($errors->has('status_cpu_1'))
                                             <span class="help-block">
@@ -59,10 +59,10 @@
 
                                 <div id="others_cpu_1" name="others_cpu_1" style="display:none" class="form-group{{ $errors->has('others_cpu_1') ? ' has-error' : '' }}">
                                     <div class="col-md-7 col-md-offset-3">
-                                        <p class="danger-box-request "> Pela CPU estar incompleta, por favor, nos informe os componentes que faltam. </p>
+                                        <p class="danger-box-request ">@lang('app.cpudescription')</p>
                                     </div>
 
-                                    <label for="others_cpu_1" class="col-md-3 control-label">Descrição</label>
+                                    <label for="others_cpu_1" class="col-md-3 control-label">@lang('app.description')</label>
 
                                     <div class="col-md-7">
                                         <input id="others_cpu_1" type="text" class="form-control" name="others_cpu_1" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu_1') }}">
@@ -77,10 +77,10 @@
 
                                 <div id="others_1" style="display:none" class="form-group{{ $errors->has('others_1') ? ' has-error' : '' }}">
                                     <div class="col-md-7 col-md-offset-3">
-                                        <p class="danger-box-request ">Alguns equipamentos, como lâmpadas, baterias, cartuchos e toners de impressora, podem não ser recolhidos, porém incentivamos o cadastro dos mesmos.</p>
+                                        <p class="danger-box-request ">@lang('app.equipamentstext')</p>
                                     </div>
 
-                                    <label for="others_1" class="col-md-3 control-label">Equipamento</label>
+                                    <label for="others_1" class="col-md-3 control-label">@lang('app.equipament')</label>
 
                                     <div class="col-md-7">
                                         <input id="others_1" type="text" class="form-control" name="others_1" placeholder="Descreva qual resíduo quer doar" value="{{ old('others_1') }}">
@@ -94,7 +94,7 @@
                                 </div>
 
                                 <div class="form-group{{ $errors->has('quantity_1') ? ' has-error' : '' }}">
-            					    <label for="quantity_1" class="col-md-3 control-label">Quantidade</label>
+            					    <label for="quantity_1" class="col-md-3 control-label">@lang('app.quantity')</label>
 
                                     <div class="col-md-7">
                                         <input id="quantity_1" type="text" class="form-control" name="quantity_1" placeholder="Escreva um número" value="1" required>
@@ -108,7 +108,7 @@
                                 </div>
                                 
                                 <div class="form-group{{ $errors->has('observation_1') ? ' has-error' : '' }}">
-                                    <label for="observation_1" class="col-md-3 control-label">Observação</label>
+                                    <label for="observation_1" class="col-md-3 control-label">@lang('app.observation')</label>
 
                                     <div class="col-md-7">
                                         <input id="observation_1" type="text" maxlength="140" class="form-control" name="observation_1" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation_1') }}">
@@ -121,19 +121,18 @@
                                     </div>
                                 </div>
 
-                                
-                                <p class="col-md-7 col-md-offset-3 text-center">---------</p>
+                                <p class="col-md-7 col-md-offset-3 text-center division-line">----------------------</p>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-7 col-md-offset-3">
-                            <a input="button" id="btn-repeat" class="btn btn-default btn-block">Adicionar outro resíduo</a>
+                            <a input="button" id="btn-repeat" class="btn btn-default btn-block">@lang('app.addanotherresidue')</a>
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                    <label for="address" class="col-md-3 control-label">Endereço de coleta</label>
+                                    <label for="address" class="col-md-3 control-label">@lang('app.requestaddress')</label>
 
                                     <div class="col-md-7">
                                         <select class="form-control" autofocus name="id_add" id="id_add" onchange="myFunction()">
@@ -147,7 +146,7 @@
                                                     @endif
                                                     
                                                 @endforeach
-                                                <option value="{{ url('/settings')}}" id="new_address"> Adicionar outro endereço para ser feita a coleta </option>
+                                                <option value="{{ url('/settings')}}" id="new_address"> @lang('app.addanotheraddress')</option>
                                             @endif
                                         </select>
                                         @if ($errors->has('address'))
@@ -159,33 +158,31 @@
                                 </div>
 
                         <div class="form-group">
-                            <div class="col-md-7 col-md-offset-3 text-center">
-                                Escolha os dias e periodo que você pode efetuar a coleta. 
-                            </div>
+                            <div class="col-md-7 col-md-offset-3 text-center">@lang('app.choosedays')</div>
                         </div>
 
                         <div class="form-group{{ $errors->has('weekdays') ? ' has-error' : '' }}">
-                            <label for="weekdays" class="col-md-3 control-label">Dias</label>
+                            <label for="weekdays" class="col-md-3 control-label">@lang('app.days')</label>
                             <div class="col-md-7">
                                 <div class="btn-group btn-group-justified" id="weekcheckbox" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="checkbox" name="domingo" value="1" required>Domingo</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="segunda" value="1" required>Segunda</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="terça" value="1" required>Terça</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="quarta" value="1" required>Quarta</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="quinta" value="1" required>Quinta</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="sexta" value="1" required>Sexta</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="sabado" value="1" required>Sábado</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="domingo" value="1" required>@lang('app.sunday')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="segunda" value="1" required>@lang('app.monday')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="terça" value="1" required>@lang('app.tuesday')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="quarta" value="1" required>@lang('app.wednesday')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="quinta" value="1" required>@lang('app.thursday')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="sexta" value="1" required>@lang('app.friday')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="sabado" value="1" required>@lang('app.saturday')</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('period') ? ' has-error' : '' }}">
-                            <label for="period" class="col-md-3 control-label">Periodo</label>
+                            <label for="period" class="col-md-3 control-label">@lang('app.period')</label>
                             <div class="col-md-7">
                                 <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1" required>Manhã</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1" required>Tarde</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="noite" value="1" required>Noite</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1" required>@lang('app.morning')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1" required>@lang('app.noon')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="noite" value="1" required>@lang('app.night')</label>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +192,7 @@
                         <div class="row">
                             <div class="col-md-7 col-md-offset-3">
     	                    	<a input="button" id="checkBtn" data-toggle="modal" data-target="#confirmdonation" class="open-confirmdonation btn btn-primary btn-block">
-    	                        	Registrar
+    	                        	@lang('app.register')
     	                    	</a>
     	                    </div>
     	                 </div>

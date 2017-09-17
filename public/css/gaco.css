@@ -128,6 +128,17 @@
 	border-radius: 5px;
 }
 
+.division-line {
+     /*background: var(--headercolor); 
+     width: 6%; 
+
+     padding-bottom: 1px;
+
+     margin-left: 51%*/
+	 color: var(--headercolor);
+     letter-spacing: -3px;
+}
+
 /*
 =======================================
 			   COOPS 

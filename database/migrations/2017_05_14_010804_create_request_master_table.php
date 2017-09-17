@@ -18,6 +18,8 @@ class CreateRequestMasterTable extends Migration
             $table->string('status_req');
             $table->string('conf_token');
             $table->string('id_active', 1);
+            $table->string('tx_weekdays');
+            $table->string('tx_period_day');
             $table->date('dt_req');
             $table->date('dt_collect')->nullable();
             $table->timestamps();

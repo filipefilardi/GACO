@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Util\Dao\RequestDao;
-use App\Util\Dao\RequestMasterDAO;
+use App\Util\Dao\RequestMasterDao;
 use App\Util\Dao\UserDao;
 use Auth;
 use Session;
@@ -46,17 +46,19 @@ class HomeController extends Controller
         }
         $user_acpt = null;
         $user_pend = null;
+        $master_user_acpt = null;
+        $master_user_pend = null;
         
         if ($id_cat == 1 || $id_cat == 2) {
             //$request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
-            $master_user_acpt = RequestMasterDAO::get_master_by_user_conditional($id_user, 'status_req', '=', 'ACPT');
-            $master_user_pend = RequestMasterDAO::get_master_by_user_conditional($id_user, 'status_req', '=', 'PEND');
+            $master_user_acpt = RequestMasterDao::get_master_by_user_conditional($id_user, 'status_req', '=', 'ACPT');
+            $master_user_pend = RequestMasterDao::get_master_by_user_conditional($id_user, 'status_req', '=', 'PEND');
 
             $count = 0;
 
             if(sizeof($master_user_acpt) > 0) {
                 foreach ($master_user_acpt as $key => $value) {
-                    $user_acpt = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.id_req_master', '=', $value->id_req_master);
+                    $user_acpt = RequestDao::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.id_req_master', '=', $value->id_req_master);
                     $count++;
                     $master_user_acpt->splice((int)$key + $count, 0, $user_acpt );
                 }
@@ -66,20 +68,20 @@ class HomeController extends Controller
 
             if(sizeof($master_user_pend) > 0) {
                 foreach ($master_user_pend as $key => $value) {
-                    $user_pend = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.id_req_master', '=', $value->id_req_master);
+                    $user_pend = RequestDao::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.id_req_master', '=', $value->id_req_master);
                     $count++;
                     $master_user_pend->splice((int)$key + $count, 0, $user_pend );
                 }
             }
             
-            dd($master_user_pend);
+            //dd($master_user_pend);
             
-            $user_acpt = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.status_req', '=', 'ACPT');
-            $user_pend = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.status_req', '=', 'PEND');
+            $user_acpt = RequestDao::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.status_req', '=', 'ACPT');
+            $user_pend = RequestDao::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.status_req', '=', 'PEND');
         }
         else{
-            $request = RequestDAO::get_pend_requests_for_coop();
-            $request_acpt = RequestDAO::get_acpt_requests_by_coop($id_user);
+            $request = RequestDao::get_pend_requests_for_coop();
+            $request_acpt = RequestDao::get_acpt_requests_by_coop($id_user);
         }
         
         if ($id_cat == 4) return redirect('admin');

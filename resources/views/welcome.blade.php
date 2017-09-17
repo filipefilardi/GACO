@@ -43,7 +43,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#gaco">GACO</a></li>
                                     <li><a href="#funcionamento">Como funciona</a></li>
-                                    <li><a href="#parcerias">Parcerias</a></li>
+                                    <!-- <li><a href="#parcerias">Parcerias</a></li> -->
                                 </ul>
                             </li>
                             
@@ -55,12 +55,12 @@
             </nav>
 
             <div class="hero">
-                <h1>Não acumule lixo eletrônico</h1>
+                <h1>DESCARTE SEU RESÍDUO SEM SAIR DE CASA</h1>
                 <div class="text-justify">
-                    <p>Ajude a cidade de São Paulo, dedicando apenas alguns minutos, a se tornar uma cidade mais limpa e bonita, totalmente sem custos.</p>
+                    <p><i>Colabore com a cidade de São Paulo, dedicando apenas alguns minutos, a se tornar uma cidade mais sustentável, descartando seu resíduo de forma prática e <b>totalmente sem custos</b>.</i></p>
                 </div>
                 <a href="{{ url('/register') }}" class="btn btn-primary">COMECE AGORA</a>
-                <p style="margin-top:80px;"><a href="#descubra" style="color: white; font-size: 40px"><i class="fa fa-angle-down" aria-hidden="true"></i></p></a>
+                <p style="margin-top:80px;"><a href="#gaco" style="color: white; font-size: 40px"><i class="fa fa-angle-down" aria-hidden="true"></i></p></a>
             </div>
             </div>
         </div>
@@ -80,7 +80,6 @@
             </div>
         </div>        
     </div>
-
     
     <div class="marketing">
         <div class="gray-background">
@@ -92,18 +91,19 @@
                     <div class="col-lg-4">
                         <img src="/img/file.png" alt="Agendamento" width="180" height="180">
                         <h2>Agendamento</h2>
-                        <p>Atravéz da plataforma, você pode se comunicar com as cooperativas parceiras, escolhendo qual resíduo eletrônico você deseja doar gratuitamente.</p>
+                        <p>Atravéz do GACO, você pode se comunicar com as cooperativas parceiras, escolhendo qual resíduo eletrônico você deseja doar gratuitamente e agendando sua coleta.</p>
                     </div>
                     <div class="col-lg-4">
                         <img src="/img/laptop.png" alt="Coleta" width="180" height="180">
                         <!-- <h2>Logistica Reversa</h2> -->
                         <h2>Coleta</h2>
-                        <p>A cooperativa é capacitada no manuseio do seu equipamento de forma responsável e irá coletar seu resíduo assim que possível.</p>
+                       <!--  <p>A cooperativa é capacitada no manuseio do seu equipamento de forma responsável e irá coletar seu resíduo assim que possível.</p> -->
+                       <p>Após o agendamento, será realizada a coleta, efetuada por cooperativas capacitadas tecnicamente para receber, separar, descartar e destinar resíduos eletroeletrônicos de modo ambientalmente responsável.</p>
                     </div>
                     <div class="col-lg-4">
                         <img src="/img/planet-earth.png" alt="Colaboratividade" width="180" height="180">
                         <h2>Colaboratividade</h2>
-                        <p>O GACO é um projeto colaborativo, entre no nosso  <a href="https://github.com/filipefilardi/GACO" target="_blank" style="color: #385169;">repositório</a> para entender como você pode colaborar ainda mais com a sustentabilidade na cidade de São Paulo.</p>
+                        <p>O GACO é software livre, entre no nosso  <a href="https://github.com/filipefilardi/GACO" target="_blank" style="color: #385169;">repositório</a> para entender como você pode colaborar ainda mais com a sustentabilidade na cidade de São Paulo.</p>
                     </div>
                 </div>
             </div>
@@ -116,6 +116,33 @@
             </div>
         </div>
         </div>
+<!-- 
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-block">
+                    <h3 class="card-title">Special title treatment</h3>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-block">
+                    <h3 class="card-title">Special title treatment</h3>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div> -->
+
+    
+
+<!-- 
         <div class="fade">
         <div class="white-background">
             <div class="container" id="parcerias">
@@ -134,17 +161,9 @@
                         <a href="https://www.coopernovacotiarecicla.com/"><img src="/img/coopernova_logo.png" class="img-responsive img-parcerias"></a>
                     </div>
                 </div>
-                <!-- 
-                <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
-                        <a href="{{ url('/register') }}" class="btn btn-primary btn-block" style="margin-bottom:15px; margin-top: 15px;">COMECE AGORA</a>
-                    </div>
-                </div>
-                -->
             </div>
         </div>
-        </div>
+        </div> -->
 <!-- 
         <div class="container" id="contato">
             <h1 class="text-center header">Contato</h1>
@@ -166,21 +185,27 @@
 
             <a href="https://www.facebook.com/gaco.sp" target="_blank"><i class="fa fa-facebook"></i></a>
             <a href="https://github.com/filipefilardi/GACO" target="_blank"><i class="fa fa-github"></i></a>
-
+                
             </div>
 
             <div class="footer-left">
 
                 <p class="footer-links">
-                    <a href="#inicio">Início</a>
+                    <a href="#inicio">INÍCIO</a>
                     ·
                     <a href="#gaco">GACO</a>
                     ·
-                    <a href="#funcionamento">Como funciona</a>
-                    ·
+                    <a href="#funcionamento">COMO FUNCIONA</a>
+                    <!-- ·
                     <a href="#parcerias">Parcerias</a>
-                
-                    
+                 -->
+                    <!-- <div class="footer-logo">>
+                        <a href="http://www.lassu.usp.br"><img src="/img/lassu_logo.png" class="img-responsive img-parcerias"></a>
+                        <a href="http://www.lassu.usp.br"><img src="/img/lassu_logo.png" class="img-responsive img-parcerias"></a>
+                        <a href="http://www.lassu.usp.br"><img src="/img/lassu_logo.png" class="img-responsive img-parcerias"></a>
+                        <a href="http://www.lassu.usp.br"><img src="/img/lassu_logo.png" class="img-responsive img-parcerias"></a>
+                    </div> -->
+
                 </p>
 
                 <p>GACO &copy; 2017</p>
@@ -189,29 +214,29 @@
 
         <script src="/js/app.js"></script>
     </body>
-            <script type="text/javascript">
-            $(window).on("load",function() {
-              function fade(pageLoad) {
-                var windowTop=$(window).scrollTop(), windowBottom=windowTop+$(window).innerHeight();
-                var min=0.3, max=1, threshold=0.01;
-                
-                $(".fade").each(function() {
-                  /* Check the location of each desired element */
-                  var objectHeight=$(this).outerHeight(), objectTop=$(this).offset().top, objectBottom=$(this).offset().top+objectHeight;
-                  
-                  /* Fade element in/out based on its visible percentage */
-                  if (objectTop < windowTop) {
-                    if (objectBottom > windowTop) {$(this).fadeTo(0,min+((max-min)*((objectBottom-windowTop)/objectHeight)));}
-                    else if ($(this).css("opacity")>=min+threshold || pageLoad) {$(this).fadeTo(0,min);}
-                  } else if (objectBottom > windowBottom) {
-                    if (objectTop < windowBottom) {$(this).fadeTo(0,min+((max-min)*((windowBottom-objectTop)/objectHeight)));}
-                    else if ($(this).css("opacity")>=min+threshold || pageLoad) {$(this).fadeTo(0,min);}
-                  } else if ($(this).css("opacity")<=max-threshold || pageLoad) {$(this).fadeTo(0,max);}
-                });
-              } fade(true); //fade elements on page-load
-              $(window).scroll(function(){
-                fade(false);}
-                ); //fade elements on scroll
+    <script type="text/javascript">
+        $(window).on("load",function() {
+          function fade(pageLoad) {
+            var windowTop=$(window).scrollTop(), windowBottom=windowTop+$(window).innerHeight();
+            var min=0.3, max=1, threshold=0.01;
+            
+            $(".fade").each(function() {
+              /* Check the location of each desired element */
+              var objectHeight=$(this).outerHeight(), objectTop=$(this).offset().top, objectBottom=$(this).offset().top+objectHeight;
+              
+              /* Fade element in/out based on its visible percentage */
+              if (objectTop < windowTop) {
+                if (objectBottom > windowTop) {$(this).fadeTo(0,min+((max-min)*((objectBottom-windowTop)/objectHeight)));}
+                else if ($(this).css("opacity")>=min+threshold || pageLoad) {$(this).fadeTo(0,min);}
+              } else if (objectBottom > windowBottom) {
+                if (objectTop < windowBottom) {$(this).fadeTo(0,min+((max-min)*((windowBottom-objectTop)/objectHeight)));}
+                else if ($(this).css("opacity")>=min+threshold || pageLoad) {$(this).fadeTo(0,min);}
+              } else if ($(this).css("opacity")<=max-threshold || pageLoad) {$(this).fadeTo(0,max);}
             });
-        </script>
+          } fade(true); //fade elements on page-load
+          $(window).scroll(function(){
+            fade(false);}
+            ); //fade elements on scroll
+        });
+    </script>
 </html>

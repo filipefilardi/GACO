@@ -26,6 +26,10 @@ class RequestDao
             $join->on('request.id_garbage', '=', 'garbage.id_garbage')
                  ->where('garbage.id_del', 0);
             })
+            ->join('request_master', function ($join) {
+            $join->on('request.id_req_master', '=', 'request_master.id_req_master')
+                 ->where('request_master.id_del', 0);
+            })
             ->join('address', function ($join){
                 $join->on('address.id_add', '=', 'request.id_add')
                  ->where('address.id_del', 0);
@@ -56,6 +60,10 @@ class RequestDao
             ->join('garbage', function ($join) {
             $join->on('request.id_garbage', '=', 'garbage.id_garbage')
                  ->where('garbage.id_del', 0);
+            })
+            ->join('request_master', function ($join) {
+            $join->on('request.id_req_master', '=', 'request_master.id_req_master')
+                 ->where('request_master.id_del', 0);
             })
             ->join('address', function ($join){
                 $join->on('address.id_add', '=', 'request.id_add')

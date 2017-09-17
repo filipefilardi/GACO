@@ -30,6 +30,13 @@ class AddRelationalTables extends Migration
             $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');;
         });
 
+        Schema::table('request_postpone', function($table) {
+            $table->integer('id_user_post')->unsigned();
+            $table->foreign('id_user_post')->references('id_user')->on('users')->onDelete('cascade');;
+            $table->integer('id_req_master')->unsigned();
+            $table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');; 
+        });
+
         Schema::table('request', function($table) {
             $table->integer('id_user_req')->unsigned();
             $table->foreign('id_user_req')->references('id_user')->on('users')->onDelete('cascade');; // to be REMOVED when new flow goes in
@@ -37,8 +44,8 @@ class AddRelationalTables extends Migration
             $table->foreign('id_garbage')->references('id_garbage')->on('garbage')->onDelete('cascade');;
             $table->integer('id_add')->unsigned();
             $table->foreign('id_add')->references('id_add')->on('address')->onDelete('cascade');; // to be REMOVED when new flow goes in
-            #$table->integer('id_req_master')->unsigned();
-            #$table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');; // to be ADDED when new flow goes in
+            $table->integer('id_req_master')->unsigned();
+            $table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');; // to be ADDED when new flow goes in
         });
 
         Schema::table('coop_evaluation', function($table) {
@@ -47,8 +54,8 @@ class AddRelationalTables extends Migration
         });
 
         Schema::table('request_assignment', function($table) {
-            $table->integer('id_req')->unsigned();
-            $table->foreign('id_req')->references('id_req')->on('request')->onDelete('cascade');;
+            $table->integer('id_req_master')->unsigned();
+            $table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');;
             $table->integer('id_user_assign')->unsigned();
             $table->foreign('id_user_assign')->references('id_user')->on('users')->onDelete('cascade');;
         });
@@ -106,6 +113,7 @@ class AddRelationalTables extends Migration
         Schema::dropIfExists('coop_evaluation');
         Schema::dropIfExists('request_assignment');
         Schema::dropIfExists('request_master');
+        Schema::dropIfExists('request_postpone');
         Schema::dropIfExists('request');
         Schema::dropIfExists('garbage_collector');
         Schema::dropIfExists('garbage');

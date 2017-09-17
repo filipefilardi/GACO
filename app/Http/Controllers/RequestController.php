@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Util\Dao\AddressDao;
 use App\Util\Dao\GarbageDao;
 use App\Util\Dao\RequestDao;
+use App\Util\Dao\RequestMasterDao;
 use App\Util\Dao\UserDao;
 use App\Util\Utilities;
 use Auth;
@@ -55,55 +56,65 @@ class RequestController extends Controller
 
     public function make_request(Request $data){
         $weekday_period = Utilities::parseWeekdaysPeriod($data->all());
-
-        #dd($weekday_period,$data->all());
+        $counter = (int) $data['counter'];
 
         $res = null;
+        $id_master = null;
+        $token = null;
+
+        #dd($data->all(),$counter);
         if (Gate::allows('execute', 'create_request')) {
             
-            #Auth::user();
-            $id_garbage =  $data['id_garbage'];
-            $desc_req = "";
-            $state = "";
-            switch ($id_garbage) {
-                # tv
-                case 15:
-                    $state = $data['status_tv'];
-                    break;
-                # cpu
-                case 3:
-                    $state = $data['status_cpu'];
-                    $desc_req = $data['others_cpu'];
-                    break;
-                # other
-                case 17:
-                    $desc_req = $data['others'];
-                    break;
+            $returnMaster = RequestMasterDAO::insert_request(Auth::user()->id_user, null, null ,null, $data['id_add'], null, null, $weekday_period[0],$weekday_period[1]);
+
+            list($token,$id_master) = preg_split('~-~', $returnMaster);
+
+            #dd($data->all());
+            for($i = 1; $i <=$counter; $i++) {
+
+                #Auth::user();
+                $id_garbage =  $data['id_garbage'. '_' . $i];
+                $quantity =  $data['quantity'. '_' . $i];
+                $observation =  $data['observation'. '_' . $i];
+                $desc_req = "";
+                $state = "";
+                switch ($id_garbage) {
+                    # tv
+                    case 15:
+                        $state = $data['status_tv'. '_' . $i];
+                        break;
+                    # cpu
+                    case 3:
+                        $state = $data['status_cpu'. '_' . $i];
+                        $desc_req = $data['others_cpu'. '_' . $i];
+                        break;
+                    # other
+                    case 17:
+                        $desc_req = $data['others'. '_' . $i];
+                        break;
+                }
+
+                #$status_tv = $data['status_garbage'];
+
+                if($state == 'Aberta' && $id_garbage == 15){
+                    $data->session()->flash('message', 'A coleta de um televisor aberto é inviabilizada por riscos a saúde, dada a quantidade de chumbo exposta.'); 
+                    $data->session()->flash('alert-warning', 'warning');
+                    return redirect('/request');
+                }
+                
+                $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $observation, $data['id_add'], $quantity, $desc_req, $id_master);
+
             }
 
-            #$status_tv = $data['status_garbage'];
-            
-
-            if($state == 'Aberta' && $id_garbage == 15){
-                $data->session()->flash('message', 'A coleta de um televisor aberto é inviabilizada por riscos a saúde, dada a quantidade de chumbo exposta.'); 
-                $data->session()->flash('alert-warning', 'warning');
-                return redirect('/request');
-            }
-
-            
-            $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $data['observation'], $data['id_add'], $data['quantity'], $desc_req); #quando mudar pro Master passar $weekday_period[0], $weekday_period[1]
-
-            if(is_string($res)){
-                $data->session()->flash('message', 'Pedido realizado com sucesso! Anote o seu código ' . $res . ' para a confirmação no momento da coleta.'); 
+            if(!is_null($id_master)){
+                $data->session()->flash('message', 'Pedido realizado com sucesso! Anote o seu código ' . $token . ' para a confirmação no momento da coleta.'); 
                 $data->session()->flash('alert-success', 'sucess');
                 return redirect('/request');
             }else{
                 $data->session()->flash('message', 'Falha no pedido. Por favor, preencha os dados novamente.'); 
                 $data->session()->flash('alert-warning', 'warning');
                 return redirect('/request');
-            }
-
-            
+            }            
 
         }else{
 

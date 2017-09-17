@@ -230,7 +230,7 @@ class RequestDao
         return $list;
     }
 
-    public static function insert_request($id_user, $id_garbage, $state, $observation, $id_add, $quantity, $desc_req,$id_req_master)
+    public static function insert_request($id_user, $id_garbage, $state, $observation, $id_add, $quantity, $desc_req,$id_req_master,$conf_token)
     {
         // VALIDATION BLOCK //////////////
         $errors = array();
@@ -246,7 +246,7 @@ class RequestDao
         
         if(sizeof($errors)>0) return $errors;
         
-        $conf_token = $id_user . substr((string) time(),-3) . Utilities::randomize_dictionary(5);
+        #$conf_token = $id_user . substr((string) time(),-3) . Utilities::randomize_dictionary(5);
         $today = date("Ymd");
 
         

@@ -102,7 +102,7 @@ class RequestController extends Controller
                     return redirect('/request');
                 }
                 
-                $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $observation, $data['id_add'], $quantity, $desc_req, $id_master);
+                $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $observation, $data['id_add'], $quantity, $desc_req, $id_master, $token);
 
             }
 

@@ -62,4 +62,26 @@ class RequestMasterDao {
     public static function postpone_request($id_req_master) {
 
     }
+
+    public static function get_master_by_user_conditional($id_user, $where_key, $where_comparison, $where_value) {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
+        $list = DB::table('request_master')
+            ->join('address', function ($join){
+                $join->on('address.id_add', '=', 'request_master.id_add')
+                 ->where('address.id_del', 0);
+            })
+            ->select('request_master.*','address.str_address')
+            ->where('request_master.id_user_req', $id_user)
+            ->whereIn('request_master.status_req',['ACPT','PEND'])
+            ->where('request_master.id_del', 0)
+            ->where($where_key,$where_comparison,$where_value)
+            ->distinct()
+            ->orderBy('id_req_master')
+            ->get();
+
+        return $list;
+    }
 }

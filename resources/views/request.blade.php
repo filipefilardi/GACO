@@ -14,10 +14,10 @@
                         @include('layouts.messages')
                         <div class="parent">
                             <div class="repeatable">
-            					<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
+            					<div class="form-group{{ $errors->has('id_garbage_1') ? ' has-error' : '' }}">
             							<label class="col-md-3 control-label">Resíduo</label>
             	                    <div class="col-md-7">
-            							<select class="form-control" id="id_garbage_1" name="id_garbage">
+            							<select class="form-control" id="id_garbage_1" name="id_garbage_1">
             					 		@foreach ($garbage as $garbage)
             		                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
             		                    @endforeach
@@ -25,97 +25,97 @@
             						</div>                   
                                 </div>
 
-                                <div style="display:none" id="status_tv" class="form-group{{ $errors->has('status_tv') ? ' has-error' : '' }}">
-                                    <label for="status_tv" class="col-md-3 control-label">Condição</label>
+                                <div style="display:none" id="status_tv_1" class="form-group{{ $errors->has('status_tv_1') ? ' has-error' : '' }}">
+                                    <label for="status_tv_1" class="col-md-3 control-label">Condição</label>
 
                                     <div class="col-md-7">
-                                        <select class="form-control" name="status_tv" id="status_tv_1">
+                                        <select class="form-control" name="status_tv_1" id="status_tv_1">
                                             <option>Aberta</option>
                                             <option>Fechada</option>
                                         </select>
-                                        @if ($errors->has('status_tv'))
+                                        @if ($errors->has('status_tv_1'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('status_tv') }}</strong>
+                                                <strong>{{ $errors->first('status_tv_1') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div style="display:none" id="status_cpu" class="form-group{{ $errors->has('status_cpu') ? ' has-error' : '' }}">
-                                    <label for="status_cpu" class="col-md-3 control-label">Condição</label>
+                                <div style="display:none" id="status_cpu_1" class="form-group{{ $errors->has('status_cpu_1') ? ' has-error' : '' }}">
+                                    <label for="status_cpu_1" class="col-md-3 control-label">Condição</label>
 
                                     <div class="col-md-7">
-                                        <select class="form-control" name="status_cpu" id="status_cpu_1">
+                                        <select class="form-control" name="status_cpu_1" id="status_cpu_1">
                                             <option>Completa</option>
                                             <option>Incompleta</option>
                                         </select>
-                                        @if ($errors->has('status_cpu'))
+                                        @if ($errors->has('status_cpu_1'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('status_cpu') }}</strong>
+                                                <strong>{{ $errors->first('status_cpu_1') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div id="others_cpu" name="others_cpu" style="display:none" class="form-group{{ $errors->has('others_cpu') ? ' has-error' : '' }}">
+                                <div id="others_cpu_1" name="others_cpu_1" style="display:none" class="form-group{{ $errors->has('others_cpu_1') ? ' has-error' : '' }}">
                                     <div class="col-md-7 col-md-offset-3">
                                         <p class="danger-box-request "> Pela CPU estar incompleta, por favor, nos informe os componentes que faltam. </p>
                                     </div>
 
-                                    <label for="others_cpu" class="col-md-3 control-label">Descrição</label>
+                                    <label for="others_cpu_1" class="col-md-3 control-label">Descrição</label>
 
                                     <div class="col-md-7">
-                                        <input id="others_cpu_1" type="text" class="form-control" name="others_cpu" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu') }}">
+                                        <input id="others_cpu_1" type="text" class="form-control" name="others_cpu_1" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu_1') }}">
 
-                                        @if ($errors->has('others_cpu'))
+                                        @if ($errors->has('others_cpu_1'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('others_cpu') }}</strong>
+                                                <strong>{{ $errors->first('others_cpu_1') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div id="others" style="display:none" class="form-group{{ $errors->has('others') ? ' has-error' : '' }}">
+                                <div id="others_1" style="display:none" class="form-group{{ $errors->has('others_1') ? ' has-error' : '' }}">
                                     <div class="col-md-7 col-md-offset-3">
                                         <p class="danger-box-request ">Alguns equipamentos, como lâmpadas, baterias, cartuchos e toners de impressora, podem não ser recolhidos, porém incentivamos o cadastro dos mesmos.</p>
                                     </div>
 
-                                    <label for="others" class="col-md-3 control-label">Equipamento</label>
+                                    <label for="others_1" class="col-md-3 control-label">Equipamento</label>
 
                                     <div class="col-md-7">
-                                        <input id="others_1" type="text" class="form-control" name="others" placeholder="Descreva qual resíduo quer doar" value="{{ old('others') }}">
+                                        <input id="others_1" type="text" class="form-control" name="others_1" placeholder="Descreva qual resíduo quer doar" value="{{ old('others_1') }}">
 
-                                        @if ($errors->has('others'))
+                                        @if ($errors->has('others_1'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('others') }}</strong>
+                                                <strong>{{ $errors->first('others_1') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
-            					    <label for="quantity" class="col-md-3 control-label">Quantidade</label>
+                                <div class="form-group{{ $errors->has('quantity_1') ? ' has-error' : '' }}">
+            					    <label for="quantity_1" class="col-md-3 control-label">Quantidade</label>
 
                                     <div class="col-md-7">
-                                        <input id="quantity_1" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="1" required>
+                                        <input id="quantity_1" type="text" class="form-control" name="quantity_1" placeholder="Escreva um número" value="1" required>
 
-                                        @if ($errors->has('quantity'))
+                                        @if ($errors->has('quantity_1'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('quantity') }}</strong>
+                                                <strong>{{ $errors->first('quantity_1') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
                                 
-                                <div class="form-group{{ $errors->has('observation') ? ' has-error' : '' }}">
-                                    <label for="observation" class="col-md-3 control-label">Observação</label>
+                                <div class="form-group{{ $errors->has('observation_1') ? ' has-error' : '' }}">
+                                    <label for="observation_1" class="col-md-3 control-label">Observação</label>
 
                                     <div class="col-md-7">
-                                        <input id="observation_1" type="text" maxlength="140" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
+                                        <input id="observation_1" type="text" maxlength="140" class="form-control" name="observation_1" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation_1') }}">
 
-                                        @if ($errors->has('observation'))
+                                        @if ($errors->has('observation_1'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('observation') }}</strong>
+                                                <strong>{{ $errors->first('observation_1') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -281,43 +281,44 @@
 </div>
 
 <script>
-    document.querySelector('[id^="id_garbage"]').onchange = function() {
+    $(document).on('change', '[id^="id_garbage"]', function() {
         var tmp = $(this).prop('id').split('_');
         var num = tmp[tmp.length-1];
-        alert(num);
-        if ($('#id_garbage').find(":selected").attr('value')=="15") {
-            $('#status_tv').show();
-            $('#others').hide();
-            $('#status_cpu').hide();
-            $('#others_cpu').hide();
-            $("#others_cpu").find("input").prop('required',false);
+
+        if ($(document).find('#id_garbage_'+num).find(":selected").attr('value')=="15") {
+            $('#status_tv_'+num).show();
+            $('#others_'+num).hide();
+            $('#status_cpu_'+num).hide();
+            $('#others_cpu_'+num).hide();
+            $("#others_cpu_"+num).find("input").prop('required',false);
 
         }
-        else if ($('#id_garbage').find(":selected").attr('value')=="3") {
-            $('#status_cpu').show();
-            $('#others').hide();
-            $('#status_tv').hide();
-            $('#others_cpu').hide();
-            $("#others_cpu").find("input").prop('required',false);
+        else if ($(document).find('#id_garbage_'+num).find(":selected").attr('value')=="3") {
+            $('#status_cpu_'+num).show();
+            $('#others_'+num).hide();
+            $('#status_tv_'+num).hide();
+            $('#others_cpu_'+num).hide();
+            $("#others_cpu_"+num).find("input").prop('required',false);
 
         }
-        else if ($('#id_garbage').find(":selected").attr('value')=="17") {
-            $('#others').show();
-            $('#status_tv').hide(); 
-            $('#status_cpu').hide();
-            $('#others_cpu').hide();
-            $("#others_cpu").find("input").prop('required',false);
+        else if ($(document).find('#id_garbage_'+num).find(":selected").attr('value')=="17") {
+            $('#others_'+num).show();
+            $('#status_tv_'+num).hide(); 
+            $('#status_cpu_'+num).hide();
+            $('#others_cpu_'+num).hide();
+            $("#others_cpu_"+num).find("input").prop('required',false);
         }
         else {
-            $('#status_tv').hide();   
-            $('#others').hide();
-            $('#status_cpu').hide();
-            $('#others_cpu').hide();
-            $("#others_cpu").find("input").prop('required',false);
+            $('#status_tv_'+num).hide();   
+            $('#others_'+num).hide();
+            $('#status_cpu_'+num).hide();
+            $('#others_cpu_'+num).hide();
+            $("#others_cpu_"+num).find("input").prop('required',false);
         }        
-    };
 
-    document.querySelector('[id^="status_cpu"]').onchange = function() {
+    });
+
+    document.querySelector('[id^="status_cpu"]').onclick = function() {
         if($('#status_cpu').find(":selected").text() == "Incompleta"){
             $("#others_cpu").show();
             $("#others_cpu").find("input").prop('required',true);
@@ -354,9 +355,11 @@
         var target = $('.parent').children('div:first').clone();
 
         var counter = parseInt($(document).find('#counter').prop('value'), 10);
-        var num = counter;
-
         $(document).find('#counter').prop('value',counter + 1);
+
+        var num = counter + 1;
+
+        
 
         target.find("[name^=id_garbage]").prop('name', 'id_garbage_'+num );
         target.find("[name^=quantity]").prop('name', 'quantity_'+num );
@@ -366,7 +369,22 @@
         target.find("[name^=others_cpu]").prop('name', 'others_cpu_'+num );
         target.find("[name^=others]").prop('name', 'others_'+num );
 
+        target.find("[id^=id_garbage]").prop('id', 'id_garbage_'+num );
+        target.find("[id^=quantity]").prop('id', 'quantity_'+num );
+        target.find("[id^=observation]").prop('id', 'observation_'+num );
+        target.find("[id^=status_tv]").prop('id', 'status_tv_'+num );
+        target.find("[id^=status_cpu]").prop('id', 'status_cpu_'+num );
+        target.find("[id^=others_cpu]").prop('id', 'others_cpu_'+num );
+        target.find("[id^=others]").prop('id', 'others_'+num );
+
+
         $('.repeatable').parent('div.parent').append( target );
+
+        $('#status_tv_'+num).hide();   
+        $('#others_'+num).hide();
+        $('#status_cpu_'+num).hide();
+        $('#others_cpu_'+num).hide();
+        $("#others_cpu_"+num).find("input").prop('required',false);
     });
 </script>
 @endsection

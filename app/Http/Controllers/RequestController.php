@@ -7,6 +7,7 @@ use App\Util\Dao\AddressDao;
 use App\Util\Dao\GarbageDao;
 use App\Util\Dao\RequestDao;
 use App\Util\Dao\UserDao;
+use App\Util\Utilities;
 use Auth;
 use Gate;
 
@@ -53,7 +54,10 @@ class RequestController extends Controller
     }
 
     public function make_request(Request $data){
-        #dd($data->all());
+        $weekday_period = Utilities::parseWeekdaysPeriod($data->all());
+
+        #dd($weekday_period,$data->all());
+
         $res = null;
         if (Gate::allows('execute', 'create_request')) {
             
@@ -87,7 +91,7 @@ class RequestController extends Controller
             }
 
             
-            $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $data['observation'], $data['id_add'], $data['quantity'], $desc_req);
+            $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $data['observation'], $data['id_add'], $data['quantity'], $desc_req); #quando mudar pro Master passar $weekday_period[0], $weekday_period[1]
 
             if(is_string($res)){
                 $data->session()->flash('message', 'Pedido realizado com sucesso! Anote o seu código ' . $res . ' para a confirmação no momento da coleta.'); 

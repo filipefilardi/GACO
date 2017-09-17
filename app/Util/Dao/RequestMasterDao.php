@@ -10,7 +10,7 @@ class RequestMasterDao {
 // status_req in (PEND, ACPT, COMP, CNCL) Pending, Accepted, Completed, Canceled
 
 
-    public static function insert_request($id_user, $id_garbage, $state, $observation, $id_add, $quantity, $desc_req)
+    public static function insert_request($id_user, $id_garbage, $state, $observation, $id_add, $quantity, $desc_req, $tx_period_day, $tx_weekdays)
     {
         // VALIDATION BLOCK //////////////
         $errors = array();
@@ -60,6 +60,8 @@ class RequestMasterDao {
             //'quantity' => $quantity,
             'status_req' => 'PEND',
             'conf_token' => $conf_token,
+            'tx_weekdays' => $tx_weekdays,
+            'tx_period_day' => $tx_period_day,
             'dt_req' =>$today,
             'id_active' => 'Y',
             'id_add' => $id_add

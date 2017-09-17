@@ -70,7 +70,7 @@
 							</div>
 						</div>
 						@empty
-							<p class="text-center">@lang('app.noevaluationsuntilnow')</p>
+							<p class="text-center">@lang('app.norequestsuntilnow')</p>
 						@endforelse
 
 					</div>

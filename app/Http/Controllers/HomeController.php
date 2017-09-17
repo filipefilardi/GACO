@@ -47,7 +47,7 @@ class HomeController extends Controller
         $user_pend = null;
         
         if ($id_cat == 1 || $id_cat == 2) {
-            $request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
+            // $request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
             $user_acpt = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'status_req', '=', 'ACPT');
             $user_pend = RequestDAO::get_full_info_dashboard_req_by_user_conditional($id_user, 'status_req', '=', 'PEND');
         }

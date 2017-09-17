@@ -15,7 +15,7 @@ class RequestMasterDao {
         // VALIDATION BLOCK //////////////
         $errors = array();
 
-        if(is_null($id_garbage)     || $id_garbage <= 0)                    array_push($errors, 'id_garbage null or invalid (<=0)');
+        #if(is_null($id_garbage)     || $id_garbage <= 0)                    array_push($errors, 'id_garbage null or invalid (<=0)');
         if(is_null($id_user)        || $id_user <= 0)                       array_push($errors, 'id_user null or invalid (<=0)');
         #if(is_null($observation)       || strlen((string)$observation)<=5)        array_push($errors, 'observation null or invalid (len<=5)');
         #if(is_null($mod_req)        || strlen((string)$mod_req)<=5)         array_push($errors, 'mod_req null or invalid (len<=5)');
@@ -28,9 +28,10 @@ class RequestMasterDao {
         
         $conf_token = $id_user . substr((string) time(),-3) . Utilities::randomize_dictionary(5);
         $today = date("Ymd");
-
         
-        DB::table('request_master')
+        $insert = array('id_user_req' => $id_user,'status_req' => 'PEND','conf_token' => $conf_token,'tx_weekdays' => $tx_weekdays,'tx_period_day' => $tx_period_day, 'dt_req' =>$today,'id_active' => 'Y','id_add' => $id_add);
+
+        $id = DB::table('request_master')
         ->whereExists(function ($query) use($id_garbage) {
             $query->select(DB::raw(1))
                   ->from('garbage')
@@ -51,22 +52,14 @@ class RequestMasterDao {
                   ->whereRaw('address.id_add = ' . $id_add)
                   ->whereRaw('address.id_del = ' . 0);
         })
-        ->insert([
-            //'id_garbage' => $id_garbage,
-            'id_user_req' => $id_user,
-            //'observation' => $observation,
-            //'state' => $state,
-            //'desc_req' => $desc_req,
-            //'quantity' => $quantity,
-            'status_req' => 'PEND',
-            'conf_token' => $conf_token,
-            'tx_weekdays' => $tx_weekdays,
-            'tx_period_day' => $tx_period_day,
-            'dt_req' =>$today,
-            'id_active' => 'Y',
-            'id_add' => $id_add
-        ]);
+        ->insertGetId($insert, 'id_req_master');
         
-        return $conf_token;
+        $res = (string) ($conf_token . '-' . $id);
+
+        return $res;
+    }
+
+    public static function postpone_request($id_req_master) {
+
     }
 }

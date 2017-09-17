@@ -13,10 +13,10 @@
 		<div class="panel panel-default">
 				<div class="panel-body">			
 
-				    <p>O código fonte pode ser encontrado <a href="https://github.com/filipefilardi/GACO" target="_blank">neste repositório</a>.
+				    <p>@lang('app.sourcecoderepository')</a>.
 				    </p>
 
-				    <h3>Co-Fundadores</h3>
+				    <h3>@lang('app.cofounders')</h3>
 				    <ul>
 				        <li>Filipe Filardi de Jesus</li>
 				        <li>Sabrina Gonçalves Raimundo</li>
@@ -24,7 +24,7 @@
 				        <li>Victor Edoardo Garcia Ribeiro Valeriano</li>
 				    </ul>
 
-				    <h3>Desenvolvedores</h3>
+				    <h3>@lang('app.developers')</h3>
 				    <ul>
 				        <li>Filipe Filardi de Jesus</li>
 				        <li>Thiago Nobayashi</li>
@@ -41,7 +41,7 @@
 				    </ul>
 
 					-->
-				    <h3>Parcerias</h3>
+				    <h3>@lang('app.partners')</h3>
 				    <ul style="list-style-type: none;">
 				    	<!-- 
 				    	<div class="logos">

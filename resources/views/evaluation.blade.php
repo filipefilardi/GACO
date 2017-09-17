@@ -16,14 +16,14 @@
 							<div class="evaluation">
 								<div class="panel-heading">
 									<div class="row">
-										<strong>Média</strong>
+										<strong>@lang('app.average')</strong>
 									</div>
 									<div class="row">
 										<div class="col-md-6">
-											<strong>Pontualidade:</strong> {{$avg_ponctuality}}
+											<strong>@lang('app.ponctuality'):</strong> {{$avg_ponctuality}}
 										</div>
 										<div class="col-md-6">
-											<strong>Satisfação:</strong> {{$avg_satisfaction}}
+											<strong>@lang('app.satisfaction'):</strong> {{$avg_satisfaction}}
 										</div>
 									</div>
 								</div>
@@ -37,7 +37,7 @@
 							</div>
 						</div>
 						@else
-							<p class="text-center">Nenhuma avaliação feita até o momento.</p>
+							<p class="text-center">@lang('app.noevaluationsmade')</p>
 						@endif
 					</div>
 				</div>
@@ -61,7 +61,7 @@
 								<div class="col-md-4">
 									<div class="col-md-4 col-md-offset-8">
 										@if($eval_flag == 0)
-											<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">Avaliar</button>
+											<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">@lang('app.evaluate')</button>
 										@else
 											<div style="margin-top: 60px;"></div>
 										@endif
@@ -70,7 +70,7 @@
 							</div>
 						</div>
 						@empty
-							<p class="text-center">Nenhuma coleta realizada até o momento. Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p></p>
+							<p class="text-center">@lang('app.noevaluationsuntilnow')</p>
 						@endforelse
 
 					</div>
@@ -82,7 +82,7 @@
 				<div id="evaluationmodal" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
-							<div class="modal-header text-center"><h1>Avalie o Serviço</h1></div>
+							<div class="modal-header text-center"><h1>@lang('app.evaluatetheservice')</h1></div>
 							<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
 								
 							<form class="form-horizontal" role="form" method="POST" action="{{ url('/evaluation') }}">
@@ -90,7 +90,7 @@
 		                        <input type="hidden" name="id_req" id="id_req" value=""/>
 
 		                        <div class="form-group{{ $errors->has('punctual') ? ' has-error' : '' }}">
-		                            <label for="punctual" class="col-md-4 control-label">Pontualidade</label>
+		                            <label for="punctual" class="col-md-4 control-label">@lang('app.ponctuality')</label>
 
 		                            <div class="col-md-6">
 		                                <select class="form-control" name="punctual">
@@ -104,7 +104,7 @@
 		                        </div>
 
 		                        <div class="form-group{{ $errors->has('satisfac') ? ' has-error' : '' }}">
-		                            <label for="satisfac" class="col-md-4 control-label">Satisfação</label>
+		                            <label for="satisfac" class="col-md-4 control-label">@lang('app.satisfaction')</label>
 
 		                            <div class="col-md-6">
 		                                <select class="form-control" name="satisfac">
@@ -118,7 +118,7 @@
 		                        </div>
 
 		                        <div class="form-group{{ $errors->has('obs') ? ' has-error' : '' }}">
-		                            <label for="obs" class="col-md-4 control-label">Comentário</label>
+		                            <label for="obs" class="col-md-4 control-label">@lang('app.comments')</label>
 
 		                            <div class="col-md-6">
 		                                <textarea type="obs" rows="3" class="form-control" name="obs" value="{{ old('obs') }}" required></textarea>
@@ -127,13 +127,13 @@
 
 		                        <div class="form-group">
 									<div class="col-md-6 col-md-offset-4">
-										<button class="btn btn-primary btn-block">Avaliar</button>
+										<button class="btn btn-primary btn-block">@lang('app.evaluate')</button>
 									</div>
 		                        </div>
 
 		                        <div class="form-group">
 									<div class="col-md-6 col-md-offset-4">
-										<button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</button>
+										<button type="button" class="btn btn-default btn-block" data-dismiss="modal">@lang('app.cancel')</button>
 									</div>
 		                        </div>
 

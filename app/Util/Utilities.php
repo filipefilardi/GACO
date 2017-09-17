@@ -80,4 +80,44 @@ class Utilities
 		return $address_for_url;
 	}
 
+	public static function parseWeekdaysPeriod($data) {
+		
+		$weekdays_possible = ['domingo','segunda','terça','quarta','quinta','sexta','sabado'];
+		$period_possible = ['manha','tarde','noite'];
+		$weekdays_string = '';
+		$period_string = '';
+		$weekdays_period = [];
+		$count = 0;
+
+		for ($i = 0; $i < sizeof($weekdays_possible); $i++) {
+			if(array_key_exists($weekdays_possible[$i],$data)) {
+				if($data[$weekdays_possible[$i]] == '1') {
+					if($count == 0) $weekdays_string = $weekdays_string . 1;
+					else $weekdays_string = $weekdays_string . '-' . 1;
+				}
+			}
+			elseif($count == 0) $weekdays_string = $weekdays_string . 0;
+			else $weekdays_string = $weekdays_string . '-' . 0;
+			$count++;
+		}
+
+		array_push($weekdays_period, $weekdays_string);
+		$count = 0;
+
+		for ($i = 0; $i < sizeof($period_possible); $i++) {
+			if(array_key_exists($period_possible[$i],$data)) {
+				if($data[$period_possible[$i]] == '1') {
+					if($count == 0) $period_string = $period_string . 1;
+					else $period_string = $period_string . '-' . 1;
+				}
+			}
+			elseif($count == 0) $period_string = $period_string . 0;
+			else $period_string = $period_string . '-' . 0;
+			$count++;
+		}
+
+		array_push($weekdays_period, $period_string);
+
+		return $weekdays_period;
+	}
 }

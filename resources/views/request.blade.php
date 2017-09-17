@@ -17,7 +17,7 @@
             					<div class="form-group{{ $errors->has('id_garbage') ? ' has-error' : '' }}">
             							<label class="col-md-3 control-label">Resíduo</label>
             	                    <div class="col-md-7">
-            							<select class="form-control" id="id_garbage" name="id_garbage">
+            							<select class="form-control" id="id_garbage_1" name="id_garbage">
             					 		@foreach ($garbage as $garbage)
             		                    	<option value={{$garbage->id_garbage}}>{{$garbage->nm_garbage}}</option>
             		                    @endforeach
@@ -29,7 +29,7 @@
                                     <label for="status_tv" class="col-md-3 control-label">Condição</label>
 
                                     <div class="col-md-7">
-                                        <select class="form-control" name="status_tv" id="status_tv">
+                                        <select class="form-control" name="status_tv" id="status_tv_1">
                                             <option>Aberta</option>
                                             <option>Fechada</option>
                                         </select>
@@ -45,7 +45,7 @@
                                     <label for="status_cpu" class="col-md-3 control-label">Condição</label>
 
                                     <div class="col-md-7">
-                                        <select class="form-control" name="status_cpu" id="status_cpu">
+                                        <select class="form-control" name="status_cpu" id="status_cpu_1">
                                             <option>Completa</option>
                                             <option>Incompleta</option>
                                         </select>
@@ -65,7 +65,7 @@
                                     <label for="others_cpu" class="col-md-3 control-label">Descrição</label>
 
                                     <div class="col-md-7">
-                                        <input id="others_cpu" type="text" class="form-control" name="others_cpu" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu') }}">
+                                        <input id="others_cpu_1" type="text" class="form-control" name="others_cpu" placeholder="Descrição dos componentes que faltam" value="{{ old('others_cpu') }}">
 
                                         @if ($errors->has('others_cpu'))
                                             <span class="help-block">
@@ -83,7 +83,7 @@
                                     <label for="others" class="col-md-3 control-label">Equipamento</label>
 
                                     <div class="col-md-7">
-                                        <input id="others" type="text" class="form-control" name="others" placeholder="Descreva qual resíduo quer doar" value="{{ old('others') }}">
+                                        <input id="others_1" type="text" class="form-control" name="others" placeholder="Descreva qual resíduo quer doar" value="{{ old('others') }}">
 
                                         @if ($errors->has('others'))
                                             <span class="help-block">
@@ -97,7 +97,7 @@
             					    <label for="quantity" class="col-md-3 control-label">Quantidade</label>
 
                                     <div class="col-md-7">
-                                        <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="1" required>
+                                        <input id="quantity_1" type="text" class="form-control" name="quantity" placeholder="Escreva um número" value="1" required>
 
                                         @if ($errors->has('quantity'))
                                             <span class="help-block">
@@ -111,7 +111,7 @@
                                     <label for="observation" class="col-md-3 control-label">Observação</label>
 
                                     <div class="col-md-7">
-                                        <input id="observation" type="text" maxlength="140" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
+                                        <input id="observation_1" type="text" maxlength="140" class="form-control" name="observation" placeholder="Alguma observação sobre o equipamento" value="{{ old('observation') }}">
 
                                         @if ($errors->has('observation'))
                                             <span class="help-block">
@@ -121,7 +121,18 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                
+                                <p class="col-md-7 col-md-offset-3 text-center">---------</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-7 col-md-offset-3">
+                            <a input="button" id="btn-repeat" class="btn btn-default btn-block">Adicionar outro resíduo</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                     <label for="address" class="col-md-3 control-label">Endereço de coleta</label>
 
                                     <div class="col-md-7">
@@ -146,15 +157,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <p class="col-md-7 col-md-offset-3 text-center">---------</p>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <div class="col-md-7 col-md-offset-3">
-                            <a input="button" id="btn-repeat" class="btn btn-default btn-block">Adicionar outro resíduo</a>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <div class="col-md-7 col-md-offset-3 text-center">
                                 Escolha os dias e periodo que você pode efetuar a coleta. 
@@ -186,6 +189,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <input type="hidden" name="counter" id="counter" value="1">
 
                         <div class="row">
                             <div class="col-md-7 col-md-offset-3">
@@ -276,7 +281,10 @@
 </div>
 
 <script>
-    document.getElementById("id_garbage").onchange = function() {
+    document.querySelector('[id^="id_garbage"]').onchange = function() {
+        var tmp = $(this).prop('id').split('_');
+        var num = tmp[tmp.length-1];
+        alert(num);
         if ($('#id_garbage').find(":selected").attr('value')=="15") {
             $('#status_tv').show();
             $('#others').hide();
@@ -309,7 +317,7 @@
         }        
     };
 
-    document.getElementById("status_cpu").onchange = function() {
+    document.querySelector('[id^="status_cpu"]').onchange = function() {
         if($('#status_cpu').find(":selected").text() == "Incompleta"){
             $("#others_cpu").show();
             $("#others_cpu").find("input").prop('required',true);
@@ -343,7 +351,22 @@
 
     $(document).on('click', '#btn-repeat', function (e) {
         e.preventDefault();
-        $('.repeatable').parent('div.parent').append($('.parent').children('div:first').html());
+        var target = $('.parent').children('div:first').clone();
+
+        var counter = parseInt($(document).find('#counter').prop('value'), 10);
+        var num = counter;
+
+        $(document).find('#counter').prop('value',counter + 1);
+
+        target.find("[name^=id_garbage]").prop('name', 'id_garbage_'+num );
+        target.find("[name^=quantity]").prop('name', 'quantity_'+num );
+        target.find("[name^=observation]").prop('name', 'observation_'+num );
+        target.find("[name^=status_tv]").prop('name', 'status_tv_'+num );
+        target.find("[name^=status_cpu]").prop('name', 'status_cpu_'+num );
+        target.find("[name^=others_cpu]").prop('name', 'others_cpu_'+num );
+        target.find("[name^=others]").prop('name', 'others_'+num );
+
+        $('.repeatable').parent('div.parent').append( target );
     });
 </script>
 @endsection

@@ -80,7 +80,7 @@ class Utilities
 		return $address_for_url;
 	}
 
-	public static function parseWeekdaysPeriod($data) {
+	public static function parseWeekdaysPeriodToDB($data) {
 		
 		$weekdays_possible = ['domingo','segunda','terça','quarta','quinta','sexta','sabado'];
 		$period_possible = ['manha','tarde','noite'];
@@ -119,5 +119,33 @@ class Utilities
 		array_push($weekdays_period, $period_string);
 
 		return $weekdays_period;
+	}
+
+	public static function parseWeekdaysForUI($weekdays_str) {
+		
+		$weekdays_possible = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+
+		$weekdays = [];
+		$weekdays_str_split = preg_split('~-~', $weekdays_str);;
+
+		for ($i = 0; $i < 7; $i++) {
+			if($weekdays_str_split[$i] = '1') array_push($weekdays, $weekdays_possible[$i]);
+		}
+
+		return $weekdays;
+	}
+
+	public static function parsePeriodForUI($period_str) {
+		
+		$period_possible = ['Manhã','Tarde','Noite'];
+
+		$period = [];
+		$period_str_split = preg_split('~-~', $period_str);;
+
+		for ($i = 0; $i < 7; $i++) {
+			if($period_str_split[$i] = '1') array_push($period, $period_possible[$i]);
+		}
+
+		return $period;
 	}
 }

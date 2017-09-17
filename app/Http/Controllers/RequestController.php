@@ -55,7 +55,7 @@ class RequestController extends Controller
     }
 
     public function make_request(Request $data){
-        $weekday_period = Utilities::parseWeekdaysPeriod($data->all());
+        $weekday_period = Utilities::parseWeekdaysPeriodToDB($data->all());
         $counter = (int) $data['counter'];
 
         $res = null;

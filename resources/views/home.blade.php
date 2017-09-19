@@ -30,7 +30,61 @@
 					COLETAS PENDENTES
 			 	-->
 
-            	<a href="#req_pen" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
+				<a href="#req_pen" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
+				
+				<div id="req_pen" class="collapse">
+					@if(!$master_user_pend->isEmpty())
+						<div class="list-group request-item">
+							@foreach($master_user_pend as $req)
+								@if($loop->iteration  % 2 != 0)
+								<div class="list-group-item">
+									<div class="row">
+										<div class="col-md-8"><b>Status:</b> Pendente</div>
+										<div class="col-md-4 text-right"><b>Token:</b> {{$req->conf_token}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
+										<div class="col-md-6 text-right"><b>Data:</b> {{date('d/m/Y', strtotime($req->dt_req))}}</div>
+									</div>
+									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
+										<div class="row">
+											<div class="col-md-12" style="margin-top: 10px;"><b>Equipamentos:</b></div>
+										</div>
+										<div class="row">
+											<div class="col-md-10">
+											@foreach($master_user_pend->values()->get($loop->iteration) as $req_info)
+													@if($req_info->desc_req)
+														<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->desc_req}}</div>
+													@else
+													<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->nm_garbage}}</div>
+													@endif
+												@if($req_info->observation)
+													<div class="col-md-8"><b>&nbsp&nbsp&nbsp&nbsp obs:</b> {{$req_info->observation}}</div>
+												@endif
+											@endforeach
+											</div>
+											<div></div>
+											<div class="col-md-2">
+												<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Cancelar</button>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 text-center"><a href="#more_info_request_{{$req->id_req_master}}" data-toggle="collapse" class="testedenovo">detalhes</a></div>
+									</div>
+								</div>
+							    @endif
+							@endforeach
+						</div>
+					@else
+					<p class="text-center">Você não possui nenhuma coleta pendente! Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p>
+						@if(!Auth::user()->isComplete())
+                            <p class="text-center">Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.</p>
+                        @endif
+					@endif 	
+				</div> 
+
+<!--             	<a href="#req_pen" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
 					 
 				<div id="req_pen" class="collapse">
 					@if(!$user_pend->isEmpty())
@@ -59,10 +113,10 @@
 											<div class="col-md-8">Observação: {{$req->observation}} 
 											</div>
 											<div class="col-md-4">
-												<!-- 
+												
 												<div class="col-md-4"><button class="btn btn-primary btn-block">Adiar</button></div>
 												<div class="col-md-4"><button class="btn btn-success btn-block">Confirmar</button></div>
-												 -->
+												
 												<div class="col-md-4 col-md-offset-8">
 													<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Excluir</button>
 												</div>
@@ -79,7 +133,7 @@
                         @endif
 					@endif 	
 				</div> 
-
+ -->
 
 				<!-- 
 					COLETAS AGENDADAS

@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                         <div class="form-group{{ $errors->has('nm_state') ? ' has-error' : '' }}">
-                            <label for="nm_state" class="col-md-3 control-label">@lang('app.estate')</label>
+                            <label for="nm_state" class="col-md-3 control-label">@lang('app.state')</label>
 
                             <div class="col-md-7">
                                 <input id="nm_state" type="text" class="form-control" name="nm_state" value="{{ old('nm_state') }}" maxlength="2" required>

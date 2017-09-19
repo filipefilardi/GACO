@@ -70,7 +70,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-12 text-center"><a href="#more_info_request_{{$req->id_req_master}}" data-toggle="collapse" class="testedenovo">detalhes</a></div>
+										<div class="col-md-12 text-center"><a id="collapse_{{$req->id_req_master}}" href="#more_info_request_{{$req->id_req_master}}" data-toggle="collapse" onclick="changeSeeMore('collapse_{{$req->id_req_master}}')">detalhes da coleta</a></div>
 									</div>
 								</div>
 							    @endif
@@ -461,6 +461,15 @@
 	     var id_req = $(this).data('id');
 	     $(".modal-body #id_req").val( id_req );
 	});
+
+	function changeSeeMore(id_collapse) {
+	    if(document.getElementById(id_collapse).innerHTML == 'detalhes da coleta'){
+	    	document.getElementById(id_collapse).innerHTML = 'menos detalhes';
+	    }
+	    else{
+	    	document.getElementById(id_collapse).innerHTML = 'detalhes da coleta';	
+	    }
+	}
 </script>
 
 @endsection

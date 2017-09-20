@@ -75,19 +75,19 @@
                                     </div>
                                 </div>
 
-                                <div id="others_1" style="display:none" class="form-group{{ $errors->has('others_1') ? ' has-error' : '' }}">
+                                <div id="other_1" style="display:none" class="form-group{{ $errors->has('other_1') ? ' has-error' : '' }}">
                                     <div class="col-md-7 col-md-offset-3">
                                         <p class="danger-box-request ">@lang('app.equipamentstext')</p>
                                     </div>
 
-                                    <label for="others_1" class="col-md-3 control-label">@lang('app.equipament')</label>
+                                    <label for="other_1" class="col-md-3 control-label">@lang('app.equipament')</label>
 
                                     <div class="col-md-7">
-                                        <input id="others_1" type="text" class="form-control" name="others_1" placeholder="Descreva qual resíduo quer doar" value="{{ old('others_1') }}">
+                                        <input id="other_1" type="text" class="form-control" name="other_1" placeholder="Descreva qual resíduo quer doar" value="{{ old('other_1') }}">
 
-                                        @if ($errors->has('others_1'))
+                                        @if ($errors->has('other_1'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('others_1') }}</strong>
+                                                <strong>{{ $errors->first('other_1') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -284,7 +284,7 @@
 
         if ($(document).find('#id_garbage_'+num).find(":selected").attr('value')=="15") {
             $('#status_tv_'+num).show();
-            $('#others_'+num).hide();
+            $('#other_'+num).hide();
             $('#status_cpu_'+num).hide();
             $('#others_cpu_'+num).hide();
             $("#others_cpu_"+num).find("input").prop('required',false);
@@ -292,14 +292,14 @@
         }
         else if ($(document).find('#id_garbage_'+num).find(":selected").attr('value')=="3") {
             $('#status_cpu_'+num).show();
-            $('#others_'+num).hide();
+            $('#other_'+num).hide();
             $('#status_tv_'+num).hide();
             $('#others_cpu_'+num).hide();
             $("#others_cpu_"+num).find("input").prop('required',false);
 
         }
         else if ($(document).find('#id_garbage_'+num).find(":selected").attr('value')=="17") {
-            $('#others_'+num).show();
+            $('#other_'+num).show();
             $('#status_tv_'+num).hide(); 
             $('#status_cpu_'+num).hide();
             $('#others_cpu_'+num).hide();
@@ -307,7 +307,7 @@
         }
         else {
             $('#status_tv_'+num).hide();   
-            $('#others_'+num).hide();
+            $('#other_'+num).hide();
             $('#status_cpu_'+num).hide();
             $('#others_cpu_'+num).hide();
             $("#others_cpu_"+num).find("input").prop('required',false);
@@ -364,7 +364,7 @@
         target.find("[name^=status_tv]").prop('name', 'status_tv_'+num );
         target.find("[name^=status_cpu]").prop('name', 'status_cpu_'+num );
         target.find("[name^=others_cpu]").prop('name', 'others_cpu_'+num );
-        target.find("[name^=others]").prop('name', 'others_'+num );
+        target.find("[name^=other_]").prop('name', 'other_'+num );
 
         target.find("[id^=id_garbage]").prop('id', 'id_garbage_'+num );
         target.find("[id^=quantity]").prop('id', 'quantity_'+num );
@@ -372,13 +372,13 @@
         target.find("[id^=status_tv]").prop('id', 'status_tv_'+num );
         target.find("[id^=status_cpu]").prop('id', 'status_cpu_'+num );
         target.find("[id^=others_cpu]").prop('id', 'others_cpu_'+num );
-        target.find("[id^=others]").prop('id', 'others_'+num );
+        target.find("[id^=other_]").prop('id', 'other_'+num );
 
 
         $('.repeatable').parent('div.parent').append( target );
 
         $('#status_tv_'+num).hide();   
-        $('#others_'+num).hide();
+        $('#other_'+num).hide();
         $('#status_cpu_'+num).hide();
         $('#others_cpu_'+num).hide();
         $("#others_cpu_"+num).find("input").prop('required',false);

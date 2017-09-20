@@ -90,7 +90,7 @@ class RequestController extends Controller
                         break;
                     # other
                     case 17:
-                        $desc_req = $data['others'. '_' . $i];
+                        $desc_req = $data['other'. '_' . $i];
                         break;
                 }
 

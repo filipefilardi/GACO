@@ -64,10 +64,6 @@ class RequestController extends Controller
 
         #dd($data->all(),$counter);
         if (Gate::allows('execute', 'create_request')) {
-            
-            $returnMaster = RequestMasterDAO::insert_request(Auth::user()->id_user, null, null ,null, $data['id_add'], null, null, $weekday_period[0],$weekday_period[1]);
-
-            list($token,$id_master) = preg_split('~-~', $returnMaster);
 
             #dd($data->all());
             for($i = 1; $i <=$counter; $i++) {
@@ -100,10 +96,40 @@ class RequestController extends Controller
                     $data->session()->flash('message', 'A coleta de um televisor aberto é inviabilizada por riscos a saúde, dada a quantidade de chumbo exposta.'); 
                     $data->session()->flash('alert-warning', 'warning');
                     return redirect('/request');
+                }  
+               
+                 
+            }
+
+            // GAMBETA MONSTER
+            $returnMaster = RequestMasterDAO::insert_request(Auth::user()->id_user, null, null ,null, $data['id_add'], null, null, $weekday_period[0],$weekday_period[1]);
+
+            list($token,$id_master) = preg_split('~-~', $returnMaster);
+            for($i = 1; $i <=$counter; $i++) {
+
+                #Auth::user();
+                $id_garbage =  $data['id_garbage'. '_' . $i];
+                $quantity =  $data['quantity'. '_' . $i];
+                $observation =  $data['observation'. '_' . $i];
+                $desc_req = "";
+                $state = "";
+                switch ($id_garbage) {
+                    # tv
+                    case 15:
+                        $state = $data['status_tv'. '_' . $i];
+                        break;
+                    # cpu
+                    case 3:
+                        $state = $data['status_cpu'. '_' . $i];
+                        $desc_req = $data['others_cpu'. '_' . $i];
+                        break;
+                    # other
+                    case 17:
+                        $desc_req = $data['other'. '_' . $i];
+                        break;
                 }
                 
-                $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $observation, $data['id_add'], $quantity, $desc_req, $id_master, $token);
-
+                 $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $observation, $data['id_add'], $quantity, $desc_req, $id_master, $token);
             }
 
             if(!is_null($id_master)){

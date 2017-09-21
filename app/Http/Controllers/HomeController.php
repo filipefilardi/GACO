@@ -86,7 +86,7 @@ class HomeController extends Controller
         
         if ($id_cat == 4) return redirect('admin');
         
-        //dd($request);
+        // dd($master_user_pend);
         return view('home')->with('request', $request)
                            ->with('request_acpt', $request_acpt)
                            ->with('user_acpt', $user_acpt)

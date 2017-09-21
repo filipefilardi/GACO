@@ -197,3 +197,23 @@
 .settings-addressbox:hover{
 	background-color: var(--btndefaulthover);
 }
+
+/*
+=======================================
+			    ABOUT 
+=======================================
+*/
+
+.about-page ul{
+	list-style-type: none;
+	margin-bottom: 40px;
+}
+
+.img-responsive.img-center {
+	margin: 0 auto;
+	margin-bottom: 20px;
+	margin-top: 20px;
+
+	width: 55%;
+	height: auto;
+}

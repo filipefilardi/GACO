@@ -35,7 +35,7 @@
 				           		<div class="text-center grey-box">
 					            	<p>Rua Capitão Pacheco e Chaves, 108, Vila Prudente, São Paulo</p>
 					            	<p>(11) 4243-1810</p>
-					            	<p><a href="https://www.facebook.com/COOPERECIFAVELA" target="_blank">https://www.facebook.com/COOPERECIFAVELA</a></p>
+					            	<p><a href="https://www.recifavela.com.br/" target="_blank">https://www.recifavela.com.br/</a></p>
 				            	</div>
 			            		<p>@lang('app.recifaveladescription')</p>
 				            </div>

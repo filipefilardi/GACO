@@ -37,7 +37,7 @@
 							</div>
 						</div>
 						@else
-							<p class="text-center">@lang('app.noevaluationsmade')</p>
+							<p class="text-center">@lang('app.noevaluationsuntilnow')</p>
 						@endif
 					</div>
 				</div>

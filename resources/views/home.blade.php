@@ -285,23 +285,18 @@
 
 <!-- MODAL CANCEL REQUEST -->
 <div id="cancelrequest" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header text-center"><h1>Confirmação</h1></div>
+			<div class="modal-header text-center"><h3>Confirmação</h3></div>
 			<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
 				<form role="form" method="POST" action="{{ url('/request/cancel') }}">
 					{{ csrf_field() }}
             		<input type="hidden" name="id_req"  id="id_req" value="" />
 					
-					<h4>Seu pedido de coleta será deletado do sistema, caso não queira exclui-lo, recomendamos que clique no botão cancelar. Deseja continuar com esta ação?</h4>
-					
-					<div class="row">
-						<div class="col-md-6">
-							<button class="btn btn-danger btn-block">Continuar</button>
-						</div>
-						<div class="col-md-6">
-							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Cancelar</button>
-						</div>
+					<h4 style="font-size: 15px; padding-bottom: 15px;">Seu pedido será deletado do sistema, deseja continuar com esta ação?</h4>
+					<div class="modal-footer">
+						<button class="btn btn-danger">Deletar Pedido</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" style="margin-bottom: 0px;">Cancelar Ação</button>
 					</div>
 				</form>
 			</div>
@@ -312,12 +307,17 @@
 	<div id="acceptrequest" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header text-center"><h1>Aceitar doação</h1></div>
+				<div class="modal-header text-center"><h2>Aceitar doação</h2></div>
 				<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
 						{{ csrf_field() }}
 	            		<input type="hidden" name="id_req"  id="id_req" value="" />
 						
+						<div class="col-md-6 col-md-offset-4">
+							<p>Escolha uma data para coletar - lembrei que vai te que mudar por conta do agendamento do user</p>
+						</div>
+
+
 						<div class="form-group{{ $errors->has('dt_predicted') ? ' has-error' : '' }}">
 	                        <label for="dt_predicted" class="col-md-4 control-label">Data de Recolhimento</label>
 
@@ -339,7 +339,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-md-offset-4" style="padding-top: 5px">
-								<button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</button>
+								<button type="button" class="btn btn-default btn-block" data-dismiss="modal" style="margin-bottom: 0px;">Cancelar</button>
 							</div>
 						</div>
 					</form>

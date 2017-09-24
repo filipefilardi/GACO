@@ -84,4 +84,52 @@ class RequestMasterDao {
 
         return $list;
     }
+
+    public static function get_master_conditional($where_key, $where_comparison, $where_value) {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
+        $list = DB::table('request_master')
+            ->join('address', function ($join){
+                $join->on('address.id_add', '=', 'request_master.id_add')
+                 ->where('address.id_del', 0);
+            })
+            ->select('request_master.*','address.str_address')
+            ->where('request_master.id_user_req', $id_user)
+            ->whereIn('request_master.status_req',['ACPT','PEND'])
+            ->where('request_master.id_del', 0)
+            ->where($where_key,$where_comparison,$where_value)
+            ->distinct()
+            ->orderBy('id_req_master')
+            ->get();
+
+        return $list;
+    }
+
+    public static function get_master_acpt_by_coop($id_user) {
+        $errors = array();
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
+        if(sizeof($errors)>0) return $errors;
+
+        $list = DB::table('request_master')
+            ->join('address', function ($join){
+                $join->on('address.id_add', '=', 'request_master.id_add')
+                ->where('address.id_del', 0);
+            })
+            ->join('request_assignment', function ($join){
+                $join->on('request_assignment.id_req_master', '=', 'request_assignment.id_req_master')
+                ->where('request_assignment.id_user_assign', $id_user); 
+                ->where('request_assignment.id_del', 0);
+            })
+            ->select('request_master.*','address.str_address')
+            ->where('request_master.id_user_req', $id_user)
+            ->whereIn('request_master.status_req',['ACPT'])
+            ->where('request_master.id_del', 0)
+            ->distinct()
+            ->orderBy('id_req_master')
+            ->get();
+
+        return $list;
+    }
 }

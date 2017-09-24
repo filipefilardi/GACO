@@ -81,6 +81,39 @@ class RequestDao
         return $list;
     }
 
+    public static function get_full_info_dashboard_req_conditional($where_key, $where_comparison, $where_value) // All ACPT or PEND
+    {
+        $errors = array();
+        if(sizeof($errors)>0) return $errors;
+
+        $list = DB::table('request')
+            ->leftJoin('request_assignment', function ($join) {
+            $join->on('request.id_req', '=', 'request_assignment.id_req')
+                 ->where('request_assignment.id_del', '=', 0);
+            })
+            ->join('garbage', function ($join) {
+            $join->on('request.id_garbage', '=', 'garbage.id_garbage')
+                 ->where('garbage.id_del', 0);
+            })
+            ->join('request_master', function ($join) {
+            $join->on('request.id_req_master', '=', 'request_master.id_req_master')
+                 ->where('request_master.id_del', 0);
+            })
+            ->join('address', function ($join){
+                $join->on('address.id_add', '=', 'request.id_add')
+                 ->where('address.id_del', 0);
+            })
+            ->select('request.*','request_assignment.dt_predicted', 'garbage.nm_garbage','address.str_address')
+            ->whereIn('request.status_req',['ACPT','PEND'])
+            ->where($where_key,$where_comparison,$where_value)
+            ->where('request.id_del', 0)
+            ->distinct()
+            ->orderBy('id_req')
+            ->get();
+
+        return $list;
+    }
+
     public static function get_all_requests_by_user($id_user) // All requests
     {
         $errors = array();

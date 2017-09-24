@@ -56,8 +56,6 @@ class AddRelationalTables extends Migration
         Schema::table('request_assignment', function($table) {
             $table->integer('id_req_master')->unsigned();
             $table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');;
-            $table->integer('id_req')->unsigned();
-            $table->foreign('id_req')->references('id_req_master')->on('request_master')->onDelete('cascade');;
             $table->integer('id_user_assign')->unsigned();
             $table->foreign('id_user_assign')->references('id_user')->on('users')->onDelete('cascade');;
         });

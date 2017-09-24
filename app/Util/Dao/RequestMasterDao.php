@@ -114,7 +114,7 @@ class RequestMasterDao {
                 ->where('request_assignment.id_user_assign', $id_user)
                 ->where('request_assignment.id_del', 0);
             })
-            ->select('request_master.*','address.str_address')
+            ->select('request_master.*','address.str_address', 'request_assignment.dt_predicted')
             ->whereIn('request_master.status_req',['ACPT'])
             ->where('request_master.id_del', 0)
             ->distinct()
@@ -169,6 +169,29 @@ class RequestMasterDao {
         if($id_cat == 1 || $id_cat == 2)    $errors = RequestMasterDao::update_master_request($id_req_master,'CNCL');
         if($id_cat == 3)                    $errors = RequestMasterDao::update_master_request($id_req_master,'PEND');
 
+        DB::table('request_assignment')
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                      ->from('request_assignment')
+                      ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
+                      ->whereRaw('request_assignment.id_del = ?', 0);
+            })
+            ->where('id_req_master', $id_req_master)
+            ->update([
+                'id_del' => 1
+            ]);        
+
+        DB::table('request_confirmation')
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                      ->from('request_confirmation')
+                      ->whereRaw('request_confirmation.id_req_master = ?', $id_req_master)
+                      ->whereRaw('request_confirmation.id_del = ?', 0);
+            })
+            ->where('id_req_master', $id_req_master)
+            ->update([
+                'id_del' => 1
+            ]);
 
         return $errors;
     }

@@ -156,6 +156,10 @@
 							@foreach($master_coop_pend as $req)
 								@if($loop->iteration  % 2 != 0)
 								<div class="list-group-item">
+				            		
+				            		<input type="hidden" name="tx_period_day"  id="tx_period_day_{{$req->id_req_master}}" value="{{$req->tx_period_day}}"/>
+				            		<input type="hidden" name="tx_weekdays"  id="tx_weekdays_{{$req->id_req_master}}" value="{{$req->tx_weekdays}}"/>
+									
 									<div class="row">
 										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
 										<div class="col-md-6 text-right"><b>Data do Pedido:</b> {{date('d/m/Y', strtotime($req->dt_req))}}</div>
@@ -325,9 +329,9 @@
                             
                             <div class="col-md-6">
                                 <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1">@lang('app.morning')</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1">@lang('app.noon')</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="noite" value="1">@lang('app.night')</label>
+                                    <label class="btn btn-default"><input id="btn_morning" type="checkbox" name="manha" value="1">@lang('app.morning')</label>
+                                    <label class="btn btn-default"><input id="btn_noon" type="checkbox" name="tarde" value="1">@lang('app.noon')</label>
+                                    <label class="btn btn-default"><input id="btn_night" type="checkbox" name="noite" value="1">@lang('app.night')</label>
                                 </div>
                             </div>
                         </div>
@@ -442,14 +446,49 @@
 	</div>
 
 <script type="text/javascript">
+	
+	$('#dateaccept').datepicker({
+	    format: 'dd/mm/yyyy',
+	    startDate: '+0d',
+	    language: 'pt-BR',
+	    // daysOfWeekDisabled: '0', // 0 - sunday ~ 6 - saturday
+	});
+
 	$(document).on("click", ".open-cancelrequest", function () {
 	     var id_req = $(this).data('id');
 	     $(".modal-body #id_req").val( id_req );
 	});
 
 	$(document).on("click", ".open-acceptrequest", function () {
-	     var id_req = $(this).data('id');
-	     $(".modal-body #id_req").val( id_req );
+	    var id_req = $(this).data('id');
+	    $(".modal-body #id_req").val( id_req );
+	     
+	 	// tx_period_day = document.getElementById("tx_period_day_" + id_req).value;
+		// tx_weekdays = document.getElementById("tx_weekdays_" + id_req).value;
+		
+		// tx_period_day = tx_period_day.split('-');
+
+		// var morning = tx_period_day[0]; 
+		// var noon = tx_period_day[1];
+		// var night = tx_period_day[2];
+
+		// tx_weekdays = tx_weekdays.split('-');
+
+		// var sunday = tx_weekdays[0];
+		// var monday = tx_weekdays[1]; 
+		// var tuesday = tx_weekdays[2]; 
+		// var wednesday = tx_weekdays[3]; 
+		// var thursday = tx_weekdays[4]; 
+		// var friday = tx_weekdays[5]; 
+		// var saturday = tx_weekdays[6]; 
+
+		// $(".modal-body #btn_night").attr("bakground-color", "black");
+
+		// $('.modal-body #dateaccept').datepicker({
+		//     daysOfWeekDisabled: '4',
+		// });
+
+
 	});
 
 	$(document).on("click", ".open-confirmrequest", function () {
@@ -471,11 +510,6 @@
 	    }
 	}
 
-	$('#dateaccept').datepicker({
-	    format: 'dd/mm/yyyy',
-	    startDate: '+0d',
-	    language: 'pt-BR',
-	});
 </script>
 
 @endsection

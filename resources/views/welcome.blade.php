@@ -72,9 +72,11 @@
             <h1 class="text-center header">Projeto GACO</h1>
             <div class="right-text text-justify" style="font-size: 19px;">
                 
-                <iframe style="display: block; margin: 0 auto; margin-bottom: 30px;" width="853" height="480" src="https://www.youtube.com/embed/fe_Xx49nODc" frameborder="0" allowfullscreen></iframe>
+                <div class="wrapper">
+                    <iframe src="https://www.youtube.com/embed/fe_Xx49nODc" frameborder="0" allowfullscreen></iframe>
+                </div>
 
-                <p>O Projeto GACO surgiu em 2015 como proposta de reduzir o impacto dos resíduos eletroeletrônicos na cidade de São Paulo. Assim, Filipe Filardi, Sabrina Gonçalves, Victor Edoardo  Garcia e Thiago Nobayashi, se reuniram buscando desenvolver uma plataforma que conecta as pessoas que querem descartar seus resíduos de forma apropriada e as  cooperativas de reciclagem capacitadas a dar destinação correta a esses resíduos.</p>
+                <p style="margin-top: 30px">O Projeto GACO surgiu em 2015 como proposta de reduzir o impacto dos resíduos eletroeletrônicos na cidade de São Paulo. Assim, Filipe Filardi, Sabrina Gonçalves, Victor Edoardo  Garcia e Thiago Nobayashi, se reuniram buscando desenvolver uma plataforma que conecta as pessoas que querem descartar seus resíduos de forma apropriada e as  cooperativas de reciclagem capacitadas a dar destinação correta a esses resíduos.</p>
 
             </div>
             </div>
@@ -179,6 +181,8 @@
     </div>
 
     </content>
+    
+    <div id="app"></div>
 
     <footer class="footer-distributed">
         <div class="footer-right">

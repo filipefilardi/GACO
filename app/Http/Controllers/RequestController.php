@@ -178,7 +178,7 @@ class RequestController extends Controller
             Auth::user();
 
             $id_cat = Auth::user()->id_cat;
-            $teste = RequestDAO::cancel_request($data['id_req'],$id_cat);
+            $erros = RequestMasterDAO::cancel_master_request($data['id_req_master'],$id_cat);
 
             return redirect('/home');
 

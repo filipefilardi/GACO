@@ -137,7 +137,7 @@ class RequestMasterDao {
         $errors = array();
 
         if(is_null($new_status_req) || !in_array($new_status_req, $status_list)) array_push($errors, 'new status_req null or invalid;');
-        if(is_null($id_req_master)  || $id_req_master <= 0) array_push($errors, 'id_user null or invalid (<=0)');        
+        if(is_null($id_req_master)  || $id_req_master <= 0) array_push($errors, 'id_req_master null or invalid (<=0)');        
         
         // END VALIDATION BLOCK /////////
 
@@ -157,6 +157,23 @@ class RequestMasterDao {
             ->update([
                 'status_req' => $new_status_req
             ]);
+
+        return $errors;
+    }
+
+    public static function cancel_master_request($id_req_master,$id_cat) {
+
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($id_req_master)  || $id_req_master <= 0) array_push($errors, 'id_req_master null or invalid (<=0)');        
+        
+        if(sizeof($errors)>0) return $errors;
+        // END VALIDATION BLOCK /////////
+
+        if($id_cat == 1 || $id_cat == 2)    $errors = update_master_request($id_req_master,'CNCL');
+        if($id_cat == 3)                    $errors = update_master_request($id_req_master,'PEND');
+
 
         return $errors;
     }

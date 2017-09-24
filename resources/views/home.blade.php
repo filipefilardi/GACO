@@ -84,57 +84,6 @@
 					@endif 	
 				</div> 
 
-<!--             	<a href="#req_pen" class="btn btn-default btn-block" data-toggle="collapse">Coletas pendentes</a>
-					 
-				<div id="req_pen" class="collapse">
-					@if(!$user_pend->isEmpty())
-						<div class="list-group request-item">
-							@foreach($user_pend as $req)
-								@if($req->status_req == "PEND")
-									<div class="list-group-item">
-										<div class="row">
-											@if($req->desc_req)
-												<div class="col-md-8">Resíduo: {{$req->desc_req}}</div>
-											@else
-												<div class="col-md-8">Resíduo: {{$req->nm_garbage}}</div>
-											@endif
-											<div class="col-md-2 text-right">Token: {{$req->conf_token}}</div>
-											<div class="col-md-2 text-right">Pendente</div>
-										</div>
-										<div class="row">
-											<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-											<div class="col-md-4 col-md-offset-4 text-right">{{date('d/m/Y', strtotime($req->dt_req))}}</div>
-										</div>
-
-										<div class="row">
-											<div class="col-md-6">Endereço: {{$req->str_address}}</div>
-										</div>
-										<div class="row">
-											<div class="col-md-8">Observação: {{$req->observation}} 
-											</div>
-											<div class="col-md-4">
-												
-												<div class="col-md-4"><button class="btn btn-primary btn-block">Adiar</button></div>
-												<div class="col-md-4"><button class="btn btn-success btn-block">Confirmar</button></div>
-												
-												<div class="col-md-4 col-md-offset-8">
-													<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Excluir</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								@endif
-							@endforeach
-						</div>
-					@else
-					<p class="text-center">Você não possui nenhuma coleta pendente! Que tal <a href="{{ url('/request')}}">agendar uma doação</a>?</p>
-						@if(!Auth::user()->isComplete())
-                            <p class="text-center">Complete <a href="{{ url('/complete_registration')}}"> aqui </a> seu cadastro para descartar gratuitamente seu eletrônico.</p>
-                        @endif
-					@endif 	
-				</div> 
- -->
-
 				<!-- 
 					COLETAS AGENDADAS
 			 	-->
@@ -143,8 +92,8 @@
 				
 				<div id="req_acpt" class="collapse">
 					<div class="list-group request-item">
-						@if(!$user_acpt->isEmpty())
-							@foreach($user_acpt as $req)
+						@if(!$master_user_acpt->isEmpty())
+							@foreach($master_user_acpt as $req)
 								@if($req->status_req == "ACPT")
 									<div class="list-group-item">
 										<div class="row">
@@ -195,84 +144,106 @@
 			 -->
 			@if(Auth::user()->id_cat == 3)
 				<a href="#reg_req" class="btn btn-default btn-block" data-toggle="collapse">Doações cadastradas no sistema</a>
-				
+
 				<div id="reg_req" class="collapse">
-					<div class="list-group request-item">
-						@forelse($request as $req)
-							<div class="list-group-item">
-								<div class="row">
-									@if($req->nm_garbage)
-										<div class="col-md-8">Resíduo: {{$req->nm_garbage}}</div>
-									@else
-										<div class="col-md-8">Resíduo: Não está retornando no método</div>
-									@endif
-									<div class="col-md-2 col-md-offset-2 text-right">{{$req->status_req}}</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-									<div class="col-md-4 col-md-offset-4 text-right">{{date('d/m/Y', strtotime($req->dt_req))}}</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">Endereço:</div>
-								</div>
-								<div class="row">
-									<div class="col-md-8">Observação: {{$req->observation}} 
+					@if(!$master_coop_pend->isEmpty())
+						<div class="list-group request-item">
+							@foreach($master_coop_pend as $req)
+								@if($loop->iteration  % 2 != 0)
+								<div class="list-group-item">
+									<div class="row">
+										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
+										<div class="col-md-6 text-right"><b>Data do Pedido:</b> {{date('d/m/Y', strtotime($req->dt_req))}}</div>
 									</div>
-									<div class="col-md-4">
-										<div class="col-md-4 col-md-offset-8"><button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#acceptrequest" class="open-acceptrequest btn btn-success btn-block">Aceitar</button></div>
-									</div>
-								</div>
-							</div>
-						@empty
-							<p class="text-center">Não existem doações cadastrada no sistema.</p>	
-						@endforelse
-					</div>
-				</div>
-
-				<a href="#acpt_req" class="btn btn-default btn-block" data-toggle="collapse">Doações aceitas</a>
-				
-				<div id="acpt_req" class="collapse">
-					<div class="list-group request-item">
-						@forelse($request_acpt as $req)
-							<div class="list-group-item">
-								<div class="row">
-									@if($req->nm_garbage)
-										<div class="col-md-6">Resíduo: {{$req->nm_garbage}}</div>
-									@else
-										<div class="col-md-6">Resíduo: Não está retornando no método</div>
-									@endif
-									<div class="col-md-4 text-right">Agendamento: {{date('d/m/Y', strtotime($req->dt_predicted))}}</div>
-									<div class="col-md-2 text-right">{{$req->status_req}}</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">Endereço:</div>
-								</div>
-								<div class="row">
-									<div class="col-md-8">Observação: {{$req->observation}} 
-									</div>
-									<div class="col-md-4">
-										<div class="col-md-4"><button data-toggle="modal" data-id="{{$req->id_req}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button></div>
-										<div class="col-md-4"><button data-toggle="modal" data-id="{{$req->id_req}}" data-target="#confirmrequest" class="open-confirmrequest btn btn-primary">Confirmar</button></div>
-										<div class="col-md-4">
-											<form role="form" method="POST" action="{{ url('/request/cancel') }}">
-												{{ csrf_field() }}
-												<input type="hidden" name="id_req" value="{{$req->id_req}}" />
-												<button class="btn btn-danger"">Cancelar</button>
-											</form>
+									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
+										<div class="row">
+											<div class="col-md-12" style="margin-top: 10px;"><b>Equipamentos:</b></div>
+										</div>
+										<div class="row">
+											<div class="col-md-10">
+											@foreach($master_coop_pend->values()->get($loop->iteration) as $req_info)
+													@if($req_info->desc_req)
+														<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->desc_req}}</div>
+													@else
+													<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->nm_garbage}}</div>
+													@endif
+												@if($req_info->observation)
+													<div class="col-md-8"><b>&nbsp&nbsp&nbsp&nbsp obs:</b> {{$req_info->observation}}</div>
+												@endif
+											@endforeach
+											</div>
+											<div></div>
+											<div class="col-md-2">
+												<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#acceptrequest" class="open-acceptrequest btn btn-success btn-block">Aceitar</button>
+											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-12 text-center"><a id="collapse_{{$req->id_req_master}}" href="#more_info_request_{{$req->id_req_master}}" data-toggle="collapse" onclick="changeSeeMore('collapse_{{$req->id_req_master}}')">detalhes da coleta</a></div>
+									</div>
 								</div>
-							</div>
-						@empty
-							<p class="text-center">Não possui nenhuma doação aceita até o momento.</p>	
-						@endforelse
-					</div>
-				</div>
+							    @endif
+							@endforeach
+						</div>
+					@else
+					<p class="text-center">Não existem doações cadastrada no sistema.</p>
+					@endif 	
+				</div> 	
+
+
+				<a href="#acpt_req" class="btn btn-default btn-block" data-toggle="collapse">Doações aceitas</a>
+
+				<div id="acpt_req" class="collapse">
+					@if(!$master_coop_acpt->isEmpty())
+						<div class="list-group request-item">
+							@foreach($master_coop_acpt as $req)
+								@if($loop->iteration  % 2 != 0)
+								<div class="list-group-item">
+									<div class="row">
+										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
+										<div class="col-md-6 text-right"><b>Data do Pedido:</b> {{date('d/m/Y', strtotime($req->dt_req))}}</div>
+									</div>
+									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
+										<div class="row">
+											<div class="col-md-12" style="margin-top: 10px;"><b>Equipamentos:</b></div>
+										</div>
+										<div class="row">
+											<div class="col-md-10">
+											@foreach($master_coop_acpt->values()->get($loop->iteration) as $req_info)
+													@if($req_info->desc_req)
+														<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->desc_req}}</div>
+													@else
+													<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->nm_garbage}}</div>
+													@endif
+												@if($req_info->observation)
+													<div class="col-md-8"><b>&nbsp&nbsp&nbsp&nbsp obs:</b> {{$req_info->observation}}</div>
+												@endif
+											@endforeach
+											</div>
+											<div></div>
+											<div class="col-md-2">
+												<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button>
+												
+												<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#confirmrequest" class="open-confirmrequest btn btn-primary btn-block">Confirmar</button>
+												
+												<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Cancelar</button>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 text-center"><a id="collapse_{{$req->id_req_master}}" href="#more_info_request_{{$req->id_req_master}}" data-toggle="collapse" onclick="changeSeeMore('collapse_{{$req->id_req_master}}')">detalhes da coleta</a></div>
+									</div>
+								</div>
+							    @endif
+							@endforeach
+						</div>
+					@else
+					<p class="text-center">Não possui nenhuma doação aceita até o momento.</p>
+					@endif 	
+				</div> 	
+
+
+
 			@endif
 			</div>
 		</div>

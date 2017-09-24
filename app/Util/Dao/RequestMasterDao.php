@@ -192,7 +192,7 @@ class RequestMasterDao {
             ->whereExists(function ($query) use($id_req_master) {
                 $query->select(DB::raw(1))
                       ->from('request_master')
-                      ->whereRaw('request_master.id_req_master = ?', $id_req)
+                      ->whereRaw('request_master.id_req_master = ?', $id_req_master)
                       ->whereRaw('request_master.id_active = ?' , 'Y')
                       ->whereRaw('request_master.status_req = ?', 'PEND')
                       ->whereRaw('request_master.id_del = ?', 0);
@@ -207,7 +207,7 @@ class RequestMasterDao {
             ->whereNotExists(function ($query) use($id_req_master) {
                 $query->select(DB::raw(1))
                     ->from('request_assignment')
-                    ->whereRaw('request_assignment.id_req_master = ?', $id_req);
+                    ->whereRaw('request_assignment.id_req_master = ?', $id_req_master);
             })
             ->insert([
                 'id_req_master' => $id_req_master,

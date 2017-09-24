@@ -278,7 +278,7 @@ class RequestDao
 
         if(is_null($id_garbage) || $id_garbage <= 0)                                array_push($errors, 'id_garbage null or invalid (<=0)');
         if(is_null($id_user)    || $id_user <= 0)                                   array_push($errors, 'id_user null or invalid (<=0)');
-        if(is_null($quantity)   || !is_numeric($quantity) || (int)$quantity <= 0 ) array_push($errors, 'quantity null or invalid (<=5)');
+        if(is_null($quantity)   || !is_numeric($quantity) || (int)$quantity <= 0 )  array_push($errors, 'quantity null or invalid (<=5)');
         if(is_null($id_add)     || $id_add <=0)                                     array_push($errors, 'id_add null or invalid (<=0)');
 
         // END VALIDATION BLOCK /////////

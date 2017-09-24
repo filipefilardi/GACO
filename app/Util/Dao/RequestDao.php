@@ -276,18 +276,15 @@ class RequestDao
         // VALIDATION BLOCK //////////////
         $errors = array();
 
-        if(is_null($id_garbage)     || $id_garbage <= 0)                    array_push($errors, 'id_garbage null or invalid (<=0)');
-        if(is_null($id_user)        || $id_user <= 0)                       array_push($errors, 'id_user null or invalid (<=0)');
-        #if(is_null($observation)       || strlen((string)$observation)<=5)        array_push($errors, 'observation null or invalid (len<=5)');
-        #if(is_null($mod_req)        || strlen((string)$mod_req)<=5)         array_push($errors, 'mod_req null or invalid (len<=5)');
-        #if(is_null($status_tv) || strlen((string)$status_tv)<=5)  array_push($errors, 'status_tv null or invalid (len<=5)');
-        if(is_null($id_add)         || $id_add <=0)                         array_push($errors, 'id_add null or invalid (<=0)');
+        if(is_null($id_garbage) || $id_garbage <= 0)                                array_push($errors, 'id_garbage null or invalid (<=0)');
+        if(is_null($id_user)    || $id_user <= 0)                                   array_push($errors, 'id_user null or invalid (<=0)');
+        if(is_null($quantity)   || !is_numeric($quantity) || (int)$quantity <= 0 ) array_push($errors, 'quantity null or invalid (<=5)');
+        if(is_null($id_add)     || $id_add <=0)                                     array_push($errors, 'id_add null or invalid (<=0)');
 
         // END VALIDATION BLOCK /////////
         
         if(sizeof($errors)>0) return $errors;
         
-        #$conf_token = $id_user . substr((string) time(),-3) . Utilities::randomize_dictionary(5);
         $today = date("Ymd");
 
         

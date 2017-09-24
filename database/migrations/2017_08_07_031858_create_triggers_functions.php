@@ -106,6 +106,7 @@ class CreateTriggersFunctions extends Migration
                             WHERE id_req_master = OLD.id_req_master;
                         END IF;
                     END IF;
+                    RETURN NEW;
                 END
             $$
             LANGUAGE plpgsql VOLATILE

@@ -147,7 +147,7 @@ class RequestMasterDao {
             ->whereExists(function ($query) use($id_req_master, $new_status_req) {
                 $query->select(DB::raw(1))
                       ->from('request_master')
-                      ->whereRaw('request_master.id_req = ?', $id_req)
+                      ->whereRaw('request_master.id_req_master = ?', $id_req_master)
                       ->whereRaw('request_master.id_active = ?','Y')
                       ->whereRaw('request_master.status_req != ?','COMP') // Cannot update completed requests
                       ->whereRaw('request_master.status_req != ?', $new_status_req)
@@ -171,8 +171,8 @@ class RequestMasterDao {
         if(sizeof($errors)>0) return $errors;
         // END VALIDATION BLOCK /////////
 
-        if($id_cat == 1 || $id_cat == 2)    $errors = update_master_request($id_req_master,'CNCL');
-        if($id_cat == 3)                    $errors = update_master_request($id_req_master,'PEND');
+        if($id_cat == 1 || $id_cat == 2)    $errors = RequestMasterDao::update_master_request($id_req_master,'CNCL');
+        if($id_cat == 3)                    $errors = RequestMasterDao::update_master_request($id_req_master,'PEND');
 
 
         return $errors;

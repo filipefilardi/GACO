@@ -26,8 +26,8 @@ class CreateTriggersFunctions extends Migration
                 BEGIN
                     IF NEW.status_req <> OLD.status_req THEN
                         IF NEW.status_req = '$acceptedStatus' THEN
-                            INSERT INTO request_confirmation (id_req,id_sign, id_del)
-                            VALUES(OLD.id_req,'$noFlag',0);
+                            INSERT INTO request_confirmation (id_req_master,id_sign, id_del)
+                            VALUES(OLD.id_req_master,'$noFlag',0);
                         END IF;
                     END IF;
 
@@ -41,7 +41,7 @@ class CreateTriggersFunctions extends Migration
         // binding Trigger - verifies that request has been changed status to COMP
         DB::unprepared("CREATE TRIGGER update_status_req
             AFTER UPDATE
-            ON request
+            ON request_master
             FOR EACH ROW
             EXECUTE PROCEDURE prepare_confirmation_table();"
         );
@@ -52,9 +52,13 @@ class CreateTriggersFunctions extends Migration
                 BEGIN
                     IF NEW.id_sign <> OLD.id_sign THEN
                         IF NEW.id_sign  = '$yesFlag' THEN
+                            UPDATE request_master
+                            SET id_active = '$noFlag', status_req = '$completeStatus'
+                            WHERE id_req_master = OLD.id_req_master;
+
                             UPDATE request
                             SET id_active = '$noFlag', status_req = '$completeStatus'
-                            WHERE id_req = OLD.id_req;
+                            WHERE id_req_master = OLD.id_req_master;
                         END IF;
                     END IF;
 

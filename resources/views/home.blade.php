@@ -231,7 +231,7 @@
 											<div class="col-md-12" style="margin-top: 10px;"><b>Equipamentos:</b></div>
 										</div>
 										<div class="row">
-											<div class="col-md-10">
+											<div class="col-md-6">
 											@foreach($master_coop_acpt->values()->get($loop->iteration) as $req_info)
 													@if($req_info->desc_req)
 														<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->desc_req}}</div>
@@ -243,13 +243,18 @@
 												@endif
 											@endforeach
 											</div>
-											<div></div>
-											<div class="col-md-2">
-												<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button>
+											<div class="col-md-6">
+
+												<div class="col-md-4">
+													<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button>
+												</div>
 												
-												<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#confirmrequest" class="open-confirmrequest btn btn-primary btn-block">Confirmar</button>
-												
-												<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Cancelar</button>
+												<div class="col-md-4">
+													<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#confirmrequest" class="open-confirmrequest btn btn-primary btn-block">Confirmar</button>
+												</div>
+												<div class="col-md-4">
+													<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Cancelar</button>
+												</div>
 											</div>
 										</div>
 									</div>

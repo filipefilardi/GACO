@@ -10,16 +10,12 @@ class RequestMasterDao {
 // status_req in (PEND, ACPT, COMP, CNCL) Pending, Accepted, Completed, Canceled
 
 
-    public static function insert_request($id_user, $id_garbage, $state, $observation, $id_add, $quantity, $desc_req, $tx_period_day, $tx_weekdays)
+    public static function insert_request($id_user, $id_garbage, $state, $observation, $id_add, $quantity, $desc_req, $tx_weekdays,$tx_period_day)
     {
         // VALIDATION BLOCK //////////////
         $errors = array();
 
-        #if(is_null($id_garbage)     || $id_garbage <= 0)                    array_push($errors, 'id_garbage null or invalid (<=0)');
         if(is_null($id_user)        || $id_user <= 0)                       array_push($errors, 'id_user null or invalid (<=0)');
-        #if(is_null($observation)       || strlen((string)$observation)<=5)        array_push($errors, 'observation null or invalid (len<=5)');
-        #if(is_null($mod_req)        || strlen((string)$mod_req)<=5)         array_push($errors, 'mod_req null or invalid (len<=5)');
-        #if(is_null($status_tv) || strlen((string)$status_tv)<=5)  array_push($errors, 'status_tv null or invalid (len<=5)');
         if(is_null($id_add)         || $id_add <=0)                         array_push($errors, 'id_add null or invalid (<=0)');
 
         // END VALIDATION BLOCK /////////
@@ -219,6 +215,92 @@ class RequestMasterDao {
                 'dt_predicted' => $dt_predicted,
                 'id_del' => 0
             ]);
+
+        return $errors;
+    }
+
+    public static function confirm_master_request($id_req_master, $id_user, $conf_token, $dt_collect)
+    {
+
+        $tmp = explode("/",$dt_collect);
+        $dt_collect = $tmp[2] .  $tmp[1]  . $tmp[0];
+
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($id_user)        || $id_user <= 0)           array_push($errors, 'id_user null or invalid (<=0)');
+        if(is_null($id_req_master)  || $id_req_master <= 0)     array_push($errors, 'id_req_master null or invalid (<=0)');
+        if(is_null($conf_token)     || strlen($conf_token) < 9) array_push($errors, 'conf_token null or invalid');
+
+        if(sizeof($errors)>0) return $errors;
+
+        $conf_token_db = DB::table('request_master')
+                            ->where('id_del', 0)
+                            ->where('id_active', 'Y')
+                            ->where('id_req_master', $id_req_master)
+                            ->where('status_req', 'ACPT')
+                            ->value('conf_token');
+
+        if($conf_token_db != $conf_token) array_push($errors,'Seu token de confirmação está incorreto!');
+
+        if(sizeof($errors)>0) return $errors;
+
+        // END VALIDATION BLOCK /////////
+
+        if($id_cat == 3) {        // Master users or invalid cat cannot confirm reqs
+
+            $today = date("Ymd");
+            
+            DB::table('request_master')
+                ->whereExists(function ($query) use($id_req_master, $conf_token) {
+                $query->select(DB::raw(1))
+                    ->from('request_master')
+                    ->whereRaw('request_master.id_req_master = ?', $id_req_master)
+                    ->whereRaw('request_master.id_del = ?', 0)
+                    ->whereRaw('request_master.conf_token = ?', $conf_token);
+                })
+                ->whereExists(function ($query) use($id_req_master, $id_user) {
+                $query->select(DB::raw(1))
+                    ->from('request_assignment')
+                    ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
+                    ->whereRaw('request_assignment.id_user_assign = ?', $id_user)
+                    ->whereRaw('request_assignment.id_del = ?', 0);
+                })
+                ->whereExists(function ($query) use($id_req_master, $id_user) {
+                $query->select(DB::raw(1))
+                    ->from('request_confirmation')
+                    ->whereRaw('request_confirmation.id_req_master = ?', $id_req_master)
+                    ->whereRaw('request_confirmation.id_sign = ?', 'N')
+                    ->whereRaw('request_confirmation.id_del = ?', 0);
+                })
+                ->where('id_req_master', $id_req_master)
+                ->update([
+                    'dt_collect' => $dt_collect,
+                ]);
+
+            $affected = DB::table('request_confirmation')
+                ->whereExists(function ($query) use($id_req_master, $conf_token) {
+                $query->select(DB::raw(1))
+                    ->from('request_master')
+                    ->whereRaw('request_master.id_req_master = ?', $id_req_master)
+                    ->whereRaw('request_master.id_del = ?', 0)
+                    ->whereRaw('request_master.conf_token = ?', $conf_token);
+                })
+                ->whereExists(function ($query) use($id_req_master, $id_user) {
+                $query->select(DB::raw(1))
+                    ->from('request_assignment')
+                    ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
+                    ->whereRaw('request_assignment.id_user_assign = ?', $id_user)
+                    ->whereRaw('request_assignment.id_del = ?', 0);
+                })
+                ->where('id_req_master', $id_req_master)
+                ->update([
+                    'id_sign' => 'Y',
+                    'dt_sign' => $today
+                ]);
+        }
+
+        if($affected == 0) array_push($errors,'Nenhuma coleta confirmada')
 
         return $errors;
     }

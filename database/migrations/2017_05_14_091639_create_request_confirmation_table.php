@@ -22,8 +22,8 @@ class CreateRequestConfirmationTable extends Migration
         });
 
         Schema::table('request_confirmation', function($table) {
-            $table->integer('id_req')->unsigned();
-            $table->foreign('id_req')->references('id_req')->on('request')->onDelete('cascade');;
+            $table->integer('id_req_master')->unsigned();
+            $table->foreign('id_req_master')->references('id_req_master')->on('request_master')->onDelete('cascade');;
         });
     }
 

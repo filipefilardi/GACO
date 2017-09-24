@@ -115,7 +115,6 @@ class RequestMasterDao {
                 ->where('request_assignment.id_del', 0);
             })
             ->select('request_master.*','address.str_address')
-            ->where('request_master.id_user_req', $id_user)
             ->whereIn('request_master.status_req',['ACPT'])
             ->where('request_master.id_del', 0)
             ->distinct()

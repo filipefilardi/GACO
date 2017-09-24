@@ -95,45 +95,59 @@
 				<a href="#req_acpt" class="btn btn-default btn-block" data-toggle="collapse">Coletas agendadas</a>
 				
 				<div id="req_acpt" class="collapse">
-					<div class="list-group request-item">
-						@if(!$master_user_acpt->isEmpty())
+					@if(!$master_user_acpt->isEmpty())
+						<div class="list-group request-item">
 							@foreach($master_user_acpt as $req)
-								@if($req->status_req == "ACPT")
-									<div class="list-group-item">
+								@if($loop->iteration  % 2 != 0)
+								<div class="list-group-item">
+									<div class="row">
+										<div class="col-md-8"><b>Status:</b> {{$req->status_req}}</div>
+										<div class="col-md-4 text-right"><b>Token:</b> {{$req->conf_token}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
+										<div class="col-md-6 text-right"><b>Data de coleta:</b> {{date('d/m/Y', strtotime($req->dt_collect))}}</div>
+									</div>
+									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
 										<div class="row">
-											@if($req->desc_req)
-												<div class="col-md-8">Resíduo: {{$req->desc_req}}</div>
-											@else
-												<div class="col-md-8">Resíduo: {{$req->nm_garbage}} {{$req->desc_req}}</div>
-											@endif
-											<div class="col-md-2 text-right">Token: {{$req->conf_token}}</div>
-											<div class="col-md-2 text-right">{{$req->status_req}}</div>
+											<div class="col-md-12" style="margin-top: 10px;"><b>Equipamentos:</b></div>
 										</div>
 										<div class="row">
-											<div class="col-md-4">Quantidade: {{$req->quantity}}</div>
-											<div class="col-md-4 col-md-offset-4 text-right">{{date('d/m/Y', strtotime($req->dt_req))}}</div>
-										</div>
-
-										<div class="row">
-											<div class="col-md-6">Endereço: {{$req->str_address}}</div>
-										</div>
-										<div class="row">
-											<div class="col-md-8">Observação: {{$req->observation}} 
+											<div class="col-md-8">
+											@foreach($master_user_acpt->values()->get($loop->iteration) as $req_info)
+													@if($req_info->desc_req)
+														<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->desc_req}}</div>
+													@else
+													<div class="col-md-8">{{$req_info->quantity}} x {{$req_info->nm_garbage}}</div>
+													@endif
+												@if($req_info->observation)
+													<div class="col-md-8"><b>&nbsp&nbsp&nbsp&nbsp obs:</b> {{$req_info->observation}}</div>
+												@endif
+											@endforeach
 											</div>
+											<div></div>
 											<div class="col-md-4">
-												 
-												<div class="col-md-4 col-md-offset-4"><button data-toggle="modal" data-id="{{$req->id_req}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button></div>
-												<div class="col-md-4"><button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Excluir</button></div>
+												<div class="col-md-6">
+													<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#delayrequest" class="open-delayrequest btn btn-default btn-block">Adiar</button>
+												</div>
+												<div class="col-md-6">
+													<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#cancelrequest" class="open-cancelrequest btn btn-danger btn-block">Excluir</button>
+												</div>
 											</div>
 										</div>
 									</div>
-								@endif
+									<div class="row">
+										<div class="col-md-12 text-center"><a id="collapse_{{$req->id_req_master}}" href="#more_info_request_{{$req->id_req_master}}" data-toggle="collapse" onclick="changeSeeMore('collapse_{{$req->id_req_master}}')">detalhes da coleta</a></div>
+									</div>
+								</div>
+							    @endif
 							@endforeach
-						@else
-							<p class="text-center">Você não possui nenhuma coleta agendada! Espere alguma cooperativa aceitar o seu pedido.</p>	
-						@endif
-					</div>
-				</div>
+						</div>
+					@else
+						<p class="text-center">Você não possui nenhuma coleta agendada! Espere alguma cooperativa aceitar o seu pedido.</p>
+					@endif 	
+				</div> 
+
 			@endif
 
 			<!-- 

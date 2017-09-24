@@ -463,14 +463,14 @@
 	    var id_req = $(this).data('id');
 	    $(".modal-body #id_req").val( id_req );
 	     
-	 	// tx_period_day = document.getElementById("tx_period_day_" + id_req).value;
+	 	tx_period_day = document.getElementById("tx_period_day_" + id_req).value;
 		// tx_weekdays = document.getElementById("tx_weekdays_" + id_req).value;
 		
-		// tx_period_day = tx_period_day.split('-');
+		tx_period_day = tx_period_day.split('-');
 
-		// var morning = tx_period_day[0]; 
-		// var noon = tx_period_day[1];
-		// var night = tx_period_day[2];
+		var morning = tx_period_day[0]; 
+		var noon = tx_period_day[1];
+		var night = tx_period_day[2];
 
 		// tx_weekdays = tx_weekdays.split('-');
 
@@ -480,7 +480,17 @@
 		// var wednesday = tx_weekdays[3]; 
 		// var thursday = tx_weekdays[4]; 
 		// var friday = tx_weekdays[5]; 
-		// var saturday = tx_weekdays[6]; 
+		// var saturday = tx_weekdays[6];
+
+		if(morning == '0'){
+			$(".modal-body #btn_morning").parent().prop('class', 'btn btn-default disabled');
+		}
+		if(noon == '0'){
+			$(".modal-body #btn_noon").parent().prop('class', 'btn btn-default disabled');
+		}
+		if(night == '0'){
+			$(".modal-body #btn_night").parent().prop('class', 'btn btn-default disabled');
+		}
 
 		// $(".modal-body #btn_night").attr("bakground-color", "black");
 

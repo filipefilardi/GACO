@@ -17,6 +17,8 @@ class CreateTriggersFunctions extends Migration
         $noFlag = 'N';
         $completeStatus = 'COMP';
         $acceptedStatus = 'ACPT';
+        $canceledStatus = 'CNCL';
+        $pendingStatus  = 'PEND';
 
         // creates function - verifies that request has been changed status to COMP
         DB::unprepared("CREATE OR REPLACE FUNCTION prepare_confirmation_table() RETURNS trigger AS
@@ -92,6 +94,31 @@ class CreateTriggersFunctions extends Migration
             FOR EACH ROW
             EXECUTE PROCEDURE req_status_acpt_change();"
         );
+
+        // creates function - updates req status to accepted ACPT
+        DB::unprepared("CREATE OR REPLACE FUNCTION req_master_status_change() RETURNS trigger AS
+            $$
+                BEGIN
+                    IF NEW.status_req <> OLD.status_req THEN
+                        IF NEW.status_req  = '$canceledStatus' THEN
+                            UPDATE request
+                            SET status_req = '$canceledStatus'
+                            WHERE id_req_master = OLD.id_req_master;
+                        END IF;
+                    END IF;
+                END
+            $$
+            LANGUAGE plpgsql VOLATILE
+            COST 100;"
+        );
+
+        // binding Trigger - verifies new entry is added to request_assigment - meaning req is accepted
+        DB::unprepared("CREATE TRIGGER req_master_status_change
+            AFTER UPDATE
+            ON request_master
+            FOR EACH ROW
+            EXECUTE PROCEDURE req_master_status_change();"
+        );
     }
 
     /**
@@ -104,5 +131,6 @@ class CreateTriggersFunctions extends Migration
         DB::unprepared('DROP FUNCTION prepare_confirmation_table() CASCADE');
         DB::unprepared('DROP FUNCTION inactive_comp_request() CASCADE');
         DB::unprepared('DROP FUNCTION req_status_acpt_change() CASCADE');
+        DB::unprepared('DROP FUNCTION req_master_status_change() CASCADE');
     }
 }

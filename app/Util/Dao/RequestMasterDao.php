@@ -137,7 +137,7 @@ class RequestMasterDao {
         $errors = array();
 
         if(is_null($new_status_req) || !in_array($new_status_req, $status_list)) array_push($errors, 'new status_req null or invalid;');
-        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');        
+        if(is_null($id_req_master)  || $id_req_master <= 0) array_push($errors, 'id_user null or invalid (<=0)');        
         
         // END VALIDATION BLOCK /////////
 

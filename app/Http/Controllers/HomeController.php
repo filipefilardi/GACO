@@ -48,6 +48,8 @@ class HomeController extends Controller
         $user_pend = null;
         $master_user_acpt = null;
         $master_user_pend = null;
+        $master_coop_acpt = null;
+        $master_coop_pend = null;
         
         if ($id_cat == 1 || $id_cat == 2) {
             //$request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);

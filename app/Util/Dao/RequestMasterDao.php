@@ -177,4 +177,49 @@ class RequestMasterDao {
 
         return $errors;
     }
+
+    public static function accept_master_request($id_req_master, $id_user, $dt_predicted) {
+
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($id_req_master)  || $id_req_master <= 0) array_push($errors, 'id_req_master null or invalid (<=0)');
+        if(is_null($id_user)        || $id_user <= 0)       array_push($errors, 'id_user null or invalid (<=0)');        
+        
+        if(sizeof($errors)>0) return $errors;
+        // END VALIDATION BLOCK /////////
+
+        $tmp = explode("/",$dt_predicted);
+        $dt_predicted = $tmp[2] .  $tmp[1]  . $tmp[0];
+
+        DB::table('request_assignment')
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                      ->from('request_master')
+                      ->whereRaw('request_master.id_req_master = ?', $id_req)
+                      ->whereRaw('request_master.id_active = ?' , 'Y')
+                      ->whereRaw('request_master.status_req = ?', 'PEND')
+                      ->whereRaw('request_master.id_del = ?', 0);
+            })
+            ->whereExists(function ($query) use($id_user) {
+                $query->select(DB::raw(1))
+                      ->from('users')
+                      ->whereRaw('users.id_user = ?', $id_user)
+                      ->whereRaw('users.id_cat = ?', 3) // Has to be a cooperative to accept request 
+                      ->whereRaw('users.id_del = ?', 0);
+            })
+            ->whereNotExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                    ->from('request_assignment')
+                    ->whereRaw('request_assignment.id_req_master = ?', $id_req);
+            })
+            ->insert([
+                'id_req_master' => $id_req_master,
+                'id_user_assign' => $id_user,
+                'dt_predicted' => $dt_predicted,
+                'id_del' => 0
+            ]);
+
+        return $errors;
+    }
 }

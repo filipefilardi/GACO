@@ -204,12 +204,8 @@ class RequestController extends Controller
         if (Gate::allows('execute', 'confirm_requests')) {         
             Auth::user();
 
-            // TODO Pass DAte of Collect from UI to confirm_request function of DAO - needs to come on $data
-
-            $id_cat = Auth::user()->id_cat;
             $id_user = Auth::user()->id_user;
-            $teste = RequestDAO::confirm_request($data['id_req'],$id_user, $id_cat, $data['conf_token'], $data['dt_collected']);
-            #dd($teste);
+            $teste = RequestMasterDAO::confirm_master_request($data['id_req'],$id_user, $data['conf_token'], $data['dt_collected']);
 
             if(in_array("Seu token de confirmação está incorreto!",$teste)){
                 $data->session()->flash('message', 'Seu token de confirmação está incorreto! Por favor, tente novamente'); 

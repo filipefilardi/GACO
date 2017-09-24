@@ -343,9 +343,9 @@
                             
                             <div class="col-md-6">
                                 <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
-                                    <label class="btn btn-default"><input id="btn_morning" type="checkbox" name="manha" value="1">@lang('app.morning')</label>
-                                    <label class="btn btn-default"><input id="btn_noon" type="checkbox" name="tarde" value="1">@lang('app.noon')</label>
-                                    <label class="btn btn-default"><input id="btn_night" type="checkbox" name="noite" value="1">@lang('app.night')</label>
+                                    <label class="btn btn-default" id="label_morning"><input id="btn_morning" type="checkbox" name="manha" value="1">@lang('app.morning')</label>
+                                    <label class="btn btn-default" id="label_noon"><input id="btn_noon" type="checkbox" name="tarde" value="1">@lang('app.noon')</label>
+                                    <label class="btn btn-default" id="label_night"><input id="btn_night" type="checkbox" name="noite" value="1">@lang('app.night')</label>
                                 </div>
                             </div>
                         </div>
@@ -478,7 +478,7 @@
 	    $(".modal-body #id_req").val( id_req );
 	     
 	 	tx_period_day = document.getElementById("tx_period_day_" + id_req).value;
-		// tx_weekdays = document.getElementById("tx_weekdays_" + id_req).value;
+		tx_weekdays = document.getElementById("tx_weekdays_" + id_req).value;
 		
 		tx_period_day = tx_period_day.split('-');
 
@@ -486,31 +486,39 @@
 		var noon = tx_period_day[1];
 		var night = tx_period_day[2];
 
-		// tx_weekdays = tx_weekdays.split('-');
+		tx_weekdays = tx_weekdays.split('-');
 
-		// var sunday = tx_weekdays[0];
-		// var monday = tx_weekdays[1]; 
-		// var tuesday = tx_weekdays[2]; 
-		// var wednesday = tx_weekdays[3]; 
-		// var thursday = tx_weekdays[4]; 
-		// var friday = tx_weekdays[5]; 
-		// var saturday = tx_weekdays[6];
+		var sunday = tx_weekdays[0];
+		var monday = tx_weekdays[1]; 
+		var tuesday = tx_weekdays[2]; 
+		var wednesday = tx_weekdays[3]; 
+		var thursday = tx_weekdays[4]; 
+		var friday = tx_weekdays[5]; 
+		var saturday = tx_weekdays[6];
 
+		// disable periods
 		if(morning == '0'){
 			$(".modal-body #btn_morning").parent().prop('class', 'btn btn-default disabled');
+			$(document).on("click", "#label_morning", function () {
+			     return false;
+			});
 		}
 		if(noon == '0'){
 			$(".modal-body #btn_noon").parent().prop('class', 'btn btn-default disabled');
+			$(document).on("click", "#label_noon", function () {
+			     return false;
+			});
 		}
 		if(night == '0'){
 			$(".modal-body #btn_night").parent().prop('class', 'btn btn-default disabled');
+			$(document).on("click", "#label_night", function () {
+			     return false;
+			});
 		}
 
-		// $(".modal-body #btn_night").attr("bakground-color", "black");
-
-		// $('.modal-body #dateaccept').datepicker({
-		//     daysOfWeekDisabled: '4',
-		// });
+		//$('.modal-body #dateaccept').datepicker({
+		//    daysOfWeekDisabled: '4',
+		//});
 
 
 	});

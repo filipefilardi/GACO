@@ -2,6 +2,10 @@
 
 @section('stylesheet')
 	<script src="/js/registerformat.js" type="text/javascript"></script>
+	<script src="/js/bootstrap-datepicker.js" type="text/javascript"></script>
+	<script src="/js/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
+
+	<link href="/css/bootstrap-datepicker.css" rel="stylesheet">
     <link href="/css/carousel.css" rel="stylesheet">
 @endsection
 
@@ -143,6 +147,7 @@
 			 ################################################
 			 -->
 			@if(Auth::user()->id_cat == 3)
+
 				<a href="#reg_req" class="btn btn-default btn-block" data-toggle="collapse">Doações cadastradas no sistema</a>
 
 				<div id="reg_req" class="collapse">
@@ -242,8 +247,6 @@
 					@endif 	
 				</div> 	
 
-
-
 			@endif
 			</div>
 		</div>
@@ -283,17 +286,31 @@
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
 						{{ csrf_field() }}
 	            		<input type="hidden" name="id_req"  id="id_req" value="" />
-						
+<!-- 						
 						<div class="col-md-6 col-md-offset-4">
-							<p>Escolha uma data para coletar - lembrei que vai te que mudar por conta do agendamento do user</p>
+							<div class="input-group date">
+								<input id="dateaccept" type="text" class="form-control">
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-th"></span>
+								</div>
+							</div>
 						</div>
+ -->
 
+                        <div class="col-md-6 col-md-offset-4">
+                        	<div class="alert alert-success" role="alert">
+                        		<p>Antes de confirmar, verifique se a data digitada é a mesma selecionada no calendário.</p>
+                        	</div>
+                        </div>
 
 						<div class="form-group{{ $errors->has('dt_predicted') ? ' has-error' : '' }}">
 	                        <label for="dt_predicted" class="col-md-4 control-label">Data de Recolhimento</label>
 
 	                        <div class="col-md-6">
-	                            <input id="dt_predicted" type="text" class="form-control" name="date" value="{{ old('dt_predicted') }}" required>
+								<input id="dateaccept" name="dateaccept" type="text" class="form-control">
+								<!-- <div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div> -->
 
 	                            @if ($errors->has('dt_predicted'))
 	                                <span class="help-block">
@@ -302,6 +319,18 @@
 	                            @endif
 	                        </div>
 	                    </div>
+
+                        <div class="form-group{{ $errors->has('period') ? ' has-error' : '' }}">
+                            <label for="period" class="col-md-4 control-label">@lang('app.period')</label>
+                            
+                            <div class="col-md-6">
+                                <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
+                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1">@lang('app.morning')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1">@lang('app.noon')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="noite" value="1">@lang('app.night')</label>
+                                </div>
+                            </div>
+                        </div>
 
 						<div class="row">
 							<div class="col-md-6 col-md-offset-4">
@@ -441,6 +470,12 @@
 	    	document.getElementById(id_collapse).innerHTML = 'detalhes da coleta';	
 	    }
 	}
+
+	$('#dateaccept').datepicker({
+	    format: 'dd/mm/yyyy',
+	    startDate: '+0d',
+	    language: 'pt-BR',
+	});
 </script>
 
 @endsection

@@ -144,16 +144,16 @@ class RequestMasterDao {
         if(sizeof($errors)>0) return $errors;
 
         DB::table('request_master')
-            ->whereExists(function ($query) use($id_req, $new_status_req) {
+            ->whereExists(function ($query) use($id_req_master, $new_status_req) {
                 $query->select(DB::raw(1))
-                      ->from('request')
-                      ->whereRaw('request.id_req = ?', $id_req)
-                      ->whereRaw('request.id_active = ?','Y')
-                      ->whereRaw('request.status_req != ?','COMP') // Cannot update completed requests
-                      ->whereRaw('request.status_req != ?', $new_status_req)
-                      ->whereRaw('request.id_del = ?', 0);
+                      ->from('request_master')
+                      ->whereRaw('request_master.id_req = ?', $id_req)
+                      ->whereRaw('request_master.id_active = ?','Y')
+                      ->whereRaw('request_master.status_req != ?','COMP') // Cannot update completed requests
+                      ->whereRaw('request_master.status_req != ?', $new_status_req)
+                      ->whereRaw('request_master.id_del = ?', 0);
             })
-            ->where('id_req', $id_req)
+            ->where('id_req_master', $id_req_master)
             ->update([
                 'status_req' => $new_status_req
             ]);

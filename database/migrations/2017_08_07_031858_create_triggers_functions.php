@@ -77,9 +77,13 @@ class CreateTriggersFunctions extends Migration
         DB::unprepared("CREATE OR REPLACE FUNCTION req_status_acpt_change() RETURNS trigger AS
             $$
                 BEGIN
+                    UPDATE request_master
+                    SET status_req = '$acceptedStatus'
+                    WHERE id_req_master = NEW.id_req_master;
+
                     UPDATE request
                     SET status_req = '$acceptedStatus'
-                    WHERE id_req = NEW.id_req;
+                    WHERE id_req_master = NEW.id_req_master;
                     RETURN NEW;
                 END
             $$
@@ -106,6 +110,7 @@ class CreateTriggersFunctions extends Migration
                             WHERE id_req_master = OLD.id_req_master;
                         END IF;
                     END IF;
+                    RETURN NEW;
                 END
             $$
             LANGUAGE plpgsql VOLATILE

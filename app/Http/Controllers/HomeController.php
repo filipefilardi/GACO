@@ -80,7 +80,7 @@ class HomeController extends Controller
         }
         
         else{
-            $master_coop_pend = RequestMasterDao::get_master_conditional('status_req', '=', 'ACPT');
+            $master_coop_pend = RequestMasterDao::get_master_conditional('status_req', '=', 'PEND');
             $master_coop_acpt = RequestMasterDao::get_master_acpt_by_coop($id_user);
         
             $count = 0;
@@ -105,6 +105,8 @@ class HomeController extends Controller
 
         }
         
+        dd($master_coop_pend);
+
         if ($id_cat == 4) return redirect('admin');
         
         // dd($master_user_pend);

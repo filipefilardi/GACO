@@ -54,7 +54,7 @@ class RequestDao
 
         $list = DB::table('request')
             ->leftJoin('request_assignment', function ($join) {
-            $join->on('request.id_req', '=', 'request_assignment.id_req')
+            $join->on('request.id_req_master', '=', 'request_assignment.id_req_master')
                  ->where('request_assignment.id_del', '=', 0);
             })
             ->join('garbage', function ($join) {

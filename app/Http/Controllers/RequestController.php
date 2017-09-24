@@ -189,7 +189,7 @@ class RequestController extends Controller
         }
     }
 
-        public function confirm_request(Request $data){
+    public function confirm_request(Request $data){
 
         if (Gate::allows('execute', 'confirm_requests')) {         
             Auth::user();

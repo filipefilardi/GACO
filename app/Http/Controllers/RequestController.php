@@ -160,11 +160,13 @@ class RequestController extends Controller
     }
 
     public function accept_request(Request $data){
+        
+        $weekday_period = Utilities::parseWeekdaysPeriodToDB($data->all());
 
         if (Gate::allows('execute', 'accept_requests')) {         
-            Auth::user();
+            $id_user = Auth::user()->id_user;
             
-            $results = RequestMasterDAO::accept_master_request($data['id_req'],Auth::user()->id_user, $data['dateaccept']);
+            $results = RequestMasterDAO::accept_master_request($data['id_req'],$id_user, $data['dateaccept'], $weekday_period);
 
             if(sizeof($results) == 0){
                 $data->session()->flash('message', 'Doação aceita com sucesso'); 

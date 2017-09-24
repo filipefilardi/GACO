@@ -300,7 +300,7 @@ class RequestMasterDao {
                 ]);
         }
 
-        if($affected == 0) array_push($errors,'Nenhuma coleta confirmada')
+        if($affected == 0) array_push($errors,'Nenhuma coleta confirmada');
 
         return $errors;
     }

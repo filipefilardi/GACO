@@ -96,8 +96,12 @@ class RequestController extends Controller
                     $data->session()->flash('message', 'A coleta de um televisor aberto é inviabilizada por riscos a saúde, dada a quantidade de chumbo exposta.'); 
                     $data->session()->flash('alert-warning', 'warning');
                     return redirect('/request');
-                }  
-               
+                }
+                elseif (!is_numeric($quantity) || $quantity <= 0) {
+                    $data->session()->flash('message', 'A quantidade para coleta de um equipamente deve ser positiva. Por favor, confira os campos.'); 
+                    $data->session()->flash('alert-warning', 'warning');
+                    return redirect('/request');
+                }
                  
             }
 
@@ -129,7 +133,13 @@ class RequestController extends Controller
                         break;
                 }
                 
-                 $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $observation, $data['id_add'], $quantity, $desc_req, $id_master, $token);
+                $res = RequestDAO::insert_request(Auth::user()->id_user, $id_garbage, $state , $observation, $data['id_add'], $quantity, $desc_req, $id_master, $token);
+
+                if(is_array($res)) {
+                    RequestMasterDAO::cancel_master_request($id_master, Auth::user()->id_cat);
+                    $id_master = null;
+                    break;
+                }
             }
 
             if(!is_null($id_master)){
@@ -178,7 +188,7 @@ class RequestController extends Controller
             Auth::user();
 
             $id_cat = Auth::user()->id_cat;
-            $erros = RequestMasterDAO::cancel_master_request($data['id_req_master'],$id_cat);
+            $erros = RequestMasterDAO::cancel_master_request($data['id_req'],$id_cat);
 
             return redirect('/home');
 

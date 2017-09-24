@@ -86,9 +86,6 @@ class RequestMasterDao {
     }
 
     public static function get_master_conditional($where_key, $where_comparison, $where_value) {
-        $errors = array();
-        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
-        if(sizeof($errors)>0) return $errors;
 
         $list = DB::table('request_master')
             ->join('address', function ($join){
@@ -96,7 +93,6 @@ class RequestMasterDao {
                  ->where('address.id_del', 0);
             })
             ->select('request_master.*','address.str_address')
-            ->where('request_master.id_user_req', $id_user)
             ->whereIn('request_master.status_req',['ACPT','PEND'])
             ->where('request_master.id_del', 0)
             ->where($where_key,$where_comparison,$where_value)
@@ -117,9 +113,9 @@ class RequestMasterDao {
                 $join->on('address.id_add', '=', 'request_master.id_add')
                 ->where('address.id_del', 0);
             })
-            ->join('request_assignment', function ($join){
+            ->join('request_assignment', function ($join) use($id_user) {
                 $join->on('request_assignment.id_req_master', '=', 'request_assignment.id_req_master')
-                ->where('request_assignment.id_user_assign', $id_user); 
+                ->where('request_assignment.id_user_assign', $id_user)
                 ->where('request_assignment.id_del', 0);
             })
             ->select('request_master.*','address.str_address')
@@ -131,5 +127,37 @@ class RequestMasterDao {
             ->get();
 
         return $list;
+    }
+
+    public static function update_master_request($id_req_master, $new_status_req) {
+
+        $status_list = array('PEND', 'ACPT', 'COMP', 'CNCL');
+
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($new_status_req) || !in_array($new_status_req, $status_list)) array_push($errors, 'new status_req null or invalid;');
+        if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');        
+        
+        // END VALIDATION BLOCK /////////
+
+        if(sizeof($errors)>0) return $errors;
+
+        DB::table('request_master')
+            ->whereExists(function ($query) use($id_req, $new_status_req) {
+                $query->select(DB::raw(1))
+                      ->from('request')
+                      ->whereRaw('request.id_req = ?', $id_req)
+                      ->whereRaw('request.id_active = ?','Y')
+                      ->whereRaw('request.status_req != ?','COMP') // Cannot update completed requests
+                      ->whereRaw('request.status_req != ?', $new_status_req)
+                      ->whereRaw('request.id_del = ?', 0);
+            })
+            ->where('id_req', $id_req)
+            ->update([
+                'status_req' => $new_status_req
+            ]);
+
+        return $errors;
     }
 }

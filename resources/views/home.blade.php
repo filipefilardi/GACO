@@ -380,7 +380,7 @@
 	<div id="confirmrequest" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header text-center"><h1>Confirmar Coleta</h1></div>
+				<div class="modal-header text-center"><h3>Confirmar Coleta</h3></div>
 				<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/request/confirm') }}">
 						{{ csrf_field() }}
@@ -414,17 +414,16 @@
 	                        </div>
 	                    </div>					
 
-	                    <div class="row">
-	                        <div class="col-md-6 col-md-offset-4">
-								<button class="btn btn-primary btn-block pull-right">Confirmar</button>
+						<div class="modal-footer">
+	                        <div class="col-md-3 col-md-offset-6">
+								<button class="btn btn-primary btn-block">Confirmar</button>
 	                        </div>
-	                	</div>
-
-						<div class="row">
-							<div class="col-md-6 col-md-offset-4" style="padding-top: 5px;">
+							
+							<div class="col-md-3">
 								<button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</button>
 							</div>
 						</div>
+
 					</form>
 				</div>
 			</div>                
@@ -434,12 +433,16 @@
 	<div id="delayrequest" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header text-center"><h1>Adiar Coleta</h1></div>
+				<div class="modal-header text-center"><h3>Adiar Coleta</h3></div>
 				<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
 						{{ csrf_field() }}
 	            		<input type="hidden" name="id_req"  id="id_req" value="" />
 						
+						<div class="col-md-6 col-md-offset-4">
+							<p> TEXTO FALANDO SOBRE ADIAR PEDIDOS E COMO ESCREVER A JUSTIFICATIVA.</p>
+						</div>
+
 						<div class="form-group{{ $errors->has('justification') ? ' has-error' : '' }}">
 	                        <label for="justification" class="col-md-4 control-label">Justificativa</label>
 
@@ -454,13 +457,11 @@
 	                        </div>
 	                    </div>
 
-						<div class="row">
-							<div class="col-md-6 col-md-offset-4">
+						<div class="modal-footer">
+							<div class="col-md-3 col-md-offset-6">							
 								<button class="btn btn-primary btn-block">Adiar</button>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-md-offset-4" style="padding-top: 5px">
+							<div class="col-md-3">
 								<button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</button>
 							</div>
 						</div>

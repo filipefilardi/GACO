@@ -14,9 +14,8 @@ class CreateRequestPostponeTable extends Migration
     public function up()
     {
         Schema::create('request_postpone', function (Blueprint $table) {
-            $table->increments('id_req_post');
+            $table->increments('id_post');
             $table->string('tx_justification');
-            $table->string('id_active', 1);
             $table->date('dt_postpone');
             $table->timestamps();
             $table->integer('lst_chg_by')->nullable();

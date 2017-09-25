@@ -160,6 +160,12 @@ class RequestController extends Controller
     }
 
     public function accept_request(Request $data){
+        if($data['period'] == 'manha') $data['manha'] = 1;
+        elseif ($data['period'] == 'tarde') $data['tarde'] = 1;
+        else $data['noite'] = 1;
+
+        unset($data['period']);
+
         
         $weekday_period = Utilities::parseWeekdaysPeriodToDB($data->all());
 

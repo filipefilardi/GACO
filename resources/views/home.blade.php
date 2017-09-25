@@ -353,9 +353,9 @@
                             
                             <div class="col-md-6">
                                 <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
-                                    <label class="btn btn-default" id="label_morning"><input id="btn_morning" type="checkbox" name="manha" value="1">@lang('app.morning')</label>
-                                    <label class="btn btn-default" id="label_noon"><input id="btn_noon" type="checkbox" name="tarde" value="1">@lang('app.noon')</label>
-                                    <label class="btn btn-default" id="label_night"><input id="btn_night" type="checkbox" name="noite" value="1">@lang('app.night')</label>
+                                    <label class="btn btn-default" id="label_morning"><input id="btn_morning" type="radio" name="period" value="manha">@lang('app.morning')</label>
+                                    <label class="btn btn-default" id="label_noon"><input id="btn_noon" type="radio" name="period" value="tarde">@lang('app.noon')</label>
+                                    <label class="btn btn-default" id="label_night"><input id="btn_night" type="radio" name="period" value="noite">@lang('app.night')</label>
                                 </div>
                             </div>
                         </div>
@@ -472,25 +472,6 @@
 
 <script type="text/javascript">
 	
-
-	
-
-	//$('#dateaccept').datepicker("option", "onSelect", function(){alert('hi')});
-	$(document).on("click", "#cancel_accept_request", function () {
-	     $("#dateaccept").datepicker("destroy");
-	     $(".modal-body #btn_morning").parent().prop('class', 'btn btn-default');
-	     $(".modal-body #btn_noon").parent().prop('class', 'btn btn-default');
-		 $(".modal-body #btn_night").parent().prop('class', 'btn btn-default');
-		 $(".modal-body #btn_morning").unbind( "click" );
-		 $(".modal-body #btn_noon").unbind( "click" );
-		 $(".modal-body #btn_night").unbind( "click" );
-	});
-	
-	$('#acceptrequest').on('hide.bs.modal', function () {
-		$("#dateaccept").datepicker("destroy");
-		return true;
-	});
-
 	$(document).on("click", ".open-cancelrequest", function () {
 	     var id_req = $(this).data('id');
 	     $(".modal-body #id_req").val( id_req );
@@ -499,6 +480,13 @@
 	$(document).on("click", ".open-acceptrequest", function () {
 		var $j = jQuery.noConflict();
 
+		// clean
+		$("#label_morning").show();
+		$("#label_noon").show();
+		$("#label_night").show();
+		$(document).find("#dateaccept").datepicker("destroy");
+
+		// parse
 	    var id_req = $(this).data('id');
 	    $(".modal-body #id_req").val( id_req );
 	     
@@ -533,24 +521,16 @@
 
 		// disable periods
 		if(morning == '0'){
-			$(".modal-body #btn_morning").parent().prop('class', 'btn btn-default disabled');
-			$(document).on("click", "#label_morning", function () {
-			     return false;
-			});
+			$("#label_morning").hide();
 		}
 		if(noon == '0'){
-			$(".modal-body #btn_noon").parent().prop('class', 'btn btn-default disabled');
-			$(document).on("click", "#label_noon", function () {
-			     return false;
-			});
+			$("#label_noon").hide();
 		}
 		if(night == '0'){
-			$(".modal-body #btn_night").parent().prop('class', 'btn btn-default disabled');
-			$(document).on("click", "#label_night", function () {
-			     return false;
-			});
+			$("#label_night").hide();
 		}
 
+		// calendar
 		$('#dateaccept').datepicker({
 		    format: 'dd/mm/yyyy',
 		    startDate: '+0d',

@@ -15,7 +15,7 @@ class CreateRequestAssignmentTable extends Migration
     {
         Schema::create('request_assignment', function (Blueprint $table) {
                 $table->date('dt_predicted');
-                $table->integer('day_period');
+                $table->string('period_predicted');
                 $table->timestamps();
                 $table->integer('lst_chg_by')->nullable();
                 $table->integer('id_del')->default(0);

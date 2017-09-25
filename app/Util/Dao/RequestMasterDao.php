@@ -250,7 +250,7 @@ class RequestMasterDao {
         return $errors;
     }
 
-    public static function confirm_master_request($id_req_master, $id_user, $conf_token, $dt_collect)
+    public static function confirm_master_request($id_req_master, $id_user, $id_cat, $conf_token, $dt_collect)
     {
 
         $tmp = explode("/",$dt_collect);

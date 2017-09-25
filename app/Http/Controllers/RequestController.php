@@ -207,7 +207,8 @@ class RequestController extends Controller
             Auth::user();
 
             $id_user = Auth::user()->id_user;
-            $teste = RequestMasterDAO::confirm_master_request($data['id_req'],$id_user, $data['conf_token'], $data['dt_collected']);
+            $id_cat = Auth::user()->id_cat;
+            $teste = RequestMasterDAO::confirm_master_request($data['id_req'],$id_user,$id_cat, $data['conf_token'], $data['dt_collected']);
 
             if(in_array("Seu token de confirmação está incorreto!",$teste)){
                 $data->session()->flash('message', 'Seu token de confirmação está incorreto! Por favor, tente novamente'); 

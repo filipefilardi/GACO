@@ -118,7 +118,7 @@ class RequestMasterDao {
                 ->where('address.id_del', 0);
             })
             ->join('request_assignment', function ($join) use($id_user) {
-                $join->on('request_assignment.id_req_master', '=', 'request_assignment.id_req_master')
+                $join->on('request_assignment.id_req_master', '=', 'request_master.id_req_master')
                 ->where('request_assignment.id_user_assign', $id_user)
                 ->where('request_assignment.id_del', 0);
             })

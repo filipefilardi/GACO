@@ -137,15 +137,10 @@ class Utilities
 
 	public static function parsePeriodForUI($period_str) {
 		
-		$period_possible = ['Manhã','Tarde','Noite'];
+		$period_possible = [trans('app.morning'),trans('app.noon'),trans('app.night')];
 
-		$period = [];
-		$period_str_split = preg_split('~-~', $period_str);;
+        $day_period = array_search('1',explode("-",$period_str));
 
-		for ($i = 0; $i < 7; $i++) {
-			if($period_str_split[$i] = '1') array_push($period, $period_possible[$i]);
-		}
-
-		return $period;
+		return $period_possible[$day_period];
 	}
 }

@@ -108,7 +108,7 @@
 										<div class="col-md-6 text-right"><b>Data da coleta:</b> {{date('d/m/Y', strtotime($req->dt_collect))}}</div>
 									</div>
 									<div class="row">
-										<div class="col-md-6 col-md-offset-6 text-right"><b>Período da coleta:</b> </div>
+										<div class="col-md-6 col-md-offset-6 text-right"><b>Período da coleta:</b> {{$req->period_predicted}}</div>
 									</div>
 									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
 										<div class="row">
@@ -229,7 +229,7 @@
 										<div class="col-md-6 text-right"><b>Previsão para coleta:</b> {{date('d/m/Y', strtotime($req->dt_predicted))}}</div>
 									</div>
 									<div class="row">
-										<div class="col-md-6 col-md-offset-6 text-right"><b>Período da coleta:</b> </div>
+										<div class="col-md-6 col-md-offset-6 text-right"><b>Período da coleta:</b> {{$req->period_predicted}}</div>
 									</div>
 									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
 										<div class="row">

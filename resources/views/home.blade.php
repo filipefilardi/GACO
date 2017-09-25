@@ -486,6 +486,10 @@
 		 $(".modal-body #btn_night").unbind( "click" );
 	});
 	
+	$('#acceptrequest').on('hide.bs.modal', function () {
+		$("#dateaccept").datepicker("destroy");
+		return true;
+	});
 
 	$(document).on("click", ".open-cancelrequest", function () {
 	     var id_req = $(this).data('id');

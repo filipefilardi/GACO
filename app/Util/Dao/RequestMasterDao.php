@@ -69,7 +69,11 @@ class RequestMasterDao {
                 $join->on('address.id_add', '=', 'request_master.id_add')
                  ->where('address.id_del', 0);
             })
-            ->select('request_master.*','address.str_address')
+            ->leftJoin('request_assignment', function ($join) {
+            $join->on('request_master.id_req_master', '=', 'request_assignment.id_req_master')
+                 ->where('request_assignment.id_del', '=', 0);
+            })
+            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.day_period')
             ->where('request_master.id_user_req', $id_user)
             ->whereIn('request_master.status_req',['ACPT','PEND'])
             ->where('request_master.id_del', 0)
@@ -88,7 +92,11 @@ class RequestMasterDao {
                 $join->on('address.id_add', '=', 'request_master.id_add')
                  ->where('address.id_del', 0);
             })
-            ->select('request_master.*','address.str_address')
+            ->leftJoin('request_assignment', function ($join) {
+            $join->on('request_master.id_req_master', '=', 'request_assignment.id_req_master')
+                 ->where('request_assignment.id_del', '=', 0);
+            })
+            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.day_period')
             ->whereIn('request_master.status_req',['ACPT','PEND'])
             ->where('request_master.id_del', 0)
             ->where($where_key,$where_comparison,$where_value)
@@ -114,7 +122,7 @@ class RequestMasterDao {
                 ->where('request_assignment.id_user_assign', $id_user)
                 ->where('request_assignment.id_del', 0);
             })
-            ->select('request_master.*','address.str_address', 'request_assignment.dt_predicted')
+            ->select('request_master.*','address.str_address', 'request_assignment.dt_predicted','request_assignment.day_period')
             ->whereIn('request_master.status_req',['ACPT'])
             ->where('request_master.id_del', 0)
             ->distinct()
@@ -196,7 +204,7 @@ class RequestMasterDao {
         return $errors;
     }
 
-    public static function accept_master_request($id_req_master, $id_user, $dt_predicted) {
+    public static function accept_master_request($id_req_master, $id_user, $dt_predicted, $weekday_period) {
 
         // VALIDATION BLOCK //////////////
         $errors = array();
@@ -209,6 +217,7 @@ class RequestMasterDao {
 
         $tmp = explode("/",$dt_predicted);
         $dt_predicted = $tmp[2] .  $tmp[1]  . $tmp[0];
+        $day_period = array_search('1',explode("-",$weekday_period[1]));
 
         DB::table('request_assignment')
             ->whereExists(function ($query) use($id_req_master) {
@@ -235,6 +244,7 @@ class RequestMasterDao {
                 'id_req_master' => $id_req_master,
                 'id_user_assign' => $id_user,
                 'dt_predicted' => $dt_predicted,
+                'day_period' => $day_period,
                 'id_del' => 0
             ]);
 

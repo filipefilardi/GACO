@@ -207,6 +207,25 @@ class RequestController extends Controller
         }
     }
 
+    public function postpone_request(Request $data){
+
+        if (Gate::allows('execute', 'postpone_requests')) {         
+            $id_user = Auth::user()->id_user;
+            $id_cat = Auth::user()->id_cat;
+
+            if($id_cat == 1 || $id_cat == 2) $erros = RequestMasterDAO::postpone_request($data['$id_req'], $id_user, $id_cat, null,null, $data['tx_justification']);
+
+            elseif($id_cat == 3) $erros = RequestMasterDAO::postpone_request($data['$id_req'], $id_user, $id_cat, $data['dt_push'], $data['period_predicted'], $data['tx_justification']);
+
+            return redirect('/home');
+
+        } else {
+
+            return redirect('/home');
+            
+        }
+    }
+
     public function confirm_request(Request $data){
 
         if (Gate::allows('execute', 'confirm_requests')) {         

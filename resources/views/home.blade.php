@@ -2,9 +2,8 @@
 
 @section('stylesheet')
 	<script src="/js/registerformat.js" type="text/javascript"></script>
-	<script src="/js/bootstrap-datepicker.js" type="text/javascript"></script>
-	<script src="/js/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
-
+    <script src="/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
 	<link href="/css/bootstrap-datepicker.css" rel="stylesheet">
     <link href="/css/carousel.css" rel="stylesheet">
 @endsection
@@ -368,7 +367,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-md-offset-4" style="padding-top: 5px">
-								<button type="button" class="btn btn-default btn-block" data-dismiss="modal" style="margin-bottom: 0px;">Cancelar</button>
+								<button id='cancel_accept_request' type="button" class="btn btn-default btn-block" data-dismiss="modal" style="margin-bottom: 0px;">Cancelar</button>
 							</div>
 						</div>
 					</form>
@@ -473,12 +472,20 @@
 
 <script type="text/javascript">
 	
-	$('#dateaccept').datepicker({
-	    format: 'dd/mm/yyyy',
-	    startDate: '+0d',
-	    language: 'pt-BR',
-	    // daysOfWeekDisabled: '0', // 0 - sunday ~ 6 - saturday
+
+	
+
+	//$('#dateaccept').datepicker("option", "onSelect", function(){alert('hi')});
+	$(document).on("click", "#cancel_accept_request", function () {
+	     $("#dateaccept").datepicker("destroy");
+	     $(".modal-body #btn_morning").parent().prop('class', 'btn btn-default');
+	     $(".modal-body #btn_noon").parent().prop('class', 'btn btn-default');
+		 $(".modal-body #btn_night").parent().prop('class', 'btn btn-default');
+		 $(".modal-body #btn_morning").unbind( "click" );
+		 $(".modal-body #btn_noon").unbind( "click" );
+		 $(".modal-body #btn_night").unbind( "click" );
 	});
+	
 
 	$(document).on("click", ".open-cancelrequest", function () {
 	     var id_req = $(this).data('id');
@@ -486,6 +493,8 @@
 	});
 
 	$(document).on("click", ".open-acceptrequest", function () {
+		var $j = jQuery.noConflict();
+
 	    var id_req = $(this).data('id');
 	    $(".modal-body #id_req").val( id_req );
 	     
@@ -508,6 +517,16 @@
 		var friday = tx_weekdays[5]; 
 		var saturday = tx_weekdays[6];
 
+		var disabled_weekdays = '';
+
+		if(sunday=='0') disabled_weekdays+='0,';
+		if(monday=='0') disabled_weekdays+='1,';
+		if(tuesday=='0') disabled_weekdays+='2,';
+		if(wednesday=='0') disabled_weekdays+='3,';
+		if(thursday=='0') disabled_weekdays+='4,';
+		if(friday=='0') disabled_weekdays+='5,';
+		if(saturday=='0') disabled_weekdays+='6,';
+
 		// disable periods
 		if(morning == '0'){
 			$(".modal-body #btn_morning").parent().prop('class', 'btn btn-default disabled');
@@ -528,10 +547,13 @@
 			});
 		}
 
-		//$('.modal-body #dateaccept').datepicker({
-		//    daysOfWeekDisabled: '4',
-		//});
-
+		$('#dateaccept').datepicker({
+		    format: 'dd/mm/yyyy',
+		    startDate: '+0d',
+		    language: 'pt-BR',
+		    autoclose: true,
+		    daysOfWeekDisabled: disabled_weekdays, // 0 - sunday ~ 6 - saturday
+		});
 
 	});
 

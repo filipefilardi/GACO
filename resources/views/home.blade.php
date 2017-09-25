@@ -224,6 +224,9 @@
 							@foreach($master_coop_acpt as $req)
 								@if($loop->iteration  % 2 != 0)
 								<div class="list-group-item">
+									<input type="hidden" name="tx_period_day"  id="tx_period_day_{{$req->id_req_master}}" value="{{$req->tx_period_day}}"/>
+				            		<input type="hidden" name="tx_weekdays"  id="tx_weekdays_{{$req->id_req_master}}" value="{{$req->tx_weekdays}}"/>
+
 									<div class="row">
 										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
 										<div class="col-md-6 text-right"><b>Previsão para coleta:</b> {{date('d/m/Y', strtotime($req->dt_predicted))}}</div>
@@ -438,9 +441,40 @@
 						{{ csrf_field() }}
 	            		<input type="hidden" name="id_req"  id="id_req" value="" />
 						
+	            		@if(Auth::user()->id_cat == 3)
+							<div class="form-group{{ $errors->has('dt_predicted') ? ' has-error' : '' }}">
+		                        <label for="dt_predicted" class="col-md-4 control-label">Data de Recolhimento</label>
+
+		                        <div class="col-md-6">
+									<input id="datedelay" name="dateaccept" type="text" class="form-control">
+									<!-- <div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div> -->
+
+		                            @if ($errors->has('dt_predicted'))
+		                                <span class="help-block">
+		                                    <strong>{{ $errors->first('dt_predicted') }}</strong>
+		                                </span>
+		                            @endif
+		                        </div>
+		                    </div>
+
+		                    <div class="form-group{{ $errors->has('period') ? ' has-error' : '' }}">
+	                            <label for="period" class="col-md-4 control-label">@lang('app.period')</label>
+	                            
+	                            <div class="col-md-6">
+	                                <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
+	                                    <label class="btn btn-default" id="label_morning_delay"><input id="btn_morning" type="radio" name="period" value="manha">@lang('app.morning')</label>
+	                                    <label class="btn btn-default" id="label_noon_delay"><input id="btn_noon" type="radio" name="period" value="tarde">@lang('app.noon')</label>
+	                                    <label class="btn btn-default" id="label_night_delay"><input id="btn_night" type="radio" name="period" value="noite">@lang('app.night')</label>
+	                                </div>
+	                            </div>
+	                        </div>
+	            		@else
 						<div class="col-md-6 col-md-offset-4">
 							<p> TEXTO FALANDO SOBRE ADIAR PEDIDOS E COMO ESCREVER A JUSTIFICATIVA.</p>
 						</div>
+	            		@endif
 
 						<div class="form-group{{ $errors->has('justification') ? ' has-error' : '' }}">
 	                        <label for="justification" class="col-md-4 control-label">Justificativa</label>
@@ -547,8 +581,66 @@
 	});
 	
 	$(document).on("click", ".open-delayrequest", function () {
-	     var id_req = $(this).data('id');
-	     $(".modal-body #id_req").val( id_req );
+		var $j = jQuery.noConflict();
+
+		// clean
+		$("#label_morning_delay").show();
+		$("#label_noon_delay").show();
+		$("#label_night_delay").show();
+		$(document).find("#datedelay").datepicker("destroy");
+
+		// parse
+	    var id_req = $(this).data('id');
+	    $(".modal-body #id_req").val( id_req );
+	     
+	 	tx_period_day = document.getElementById("tx_period_day_" + id_req).value;
+		tx_weekdays = document.getElementById("tx_weekdays_" + id_req).value;
+		
+		tx_period_day = tx_period_day.split('-');
+
+		var morning = tx_period_day[0]; 
+		var noon = tx_period_day[1];
+		var night = tx_period_day[2];
+
+		tx_weekdays = tx_weekdays.split('-');
+
+		var sunday = tx_weekdays[0];
+		var monday = tx_weekdays[1]; 
+		var tuesday = tx_weekdays[2]; 
+		var wednesday = tx_weekdays[3]; 
+		var thursday = tx_weekdays[4]; 
+		var friday = tx_weekdays[5]; 
+		var saturday = tx_weekdays[6];
+
+		var disabled_weekdays = '';
+
+		if(sunday=='0') disabled_weekdays+='0,';
+		if(monday=='0') disabled_weekdays+='1,';
+		if(tuesday=='0') disabled_weekdays+='2,';
+		if(wednesday=='0') disabled_weekdays+='3,';
+		if(thursday=='0') disabled_weekdays+='4,';
+		if(friday=='0') disabled_weekdays+='5,';
+		if(saturday=='0') disabled_weekdays+='6,';
+
+		// disable periods
+		if(morning == '0'){
+			$("#label_morning_delay").hide();
+		}
+		if(noon == '0'){
+			$("#label_noon_delay").hide();
+		}
+		if(night == '0'){
+			$("#label_night_delay").hide();
+		}
+
+
+		$('#datedelay').datepicker({
+		    format: 'dd/mm/yyyy',
+		    startDate: '+0d',
+		    language: 'pt-BR',
+		    autoclose: true,
+		    daysOfWeekDisabled: disabled_weekdays, // 0 - sunday ~ 6 - saturday
+		});
 	});
 
 	function changeSeeMore(id_collapse) {

@@ -113,6 +113,11 @@ class CreateTriggersFunctions extends Migration
                             SET status_req = '$canceledStatus'
                             WHERE id_req_master = OLD.id_req_master;
                         END IF;
+                        IF NEW.status_req  = '$pendingStatus' THEN
+                            UPDATE request
+                            SET status_req = '$pendingStatus'
+                            WHERE id_req_master = OLD.id_req_master;
+                        END IF;
                     END IF;
                     RETURN NEW;
                 END

@@ -105,7 +105,7 @@
 									</div>
 									<div class="row">
 										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
-										<div class="col-md-6 text-right"><b>Data da coleta:</b> {{date('d/m/Y', strtotime($req->dt_collect))}}</div>
+										<div class="col-md-6 text-right"><b>Data da coleta:</b> {{date('d/m/Y', strtotime($req->dt_predicted))}}</div>
 									</div>
 									<div class="row">
 										<div class="col-md-6 col-md-offset-6 text-right"><b>Período da coleta:</b> {{$req->period_predicted}}</div>
@@ -402,7 +402,20 @@
 	                        </div>
 	                    </div>
 
-	                    <div class="form-group{{ $errors->has('dt_collected') ? ' has-error' : '' }}">
+						<div class="form-group{{ $errors->has('dt_collected') ? ' has-error' : '' }}">
+	                        <label for="dt_collected" class="col-md-4 control-label">Data da Coleta</label>
+
+	                        <div class="col-md-6">
+								<input id="dt_collected" name="dt_collected" type="text" class="form-control">
+	                            @if ($errors->has('dt_collected'))
+	                                <span class="help-block">
+	                                    <strong>{{ $errors->first('dt_collected') }}</strong>
+	                                </span>
+	                            @endif
+	                        </div>
+	                    </div>
+
+<!-- 	                    <div class="form-group{{ $errors->has('dt_collected') ? ' has-error' : '' }}">
 	                        <label for="dt_collected" class="col-md-4 control-label">Data da Coleta</label>
 
 	                        <div class="col-md-6">
@@ -415,7 +428,7 @@
 	                            @endif
 	                        </div>
 	                    </div>					
-
+ -->
 						<div class="modal-footer">
 	                        <div class="col-md-3 col-md-offset-6">
 								<button class="btn btn-primary btn-block">Confirmar</button>
@@ -480,7 +493,7 @@
 	                        <label for="justification" class="col-md-4 control-label">Justificativa</label>
 
 	                        <div class="col-md-6">
-	                            <textarea id="justification" rows="3" type="text" class="form-control" name="justification" value="{{ old('justification') }}" required></textarea>
+	                            <textarea id="justificationr" rows="3" type="text" class="form-control" name="justification" value="{{ old('justification') }}" required></textarea>
 
 	                            @if ($errors->has('justification'))
 	                                <span class="help-block">
@@ -576,8 +589,41 @@
 	});
 
 	$(document).on("click", ".open-confirmrequest", function () {
-	     var id_req = $(this).data('id');
-	     $(".modal-body #id_req").val( id_req );
+		var $j = jQuery.noConflict();
+
+		$(document).find("#dt_collected").datepicker("destroy");
+
+	    var id_req = $(this).data('id');
+	    $(".modal-body #id_req").val( id_req );
+	
+		// tx_weekdays = document.getElementById("tx_weekdays_" + id_req).value;
+		// tx_weekdays = tx_weekdays.split('-');
+
+		// var sunday = tx_weekdays[0];
+		// var monday = tx_weekdays[1]; 
+		// var tuesday = tx_weekdays[2]; 
+		// var wednesday = tx_weekdays[3]; 
+		// var thursday = tx_weekdays[4]; 
+		// var friday = tx_weekdays[5]; 
+		// var saturday = tx_weekdays[6];
+
+		// var disabled_weekdays = '';
+
+		// if(sunday=='0') disabled_weekdays+='0,';
+		// if(monday=='0') disabled_weekdays+='1,';
+		// if(tuesday=='0') disabled_weekdays+='2,';
+		// if(wednesday=='0') disabled_weekdays+='3,';
+		// if(thursday=='0') disabled_weekdays+='4,';
+		// if(friday=='0') disabled_weekdays+='5,';
+		// if(saturday=='0') disabled_weekdays+='6,';
+
+		$('#dt_collected').datepicker({
+		    format: 'dd/mm/yyyy',
+		    startDate: '-60d',
+		    language: 'pt-BR',
+		    autoclose: true,
+		    // daysOfWeekDisabled: disabled_weekdays, // 0 - sunday ~ 6 - saturday
+		});
 	});
 	
 	$(document).on("click", ".open-delayrequest", function () {

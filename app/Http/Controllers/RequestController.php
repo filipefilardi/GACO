@@ -166,7 +166,7 @@ class RequestController extends Controller
         if (Gate::allows('execute', 'accept_requests')) {         
             $id_user = Auth::user()->id_user;
             
-            $results = RequestMasterDAO::accept_master_request($data['id_req'],$id_user, $data['dateaccept'], $weekday_period);
+            $results = RequestMasterDAO::accept_master_request($data['id_req'],$id_user, $data['dateaccept'], $weekday_period[1]);
 
             if(sizeof($results) == 0){
                 $data->session()->flash('message', 'Doação aceita com sucesso'); 

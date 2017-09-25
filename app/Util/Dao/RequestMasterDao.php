@@ -55,10 +55,6 @@ class RequestMasterDao {
         return $res;
     }
 
-    public static function postpone_request($id_req_master) {
-
-    }
-
     public static function get_master_by_user_conditional($id_user, $where_key, $where_comparison, $where_value) {
         $errors = array();
         if(is_null($id_user) || $id_user <= 0) array_push($errors, 'id_user null or invalid (<=0)');
@@ -237,6 +233,7 @@ class RequestMasterDao {
             ->whereNotExists(function ($query) use($id_req_master) {
                 $query->select(DB::raw(1))
                     ->from('request_assignment')
+                    ->whereRaw('request_assignment.id_del = ?', 0)
                     ->whereRaw('request_assignment.id_req_master = ?', $id_req_master);
             })
             ->insert([
@@ -250,8 +247,7 @@ class RequestMasterDao {
         return $errors;
     }
 
-    public static function confirm_master_request($id_req_master, $id_user, $id_cat, $conf_token, $dt_collect)
-    {
+    public static function confirm_master_request($id_req_master, $id_user, $id_cat, $conf_token, $dt_collect) {
 
         $tmp = explode("/",$dt_collect);
         $dt_collect = $tmp[2] .  $tmp[1]  . $tmp[0];
@@ -334,5 +330,112 @@ class RequestMasterDao {
         if($affected == 0) array_push($errors,'Nenhuma coleta confirmada');
 
         return $errors;
+    }
+
+    public static function postpone_request($id_req_master, $id_user, $id_cat, $dt_push, $period_predicted, $tx_justification) {
+        
+        // VALIDATION BLOCK //////////////
+        $errors = array();
+
+        if(is_null($id_req_master)  || $id_req_master <= 0) array_push($errors, 'id_req_master null or invalid (<=0)');
+        if(is_null($id_user)        || $id_user <= 0)       array_push($errors, 'id_user null or invalid (<=0)');        
+        if(is_null($id_cat)         || $id_cat <= 0)        array_push($errors, 'id_cat null or invalid (<=0)');
+        
+        if(sizeof($errors)>0) return $errors;
+        // END VALIDATION BLOCK /////////
+
+        $today = date("Ymd");
+
+        if($id_cat == 1 || $id_cat == 2) {
+            
+            DB::table('request_assignment')
+            ->whereExists(function ($query) use($id_req_master, $id_user) {
+                $query->select(DB::raw(1))
+                ->from('request_master')
+                ->whereRaw('request_master.id_req_master = ?', $id_req_master)
+                ->whereRaw('request_master.id_user_req = ?', $id_user)
+                ->whereRaw('request_master.status_req = ?','ACPT')
+                ->whereRaw('request_master.id_del = ?', 0);
+            })
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                ->from('request_assignment')
+                ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
+                ->whereRaw('request_assignment.id_del = ?', 0);
+            })
+            ->where('id_req_master', $id_req_master)
+            ->update([
+                'id_del' => 1,
+                'lst_chg_by' => $id_user
+            ]);
+
+            DB::table('request_confirmation')
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                ->from('request_master')
+                ->whereRaw('request_master.id_req_master = ?', $id_req_master)
+                ->whereRaw('request_master.id_user_req = ?', $id_user)
+                ->whereRaw('request_master.status_req = ?','ACPT')
+                ->whereRaw('request_master.id_del = ?', 0);
+            })
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                ->from('request_confirmation')
+                ->whereRaw('request_confirmation.id_req_master = ?', $id_req_master)
+                ->whereRaw('request_confirmation.id_del = ?', 0);
+            })
+            ->where('id_req_master', $id_req_master)
+            ->update([
+                'id_del' => 1,
+                'lst_chg_by' => $id_user
+            ]);
+
+            RequestMasterDao::update_master_request($id_req_master,'PEND');
+
+        } elseif ($id_cat == 3) {
+
+            DB::table('request_assignment')
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                ->from('request_master')
+                ->whereRaw('request_master.id_req_master = ?', $id_req_master)
+                ->whereRaw('request_master.status_req = ?','ACPT')
+                ->whereRaw('request_master.id_del = ?', 0);
+            })
+            ->whereExists(function ($query) use($id_req_master, $id_user) {
+                $query->select(DB::raw(1))
+                ->from('request_assignment')
+                ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
+                ->whereRaw('request_assignment.id_user_assign = ?', $id_user)
+                ->whereRaw('request_assignment.id_del = ?', 0);
+            })
+            ->where('id_req_master', $id_req_master)
+            ->update([
+                'id_del' => 1,
+                'lst_chg_by' => $id_user
+            ]);
+            
+            RequestMasterDao::update_master_request($id_req_master,'PEND');
+            RequestMasterDAO::accept_master_request($id_req_master,$id_user, $dt_push, $period_predicted);
+
+        }
+
+        DB::table('request_postpone')
+            ->whereExists(function ($query) use($id_req_master) {
+                $query->select(DB::raw(1))
+                      ->from('request_master')
+                      ->whereRaw('request_master.id_req_master = ?', $id_req_master)
+                      ->whereRaw('request_master.id_active = ?','Y')
+                      ->whereRaw('request_master.status_req in (?,?)',['PEND','ACPT'])
+                      ->whereRaw('request_master.id_del = ?', 0);
+            })
+            ->insert([
+                'id_req_master' => $id_req_master,
+                'id_user_post' => $id_user,
+                'dt_postpone' => $today,
+                'id_active' => 'Y',
+                'tx_justification' => $tx_justification,
+                'id_del' => 0
+            ]);
     }
 }

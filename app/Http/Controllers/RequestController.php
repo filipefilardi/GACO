@@ -209,13 +209,22 @@ class RequestController extends Controller
 
     public function postpone_request(Request $data){
         
+        if($data['period'] == 'manha') $data['manha'] = 1;
+        elseif ($data['period'] == 'tarde') $data['tarde'] = 1;
+        else $data['noite'] = 1;
+
+        unset($data['period']);
+
         if (Gate::allows('execute', 'postpone_requests')) {         
+
+            $weekday_period = Utilities::parseWeekdaysPeriodToDB($data->all());
+
             $id_user = Auth::user()->id_user;
             $id_cat = Auth::user()->id_cat;
 
-            if($id_cat == 1 || $id_cat == 2) $erros = RequestMasterDAO::postpone_request($data['$id_req'], $id_user, $id_cat, null,null, $data['justification']);
+            if($id_cat == 1 || $id_cat == 2) $erros = RequestMasterDAO::postpone_request($data['id_req'], $id_user, $id_cat, null,null, $data['justification']);
 
-            elseif($id_cat == 3) $erros = RequestMasterDAO::postpone_request($data['$id_req'], $id_user, $id_cat, $data['dateaccept'], $data['period'], $data['justification']);
+            elseif($id_cat == 3) $erros = RequestMasterDAO::postpone_request($data['id_req'], $id_user, $id_cat, $data['dateaccept'], $weekday_period[1], $data['justification']);
 
             return redirect('/home');
 

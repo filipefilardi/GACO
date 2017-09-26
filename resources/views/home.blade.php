@@ -41,6 +41,12 @@
 							@foreach($master_user_pend as $req)
 								@if($loop->iteration  % 2 != 0)
 								<div class="list-group-item">
+				            		@if($req->tx_justification)
+					            		<div class="row">
+					            			<div class="col-md-12 text-danger"><b>OBSERVAÇÃO:</b> {{$req->tx_justification}}</div>
+					            		</div>
+				            		@endif
+
 									<div class="row">
 										<div class="col-md-8"><b>Status:</b> Pendente</div>
 										<div class="col-md-4 text-right"><b>Token:</b> {{$req->conf_token}}</div>
@@ -99,6 +105,13 @@
 							@foreach($master_user_acpt as $req)
 								@if($loop->iteration  % 2 != 0)
 								<div class="list-group-item">
+
+				            		@if($req->tx_justification)
+					            		<div class="row">
+					            			<div class="col-md-12 text-danger"><b>OBSERVAÇÃO:</b> {{$req->tx_justification}}</div>
+					            		</div>
+				            		@endif
+
 									<div class="row">
 										<div class="col-md-8"><b>Status:</b> {{$req->status_req}}</div>
 										<div class="col-md-4 text-right"><b>Token:</b> {{$req->conf_token}}</div>
@@ -176,6 +189,12 @@
 				            		<input type="hidden" name="tx_period_day"  id="tx_period_day_{{$req->id_req_master}}" value="{{$req->tx_period_day}}"/>
 				            		<input type="hidden" name="tx_weekdays"  id="tx_weekdays_{{$req->id_req_master}}" value="{{$req->tx_weekdays}}"/>
 									
+				            		@if($req->tx_justification)
+					            		<div class="row">
+					            			<div class="col-md-12 text-danger"><b>OBSERVAÇÃO:</b> {{$req->tx_justification}}</div>
+					            		</div>
+				            		@endif
+
 									<div class="row">
 										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
 										<div class="col-md-6 text-right"><b>Data do Pedido:</b> {{date('d/m/Y', strtotime($req->dt_req))}}</div>
@@ -226,6 +245,12 @@
 								<div class="list-group-item">
 									<input type="hidden" name="tx_period_day"  id="tx_period_day_{{$req->id_req_master}}" value="{{$req->tx_period_day}}"/>
 				            		<input type="hidden" name="tx_weekdays"  id="tx_weekdays_{{$req->id_req_master}}" value="{{$req->tx_weekdays}}"/>
+
+				            		@if($req->tx_justification)
+					            		<div class="row">
+					            			<div class="col-md-12 text-danger"><b>OBSERVAÇÃO:</b> {{$req->tx_justification}}</div>
+					            		</div>
+				            		@endif
 
 									<div class="row">
 										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>

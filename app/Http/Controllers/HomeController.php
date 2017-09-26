@@ -36,6 +36,10 @@ class HomeController extends Controller
         $request = null;
         $request_acpt = null;
 
+        //$results = RequestMasterDAO::accept_master_request(3,$id_user, '10/12/2017', '1-0-0');
+
+        //dd($results);
+
         // check whether the account is deleted
         $user_status = UserDao::getStatus($id_user);
         // logout!

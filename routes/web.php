@@ -25,6 +25,7 @@ Route::get('/request', 'RequestController@index_user');
 Route::post('/request', 'RequestController@make_request');
 Route::post('/request/cancel', 'RequestController@cancel_request');
 Route::post('/request/confirm', 'RequestController@confirm_request');
+Route::post('/request/postpone', 'RequestController@postpone_request');
 Route::get('/notification', 'RequestController@index_customer');
 
 Route::get('/evaluation', 'EvaluationController@index_evaluation');

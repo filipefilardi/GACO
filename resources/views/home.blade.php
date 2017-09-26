@@ -450,7 +450,7 @@
 			<div class="modal-content">
 				<div class="modal-header text-center"><h3>Adiar Coleta</h3></div>
 				<div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('/request/postpone') }}">
 						{{ csrf_field() }}
 	            		<input type="hidden" name="id_req"  id="id_req" value="" />
 						

@@ -17,6 +17,9 @@ class CreateRequestPostponeTable extends Migration
             $table->increments('id_post');
             $table->string('tx_justification');
             $table->date('dt_postpone');
+            $table->date('dt_push')->nullable();
+            $table->string('period_push')->nullable();
+            $table->string('id_active', 1);
             $table->timestamps();
             $table->integer('lst_chg_by')->nullable();
             $table->integer('id_del')->default(0);

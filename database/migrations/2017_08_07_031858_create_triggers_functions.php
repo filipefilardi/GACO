@@ -19,6 +19,7 @@ class CreateTriggersFunctions extends Migration
         $acceptedStatus = 'ACPT';
         $canceledStatus = 'CNCL';
         $pendingStatus  = 'PEND';
+        $deletedFlag  = 1;
 
         // creates function - verifies that request has been changed status to COMP
         DB::unprepared("CREATE OR REPLACE FUNCTION prepare_confirmation_table() RETURNS trigger AS
@@ -112,10 +113,26 @@ class CreateTriggersFunctions extends Migration
                             UPDATE request
                             SET status_req = '$canceledStatus'
                             WHERE id_req_master = OLD.id_req_master;
+
+                            UPDATE request_assignment
+                            SET id_del = '$deletedFlag'
+                            WHERE id_req_master = OLD.id_req_master;
+
+                            UPDATE request_confirmation
+                            SET id_del = '$deletedFlag'
+                            WHERE id_req_master = OLD.id_req_master;
                         END IF;
                         IF NEW.status_req  = '$pendingStatus' THEN
                             UPDATE request
                             SET status_req = '$pendingStatus'
+                            WHERE id_req_master = OLD.id_req_master;
+
+                            UPDATE request_assignment
+                            SET id_del = '$deletedFlag'
+                            WHERE id_req_master = OLD.id_req_master;
+
+                            UPDATE request_confirmation
+                            SET id_del = '$deletedFlag'
                             WHERE id_req_master = OLD.id_req_master;
                         END IF;
                     END IF;
@@ -132,6 +149,28 @@ class CreateTriggersFunctions extends Migration
             ON request_master
             FOR EACH ROW
             EXECUTE PROCEDURE req_master_status_change();"
+        );
+
+        // creates function - updates req status to accepted ACPT
+        DB::unprepared("CREATE OR REPLACE FUNCTION postpone_inactivate_prev() RETURNS trigger AS
+            $$
+                BEGIN
+                    UPDATE request_postpone
+                    SET id_active = '$noFlag'
+                    WHERE id_req_master = NEW.id_req_master;
+                    RETURN NEW;
+                END
+            $$
+            LANGUAGE plpgsql VOLATILE
+            COST 100;"
+        );
+
+        // binding Trigger - verifies new entry is added to request_assigment - meaning req is accepted
+        DB::unprepared("CREATE TRIGGER postpone_req_insert
+            BEFORE INSERT
+            ON request_postpone
+            FOR EACH ROW
+            EXECUTE PROCEDURE postpone_inactivate_prev();"
         );
     }
 

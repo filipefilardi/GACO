@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Util\Dao\RequestDao;
 use App\Util\Dao\RequestMasterDao;
 use App\Util\Dao\UserDao;
+use App\Util\Utilities;
 use Auth;
 use Session;
 
@@ -60,6 +61,7 @@ class HomeController extends Controller
 
             if(sizeof($master_user_acpt) > 0) {
                 foreach ($master_user_acpt as $key => $value) {
+                    $value->period_predicted = Utilities::parsePeriodForUI($value->period_predicted);
                     $user_acpt = RequestDao::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.id_req_master', '=', $value->id_req_master);
                     $count++;
                     $master_user_acpt->splice((int)$key + $count, 0, $user_acpt );
@@ -89,6 +91,7 @@ class HomeController extends Controller
 
             if(sizeof($master_coop_acpt) > 0) {
                 foreach ($master_coop_acpt as $key => $value) {
+                    $value->period_predicted = Utilities::parsePeriodForUI($value->period_predicted);
                     $coop_acpt = RequestDao::get_full_info_dashboard_req_conditional('request.id_req_master','=',$value->id_req_master);
                     $count++;
                     $master_coop_acpt->splice((int)$key + $count, 0, $coop_acpt );
@@ -107,11 +110,10 @@ class HomeController extends Controller
 
         }
         
-        #dd($master_coop_pend);
+        #dd($master_user_acpt);
 
         if ($id_cat == 4) return redirect('admin');
-        
-        // dd($master_user_pend);
+
         return view('home')->with('request', $request)
                            ->with('request_acpt', $request_acpt)
                            #->with('user_acpt', $user_acpt)

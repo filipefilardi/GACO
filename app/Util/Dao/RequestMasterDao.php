@@ -69,7 +69,11 @@ class RequestMasterDao {
             $join->on('request_master.id_req_master', '=', 'request_assignment.id_req_master')
                  ->where('request_assignment.id_del', '=', 0);
             })
-            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted')
+            ->leftJoin('request_postpone', function ($join) {
+            $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+                 ->where('request_postpone.id_active', '=', 'Y');
+            })
+            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification')
             ->where('request_master.id_user_req', $id_user)
             ->whereIn('request_master.status_req',['ACPT','PEND'])
             ->where('request_master.id_del', 0)
@@ -92,7 +96,11 @@ class RequestMasterDao {
             $join->on('request_master.id_req_master', '=', 'request_assignment.id_req_master')
                  ->where('request_assignment.id_del', '=', 0);
             })
-            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted')
+            ->leftJoin('request_postpone', function ($join) {
+            $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+                 ->where('request_postpone.id_active', '=', 'Y');
+            })
+            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification')
             ->whereIn('request_master.status_req',['ACPT','PEND'])
             ->where('request_master.id_del', 0)
             ->where($where_key,$where_comparison,$where_value)
@@ -118,7 +126,11 @@ class RequestMasterDao {
                 ->where('request_assignment.id_user_assign', $id_user)
                 ->where('request_assignment.id_del', 0);
             })
-            ->select('request_master.*','address.str_address', 'request_assignment.dt_predicted','request_assignment.period_predicted')
+            ->leftJoin('request_postpone', function ($join) {
+            $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+                 ->where('request_postpone.id_active', '=', 'Y');
+            })
+            ->select('request_master.*','address.str_address', 'request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification')
             ->whereIn('request_master.status_req',['ACPT'])
             ->where('request_master.id_del', 0)
             ->distinct()
@@ -172,30 +184,6 @@ class RequestMasterDao {
 
         if($id_cat == 1 || $id_cat == 2)    $errors = RequestMasterDao::update_master_request($id_req_master,'CNCL');
         if($id_cat == 3)                    $errors = RequestMasterDao::update_master_request($id_req_master,'PEND');
-
-        DB::table('request_assignment')
-            ->whereExists(function ($query) use($id_req_master) {
-                $query->select(DB::raw(1))
-                      ->from('request_assignment')
-                      ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
-                      ->whereRaw('request_assignment.id_del = ?', 0);
-            })
-            ->where('id_req_master', $id_req_master)
-            ->update([
-                'id_del' => 1
-            ]);        
-
-        DB::table('request_confirmation')
-            ->whereExists(function ($query) use($id_req_master) {
-                $query->select(DB::raw(1))
-                      ->from('request_confirmation')
-                      ->whereRaw('request_confirmation.id_req_master = ?', $id_req_master)
-                      ->whereRaw('request_confirmation.id_del = ?', 0);
-            })
-            ->where('id_req_master', $id_req_master)
-            ->update([
-                'id_del' => 1
-            ]);
 
         return $errors;
     }
@@ -340,80 +328,19 @@ class RequestMasterDao {
         if(is_null($id_req_master)  || $id_req_master <= 0) array_push($errors, 'id_req_master null or invalid (<=0)');
         if(is_null($id_user)        || $id_user <= 0)       array_push($errors, 'id_user null or invalid (<=0)');        
         if(is_null($id_cat)         || $id_cat <= 0)        array_push($errors, 'id_cat null or invalid (<=0)');
-        
+
         if(sizeof($errors)>0) return $errors;
         // END VALIDATION BLOCK /////////
 
         $today = date("Ymd");
 
         if($id_cat == 1 || $id_cat == 2) {
-            
-            DB::table('request_assignment')
-            ->whereExists(function ($query) use($id_req_master, $id_user) {
-                $query->select(DB::raw(1))
-                ->from('request_master')
-                ->whereRaw('request_master.id_req_master = ?', $id_req_master)
-                ->whereRaw('request_master.id_user_req = ?', $id_user)
-                ->whereRaw('request_master.status_req = ?','ACPT')
-                ->whereRaw('request_master.id_del = ?', 0);
-            })
-            ->whereExists(function ($query) use($id_req_master) {
-                $query->select(DB::raw(1))
-                ->from('request_assignment')
-                ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
-                ->whereRaw('request_assignment.id_del = ?', 0);
-            })
-            ->where('id_req_master', $id_req_master)
-            ->update([
-                'id_del' => 1,
-                'lst_chg_by' => $id_user
-            ]);
-
-            DB::table('request_confirmation')
-            ->whereExists(function ($query) use($id_req_master) {
-                $query->select(DB::raw(1))
-                ->from('request_master')
-                ->whereRaw('request_master.id_req_master = ?', $id_req_master)
-                ->whereRaw('request_master.id_user_req = ?', $id_user)
-                ->whereRaw('request_master.status_req = ?','ACPT')
-                ->whereRaw('request_master.id_del = ?', 0);
-            })
-            ->whereExists(function ($query) use($id_req_master) {
-                $query->select(DB::raw(1))
-                ->from('request_confirmation')
-                ->whereRaw('request_confirmation.id_req_master = ?', $id_req_master)
-                ->whereRaw('request_confirmation.id_del = ?', 0);
-            })
-            ->where('id_req_master', $id_req_master)
-            ->update([
-                'id_del' => 1,
-                'lst_chg_by' => $id_user
-            ]);
 
             RequestMasterDao::update_master_request($id_req_master,'PEND');
+            $dt_push = null;
+            $period_predicted = null;
 
         } elseif ($id_cat == 3) {
-
-            DB::table('request_assignment')
-            ->whereExists(function ($query) use($id_req_master) {
-                $query->select(DB::raw(1))
-                ->from('request_master')
-                ->whereRaw('request_master.id_req_master = ?', $id_req_master)
-                ->whereRaw('request_master.status_req = ?','ACPT')
-                ->whereRaw('request_master.id_del = ?', 0);
-            })
-            ->whereExists(function ($query) use($id_req_master, $id_user) {
-                $query->select(DB::raw(1))
-                ->from('request_assignment')
-                ->whereRaw('request_assignment.id_req_master = ?', $id_req_master)
-                ->whereRaw('request_assignment.id_user_assign = ?', $id_user)
-                ->whereRaw('request_assignment.id_del = ?', 0);
-            })
-            ->where('id_req_master', $id_req_master)
-            ->update([
-                'id_del' => 1,
-                'lst_chg_by' => $id_user
-            ]);
             
             RequestMasterDao::update_master_request($id_req_master,'PEND');
             RequestMasterDAO::accept_master_request($id_req_master,$id_user, $dt_push, $period_predicted);
@@ -433,6 +360,8 @@ class RequestMasterDao {
                 'id_req_master' => $id_req_master,
                 'id_user_post' => $id_user,
                 'dt_postpone' => $today,
+                'dt_push' => $dt_push,
+                'period_push' => $period_predicted,
                 'id_active' => 'Y',
                 'tx_justification' => $tx_justification,
                 'id_del' => 0

@@ -12,11 +12,11 @@ class MailController extends Controller {
    public function send(){
       // 0: fail
       // 1: success
-      $data['email'] = "thiago.nobayashi@gmail.com";
+      $data['email'] = "filipefilardi@gmail.com";
       $data['username'] = "username";
       $data['title'] = "título";
       $data['content'] = "this is the content";
-      $data['subject'] = "subject";
+      $data['subject'] = "Confirmação Genérica";
       $res = MailUtil::basic_email($data);
 
    }

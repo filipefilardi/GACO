@@ -11,7 +11,7 @@ class MailUtil
 
     	try{
     		Mail::send('emails.send', ['title' => $data['title'], 'content' => $data['content']], function ($message) use ($data){
-				$message->from('nao-responda@gaco.com', 'Fausto Silva')->subject($data['subject']);
+				$message->from('nao-responda@gaco.com', 'GACO')->subject($data['subject']);
 				$message->to($data['email'], $data['email']);
 			});
     	}catch(\Exception $e){

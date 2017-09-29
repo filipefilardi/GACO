@@ -583,13 +583,15 @@
 
 		var disabled_weekdays = '';
 
-		if(sunday=='0') disabled_weekdays+='0,';
+		disabled_weekdays +='0,';
+		// if(sunday=='0') disabled_weekdays+='0,';
 		if(monday=='0') disabled_weekdays+='1,';
 		if(tuesday=='0') disabled_weekdays+='2,';
 		if(wednesday=='0') disabled_weekdays+='3,';
 		if(thursday=='0') disabled_weekdays+='4,';
 		if(friday=='0') disabled_weekdays+='5,';
-		if(saturday=='0') disabled_weekdays+='6,';
+		// if(saturday=='0') disabled_weekdays+='6,';
+		disabled_weekdays +='6,';
 
 		// disable periods
 		if(morning == '0'){
@@ -634,6 +636,7 @@
 
 		// var disabled_weekdays = '';
 
+		// disabled_weekdays +='0,';
 		// if(sunday=='0') disabled_weekdays+='0,';
 		// if(monday=='0') disabled_weekdays+='1,';
 		// if(tuesday=='0') disabled_weekdays+='2,';
@@ -641,6 +644,7 @@
 		// if(thursday=='0') disabled_weekdays+='4,';
 		// if(friday=='0') disabled_weekdays+='5,';
 		// if(saturday=='0') disabled_weekdays+='6,';
+		// disabled_weekdays +='6,';
 
 		$('#dt_collected').datepicker({
 		    format: 'dd/mm/yyyy',
@@ -685,13 +689,15 @@
 
 		var disabled_weekdays = '';
 
-		if(sunday=='0') disabled_weekdays+='0,';
+		disabled_weekdays +='0,';
+		// if(sunday=='0') disabled_weekdays+='0,';
 		if(monday=='0') disabled_weekdays+='1,';
 		if(tuesday=='0') disabled_weekdays+='2,';
 		if(wednesday=='0') disabled_weekdays+='3,';
 		if(thursday=='0') disabled_weekdays+='4,';
 		if(friday=='0') disabled_weekdays+='5,';
-		if(saturday=='0') disabled_weekdays+='6,';
+		// if(saturday=='0') disabled_weekdays+='6,';
+		disabled_weekdays +='6,';
 
 		// disable periods
 		if(morning == '0'){

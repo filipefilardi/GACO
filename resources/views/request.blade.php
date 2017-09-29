@@ -165,13 +165,13 @@
                             <label for="weekdays" class="col-md-3 control-label">@lang('app.days')</label>
                             <div class="col-md-7">
                                 <div class="btn-group btn-group-justified" id="weekcheckbox" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="checkbox" name="domingo" value="1" required>@lang('app.sunday')</label>
+                                    <label class="btn btn-default hidden"><input type="checkbox" name="domingo" value="1" required>@lang('app.sunday')</label>
                                     <label class="btn btn-default"><input type="checkbox" name="segunda" value="1" required>@lang('app.monday')</label>
                                     <label class="btn btn-default"><input type="checkbox" name="terça" value="1" required>@lang('app.tuesday')</label>
                                     <label class="btn btn-default"><input type="checkbox" name="quarta" value="1" required>@lang('app.wednesday')</label>
                                     <label class="btn btn-default"><input type="checkbox" name="quinta" value="1" required>@lang('app.thursday')</label>
                                     <label class="btn btn-default"><input type="checkbox" name="sexta" value="1" required>@lang('app.friday')</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="sabado" value="1" required>@lang('app.saturday')</label>
+                                    <label class="btn btn-default hidden"><input type="checkbox" name="sabado" value="1" required>@lang('app.saturday')</label>
                                 </div>
                             </div>
                         </div>

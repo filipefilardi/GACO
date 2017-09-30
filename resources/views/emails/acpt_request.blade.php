@@ -24,7 +24,7 @@
 													@lang('email.greetings')
 												</h1>
 												<p style="margin-top:0;color:#575a5f;font-size:16px;line-height:1.5em;line-height:1.5em; text-align: justify;">
-													Você está recebendo este e-mail porque seu pedido de coleta foi confirmado para o dia "dd/mm/yy" no periodo da 'periodo'.
+													Você está recebendo este e-mail porque seu pedido de coleta foi <b>confirmado para o dia {{$date}} no periodo da {{$period}}</b>.
 												</p>
 
 

@@ -24,7 +24,11 @@
 													@lang('email.greetings')
 												</h1>
 												<p style="margin-top:0;color:#575a5f;font-size:16px;line-height:1.5em;line-height:1.5em; text-align: justify;">
-													Você está recebendo este e-mail porque seu pedido de coleta foi confirmado para o dia "dd/mm/yy" no periodo da 'periodo'.
+													Você está recebendo este e-mail porque seu pedido de coleta foi <b>adiado para o dia {{$date}} no periodo da {{$period}}.
+												</p>
+
+												<p style="margin-top:0;color:#575a5f;font-size:16px;line-height:1.5em;line-height:1.5em; text-align: justify;">
+													<b>Mensagem da cooperativa:</b> <i>"{{$justification}}"</i>
 												</p>
 
 
@@ -41,32 +45,14 @@
 
 
 												<p style="margin-top:0;color:#575a5f;font-size:16px;line-height:1.5em; text-align: justify;">
-													Confirme através do botão "Confirmar data de coleta" se deseja continuar com a coleta ou <a style="color:#385169" href="{{ url('/home') }}" target="_blank">entre na plataforma</a> para adiar.
+													Confirme através do botão "Confirmar data de coleta" se deseja continuar com a coleta nesta nova data solicitada ou <a style="color:#385169" href="{{ url('/home') }}" target="_blank">entre na plataforma</a> para adiar.
 												</p>
 
 
 												<p style="margin-top:0;color:#575a5f;font-size:16px;line-height:1.5em">
-													@lang('email.regards')<br>{{config('app.name')}}
+													@lang('email.regards')<br>GACO
 												</p>
 
-
-												<table style="margin-top:25px;padding-top:25px;border-top:1px solid #edeff2">
-													<tbody>
-														<tr>
-															<td style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif">
-																<p style="margin-top:0;color:#575a5f;font-size:12px;line-height:1.5em">
-																	Se você está com problemas ao clicar no botão "Confirmar" , copie e cole a URL no seu navegador web:
-																</p>
-
-																<p style="margin-top:0;color:#575a5f;font-size:12px;line-height:1.5em">
-																	<a style="color:#385169" href="http://localhost:8000/password/reset/0723866e36fbe5482f65b8eb92ab86b412dda53cafdaf4bbef232895d20f1c56" target="_blank">
-																		http://localhost:8000/<wbr>password/reset/<wbr>0723866e36fbe5482f65b8eb92ab86<wbr>b412dda53cafdaf4bbef232895d20f<wbr>1c56
-																	</a>
-																</p>
-															</td>
-														</tr>
-													</tbody>
-												</table>
 											</td>
 										</tr>
 									</tbody>

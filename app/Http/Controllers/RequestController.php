@@ -9,6 +9,7 @@ use App\Util\Dao\RequestDao;
 use App\Util\Dao\RequestMasterDao;
 use App\Util\Dao\UserDao;
 use App\Util\Utilities;
+use App\Http\Controllers\MailController;
 use Auth;
 use Gate;
 
@@ -160,6 +161,8 @@ class RequestController extends Controller
     }
 
     public function accept_request(Request $data){
+        $data_period = $data['period'];
+
         if($data['period'] == 'manha') $data['manha'] = 1;
         elseif ($data['period'] == 'tarde') $data['tarde'] = 1;
         else $data['noite'] = 1;
@@ -175,6 +178,11 @@ class RequestController extends Controller
             $results = RequestMasterDAO::accept_master_request($data['id_req'],$id_user, $data['dateaccept'], $weekday_period[1]);
 
             if(sizeof($results) == 0){
+
+                // SEND MAIL
+                MailController::send_request_accepted('filipefilardi@gmail.com', $data['dateaccept'], $data_period);
+
+
                 $data->session()->flash('message', 'Doação aceita com sucesso'); 
                 $data->session()->flash('alert-success', 'sucess');
             }else{
@@ -208,7 +216,8 @@ class RequestController extends Controller
     }
 
     public function postpone_request(Request $data){
-        
+        $data_period = $data['period'];
+
         if($data['period'] == 'manha') $data['manha'] = 1;
         elseif ($data['period'] == 'tarde') $data['tarde'] = 1;
         else $data['noite'] = 1;
@@ -224,7 +233,13 @@ class RequestController extends Controller
 
             if($id_cat == 1 || $id_cat == 2) $erros = RequestMasterDAO::postpone_request($data['id_req'], $id_user, $id_cat, null,null, $data['justification']);
 
-            elseif($id_cat == 3) $erros = RequestMasterDAO::postpone_request($data['id_req'], $id_user, $id_cat, $data['dateaccept'], $weekday_period[1], $data['justification']);
+            elseif($id_cat == 3) {
+                $erros = RequestMasterDAO::postpone_request($data['id_req'], $id_user, $id_cat, $data['dateaccept'], $weekday_period[1], $data['justification']);
+
+                // SEND MAIL
+                MailController::send_request_postpone('filipefilardi@gmail.com', $data['dateaccept'], $data_period, $data['justification']);
+
+            }
 
             return redirect('/home');
 

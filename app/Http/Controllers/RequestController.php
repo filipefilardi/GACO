@@ -10,6 +10,7 @@ use App\Util\Dao\RequestMasterDao;
 use App\Util\Dao\UserDao;
 use App\Util\Utilities;
 use App\Http\Controllers\MailController;
+use DB;
 use Auth;
 use Gate;
 
@@ -179,8 +180,11 @@ class RequestController extends Controller
 
             if(sizeof($results) == 0){
 
+
+                $email = $this->get_email_user_by_id_req($data['id_req']);
+
                 // SEND MAIL
-                MailController::send_request_accepted('filipefilardi@gmail.com', $data['dateaccept'], $data_period);
+                MailController::send_request_accepted($email, $data['dateaccept'], $data_period);
 
 
                 $data->session()->flash('message', 'Doação aceita com sucesso'); 
@@ -236,8 +240,12 @@ class RequestController extends Controller
             elseif($id_cat == 3) {
                 $erros = RequestMasterDAO::postpone_request($data['id_req'], $id_user, $id_cat, $data['dateaccept'], $weekday_period[1], $data['justification']);
 
+
+                
+                $email = $this->get_email_user_by_id_req($data['id_req']);
+
                 // SEND MAIL
-                MailController::send_request_postpone('filipefilardi@gmail.com', $data['dateaccept'], $data_period, $data['justification']);
+                MailController::send_request_postpone($email, $data['dateaccept'], $data_period, $data['justification']);
 
             }
 
@@ -280,6 +288,15 @@ class RequestController extends Controller
             return redirect('/home');
             
         }
+    }
+
+    public function get_email_user_by_id_req($id_req){
+
+        $id_user_req = DB::table('request_master')->where('id_req_master', $id_req)->value('id_user_req');
+        
+        $email = DB::table('users')->where('id_user', $id_user_req)->value('email');
+
+        return $email;
     }
 
 }

@@ -182,7 +182,7 @@
                                 <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
                                     <label class="btn btn-default"><input type="checkbox" name="manha" value="1" required>@lang('app.morning')</label>
                                     <label class="btn btn-default"><input type="checkbox" name="tarde" value="1" required>@lang('app.noon')</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="noite" value="1" required>@lang('app.night')</label>
+                                    <label class="btn btn-default hidden"><input type="checkbox" name="noite" value="1" required>@lang('app.night')</label>
                                 </div>
                             </div>
                         </div>

@@ -23,9 +23,7 @@ class MailController extends Controller {
 
    public static function send_request_accepted($email, $date, $period){
       $data['email'] = $email;
-      $data['username'] = $email; // não sei pra que usa ainda
-      $data['title'] = "Pedido confirmado"; // não sei pra que usa ainda
-      $data['content'] = "this is the content"; // não sei pra que usa ainda
+      $data['username'] = $email;
       $data['subject'] = "Seu pedido foi confirmado";
       $data['date'] = $date;
       $data['period'] = $period;
@@ -35,9 +33,7 @@ class MailController extends Controller {
 
       public static function send_request_postpone($email, $date, $period, $justification){
       $data['email'] = $email;
-      $data['username'] = $email; // não sei pra que usa ainda
-      $data['title'] = "Pedido confirmado"; // não sei pra que usa ainda
-      $data['content'] = "this is the content"; // não sei pra que usa ainda
+      $data['username'] = $email;
       $data['subject'] = "Seu pedido foi adiado";
       $data['date'] = $date;
       $data['period'] = $period;

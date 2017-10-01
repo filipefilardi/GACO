@@ -60,8 +60,8 @@
 								<div class="col-md-8"> Alguma info de identificação do request, talvez data e alguma outra coisa ({{$req->dt_req}}, {{$req->conf_token}})</div>
 								<div class="col-md-4">
 									<div class="col-md-4 col-md-offset-8">
-										@if($eval_flag == 0)
-											<button  data-toggle="modal" data-id="{{$req->id_req}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">@lang('app.evaluate')</button>
+										@if($req->id_eval == null)
+											<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">@lang('app.evaluate')</button>
 										@else
 											<div style="margin-top: 60px;"></div>
 										@endif
@@ -75,9 +75,7 @@
 
 					</div>
 
-					<div class="text-center">
-						{{ $request->links() }}
-					</div>
+					<!--local do pedaço de codigo links-->
 
 				<div id="evaluationmodal" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-lg">
@@ -87,7 +85,7 @@
 								
 							<form class="form-horizontal" role="form" method="POST" action="{{ url('/evaluation') }}">
 		                        {{ csrf_field() }}
-		                        <input type="hidden" name="id_req" id="id_req" value=""/>
+		                        <input type="hidden" name="id_req_master" id="id_req_master" value=""/>
 
 		                        <div class="form-group{{ $errors->has('punctual') ? ' has-error' : '' }}">
 		                            <label for="punctual" class="col-md-4 control-label">@lang('app.ponctuality')</label>
@@ -151,8 +149,8 @@
 	</div>
 	<script type="text/javascript">
 	$(document).on("click", ".open-evaluationmodal", function () {
-	     var id_req = $(this).data('id');
-	     $(".modal-body #id_req").val( id_req );
+	     var id_req_master = $(this).data('id');
+	     $(".modal-body #id_req_master").val( id_req_master );
 	});
 </script>
 @endif

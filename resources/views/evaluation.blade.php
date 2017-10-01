@@ -64,7 +64,7 @@
 										@if($req->id_eval == null)
 											<button  data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block">@lang('app.evaluate')</button>
 										@else
-											<div style="margin-top: 60px;"></div>
+											<button data-toggle="modal" data-id="{{$req->id_req_master}}" data-target="#evaluationmodal" class="open-evaluationmodal btn btn-primary btn-block disabled" disabled="disabled">Avaliado</button>
 										@endif
 									</div>
 								</div>

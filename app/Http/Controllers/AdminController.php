@@ -33,6 +33,8 @@ class AdminController extends Controller
     {   
         $res = UserDao::insert(Auth::user()->id_user,$request->all(),3); // 3 - ID CAT de Coop
 
+        #dd($res);
+
         if($res == 1){
             $request->session()->flash('message', 'Cooperativa criada com sucesso!'); 
             $request->session()->flash('alert-success', 'sucess');

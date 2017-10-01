@@ -12,7 +12,7 @@ class MailController extends Controller {
    public function send(){
       // 0: fail
       // 1: success
-      $data['email'] = "filipefilardi@gmail.com";
+      $data['email'] = "victoredoardo@gmail.com";
       $data['username'] = "username";
       $data['title'] = "título";
       $data['content'] = "this is the content";

@@ -11,7 +11,7 @@ class MailUtil
 
     	try{
     		Mail::send('emails.send', ['title' => $data['title'], 'content' => $data['content']], function ($message) use ($data){
-				$message->from('nao-responda@gaco.com', 'GACO')->subject($data['subject']);
+				$message->from('victoredoardo@gmail.com', 'GACO')->subject($data['subject']);
 				$message->to($data['email'], $data['email']);
 			});
     	}catch(\Exception $e){
@@ -29,7 +29,7 @@ class MailUtil
 
         try{
             Mail::send('emails.acpt_request', ['date' => $data['date'], 'period' => $data['period']], function ($message) use ($data){
-                $message->from('nao-responda@gaco.com', 'GACO')->subject($data['subject']);
+                $message->from('victoredoardo@gmail.com', 'GACO')->subject($data['subject']);
                 $message->to($data['email'], $data['email']);
             });
         }catch(\Exception $e){
@@ -46,7 +46,7 @@ class MailUtil
 
         try{
             Mail::send('emails.postpone_request', ['date' => $data['date'], 'period' => $data['period'], 'justification' => $data['justification']], function ($message) use ($data){
-                $message->from('nao-responda@gaco.com', 'GACO')->subject($data['subject']);
+                $message->from('victoredoardo@gmail.com', 'GACO')->subject($data['subject']);
                 $message->to($data['email'], $data['email']);
             });
         }catch(\Exception $e){

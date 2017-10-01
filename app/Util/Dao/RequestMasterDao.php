@@ -73,14 +73,21 @@ class RequestMasterDao {
             $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
                  ->where('request_postpone.id_active', '=', 'Y');
             })
-            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification')
+            ->leftJoin('coop_evaluation', function ($join) {
+            $join->on('request_master.id_req_master', '=', 'coop_evaluation.id_req_master')
+                 ->where('coop_evaluation.id_del', '=', 0);
+            })
+            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification', 'coop_evaluation.id_eval')
             ->where('request_master.id_user_req', $id_user)
-            ->whereIn('request_master.status_req',['ACPT','PEND'])
+            ->whereIn('request_master.status_req',['ACPT','PEND','COMP'])
             ->where('request_master.id_del', 0)
             ->where($where_key,$where_comparison,$where_value)
             ->distinct()
             ->orderBy('id_req_master')
+            #->toSql();
             ->get();
+
+            #dd($list);
 
         return $list;
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Util\Dao\RequestMasterDAO;
+use App\Util\Dao\RequestMasterDao;
 use App\Util\Dao\RequestDAO;
 use App\Util\Dao\EvaluationDao;
 use App\Util\Dao\UserDao;
@@ -56,7 +56,7 @@ class EvaluationController extends Controller
             ->with("count", $count);
         } elseif ($id_cat < 3 and $id_cat >=1) {
 
-            $request = RequestMasterDAO::get_master_by_user_conditional($id_user,'request_master.status_req','=', 'COMP');
+            $request = RequestMasterDao::get_master_by_user_conditional($id_user,'request_master.status_req','=', 'COMP');
             #dd($request);
             return view('/evaluation')->with("request",$request)->with("eval_flag", "0");
         

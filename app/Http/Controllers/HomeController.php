@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Util\Dao\RequestDao;
 use App\Util\Dao\RequestMasterDao;
 use App\Util\Dao\UserDao;
+use App\Util\Dao\EvaluationDao;
 use App\Util\Utilities;
 use Auth;
 use Session;

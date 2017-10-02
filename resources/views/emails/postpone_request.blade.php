@@ -35,10 +35,13 @@
 												<table style="width:100%;margin:30px auto;padding:0;text-align:center" align="center" width="100%" cellpadding="0" cellspacing="0">
 													<tbody><tr>
 														<td align="center">
+															<form class="form-horizontal" role="form" method="POST" action="{{ url('/mailconfirm') }}">
+																{{ csrf_field() }}
 
-															<a href="{{ url('/login') }}" style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;display:block;display:inline-block;width:200px;min-height:20px;padding:20px;background-color:#385169;border-radius:3px;color:#ffffff;font-size:15px;line-height:25px;text-align:center;text-decoration:none;background-color:#385169" target="_blank">
-																Confirmar data de coleta
-															</a>
+																<input type="hidden" name="id_req_master" value="{{$id_req_master}}"/>
+
+																<button type='submit' style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;display:block;display:inline-block;width:200px;min-height:20px;padding:20px;background-color:#385169;border-radius:3px;color:#ffffff;font-size:14px;line-height:25px;text-align:center;text-decoration:none;background-color:#385169; border-radius:10px;">Confirmar data de coleta</button>
+															</form>
 														</td>
 													</tr>
 												</tbody></table>

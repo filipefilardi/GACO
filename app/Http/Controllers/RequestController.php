@@ -184,7 +184,7 @@ class RequestController extends Controller
                 $email = $this->get_email_user_by_id_req($data['id_req']);
 
                 // SEND MAIL
-                MailController::send_request_accepted($email, $data['dateaccept'], $data_period);
+                MailController::send_request_accepted($email, $data['dateaccept'], $data_period, $data['id_req']);
 
 
                 $data->session()->flash('message', 'Doação aceita com sucesso'); 
@@ -245,7 +245,7 @@ class RequestController extends Controller
                 $email = $this->get_email_user_by_id_req($data['id_req']);
 
                 // SEND MAIL
-                MailController::send_request_postpone($email, $data['dateaccept'], $data_period, $data['justification']);
+                MailController::send_request_postpone($email, $data['dateaccept'], $data_period, $data['justification'], $data['id_req']);
 
             }
 

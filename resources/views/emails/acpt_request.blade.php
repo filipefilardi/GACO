@@ -31,10 +31,12 @@
 												<table style="width:100%;margin:30px auto;padding:0;text-align:center" align="center" width="100%" cellpadding="0" cellspacing="0">
 													<tbody><tr>
 														<td align="center">
+															<form class="form-horizontal" role="form" method="POST" action="{{ url('/mailconfirm') }}">
+																{{ csrf_field() }}
 
-															<a href="{{ url('/login') }}" style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;display:block;display:inline-block;width:200px;min-height:20px;padding:20px;background-color:#385169;border-radius:3px;color:#ffffff;font-size:15px;line-height:25px;text-align:center;text-decoration:none;background-color:#385169" target="_blank">
-																Confirmar data de coleta
-															</a>
+																<input type="hidden" name="id_req_master" value="{{$id_req_master}}"/>
+
+																<button style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;display:block;display:inline-block;width:200px;min-height:20px;padding:20px;background-color:#385169;border-radius:3px;color:#ffffff;font-size:14px;line-height:25px;text-align:center;text-decoration:none;background-color:#385169; border-radius:10px;">Confirmar data de coleta</button>
 														</td>
 													</tr>
 												</tbody></table>
@@ -49,24 +51,6 @@
 													@lang('email.regards')<br>{{config('app.name')}}
 												</p>
 
-
-												<table style="margin-top:25px;padding-top:25px;border-top:1px solid #edeff2">
-													<tbody>
-														<tr>
-															<td style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif">
-																<p style="margin-top:0;color:#575a5f;font-size:12px;line-height:1.5em">
-																	Se você está com problemas ao clicar no botão "Confirmar" , copie e cole a URL no seu navegador web:
-																</p>
-
-																<p style="margin-top:0;color:#575a5f;font-size:12px;line-height:1.5em">
-																	<a style="color:#385169" href="http://localhost:8000/password/reset/0723866e36fbe5482f65b8eb92ab86b412dda53cafdaf4bbef232895d20f1c56" target="_blank">
-																		http://localhost:8000/<wbr>password/reset/<wbr>0723866e36fbe5482f65b8eb92ab86<wbr>b412dda53cafdaf4bbef232895d20f<wbr>1c56
-																	</a>
-																</p>
-															</td>
-														</tr>
-													</tbody>
-												</table>
 											</td>
 										</tr>
 									</tbody>

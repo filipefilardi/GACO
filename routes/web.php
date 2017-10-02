@@ -51,4 +51,9 @@ Route::post('/activate/account', 'Auth2000Controller@loginActivateAccount');
 
 Route::get('/cooperatives', 'CooperativesController@index_cooperatives');
 
-Route::get('/send', 'MailController@send');
+
+
+/* MAIL */
+
+// Route::get('/send', 'MailController@send');
+Route::post('/mailconfirm', 'MailController@btn_confirm_request');

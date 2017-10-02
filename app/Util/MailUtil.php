@@ -28,7 +28,7 @@ class MailUtil
         $res = 1;
 
         try{
-            Mail::send('emails.acpt_request', ['date' => $data['date'], 'period' => $data['period']], function ($message) use ($data){
+            Mail::send('emails.acpt_request', ['date' => $data['date'], 'period' => $data['period'], 'id_req_master' => $data['id_req_master']], function ($message) use ($data){
                 $message->from('victoredoardo@gmail.com', 'GACO')->subject($data['subject']);
                 $message->to($data['email'], $data['email']);
             });
@@ -45,7 +45,7 @@ class MailUtil
         $res = 1;
 
         try{
-            Mail::send('emails.postpone_request', ['date' => $data['date'], 'period' => $data['period'], 'justification' => $data['justification']], function ($message) use ($data){
+            Mail::send('emails.postpone_request', ['date' => $data['date'], 'period' => $data['period'], 'justification' => $data['justification'], 'id_req_master' => $data['id_req_master']], function ($message) use ($data){
                 $message->from('victoredoardo@gmail.com', 'GACO')->subject($data['subject']);
                 $message->to($data['email'], $data['email']);
             });

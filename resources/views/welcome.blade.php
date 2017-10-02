@@ -7,6 +7,8 @@
 
         <title>GACO</title>
 
+        <link rel="icon" href="/img/favicon.png">
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="/css/app.css" rel="stylesheet">
@@ -14,6 +16,7 @@
         <link href="/css/welcome.css" rel="stylesheet">
         <link href="/css/footer.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/font-awesome.min.css">
+
         <!-- Styles -->
         <style>
 

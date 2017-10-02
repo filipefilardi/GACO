@@ -172,7 +172,7 @@
                 <a href="#conta" class="btn btn-default btn-block" data-toggle="collapse">@lang('app.account')</a>
 
                 <div id="conta" class="main-container collapse">
-                    <h3 class="col-md-offset-3">@lang('app.changepassword')</h3>
+                    <h3 class="col-md-7 col-md-offset-3 text-center" style="margin-bottom: 20px;">@lang('app.changepassword')</h3>
                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/update/password') }}">
                         {{ csrf_field() }}
                         
@@ -222,7 +222,7 @@
                         </div>
                     </form>
 
-                    <h3 class="col-md-offset-3">@lang('app.deleteaccount')</h3>
+                    <h3 class="col-md-7 col-md-offset-3 text-center" style="margin-bottom: 20px;">@lang('app.deleteaccount')</h3>
                     <form class="form-horizontal" role="form" method="POST" action="/delete/account">
                         {{ csrf_field() }}
                         <div class="form-group">

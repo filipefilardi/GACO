@@ -57,7 +57,7 @@
             <div class="hero">
                 <h1>DESCARTE SEU RESÍDUO SEM SAIR DE CASA</h1>
                 <div class="text-justify">
-                    <p><i>Colabore com a cidade de São Paulo, dedicando apenas alguns minutos, a se tornar uma cidade mais sustentável, descartando seu resíduo de forma prática e <b>totalmente sem custos</b>.</i></p>
+                    <p><i>Colabore com a cidade de São Paulo, dedicando apenas alguns minutos, a se tornar uma cidade mais sustentável, descartando seu resíduo eletrônico de forma prática e <b>totalmente sem custos</b>.</i></p>
                 </div>
                 <a href="{{ url('/register') }}" class="btn btn-primary">COMECE AGORA</a>
                 <p style="margin-top:80px;"><a href="#gaco" style="color: white; font-size: 40px"><i class="fa fa-angle-down" aria-hidden="true"></i></p></a>
@@ -69,14 +69,14 @@
     <div class="marketing">
         <div class="container" id="gaco">
             <div class="fade">
-            <h1 class="text-center header">Projeto GACO</h1>
+            <h1 class="text-center header">GACO</h1>
             <div class="right-text text-justify" style="font-size: 19px;">
                 
                 <div class="wrapper">
                     <iframe src="https://www.youtube.com/embed/fe_Xx49nODc" frameborder="0" allowfullscreen></iframe>
                 </div>
 
-                <p style="margin-top: 30px">O Projeto GACO surgiu em 2015 como proposta de reduzir o impacto dos resíduos eletroeletrônicos na cidade de São Paulo. Assim, Filipe Filardi, Sabrina Gonçalves, Victor Edoardo  Garcia e Thiago Nobayashi, se reuniram buscando desenvolver uma plataforma que conecta as pessoas que querem descartar seus resíduos de forma apropriada e as  cooperativas de reciclagem capacitadas a dar destinação correta a esses resíduos.</p>
+                <p style="margin-top: 30px; padding-bottom: 40px">O Projeto GACO surgiu em 2015 tendo como objetivo reduzir o impacto dos resíduos eletroeletrônicos na cidade de São Paulo. Assim, a equipe buscou desenvolver uma plataforma capaz de conectar e comunicar pessoas que desejam descartar seus resíduos de forma apropriada e algumas cooperativas de reciclagem que são capacitadas a destinar corretamente esses resíduos.<p>
 
             </div>
             </div>
@@ -93,19 +93,19 @@
                     <div class="col-lg-4">
                         <img src="/img/file.png" alt="Agendamento" width="180" height="180">
                         <h2>Agendamento</h2>
-                        <p>Atravéz do GACO, você pode se comunicar com as cooperativas parceiras, escolhendo qual resíduo eletrônico você deseja doar gratuitamente e agendando sua coleta.</p>
+                        <p>Através do GACO, você pode se comunicar com as cooperativas parceiras, escolhendo qual resíduo eletrônico você deseja doar gratuitamente e agendando sua coleta.</p>
                     </div>
                     <div class="col-lg-4">
                         <img src="/img/laptop.png" alt="Coleta" width="180" height="180">
                         <!-- <h2>Logistica Reversa</h2> -->
                         <h2>Coleta</h2>
                        <!--  <p>A cooperativa é capacitada no manuseio do seu equipamento de forma responsável e irá coletar seu resíduo assim que possível.</p> -->
-                       <p>Após o agendamento, será realizada a coleta, efetuada por cooperativas capacitadas tecnicamente para receber, separar, descartar e destinar resíduos eletroeletrônicos de modo ambientalmente responsável.</p>
+                       <p>Após o agendamento, será realizada a coleta, feita por cooperativas capacitadas tecnicamente para receber, separar, descartar e destinar resíduos eletroeletrônicos de modo ambientalmente responsável.</p>
                     </div>
                     <div class="col-lg-4">
                         <img src="/img/planet-earth.png" alt="Colaboratividade" width="180" height="180">
                         <h2>Colaboratividade</h2>
-                        <p>O GACO é software livre, entre no nosso  <a href="https://github.com/filipefilardi/GACO" target="_blank" style="color: #385169;">repositório</a> para entender como você pode colaborar ainda mais com a sustentabilidade na cidade de São Paulo.</p>
+                        <p>O GACO é software livre, entre no nosso  <a href="https://github.com/filipefilardi/GACO" target="_blank" style="color: #385169;">repositório</a> para entender como você pode colaborar ainda mais com a sustentabilidade ambiental na cidade de São Paulo.</p>
                     </div>
                 </div>
             </div>

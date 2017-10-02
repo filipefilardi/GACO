@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'GACO') }}</title>
 
-    <link rel="icon" href="/img/favicon.png">
+    <link rel="icon" href="/img/planet-earth.png">
 
     <!-- Styles -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

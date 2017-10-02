@@ -7,7 +7,7 @@
 
         <title>GACO</title>
 
-        <link rel="icon" href="/img/favicon.png">
+        <link rel="icon" href="/img/planet-earth.png">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">

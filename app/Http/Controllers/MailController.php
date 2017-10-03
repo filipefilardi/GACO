@@ -47,6 +47,9 @@ class MailController extends Controller {
    public function btn_confirm_request(Request $data){
       dd($data->all(), 'Mensage no MailController, tem que fazer a função de alterar a flag no bd agora e chamar nessa função dentro do MailController');
 
+         #TODO: Passar para a funcao e testar -- provavelmente funciona -- Alem disso precisa mostrar na view um NAO CONFIRMADO PELO USUARIO para a cooperativa quando fl_user_confirm for N
+         #$res = user_reply_assignment($id_req_master,$conf_token,$id_user,$id_cat,$id_choice);
+      
       return view('mailconfirm'); 
    }
 }

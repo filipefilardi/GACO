@@ -90,6 +90,10 @@ class CreateTriggersFunctions extends Migration
                     SET status_req = '$acceptedStatus'
                     WHERE id_req_master = NEW.id_req_master;
                     RETURN NEW;
+
+                    UPDATE request_postpone
+                    SET id_del = '$deletedFlag', id_active = '$noFlag'
+                    WHERE id_req_master = NEW.id_req_master;
                 END
             $$
             LANGUAGE plpgsql VOLATILE

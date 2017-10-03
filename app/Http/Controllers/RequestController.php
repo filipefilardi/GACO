@@ -181,7 +181,7 @@ class RequestController extends Controller
             if(sizeof($results) == 0){
 
 
-                $email = $this->get_email_user_by_id_req($data['id_req']);
+                $email = UserDao::get_email_user_by_id_req($data['id_req']);
 
                 // SEND MAIL
                 MailController::send_request_accepted($email, $data['dateaccept'], $data_period, $data['id_req']);
@@ -242,7 +242,7 @@ class RequestController extends Controller
 
 
                 
-                $email = $this->get_email_user_by_id_req($data['id_req']);
+                $email = UserDao::get_email_user_by_id_req($data['id_req']);
 
                 // SEND MAIL
                 MailController::send_request_postpone($email, $data['dateaccept'], $data_period, $data['justification'], $data['id_req']);
@@ -288,15 +288,6 @@ class RequestController extends Controller
             return redirect('/home');
             
         }
-    }
-
-    public function get_email_user_by_id_req($id_req){
-
-        $id_user_req = DB::table('request_master')->where('id_req_master', $id_req)->value('id_user_req');
-        
-        $email = DB::table('users')->where('id_user', $id_user_req)->value('email');
-
-        return $email;
     }
 
 }

@@ -69,15 +69,15 @@ class RequestMasterDao {
             $join->on('request_master.id_req_master', '=', 'request_assignment.id_req_master')
                  ->where('request_assignment.id_del', '=', 0);
             })
-            // ->leftJoin('request_postpone', function ($join) {
-            // $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
-            //      ->where('request_postpone.id_active', '=', 'Y');
-            // })
             ->leftJoin('request_postpone', function ($join) {
-            $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
-                 ->where('request_postpone.id_active', '=', 'Y')
-                 ->where('request_postpone.id_del', '=', 0);
+            $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+                 ->where('request_postpone.id_active', '=', 'Y');
             })
+            // ->leftJoin('request_postpone', function ($join) {
+            // $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
+            //      ->where('request_postpone.id_active', '=', 'Y')
+            //      ->where('request_postpone.id_del', '=', 0);
+            // })
             ->leftJoin('coop_evaluation', function ($join) {
             $join->on('request_master.id_req_master', '=', 'coop_evaluation.id_req_master')
                  ->where('coop_evaluation.id_del', '=', 0);
@@ -108,16 +108,16 @@ class RequestMasterDao {
             $join->on('request_master.id_req_master', '=', 'request_assignment.id_req_master')
                  ->where('request_assignment.id_del', '=', 0);
             })
-            // ->leftJoin('request_postpone', function ($join) {
-            // $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
-            //      ->where('request_postpone.id_active', '=', 'Y');
-            // })
             ->leftJoin('request_postpone', function ($join) {
-            $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
-                 ->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
-                 ->where('request_postpone.id_active', '=', 'Y')
-                 ->where('request_postpone.id_del', '=', 0);
+            $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+                 ->where('request_postpone.id_active', '=', 'Y');
             })
+            // ->leftJoin('request_postpone', function ($join) {
+            // $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
+            //      ->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+            //      ->where('request_postpone.id_active', '=', 'Y')
+            //      ->where('request_postpone.id_del', '=', 0);
+            // })
             ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification', 'request_assignment.fl_user_confirm')
             ->whereIn('request_master.status_req',['ACPT','PEND'])
             ->where('request_master.id_del', 0)
@@ -144,17 +144,17 @@ class RequestMasterDao {
                 ->where('request_assignment.id_user_assign', $id_user)
                 ->where('request_assignment.id_del', 0);
             })
-            // ->leftJoin('request_postpone', function ($join) {
-            // $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
-            //      ->where('request_postpone.id_active', '=', 'Y');
-            //      ->where('request_postpone.id_del', '=', 0);
-            // })
-            ->leftJoin('request_postpone', function ($join) use($id_user) {
-            $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
-                 ->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
-                 ->where('request_postpone.id_active', '=', 'Y')
+            ->leftJoin('request_postpone', function ($join) {
+            $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+                 ->where('request_postpone.id_active', '=', 'Y');
                  ->where('request_postpone.id_del', '=', 0);
             })
+            // ->leftJoin('request_postpone', function ($join) use($id_user) {
+            // $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
+            //      ->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
+            //      ->where('request_postpone.id_active', '=', 'Y')
+            //      ->where('request_postpone.id_del', '=', 0);
+            // })
             ->select('request_master.*','address.str_address', 'request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification', 'request_assignment.fl_user_confirm')
             ->whereIn('request_master.status_req',['ACPT'])
             ->where('request_master.id_del', 0)
@@ -366,6 +366,7 @@ class RequestMasterDao {
             RequestMasterDao::update_master_request($id_req_master,'PEND');
             $dt_push = null;
             $period_predicted = null;
+            $id_assign =
 
         } elseif ($id_cat == 3) {
             
@@ -378,6 +379,7 @@ class RequestMasterDao {
             ->whereExists(function ($query) use($id_req_master) {
                 $query->select(DB::raw(1))
                       ->from('request_master')
+                      ->whereRaw('request_master.id_req_master = ?', $id_req_master)
                       ->whereRaw('request_master.id_req_master = ?', $id_req_master)
                       ->whereRaw('request_master.id_active = ?','Y')
                       ->whereRaw('request_master.status_req in (?,?)',['PEND','ACPT'])

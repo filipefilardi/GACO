@@ -125,6 +125,10 @@ class CreateTriggersFunctions extends Migration
                             UPDATE request_confirmation
                             SET id_del = '$deletedFlag'
                             WHERE id_req_master = OLD.id_req_master;
+
+                            UPDATE request_postpone
+                            SET id_del = '$deletedFlag'
+                            WHERE id_req_master = OLD.id_req_master;
                         END IF;
                         IF NEW.status_req  = '$pendingStatus' THEN
                             UPDATE request
@@ -136,10 +140,6 @@ class CreateTriggersFunctions extends Migration
                             WHERE id_req_master = OLD.id_req_master;
 
                             UPDATE request_confirmation
-                            SET id_del = '$deletedFlag'
-                            WHERE id_req_master = OLD.id_req_master;
-
-                            UPDATE request_postpone
                             SET id_del = '$deletedFlag'
                             WHERE id_req_master = OLD.id_req_master;
                         END IF;

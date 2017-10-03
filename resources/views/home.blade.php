@@ -509,9 +509,9 @@
 	                            </div>
 	                        </div>
 	            		@else
-						<div class="col-md-6 col-md-offset-4">
+						<!-- <div class="col-md-6 col-md-offset-4">
 							<p> TEXTO FALANDO SOBRE ADIAR PEDIDOS E COMO ESCREVER A JUSTIFICATIVA.</p>
-						</div>
+						</div> -->
 	            		@endif
 
 						<div class="form-group{{ $errors->has('justification') ? ' has-error' : '' }}">

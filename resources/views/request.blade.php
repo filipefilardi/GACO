@@ -249,19 +249,21 @@
                                         <!-- PESSOAS JURIDICAS -->
                                         <p>Apenas para pessoas jurídicas, as seguintes condições são necessárias para efetuar uma doação:</p>
                                         <ol>
-                                            <li>Devido a atenção especial a doação, é necessario <strong>taxar R$ 4,50 cada KM</strong> que a cooperativa se deslocará até o endereço escolhido da pessoa júridica;</li>
-                                            <li>A taxação será cobrada no ato da coleta pela própria cooperativa. De maneira que nenhuma transação seja feita pela plataforma GACO;</li>
-                                            <li>A taxação resultará em uma certicação de que seu resíduo foi coletado, também entregue na coleta;</li>
+                                            <li>Eu entendo que as cooperativas tem custo para coletar o meu resíduo, portanto me comprometo a cumprir a minha parte como doador;</li>
+                                            <li>Devido a atenção especial dada ao setor, é <strong>taxado em R$ 4,50 cada KM</strong> que a cooperativa se deslocará até o endereço escolhida para a coleta;</li>
+                                            <li>A taxação será calculada e cobrada pela própria cooperativa no ato da coleta e em dinheiro. De maneira que nenhuma transação será feita através da plataforma GACO</li>
+                                            <li>A taxação resultará em uma certificação e termo de recolhimento do resíduo que foi coletado, entregue pela cooperativa após a coleta do resíduos;</li>
+                                            <li>Ao confirmar seu pedido e coleta, você diz que entende, aceita e cumprirá com essa cobrança;</li>
                                         </ol>
                                         <p><strong>Ao confirmar seu pedido e coleta, você diz que entende, aceita e cumprirá com essa cobrança;</strong></p>
                                     @else
                                         <!-- COLETIVOS E PESSOAS FISICAS -->
                                         <p>Ao fazer a coleta, eu entendo que:</p>
                                         <ol>
-                                            <li>Estou doando de forma voluntária o meu eletrônico sem receber qualquer remuneração em troca;</li>
+                                            <li>Eu entendo que as cooperativas tem custo para coletar o meu resíduo, portanto me comprometo a cumprir a minha parte como doador;</li>
+                                            <li>Estou doando de forma voluntária o meu resíduo sem receber qualquer remuneração e favor em troca;</li>
                                             <li>Não será cobrado nenhum tipo de taxa, ou seja, o serviço prestado por essa forma é totalmente gratuito;</li>
-                                            <li>Eu entendo que as cooperativas tem um custo para coletar o meu resíduo, portanto me comprometo a cumprir a minha parte como doador;</li>
-                                            <li>Entendo que posso cancelar ou adiar os meus pedidos, e o farei mediante a justificativa e com pelo menos um dia de antecedência a coleta.</li>
+                                            <li>Entendo que posso cancelar ou adiar os meus pedidos, e o farei mediante justificativa e com requisição com pelo menos um dia de antecedência da coleta pré-agendada.</li>
                                         </ol>
                                     @endif
                                         <button class="btn btn-primary btn-block">Confirmar Coleta</button>

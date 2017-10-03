@@ -122,7 +122,7 @@
             </div>
         </nav>
 
-        <div class="content">
+        <div class="content" style="padding-bottom: 50px;">
             @yield('content')
         </div>
     </div>

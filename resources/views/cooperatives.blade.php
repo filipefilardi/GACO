@@ -41,9 +41,9 @@
 				            </div>
 			            </div>
 
-			            <h2 class="text-center">Faça parte</h2>
+			            <h2 class="text-center" style="margin-top: 30px;">Faça parte</h2>
 
-			            <p>@lang('app.letscontribute')</p>
+			            <p class="text-center">@lang('app.letscontribute')</p>
 			            <a href="/request" class="btn btn-primary btn-block" >@lang('app.wannacontribute')</a>
 
 		            </div>

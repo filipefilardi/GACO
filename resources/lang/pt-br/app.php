@@ -51,7 +51,7 @@ return [
 	'fullname' => 'Nome Completo',
 
 	// Cooperatives view
-    'cooptextintro' => 'Texto falando sobre as cooperativas que trabalhos e porque elas...',
+    'cooptextintro' => 'No Brasil, cerca de 1% dos resíduos são realmente reciclados, havendo ainda uma alta demanda para ser atendida. Atualmente, os profissionais responsáveis pelo setor são os catadores e as cooperativas de reciclagem que atuam diretamente sobre a coleta, triagem e destinação adequada dos resíduos. Se considerado resíduos eletrônicos, este cenário é ainda  mais delicado, havendo poucas cooperativas e catadores capacitados a realizar este processo de maneira sustentável dos recicláveis. Na GACO, contamos com parceiros capacitados, pioneiros e experientes na coleta sustentável dos e-resíduos.',
     'letscontribute' => 'As cooperativas precisam de sua ajuda, o que acha de contribuir com elas?',
     'recifaveladescription' => '<p>A Cooperativa Recifavela foi fundada dia 26/12/2007 no centro da Favela Da Vila Prudente com grande objetivo dar solução à coleta seletiva na região da Vila Prudente e gerar renda, dar formação cidadã e manter a comunidade sempre informada com os gastos do poder publico na questão do lixo na Grande São Paulo. A Cooperativa Recifavela nasceu no momento de crise no mercado da reciclagem, muitas pessoas não acreditaram na força dessa cooperativa que estava nascendo com uma força já mais vista em outra cooperativa, mas estamos firmes e fortes na caminhada para uma sociedade mais justa e solidária.</p>',
 

@@ -146,7 +146,7 @@ class RequestMasterDao {
             })
             ->leftJoin('request_postpone', function ($join) {
             $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
-                 ->where('request_postpone.id_active', '=', 'Y');
+                 ->where('request_postpone.id_active', '=', 'Y')
                  ->where('request_postpone.id_del', '=', 0);
             })
             // ->leftJoin('request_postpone', function ($join) use($id_user) {
@@ -366,7 +366,7 @@ class RequestMasterDao {
             RequestMasterDao::update_master_request($id_req_master,'PEND');
             $dt_push = null;
             $period_predicted = null;
-            $id_assign =
+            $id_assign = null;
 
         } elseif ($id_cat == 3) {
             

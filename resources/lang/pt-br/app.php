@@ -2,7 +2,7 @@
 
 return [
 	// NAVBAR
-	'home' => 'Home',
+	'home' => 'Coletas',
 	'request' => 'Quero Descartar',
 	'cooperatives' => 'Cooperativas',
 	'ewaste' => 'Resíduo Eletrônico',

@@ -58,9 +58,9 @@
             </nav>
 
             <div class="hero">
-                <h1>DESCARTE SEU RESÍDUO SEM SAIR DE CASA</h1>
+                <h1>DESCARTE SEU E-RESÍDUO SEM SAIR DE CASA</h1>
                 <div class="text-justify">
-                    <p><i>Colabore com a cidade de São Paulo, dedicando apenas alguns minutos, a se tornar uma cidade mais sustentável, descartando seu resíduo eletrônico de forma prática e <b>totalmente sem custos</b>.</i></p>
+                    <p><i>Colabore com a cidade de São Paulo, dedicando apenas alguns minutos, a se tornar uma cidade mais sustentável, descartando seu resíduo eletrônico de forma prática e <b>totalmente sem custos para pessoas físicas e coletivos</b>.</i></p>
                 </div>
                 <a href="{{ url('/register') }}" class="btn btn-primary">COMECE AGORA</a>
                 <p style="margin-top:80px;"><a href="#gaco" style="color: white; font-size: 40px"><i class="fa fa-angle-down" aria-hidden="true"></i></p></a>

@@ -55,11 +55,11 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+               <!--      <div class="form-group">
                         <div class="col-md-6 col-md-offset-4" style="text-align: justify;text-justify: inter-word;">
                             Clicando em registar você afirma que leu e concorda com os <a href="#" data-toggle="modal" data-target="#termsModal">Termos e Condições</a> do GACO.
                         </div>
-                    </div>
+                    </div> -->
 
                      <!-- Modal -->
                     <div id="termsModal" class="modal fade" role="dialog">

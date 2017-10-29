@@ -180,8 +180,8 @@
                             <label for="period" class="col-md-3 control-label">@lang('app.period')</label>
                             <div class="col-md-7">
                                 <div class="btn-group btn-group-justified" id="periodcheckbox" data-toggle="buttons">
-                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1" required>@lang('app.morning')</label>
-                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1" required>@lang('app.noon')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="manha" value="1" id="checkbox_manha" required>@lang('app.morning')</label>
+                                    <label class="btn btn-default"><input type="checkbox" name="tarde" value="1" id="checkbox_tarde"required>@lang('app.noon')</label>
                                     <label class="btn btn-default hidden"><input type="checkbox" name="noite" value="1" required>@lang('app.night')</label>
                                 </div>
                             </div>
@@ -336,14 +336,24 @@
     $(document).ready(function () {
         $('#checkBtn').click(function() {
             checked = $("input[type=checkbox]:checked").length;
-            if(checked < 2) {
+            
+            count = 0;
+            if(document.getElementById('checkbox_manha').checked){
+                count = count + 1
+            }
+            if(document.getElementById('checkbox_tarde').checked){
+                count = count + 1
+            }
+
+
+            if(checked > 0 + count && count != 0) {
+                $("input[type=checkbox]").removeAttr('required');
+            }
+            else {
                 //alert("You must check at least one checkbox.");
                 $('#weekcheckbox').attr('style', "border-radius: 5px; border:#B63131 1px solid;");
                 $('#periodcheckbox').attr('style', "border-radius: 5px; border:#B63131 1px solid;");
                 return false;
-            }
-            else {
-                $("input[type=checkbox]").removeAttr('required');
             }
 
         });

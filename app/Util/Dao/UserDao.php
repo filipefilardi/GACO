@@ -222,7 +222,7 @@ class UserDao
         return $res;
     }
 
-    public function get_email_user_by_id_req($id_req){
+    public static function get_email_user_by_id_req($id_req){
 
         $id_user_req = DB::table('request_master')->where('id_req_master', $id_req)->value('id_user_req');
         

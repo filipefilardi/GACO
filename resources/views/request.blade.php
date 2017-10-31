@@ -345,7 +345,6 @@
                 count = count + 1
             }
 
-
             if(checked > 0 + count && count != 0) {
                 $("input[type=checkbox]").removeAttr('required');
             }

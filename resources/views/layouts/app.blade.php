@@ -69,19 +69,17 @@
                                 @endif
                                 <li><a href="{{ url('/cooperatives') }}">@lang('app.cooperatives')</a></li>
                                 <li><a href="{{ url('/garbage') }}">@lang('app.ewaste')</a></li>
-                                <li><a href="{{ url('/about') }}">@lang('app.about')</a></li>
                                 @if(Auth::user()->id_cat == 4)
                                     <!-- Apenas para administradores -->
                                     <li><a href="{{ url('/admin') }}">@lang('app.adminpanel')</a></li>
+                                @else
+                                    <li><a href="{{ url('/about') }}">@lang('app.about')</a></li>
                                 @endif
                                 <!-- Só se não tiver sido completado -->
                                 @if(!Auth::user()->isComplete())
                                     @if(Auth::user()->id_cat == 1 || Auth::user()->id_cat == 2)
                                         <li><a href="{{ url('/complete_registration') }}">@lang('app.completeregistration')</a></li>
                                     @endif
-                                @endif
-                                @if(Auth::user()->id_cat == 4)
-                                    <li><a href="{{ url('/complete_registration') }}">@lang('app.completeregistration')</a></li>
                                 @endif
                             @else
                                 <li><a href="{{ url('/home') }}">@lang('app.cooperativepanel')</a></li>

@@ -195,7 +195,7 @@
                             </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-3 control-label">@lang('app.password')</label>
+                            <label for="password" class="col-md-3 control-label">@lang('app.newpassword')</label>
 
                             <div class="col-md-7">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -209,7 +209,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-3 control-label">@lang('app.confirmpassword')</label>
+                            <label for="password-confirm" class="col-md-3 control-label">@lang('app.confirmnewpassword')</label>
 
                             <div class="col-md-7">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>

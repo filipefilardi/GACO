@@ -55,11 +55,11 @@
                         </div>
                     </div>
 
-               <!--      <div class="form-group">
+                    <div class="form-group">
                         <div class="col-md-6 col-md-offset-4" style="text-align: justify;text-justify: inter-word;">
                             Clicando em registar você afirma que leu e concorda com os <a href="#" data-toggle="modal" data-target="#termsModal">Termos e Condições</a> do GACO.
                         </div>
-                    </div> -->
+                    </div>
 
                      <!-- Modal -->
                     <div id="termsModal" class="modal fade" role="dialog">
@@ -68,20 +68,52 @@
                             <div class="modal-content">
                                 <div class="modal-header text-center"><h1>Termos e Condições</h1></div>
                                 <div class="modal-body" style=" text-align: justify;text-justify: inter-word;">
-                                    <p>O uso de todas as páginas desse website estão sujeitas a esse termos e condiçoes.</p>
+                                    <p>Ao se cadastrar e fazer uso da plataforma GACO, o usuário concorda em:</p>
                                     <ol>
-                                        <li><strong>MODELO PARA O TERMOS E CONDICOES, É PRECISO ALTERA-LO</strong></li>
-                                        <li>Qualquer pessoa envolvida com o desenvolvimento da plataforma JubilaNao, não tem nenhum envolvimento com as publicações e avaliações feitas e disponibilizadas;</li>
-                                        <li>O JubilaNão não se responsabiliza pelo conteúdo divulgado aqui, cabe a cada autor de cada publicação se responsabilizar pelo conteudo divulgado;</li>
-                                        <li>A presente versão do JubilaNão foi criado para uso de estudantes e professores da USP. Qualquer usúario não USPiano precisa enter que a platoforma pode não ser de seu interesse;</li>
-                                        <li>Você não pode usar esse site:
+                                        <!-- <li><strong>MODELO PARA O TERMOS E CONDICOES, É PRECISO ALTERA-LO</strong></li> -->
+                                        <li>As cooperativas parceiras são responsáveis pela coleta, pela triagem e pela
+                                        comercialização e destinação dos resíduos doados registrados na plataforma, a equipe GACO
+                                        fica responsável apenas pelo desenvolvimento do canal de comunicação;</li>
+                                        <li>O usuário se responsabiliza pela veracidade dos dados de cadastro na
+                                        plataformaweb, bem como responsáveis também pelos dados dos itens registrados no
+                                        sistema para doação;</li>
+                                        <li>A doação será realizada através do contato com as cooperativas parceiras
+                                        associadas à plataforma GACO, não haverá encargos no caso de pessoas físicas e
+                                        coletivos (condomínios, entidades sem fins lucrativos, grupos organizados e etc), no
+                                        caso de entidades com fins lucrativos será encargado o valor de R$4,50 por quilômetro
+                                        (diferença de ida e volta do local de coleta e cooperativa que fará a coleta);</li>
+                                        <li>Os resíduos sólidos recicláveis serão coletados, transportados, triados,
+                                        transportados e comercializados diretamente pelas cooperativas parceiras da
+                                        plataformaweb GACO. Não tendo o doador direitos sobre sua doação a posteriori;</li>
+                                        <li>Está excluído do presente termo os resíduos não recicláveis ou que se sujeitem, nos
+                                        termos de legislação vigente, a um tratamento específico fora do eixo de especialidade
+                                        das cooperativas;</li>
+                                        <p></p>
+                                        <p><strong>Constitui obrigação da Associação/Cooperativa:</strong></p>
+                                        <li>Cumprir a legislação federal, estadual e municipal aplicável à sua atividade, bem
+                                        como, todas as determinações e resoluções dos órgãos da Administração Pública
+                                        competentes e demais entidades de fiscalização, responsabilizando-se por todo e
+                                        qualquer ônus decorrente da sua não observância:
                                             <ol type="a">
-                                                <li>para postar qualquer matérial ou comentário que infrija os direitos legais de qualaquer pessoa;</li>
-                                                <li>para postar qualquer propaganda não autorizada ou spam;</li>
-                                                <li>para transmitir ou re-circular qualquer material obtido pelo site para qualquer terceiro;</li>
+                                                <li>dar a correta destinação aos resíduos sólidos recicláveis que lhe estão sendo
+                                                entregues através da demanda gerada pelo usuário da plataforma web GACO;</li>
+                                                <li>emitir comprovante de destinação dos resíduos doados, caso o doador faça
+                                                requisição deste documento;</li>
+
+                                                <li>exigir que seus associados/cooperados utilizem equipamentos adequados ao
+                                                desenvolvimento se sua atividade e que estejam devidamente identificados
+                                                durante o período que permanecerem na GACO;
+                                                <li>observar os regimentos e normas internas do contrato de parceria entre GACO;</li>
+                                                <li>aplicar o montante financeiro oriundo da reciclagem dos resíduos em prol da
+                                                coletividade dos catadores de acordo com regimento interno da cooperativa e
+                                                legislação pertinente</li>
+                                                <li>permitir a fiscalização, a qualquer tempo, pela GACO no que concerne ao objeto
+                                                do presente termo de parceria das atividades pertinentes à
+                                                Associação/Cooperativa;</li>
+                                                <li>não transferir a outrem, no todo ou em parte, o objeto doado, respeitando a
+                                                destinação correta dos objetos recebidos.</li>
                                             </ol>
                                         </li>
-                                        <li>Cada usuário cadastrado entende que ele está de acordo com tudo que está descrito nos termos e condições, caso ele não concorde, ele não deverá se cadastrar na plataforma.</li>
                                     </ol>
                                     <div class="modal-footer">
                                         <div class="form-group">

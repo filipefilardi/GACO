@@ -1,5 +1,6 @@
 # GACO 
 
+*Read this in other language: [English](README.md), [Português](README.pt_br.md).*
 
 GACO is a web application made with Laravel a php framework.
 
@@ -11,6 +12,10 @@ The oficial laravel documentation can be found in [Laravel website](http://larav
 
 `$ sudo apt-get install php-common php-mbstring php-xml php-curl`
 
-## Run
+## Local Run
 
 `$ php artisan serve`
+
+or
+
+`$ php artisan serve --host 0.0.0.0 --port 8000` if you wish ip access on multiple devices.

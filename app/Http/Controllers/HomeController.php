@@ -23,6 +23,16 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function translate_status($requests){
+        foreach($requests as $request){
+            if($request->status_req == 'ACPT'){
+                $request->status_req = "Aceito";
+            }else{
+                $request->status_req = "Pendente";
+            }
+        }
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -61,6 +71,8 @@ class HomeController extends Controller
             //$request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
             $master_user_acpt = RequestMasterDao::get_master_by_user_conditional($id_user, 'status_req', '=', 'ACPT');
             $master_user_pend = RequestMasterDao::get_master_by_user_conditional($id_user, 'status_req', '=', 'PEND');
+            $this->translate_status($master_user_acpt);
+            $this->translate_status($master_user_pend);
 
             $count = 0;
 
@@ -91,6 +103,9 @@ class HomeController extends Controller
         else{
             $master_coop_pend = RequestMasterDao::get_master_conditional('status_req', '=', 'PEND');
             $master_coop_acpt = RequestMasterDao::get_master_acpt_by_coop($id_user);
+
+            $this->translate_status($master_coop_pend);
+            $this->translate_status($master_coop_acpt);
         
             $count = 0;
 

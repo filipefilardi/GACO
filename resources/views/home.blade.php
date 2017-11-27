@@ -48,7 +48,7 @@
 				            		@endif
 
 									<div class="row">
-										<div class="col-md-8"><b>Status:</b> Pendente</div>
+										<div class="col-md-8"><b>Acompanhamento:</b> Pendente</div>
 										<div class="col-md-4 text-right"><b>Token:</b> {{$req->conf_token}}</div>
 									</div>
 									<div class="row">
@@ -113,7 +113,7 @@
 				            		@endif
 
 									<div class="row">
-										<div class="col-md-8"><b>Status:</b> {{$req->status_req}}</div>
+										<div class="col-md-8"><b>Acompanhamento:</b> {{$req->status_req}}</div>
 										<div class="col-md-4 text-right"><b>Token:</b> {{$req->conf_token}}</div>
 									</div>
 									<div class="row">

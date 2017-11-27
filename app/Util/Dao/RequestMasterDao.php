@@ -224,8 +224,10 @@ class RequestMasterDao {
         if(sizeof($errors)>0) return $errors;
         // END VALIDATION BLOCK /////////
 
-        $tmp = explode("/",$dt_predicted);
-        $dt_predicted = $tmp[2] .  $tmp[1]  . $tmp[0];
+        if ($dt_predicted != null && strlen($dt_predicted) > 8) {
+            $tmp = explode("/",$dt_predicted);
+            $dt_predicted = $tmp[2] .  $tmp[1]  . $tmp[0];
+        }
 
         DB::table('request_assignment')
             ->whereExists(function ($query) use($id_req_master) {
@@ -358,8 +360,6 @@ class RequestMasterDao {
         // END VALIDATION BLOCK /////////
 
         $today = date("Ymd");
-        $tmp = explode("/",$dt_push);
-        $dt_push = $tmp[2] .  $tmp[1]  . $tmp[0];
 
         if($id_cat == 1 || $id_cat == 2) {
 
@@ -370,6 +370,9 @@ class RequestMasterDao {
 
         } elseif ($id_cat == 3) {
             
+            $tmp = explode("/",$dt_push);
+            $dt_push = $tmp[2] .  $tmp[1]  . $tmp[0];
+
             RequestMasterDao::update_master_request($id_req_master,'PEND');
             RequestMasterDAO::accept_master_request($id_req_master,$id_user, $dt_push, $period_predicted);
 

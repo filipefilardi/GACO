@@ -52,6 +52,8 @@ class AdminController extends Controller
 
             
         }else{
+            $request->session()->flash('message', 'Falha ao criar cooperativa. Por favor, tente novamente'); 
+            $request->session()->flash('alert-warning', 'warning');
         }
 
 

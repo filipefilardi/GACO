@@ -48,13 +48,19 @@
                                 @endif
                             </div>
                         </div>
-
-
+<!-- 
+                            <div class="col-md-3"></div>
+                            <div class="col-md-7">
+                                <div class="alert alert-warning" role="alert">
+                                  Preencha o campo CNPJ apenas com números. Não uitlize pontos, barras e hifém
+                                </div>
+                            </div>
+ -->
                          <div class="form-group{{ $errors->has('cnpj') ? ' has-error' : '' }}">
                                 <label for="cnpj" class="col-md-3 control-label">@lang('app.juridicperson')</label>
 
                                 <div class="col-md-7">
-                                    <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}" required>
+                                    <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}" placeholder="Preencha apenas com números" required>
 
                                     @if ($errors->has('cnpj'))
                                         <span class="help-block">
@@ -188,7 +194,7 @@
                                 <label for="radius" class="col-md-3 control-label">@lang('app.radius')</label>
 
                                 <div class="col-md-7">
-                                    <input id="radius" type="text" class="form-control" name="radius" value="{{ old('radius') }}" required>
+                                    <input id="radius" type="text" class="form-control" name="radius" value="{{ old('radius') }}"  placeholder="Preencha o raio de alcance de sua cooperativa" required>
 
                                     @if ($errors->has('radius'))
                                         <span class="help-block">

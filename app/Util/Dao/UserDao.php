@@ -9,6 +9,13 @@ class UserDao
 
 {
     
+    public static function getIdByEmail($email){
+        $res = DB::table('users')
+                        ->where('email', $email)
+                        ->get();
+         return $res;               
+    }
+
     public static function getListUsersByCat($id_cat)
     {
         switch ($id_cat) {

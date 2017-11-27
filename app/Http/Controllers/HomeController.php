@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Util\Dao\RequestDao;
 use App\Util\Dao\RequestMasterDao;
+use App\Util\Dao\AddressDao;
 use App\Util\Dao\UserDao;
 use App\Util\Dao\EvaluationDao;
 use App\Util\Utilities;
@@ -31,6 +32,25 @@ class HomeController extends Controller
                 $request->status_req = "Pendente";
             }
         }
+    }
+
+    public function check_radius($req, $coop, $radius){
+        $req_add = AddressDao::getAddressesById($req->id_add)->toArray()[0];
+        $req_lat = $req_add->id_lat;
+        $req_lon = $req_add->id_lon;
+
+        $coop_lat = $coop->id_lat;
+        $coop_lon = $coop->id_lon;
+
+        $distance = AddressDao::getDistance($req_lat,$req_lon,$coop_lat,$coop_lon);
+        
+        if($distance/1000 <= $radius){
+            return true;
+        } 
+        else{
+            return false;
+        } 
+        
     }
 
     /**
@@ -106,15 +126,26 @@ class HomeController extends Controller
 
             $this->translate_status($master_coop_pend);
             $this->translate_status($master_coop_acpt);
-        
+
+            $coop_add = AddressDao::getAddresses($id_user)->toArray()[0];
+            $coop = UserDao::getInfo($id_user,3)->toArray()[0];
+            $radius = $coop->id_radius_user;
             $count = 0;
 
             if(sizeof($master_coop_acpt) > 0) {
                 foreach ($master_coop_acpt as $key => $value) {
+                    
+                    if($this->check_radius($value, $coop_add, $radius) == false){
+                        $value->available = false;
+                    }else{
+                        $value->available = true;
+                    }
+
                     $value->period_predicted = Utilities::parsePeriodForUI($value->period_predicted);
                     $coop_acpt = RequestDao::get_full_info_dashboard_req_conditional('request.id_req_master','=',$value->id_req_master);
                     $count++;
                     $master_coop_acpt->splice((int)$key + $count, 0, $coop_acpt );
+                    
                 }
             }
 
@@ -122,6 +153,12 @@ class HomeController extends Controller
 
             if(sizeof($master_coop_pend) > 0) {
                 foreach ($master_coop_pend as $key => $value) {
+
+                    if($this->check_radius($value, $coop_add, $radius) == false){
+                        $value->available = false;
+                    }else{
+                        $value->available = true;
+                    }
                     $coop_pend = RequestDao::get_full_info_dashboard_req_conditional('request.id_req_master','=',$value->id_req_master);
                     $count++;
                     $master_coop_pend->splice((int)$key + $count, 0, $coop_pend );

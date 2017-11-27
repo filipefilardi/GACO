@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Util\Dao\UserDao;
+use App\Util\Dao\AddressDao;
 use Auth;
 
 class AdminController extends Controller
@@ -33,14 +34,24 @@ class AdminController extends Controller
     {   
         $res = UserDao::insert(Auth::user()->id_user,$request->all(),3); // 3 - ID CAT de Coop
 
-        #dd($res);
+        $request['id_cep'] = preg_replace("/[^0-9]/", "", $request['id_cep'] );
+
+
 
         if($res == 1){
-            $request->session()->flash('message', 'Cooperativa criada com sucesso!'); 
-            $request->session()->flash('alert-success', 'sucess');
+            $new_user_id = UserDao::getIdByEmail($request->email);
+            $address = AddressDao::insertAndUpdateAddress($new_user_id->toArray()[0]->id_user,$request->all());
+
+            if($address == 1){
+                $request->session()->flash('message', 'Cooperativa criada com sucesso!'); 
+                $request->session()->flash('alert-success', 'sucess');
+            }else{
+                $request->session()->flash('message', 'Falha ao criar cooperativa. Por favor, tente novamente'); 
+                $request->session()->flash('alert-warning', 'warning');
+            }
+
+            
         }else{
-            $request->session()->flash('message', 'Falha ao criar cooperativa. Por favor, tente novamente'); 
-            $request->session()->flash('alert-warning', 'warning');
         }
 
 

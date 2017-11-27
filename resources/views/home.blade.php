@@ -183,7 +183,7 @@
 					@if(!$master_coop_pend->isEmpty())
 						<div class="list-group request-item">
 							@foreach($master_coop_pend as $req)
-								@if($loop->iteration  % 2 != 0)
+								@if($loop->iteration  % 2 != 0 && $req->available==true)
 								<div class="list-group-item">
 				            		
 				            		<input type="hidden" name="tx_period_day"  id="tx_period_day_{{$req->id_req_master}}" value="{{$req->tx_period_day}}"/>

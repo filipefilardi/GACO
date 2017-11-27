@@ -8,6 +8,35 @@ use App\Util\Utilities;
 class AddressDao
 
 {
+    public static function getDistance(
+      $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
+    {
+      // convert from degrees to radians
+      $latFrom = deg2rad($latitudeFrom);
+      $lonFrom = deg2rad($longitudeFrom);
+      $latTo = deg2rad($latitudeTo);
+      $lonTo = deg2rad($longitudeTo);
+
+      $lonDelta = $lonTo - $lonFrom;
+      $a = pow(cos($latTo) * sin($lonDelta), 2) +
+        pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
+      $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
+
+      $angle = atan2(sqrt($a), $b);
+      return $angle * $earthRadius;
+    }
+
+    public static function getAddressesById($id_add)
+    {
+        
+        $res = DB::table('address')
+        ->where('id_add', $id_add)
+        ->where('id_del', 0)
+        ->get();
+
+
+        return $res;
+    }
     
     public static function getAddresses($id_user)
     {

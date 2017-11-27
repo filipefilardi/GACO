@@ -251,7 +251,6 @@ class RequestDao
 
     public static function get_acpt_requests_by_coop($id_user) // Accepted requests by coop
     {
-
         $list = DB::table('request_assignment')
             ->join('request', function ($join) {
             $join->on('request_assignment.id_req', '=', 'request.id_req')

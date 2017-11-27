@@ -252,6 +252,10 @@
 					            		</div>
 				            		@endif
 
+				            		<div class="row">
+										<div class="col-md-8"><b>Status:</b> {{$req->status_req}}</div>
+				            		</div>
+
 									<div class="row">
 										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
 										<div class="col-md-6 text-right"><b>Previsão para coleta:</b> {{date('d/m/Y', strtotime($req->dt_predicted))}}</div>

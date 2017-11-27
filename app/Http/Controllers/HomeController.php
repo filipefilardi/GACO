@@ -120,7 +120,7 @@ class HomeController extends Controller
         
         }
         
-        else{
+        else if($id_cat == 3){
             $master_coop_pend = RequestMasterDao::get_master_conditional('status_req', '=', 'PEND');
             $master_coop_acpt = RequestMasterDao::get_master_acpt_by_coop($id_user);
 
@@ -128,13 +128,14 @@ class HomeController extends Controller
             $this->translate_status($master_coop_acpt);
 
             $coop_add = AddressDao::getAddresses($id_user)->toArray()[0];
+
             $coop = UserDao::getInfo($id_user,3)->toArray()[0];
             $radius = $coop->id_radius_user;
             $count = 0;
 
             if(sizeof($master_coop_acpt) > 0) {
                 foreach ($master_coop_acpt as $key => $value) {
-                    
+
                     if($this->check_radius($value, $coop_add, $radius) == false){
                         $value->available = false;
                     }else{

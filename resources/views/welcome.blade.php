@@ -24,7 +24,7 @@
         </style>
 
     </head>
-    <body>
+    <body style="zoom: 90%">
 
         <div class="header-nightsky" id="inicio">
             <div class="fade">

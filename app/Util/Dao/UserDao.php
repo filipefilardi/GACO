@@ -127,9 +127,8 @@ class UserDao
                         break;
 
                     case 3:
-                        $data['cnpj_user'] = preg_replace("/[^0-9]/", "", $data['cnpj'] );
+                        $data['cnpj'] = preg_replace("/[^0-9]/", "", $data['cnpj'] );
                         $data['phone'] = preg_replace("/[^0-9]/", "", $data['phone'] );
-
                         $userCreated = User::create([
                         'email' => $data['email'],
                         'password' => bcrypt($data['password']),

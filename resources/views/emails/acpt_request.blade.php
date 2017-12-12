@@ -37,6 +37,7 @@
 																<input type="hidden" name="id_req_master" value="{{$id_req_master}}"/>
 
 																<button style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;display:block;display:inline-block;width:200px;min-height:20px;padding:20px;background-color:#385169;border-radius:3px;color:#ffffff;font-size:14px;line-height:25px;text-align:center;text-decoration:none;background-color:#385169; border-radius:10px;">Confirmar data de coleta</button>
+															</form>
 														</td>
 													</tr>
 												</tbody></table>

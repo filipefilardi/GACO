@@ -400,6 +400,15 @@ class RequestMasterDao {
             ]);
     }
 
+    public static function get_token_by_request($id_req_master) {
+        
+        $res = DB::table('request_master')
+                        ->where('id_req_master', $id_req_master)
+                        ->get();
+
+        return $res;
+    }
+
     public static function user_reply_assignment($id_req_master,$conf_token,$id_user,$id_cat,$id_choice) {
 
         // VALIDATION BLOCK //////////////
@@ -411,7 +420,6 @@ class RequestMasterDao {
         
         if(sizeof($errors)>0) return $errors;
         // END VALIDATION BLOCK /////////
-
         if($id_cat == 1 || $id_cat == 2) {
 
             if($id_choice == 'Y') $decision_flag = 'Y';
@@ -434,7 +442,7 @@ class RequestMasterDao {
                       ->whereRaw('users.id_cat in (?,?)', [1,2])
                       ->whereRaw('users.id_del = ?', 0);
             })
-            ->whereExists(function ($query) use($id_req_master) {
+            ->where(function ($query) use($id_req_master) {
                 $query->select(DB::raw(1))
                     ->from('request_assignment')
                     ->whereRaw('request_assignment.id_del = ?', 0)

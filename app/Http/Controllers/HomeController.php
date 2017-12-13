@@ -24,13 +24,22 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function translate_status($requests){
+    public function translate_status($requests, $coop){
         foreach($requests as $request){
-            if($request->status_req == 'ACPT'){
-                $request->status_req = "Aceito";
+            if($coop == 1){
+                if($request->fl_user_confirm == 'Y'){
+                    $request->status_req = "Aceito pelo usuário";
+                }else{
+                    $request->status_req = "Pendente";
+                }
             }else{
-                $request->status_req = "Pendente";
+                if($request->status_req == 'ACPT'){
+                    $request->status_req = "Aceito";
+                }else{
+                    $request->status_req = "Pendente";
+                }
             }
+            
         }
     }
 
@@ -91,8 +100,8 @@ class HomeController extends Controller
             //$request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
             $master_user_acpt = RequestMasterDao::get_master_by_user_conditional($id_user, 'status_req', '=', 'ACPT');
             $master_user_pend = RequestMasterDao::get_master_by_user_conditional($id_user, 'status_req', '=', 'PEND');
-            $this->translate_status($master_user_acpt);
-            $this->translate_status($master_user_pend);
+            $this->translate_status($master_user_acpt, 0);
+            $this->translate_status($master_user_pend, 0);
 
             $count = 0;
 
@@ -124,8 +133,8 @@ class HomeController extends Controller
             $master_coop_pend = RequestMasterDao::get_master_conditional('status_req', '=', 'PEND');
             $master_coop_acpt = RequestMasterDao::get_master_acpt_by_coop($id_user);
 
-            $this->translate_status($master_coop_pend);
-            $this->translate_status($master_coop_acpt);
+            $this->translate_status($master_coop_pend, 1);
+            $this->translate_status($master_coop_acpt, 1);
 
             $coop_add = AddressDao::getAddresses($id_user)->toArray()[0];
 

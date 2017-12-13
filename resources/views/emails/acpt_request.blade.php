@@ -32,7 +32,6 @@
 													<tbody><tr>
 														<td align="center">
 															<form class="form-horizontal" role="form" method="POST" action="{{ url('/mailconfirm') }}">
-																{{ csrf_field() }}
 
 																<input type="hidden" name="id_req_master" value="{{$id_req_master}}"/>
 

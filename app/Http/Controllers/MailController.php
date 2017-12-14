@@ -57,10 +57,11 @@ class MailController extends Controller {
          #TODO: Passar para a funcao e testar -- provavelmente funciona -- Alem disso precisa mostrar na view um NAO CONFIRMADO PELO USUARIO para a cooperativa quando fl_user_confirm for N
          $res = RequestMasterDao::user_reply_assignment($data->id_req_master,$conf_token,$id_user,$id_cat,$id_choice);
          if(in_array("user does not have permission to confirm assignment",$res)){
-            dd("MailController: not ok\n retornar view mostrando que deu errado");
+            // dd("MailController: not ok\n retornar view mostrando que deu errado");
+            return view('mailerror');
          }else{
-            dd("MailController: ok\n retornar view mostrando que deu certo");
+            // dd("MailController: ok\n retornar view mostrando que deu certo");
+            return view('mailconfirm'); 
          }
-      return view('mailconfirm'); 
    }
 }

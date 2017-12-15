@@ -143,6 +143,8 @@ class UserDao
                                 'id_radius_user' => $data['radius'],
                                 'cnpj_user' => $data['cnpj']
                             ]);
+                        }else{
+                            DB::table('users')->where('email', '=', $data['email'])->delete();
                         }
 
                         $res=1;

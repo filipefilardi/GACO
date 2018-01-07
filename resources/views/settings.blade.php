@@ -184,7 +184,7 @@
                                 <label for="old_password" class="col-md-3 control-label">@lang('app.oldpassword')</label>
 
                                 <div class="col-md-7">
-                                    <input id="old_password" type="text" class="form-control" name="old_password" value="{{ old('old_password') }}" required>
+                                    <input id="old_password" type="password" class="form-control" name="old_password" value="{{ old('old_password') }}" required>
 
                                     @if ($errors->has('old_password'))
                                         <span class="help-block">

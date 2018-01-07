@@ -45,16 +45,19 @@ class SettingsController extends Controller
     }
 
     public function updatePassword(Request $request) {
+        
     	$id_user = Auth::user()->id_user;
-    	if(Hash::check($request->old_password, Auth::user()->password) && $password_confirmation == $request->password){
+    	if(Hash::check($request->old_password, Auth::user()->password) && $request->password_confirmation == $request->password){
     		 $res = UserDao::updatePassword($id_user, bcrypt($request->password));
     	}else{
     		$res = 0;
     	}
 
         if($res == 1){
+            $request->session()->flash('message', 'Senha alterada com sucesso!');
             $request->session()->flash('alert-success', 'success');
         }else{
+            $request->session()->flash('message', 'Falha ao tentar alterar senha. Verifique seus dados e tente novamente.');
             $request->session()->flash('alert-warning', 'warning');
             
         }

@@ -67,7 +67,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $data)
     {
         Auth::user();
         $id_user = Auth::user()->id_user;
@@ -76,9 +76,10 @@ class HomeController extends Controller
         $request = null;
         $request_acpt = null;
 
-        //$results = RequestMasterDAO::accept_master_request(3,$id_user, '10/12/2017', '1-0-0');
+        // get addresses list
+        $address_list = AddressDao::get_all_coop_address();
 
-        //dd($results);
+        //$results = RequestMasterDAO::accept_master_request(3,$id_user, '10/12/2017', '1-0-0');
 
         // check whether the account is deleted
         $user_status = UserDao::getStatus($id_user);
@@ -95,6 +96,7 @@ class HomeController extends Controller
         $master_user_pend = null;
         $master_coop_acpt = null;
         $master_coop_pend = null;
+
         
         if ($id_cat == 1 || $id_cat == 2) {
             //$request = RequestDAO::get_full_info_dashboard_req_by_user($id_user);
@@ -115,13 +117,26 @@ class HomeController extends Controller
             }
 
             $count = 0;
+            $inside_area = false;
+
+            
 
             if(sizeof($master_user_pend) > 0) {
                 foreach ($master_user_pend as $key => $value) {
+                    foreach ($address_list as &$coop) {
+                            if($this->check_radius($value, $coop, $coop->id_radius_user) == true){
+                                $inside_area = true;
+                            }
+                    }
                     $user_pend = RequestDao::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.id_req_master', '=', $value->id_req_master);
                     $count++;
                     $master_user_pend->splice((int)$key + $count, 0, $user_pend );
                 }
+            }
+            
+            if($inside_area == false && sizeof($master_user_pend) > 0){
+                $data->session()->flash('message', 'Infelizmente no momento não existe nenhuma cooperativa que atende sua região.'); 
+                $data->session()->flash('alert-warning', 'warning'); 
             }
             
             #$user_acpt = RequestDao::get_full_info_dashboard_req_by_user_conditional($id_user, 'request.status_req', '=', 'ACPT');

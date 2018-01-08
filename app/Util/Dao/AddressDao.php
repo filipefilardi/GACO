@@ -107,4 +107,17 @@ class AddressDao
 
         return $res;
     }
+
+    public static function get_all_coop_address() // Pending requests for coop
+    {
+
+        $list = DB::table('user_cooperative')
+        ->join('address', function ($join) {
+            $join->on('user_cooperative.id_user', '=', 'address.id_user')
+                 ->where('address.main_address', 1);
+            })
+            ->get();
+                    
+        return $list;
+    }
 }

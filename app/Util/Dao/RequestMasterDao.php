@@ -112,19 +112,23 @@ class RequestMasterDao {
             $join->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
                  ->where('request_postpone.id_active', '=', 'Y');
             })
+            ->leftJoin('users', function ($join) {
+            $join->on('request_master.id_user_req', '=', 'users.id_user');
+            })
             // ->leftJoin('request_postpone', function ($join) {
             // $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
             //      ->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
             //      ->where('request_postpone.id_active', '=', 'Y')
             //      ->where('request_postpone.id_del', '=', 0);
             // })
-            ->select('request_master.*','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification', 'request_assignment.fl_user_confirm')
+            ->select('request_master.*','users.email','address.str_address','request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification', 'request_assignment.fl_user_confirm')
             ->whereIn('request_master.status_req',['ACPT','PEND'])
             ->where('request_master.id_del', 0)
             ->where($where_key,$where_comparison,$where_value)
             ->distinct()
             ->orderBy('id_req_master')
             ->get();
+
 
         return $list;
     }
@@ -149,13 +153,16 @@ class RequestMasterDao {
                  ->where('request_postpone.id_active', '=', 'Y')
                  ->where('request_postpone.id_del', '=', 0);
             })
+            ->leftJoin('users', function ($join) {
+            $join->on('request_master.id_user_req', '=', 'users.id_user');
+            })
             // ->leftJoin('request_postpone', function ($join) use($id_user) {
             // $join->on('request_assignment.id_assign', '=', 'request_postpone.id_assign')
             //      ->on('request_master.id_req_master', '=', 'request_postpone.id_req_master')
             //      ->where('request_postpone.id_active', '=', 'Y')
             //      ->where('request_postpone.id_del', '=', 0);
             // })
-            ->select('request_master.*','address.str_address', 'request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification', 'request_assignment.fl_user_confirm')
+            ->select('request_master.*', 'users.email', 'address.str_address', 'request_assignment.dt_predicted','request_assignment.period_predicted','request_postpone.tx_justification', 'request_assignment.fl_user_confirm')
             ->whereIn('request_master.status_req',['ACPT'])
             ->where('request_master.id_del', 0)
             ->distinct()

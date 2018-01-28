@@ -176,7 +176,6 @@
 			 ################################################
 			 -->
 			@if(Auth::user()->id_cat == 3)
-
 				<a href="#reg_req" class="btn btn-default btn-block" data-toggle="collapse">Doações cadastradas no sistema</a>
 
 				<div id="reg_req" class="collapse">
@@ -198,6 +197,9 @@
 									<div class="row">
 										<div class="col-md-6"><b>Endereço:</b> {{$req->str_address}}</div>
 										<div class="col-md-6 text-right"><b>Data do Pedido:</b> {{date('d/m/Y', strtotime($req->dt_req))}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12"><b>Email:</b> {{$req->email}}</div>
 									</div>
 									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
 										<div class="row">
@@ -261,11 +263,12 @@
 										<div class="col-md-6 text-right"><b>Previsão para coleta:</b> {{date('d/m/Y', strtotime($req->dt_predicted))}}</div>
 									</div>
 									<div class="row">
-										<div class="col-md-6 col-md-offset-6 text-right"><b>Período da coleta:</b> {{$req->period_predicted}}</div>
+										<div class="col-md-6"><b>Email:</b> {{$req->email}}</div>
+										<div class="col-md-6 text-right"><b>Período da coleta:</b> {{$req->period_predicted}}</div>
 									</div>
 									<div id="more_info_request_{{$req->id_req_master}}" class="collapse" style="margin-bottom: 10px;">
 										<div class="row">
-											<div class="col-md-12"><b>Equipamentos:</b></div>
+											<div class="col-md-12" style="margin-top: 10px;"><b>Equipamentos:</b></div>
 										</div>
 										<div class="row">
 											<div class="col-md-6">

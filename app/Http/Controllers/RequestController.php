@@ -33,7 +33,8 @@ class RequestController extends Controller
      */
     public function index_user(Request $data) {
          if (Gate::allows('execute', 'create_request')) {
-
+            $data->session()->flash('message', 'Aviso: Estamos atendendo apenas as regiões da zona leste da cidade de São Paulo e Cotia'); 
+            $data->session()->flash('alert-warning', 'sucess');
             // check whether the registration is complete
             $is_complete = UserDao::getInfo(Auth::user()->id_user,Auth::user()->id_cat);
             if($is_complete->count()>0){

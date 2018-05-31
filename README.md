@@ -17,3 +17,7 @@ The oficial laravel documentation can be found in [Laravel website](http://larav
 or
 
 `$ php artisan serve --host 0.0.0.0 --port 8000` if you wish ip access on multiple devices.
+
+## License
+
+Gaco is under [MIT License](LICENSE).

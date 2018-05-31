@@ -1,7 +1,5 @@
 # GACO 
 
-*Read this in other language: [English](README.md), [Português](README.pt_br.md).*
-
 GACO is a web application made with Laravel a php framework.
 
 ## Laravel Documentation

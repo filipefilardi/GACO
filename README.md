@@ -1,22 +1,14 @@
 # GACO 
 
-GACO is a web application made with Laravel a php framework.
+GACO is a web plataform to assist the management of eletronic waste in São Paulo and was made with [Laravel](http://laravel.com/docs).
 
-## Laravel Documentation
-
-The oficial laravel documentation can be found in [Laravel website](http://laravel.com/docs).
-
-## Installation
+## Install
 
 `$ sudo apt-get install php-common php-mbstring php-xml php-curl`
 
-## Local Run
+## Run
 
 `$ php artisan serve`
-
-or
-
-`$ php artisan serve --host 0.0.0.0 --port 8000` if you wish ip access on multiple devices.
 
 ## License
 
